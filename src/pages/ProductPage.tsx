@@ -1,8 +1,7 @@
 import {
-  leftArrowCircleIcon,
-  ProductCard,
+  ProductListHorizontal,
   ProductDetailsCard,
-  rightArrowCircleIcon,
+  LeftRightButtonsCircle,
 } from ".";
 
 const ProductPage = () => {
@@ -19,7 +18,7 @@ const ProductPage = () => {
         <span className="text-gray-500">&gt;</span>
         <span className="font-bold">طقم شطاف WG006</span>
       </div>
-      <section className="flex justify-center items-center h-screen">
+      <section className="flex justify-center items-center h-screen my-8">
         <ProductDetailsCard />
       </section>
       <section className="flex flex-col gap-8 py-8">
@@ -35,25 +34,10 @@ const ProductPage = () => {
           فإن طقم الشطاف يعد اختيارًا مثاليًا يجمع بين الجودة والأداء.
         </p>
       </section>
-      <section className="flex flex-col gap-8 py-8">
-        <h1 className="text-3xl font-bold">منتجات متشابهة</h1>
-        <div className="inline-flex py-4 gap-8">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div>
-        <div className="flex justify-end gap-2 p-8">
-          <button>
-            <img src={rightArrowCircleIcon} alt="" />
-          </button>
-          <button>
-            <img src={leftArrowCircleIcon} alt="" />
-          </button>
-        </div>
+      <section className="py-8">
+        <h1 className="text-3xl font-bold mb-8">منتجات متشابهة</h1>
+        <ProductListHorizontal />
+        <LeftRightButtonsCircle />
       </section>
     </main>
   );

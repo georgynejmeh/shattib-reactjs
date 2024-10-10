@@ -64,3 +64,17 @@ export { default as plusCircleIcon } from "../assets/icon-plus-circle.svg";
 export { default as minusCircleIcon } from "../assets/icon-minus-circle.svg";
 export { default as addToBoxIcon } from "../assets/icon-add-box.svg";
 export { default as productImg } from "../assets/imgs/493263f4f044e10db4127c423842f812.jpg";
+export { default as TitleNumber } from "../components/TitleNumber";
+
+// -- Product List Horizontal --
+export { default as ProductCard } from "./ProductCard";
+
+// -- Category List Horizontal --
+export { default as CategoryCard } from "./CategoryCard";
+export { default as categoryImg01 } from "../assets/imgs/65883cc0a42a6f52d4e8bd346f1c376d.jpg";
+export { default as categoryImg02 } from "../assets/imgs/ea904aa7e74a1922b8ec054a3d3743ed.jpg";
+export { default as categoryImg03 } from "../assets/imgs/fd7439ff7ea7849bd3185a1effc0c966.jpg";
+
+// -- Left Right Buttons Cricle --
+export { default as leftArrowCircleIcon } from "../assets/icon-left-arrow-circle.svg";
+export { default as rightArrowCircleIcon } from "../assets/icon-right-arrow-circle.svg";

@@ -36,8 +36,8 @@ const SalesSlideShow = () => {
       <img
         className={
           index === 0
-            ? "absolute opacity-100 transition-opacity duration-1000"
-            : "absolute opacity-0 transition-opacity duration-1000"
+            ? "w-full h-full object-cover absolute opacity-100 transition-opacity duration-1000"
+            : "w-full h-full object-cover absolute opacity-0 transition-opacity duration-1000"
         }
         src={saleImg01}
         alt=""
@@ -45,8 +45,8 @@ const SalesSlideShow = () => {
       <img
         className={
           index === 1
-            ? "absolute opacity-100 transition-opacity duration-1000"
-            : "absolute opacity-0 transition-opacity duration-1000"
+            ? "w-full h-full object-cover absolute opacity-100 transition-opacity duration-1000"
+            : "w-full h-full object-cover absolute opacity-0 transition-opacity duration-1000"
         }
         src={saleImg02}
         alt=""
@@ -54,8 +54,8 @@ const SalesSlideShow = () => {
       <img
         className={
           index === 2
-            ? "absolute opacity-100 transition-opacity duration-1000"
-            : "absolute opacity-0 transition-opacity duration-1000"
+            ? "w-full h-full object-cover absolute opacity-100 transition-opacity duration-1000"
+            : "w-full h-full object-cover absolute opacity-0 transition-opacity duration-1000"
         }
         src={saleImg03}
         alt=""

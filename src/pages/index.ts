@@ -20,8 +20,6 @@ export { default as lockIcon } from "../assets/icon-lock.svg";
 export { default as personIcon } from "../assets/icon-person.svg";
 export { default as phoneIcon } from "../assets/icon-phone.svg";
 export { default as doubleLeftArrowIcon } from "../assets/icon-double-left-arrow.svg";
-export { default as leftArrowCircleIcon } from "../assets/icon-left-arrow-circle.svg";
-export { default as rightArrowCircleIcon } from "../assets/icon-right-arrow-circle.svg";
 
 // -- logos --
 export { default as shattibLogoCol } from "../assets/shattib-logo-col.svg";
@@ -30,19 +28,18 @@ export { default as shattibLogoRow } from "../assets/shattib-logo-row.svg";
 // -- components --
 export { default as TextInput } from "../components/TextInput";
 export { default as Button } from "../components/Button";
-export { default as RoundButton } from "../components/RoundButton";
 export { default as ProductCard } from "../components/ProductCard";
 export { default as CompaniesBanner } from "../components/CompaniesBanner";
 export { default as RegisterCompanyCard } from "../components/RegisterCompanyCard";
 export { default as RegisterPersonCard } from "../components/RegisterPersonCard";
 export { default as ButtonGold } from "../components/ButtonGold";
-export { default as CategoryCard } from "../components/CategoryCard";
 export { default as SalesSlideShow } from "../components/SalesSlideShow";
 export { default as ProductDetailsCard } from "../components/ProductDetailsCard";
-
-export { default as categoryImg01 } from "../assets/imgs/65883cc0a42a6f52d4e8bd346f1c376d.jpg";
-export { default as categoryImg02 } from "../assets/imgs/ea904aa7e74a1922b8ec054a3d3743ed.jpg";
-export { default as categoryImg03 } from "../assets/imgs/fd7439ff7ea7849bd3185a1effc0c966.jpg";
+export { default as ProductListHorizontal } from "../components/ProductListHorizontal";
+export { default as CategoryListHorizontal } from "../components/CategoryListHorizontal";
+export { default as TitleNumber } from "../components/TitleNumber";
+export { default as CategoriesButtonListHorizontal } from "../components/CategoriesButtonListHorizontal";
+export { default as LeftRightButtonsCircle } from "../components/LeftRightButtonsCircle";
 
 // -- vids --
 export { default as video01 } from "../assets/vids/-5edc-414b-85d9-12f636869104.mp4";
