@@ -14,6 +14,8 @@ export { default as heartIcon } from "../assets/icon-heart.svg";
 export { default as Button } from "./Button";
 export { default as addToCartIcon } from "../assets/icon-add-cart.svg";
 export { default as testImg } from "../assets/imgs/493263f4f044e10db4127c423842f812.jpg";
+export { default as redHeartIcon } from "../assets/icon-heart-red.svg";
+export { Link } from "react-router-dom";
 
 // -- Register Card --
 export { default as loginIcon } from "../assets/icon-login.svg";
@@ -54,3 +56,11 @@ export { default as youtubeIcon } from "../assets/icon-youtube.svg";
 export { default as linkedinIcon } from "../assets/icon-linkedin.svg";
 export { default as telegramIcon } from "../assets/icon-telegram.svg";
 export { default as whatsappIcon } from "../assets/icon-whatsapp.svg";
+
+// -- Product Details Card --
+export { default as priceTagIcon } from "../assets/icon-price-tag.svg";
+export { default as linkIcon } from "../assets/icon-link.svg";
+export { default as plusCircleIcon } from "../assets/icon-plus-circle.svg";
+export { default as minusCircleIcon } from "../assets/icon-minus-circle.svg";
+export { default as addToBoxIcon } from "../assets/icon-add-box.svg";
+export { default as productImg } from "../assets/imgs/493263f4f044e10db4127c423842f812.jpg";

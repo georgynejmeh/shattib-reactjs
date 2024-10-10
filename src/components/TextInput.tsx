@@ -1,4 +1,4 @@
-import { useState, eyeIcon } from "./index";
+import { useState, eyeIcon } from ".";
 
 interface Props {
   title?: string;

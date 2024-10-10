@@ -4,6 +4,7 @@ import IntroPage from "./pages/IntroPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MainLayout from "./layouts/MainLayout";
+import ProductPage from "./pages/ProductPage";
 
 const App = () => {
   return (
@@ -12,8 +13,9 @@ const App = () => {
         <Route path="/" element={<IntroPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
+        <Route element={<MainLayout />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/product" element={<ProductPage />} />
         </Route>
       </Routes>
     </main>

@@ -15,7 +15,7 @@ import {
   leftArrowCircleIcon,
   rightArrowCircleIcon,
   CategoryCard,
-} from "./index";
+} from ".";
 
 const HomePage = () => {
   return (

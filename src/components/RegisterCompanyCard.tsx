@@ -1,4 +1,4 @@
-import { RegisterCard, bluePerson } from "./index";
+import { RegisterCard, bluePerson } from ".";
 
 const RegisterCompanyCard = () => {
   return (

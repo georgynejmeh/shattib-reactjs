@@ -7,7 +7,7 @@ import {
   whatsappIcon,
   shattibLogoCol,
   paragraphPlaceholder,
-} from "./index";
+} from ".";
 
 const Footer = () => {
   return (

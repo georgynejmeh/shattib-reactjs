@@ -8,7 +8,7 @@ import {
   accountIcon,
   TextInput,
   ButtonGold,
-} from "./index";
+} from ".";
 
 const NavBar = () => {
   return (

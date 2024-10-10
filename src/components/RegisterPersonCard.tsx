@@ -1,4 +1,5 @@
-import { RegisterCard, yellowBuilding } from "./index";
+import { RegisterCard, yellowBuilding } from ".";
+
 const RegisterPersonCard = () => {
   return (
     <RegisterCard

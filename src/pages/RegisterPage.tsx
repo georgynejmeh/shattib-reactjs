@@ -7,7 +7,7 @@ import {
   Button,
   registerBanner,
   Link,
-} from "./index";
+} from ".";
 
 const RegisterPage = () => {
   return (

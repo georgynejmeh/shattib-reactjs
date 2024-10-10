@@ -38,6 +38,7 @@ export { default as RegisterPersonCard } from "../components/RegisterPersonCard"
 export { default as ButtonGold } from "../components/ButtonGold";
 export { default as CategoryCard } from "../components/CategoryCard";
 export { default as SalesSlideShow } from "../components/SalesSlideShow";
+export { default as ProductDetailsCard } from "../components/ProductDetailsCard";
 
 export { default as categoryImg01 } from "../assets/imgs/65883cc0a42a6f52d4e8bd346f1c376d.jpg";
 export { default as categoryImg02 } from "../assets/imgs/ea904aa7e74a1922b8ec054a3d3743ed.jpg";
