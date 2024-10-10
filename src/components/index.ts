@@ -65,6 +65,8 @@ export { default as minusCircleIcon } from "../assets/icon-minus-circle.svg";
 export { default as addToBoxIcon } from "../assets/icon-add-box.svg";
 export { default as productImg } from "../assets/imgs/493263f4f044e10db4127c423842f812.jpg";
 export { default as TitleNumber } from "../components/TitleNumber";
+export { default as QuantityControls } from "./QuantityControls";
+export { default as AccentText } from "./AccentText";
 
 // -- Product List Horizontal --
 export { default as ProductCard } from "./ProductCard";

@@ -8,6 +8,7 @@ import {
   accountIcon,
   TextInput,
   ButtonGold,
+  Link,
 } from ".";
 
 const NavBar = () => {
@@ -25,10 +26,12 @@ const NavBar = () => {
       <div className="w-96">
         <TextInput icon={searchIcon} placeholder="البحث عن المنتجات" />
       </div>
-      <div className="flex flex-col items-center">
-        <img src={cartIcon} alt="" />
-        <span>السلة</span>
-      </div>
+      <Link to={"/cart"}>
+        <div className="flex flex-col items-center">
+          <img src={cartIcon} alt="" />
+          <span>السلة</span>
+        </div>
+      </Link>
       <div className="flex flex-col items-center">
         <img src={heartIcon} alt="" />
         <span>المفضلة</span>

@@ -40,6 +40,7 @@ export { default as CategoryListHorizontal } from "../components/CategoryListHor
 export { default as TitleNumber } from "../components/TitleNumber";
 export { default as CategoriesButtonListHorizontal } from "../components/CategoriesButtonListHorizontal";
 export { default as LeftRightButtonsCircle } from "../components/LeftRightButtonsCircle";
+export { default as CartItemCard } from "../components/CartItemCard";
 
 // -- vids --
 export { default as video01 } from "../assets/vids/-5edc-414b-85d9-12f636869104.mp4";

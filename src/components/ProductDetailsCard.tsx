@@ -3,11 +3,11 @@ import {
   addToCartIcon,
   Button,
   linkIcon,
-  minusCircleIcon,
-  plusCircleIcon,
   priceTagIcon,
   productImg,
   TitleNumber,
+  QuantityControls,
+  AccentText,
 } from ".";
 
 const ProductDetailsCard = () => {
@@ -20,9 +20,8 @@ const ProductDetailsCard = () => {
         </div>
         <div className="flex items-center gap-4">
           <img src={priceTagIcon} alt="" />
-          <span className="text-2xl font-bold text-yellow-600">
-            50 - 70 ريال
-          </span>
+          <AccentText>50 - 70 ريال</AccentText>
+
           <button>
             <div className="flex items-center gap-2">
               <span className="underline">طلب عرض سعر</span>
@@ -88,15 +87,7 @@ const ProductDetailsCard = () => {
         <hr />
         <div className="flex gap-4">
           <span className="text-lg">الكمية</span>
-          <div className="rounded-full flex bg-gray-200 gap-4 py-1 px-3">
-            <button>
-              <img src={plusCircleIcon} alt="" />
-            </button>
-            <span>1</span>
-            <button>
-              <img src={minusCircleIcon} alt="" />
-            </button>
-          </div>
+          <QuantityControls />
         </div>
         <div className="flex flex-col gap-4">
           <Button>

@@ -6,6 +6,7 @@ import {
   useState,
   Link,
   redHeartIcon,
+  AccentText,
 } from ".";
 
 const ProductCard = () => {
@@ -31,8 +32,8 @@ const ProductCard = () => {
           <h2 className="text-lg font-bold">طقم شطاف WG 006</h2>
           <span className="text-sm text-gray-600 py-1">طقم شطاف</span>
           <p>إمكانية التحكم بالمياه من خلال عصا سهلة الاستخدام</p>
-          <span className="self-end text-lg font-bold text-yellow-600">
-            50 - 70 ريال
+          <span className="self-end">
+            <AccentText>50 - 70 ريال</AccentText>
           </span>
           <div className="mx-2 my-1">
             <Button size="md">
