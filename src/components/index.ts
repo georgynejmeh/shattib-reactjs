@@ -1,0 +1,56 @@
+export { useState, useEffect } from "react";
+
+// -- Companies Banner --
+export { default as cluLogo } from "../assets/logo-clu.svg";
+export { default as dewareLogo } from "../assets/logo-deware.svg";
+export { default as highBuildLogo } from "../assets/logo-high-build.svg";
+export { default as pinlocLogo } from "../assets/logo-pinloc.svg";
+export { default as prewLogo } from "../assets/logo-prew.svg";
+export { default as vblockLogo } from "../assets/logo-vblock.svg";
+export { default as zonexLogo } from "../assets/logo-zonex.svg";
+
+// -- Product Card --
+export { default as heartIcon } from "../assets/icon-heart.svg";
+export { default as Button } from "./Button";
+export { default as addToCartIcon } from "../assets/icon-add-cart.svg";
+export { default as testImg } from "../assets/imgs/493263f4f044e10db4127c423842f812.jpg";
+
+// -- Register Card --
+export { default as loginIcon } from "../assets/icon-login.svg";
+
+export { default as RegisterCard } from "./RegisterCard";
+// -- Register Company Card --
+export { default as bluePerson } from "../assets/blue-person.svg";
+// -- Register Person Card --
+export { default as yellowBuilding } from "../assets/yellow-building.svg";
+
+// -- Text Input --
+export { default as eyeIcon } from "../assets/icon-eye.svg";
+
+// -- Sales Slide Show --
+export { default as saleImg01 } from "../assets/imgs/0954885f3fc520a40ea876a0f638f1e1.jpg";
+export { default as saleImg02 } from "../assets/imgs/b97115c4f6b6aa207413091ee7d6f245.jpg";
+export { default as saleImg03 } from "../assets/imgs/c5c85ee654308527cea477bbf46e07ff.jpg";
+export { default as percentIcon } from "../assets/icon-percent.svg";
+export { default as RoundButton } from "../components/RoundButton";
+
+// -- Nav Bar --
+export { default as shattibLogoRow } from "../assets/shattib-logo-row.svg";
+export { default as shattibIcon } from "../assets/icon-shattib.svg";
+export { default as downArrowIcon } from "../assets/icon-down-arrow.svg";
+export { default as searchIcon } from "../assets/icon-search.svg";
+export { default as cartIcon } from "../assets/icon-cart.svg";
+export { default as accountIcon } from "../assets/icon-account.svg";
+export { default as TextInput } from "../components/TextInput";
+export { default as ButtonGold } from "../components/ButtonGold";
+
+// -- Footer --
+export { default as shattibLogoCol } from "../assets/shattib-logo-col.svg";
+export { default as paragraphPlaceholder } from "../assets/placeholder-paragraph.svg";
+// -- social media --
+export { default as facebookIcon } from "../assets/icon-facebook.svg";
+export { default as instagramIcon } from "../assets/icon-instagram.svg";
+export { default as youtubeIcon } from "../assets/icon-youtube.svg";
+export { default as linkedinIcon } from "../assets/icon-linkedin.svg";
+export { default as telegramIcon } from "../assets/icon-telegram.svg";
+export { default as whatsappIcon } from "../assets/icon-whatsapp.svg";
