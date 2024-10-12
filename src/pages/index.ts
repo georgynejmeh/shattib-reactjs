@@ -20,6 +20,9 @@ export { default as lockIcon } from "../assets/icon-lock.svg";
 export { default as personIcon } from "../assets/icon-person.svg";
 export { default as phoneIcon } from "../assets/icon-phone.svg";
 export { default as doubleLeftArrowIcon } from "../assets/icon-double-left-arrow.svg";
+export { default as linkIcon } from "../assets/icon-link.svg";
+export { default as addToBoxIcon } from "../assets/icon-add-box.svg";
+export { default as plusCircleIcon } from "../assets/icon-plus-circle.svg";
 
 // -- logos --
 export { default as shattibLogoCol } from "../assets/shattib-logo-col.svg";
@@ -41,6 +44,10 @@ export { default as TitleNumber } from "../components/TitleNumber";
 export { default as CategoriesButtonListHorizontal } from "../components/CategoriesButtonListHorizontal";
 export { default as LeftRightButtonsCircle } from "../components/LeftRightButtonsCircle";
 export { default as CartItemCard } from "../components/CartItemCard";
+export { default as RoundButton } from "../components/RoundButton";
+export { default as ConditionCard } from "../components/ConditionCard";
+export { default as MainPadding } from "../components/MainPadding";
+export { default as GoldConditionCard } from "../components/GoldConditionCard";
 
 // -- vids --
 export { default as video01 } from "../assets/vids/-5edc-414b-85d9-12f636869104.mp4";

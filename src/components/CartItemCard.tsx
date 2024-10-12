@@ -1,9 +1,13 @@
 import { AccentText, productImg, QuantityControls } from ".";
 
-const CartItemCard = () => {
+interface Props {
+  numbered?: boolean;
+}
+
+const CartItemCard = ({ numbered }: Props) => {
   return (
     <div className="flex items-center gap-12 my-8">
-      <h1 className="text-2xl font-bold">1</h1>
+      {numbered ? <h1 className="text-2xl font-bold">1</h1> : null}
       <div className="flex justify-around items-center rounded-xl bg-gray-100 h-32 w-full">
         <img className="rounded-xl h-28 w-20" src={productImg} alt="" />
         <div>

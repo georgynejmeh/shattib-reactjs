@@ -12,7 +12,7 @@ import {
 const ProductCard = () => {
   const [active, setActive] = useState(false);
   return (
-    <div className="h-96 w-64 rounded-xl bg-gray-200 shadow shadow-gray-500 transition-all duration-700 hover:bg-amber-100">
+    <div className="pb-2 h-96 w-64 rounded-xl bg-gray-200 shadow shadow-gray-500 transition-all duration-700 hover:bg-amber-100">
       <div className="relative h-1/2">
         <Link to={"/product"}>
           <img

@@ -2,9 +2,10 @@ import { useState, eyeIcon } from ".";
 
 interface Props {
   title?: string;
-  icon: string;
+  icon?: string;
   password?: boolean;
   placeholder?: string;
+  blackTitle?: boolean;
 }
 
 const TextInput = ({
@@ -12,12 +13,19 @@ const TextInput = ({
   icon,
   password = false,
   placeholder = "",
+  blackTitle = false,
 }: Props) => {
   const [hidden, setHidden] = useState(password);
   return (
     <>
       <div className="flex flex-col">
-        <label className="flex self-start mb-2 text-gray-400 text-sm font-medium">
+        <label
+          className={
+            blackTitle
+              ? "flex self-start mb-2 text-sm"
+              : "flex self-start mb-2 text-gray-400 text-sm font-medium"
+          }
+        >
           {title}
         </label>
         <div className="relative">
@@ -26,7 +34,11 @@ const TextInput = ({
           </span>
           <input
             type={hidden ? "password" : "text"}
-            className="w-full py-3 pl-10 pr-10 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
+            className={
+              icon
+                ? "w-full py-3 pl-10 pr-10 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
+                : "w-full py-3 pl-10 pr-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
+            }
             placeholder={placeholder}
           />
           {password ? (

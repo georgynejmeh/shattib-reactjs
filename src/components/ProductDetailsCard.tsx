@@ -12,7 +12,7 @@ import {
 
 const ProductDetailsCard = () => {
   return (
-    <div className="flex rounded-xl h-full w-3/4 bg-gray-100 px-8">
+    <div className="flex rounded-xl h-full w-3/4 bg-gray-100">
       <div className="flex flex-col justify-between gap-4 rounded-xl w-full m-8">
         <div className="flex flex-col gap-4">
           <h1 className="text-xl font-bold">طقم شطاف WG 006</h1>

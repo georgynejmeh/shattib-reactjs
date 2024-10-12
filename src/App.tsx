@@ -6,6 +6,10 @@ import RegisterPage from "./pages/RegisterPage";
 import MainLayout from "./layouts/MainLayout";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
+import WishListPage from "./pages/WishListPage";
+import ConditionDocsPage from "./pages/ConditionDocsPage";
+import NewConditionPage from "./pages/NewConditionPage";
+import ConfirmNewConditionPage from "./pages/ConfirmNewConditionPage";
 
 const App = () => {
   return (
@@ -18,6 +22,13 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/product" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/wishlist" element={<WishListPage />} />
+          <Route path="/conditions" element={<ConditionDocsPage />} />
+          <Route path="/conditions/new" element={<NewConditionPage />} />
+          <Route
+            path="/conditions/new/confirm"
+            element={<ConfirmNewConditionPage />}
+          />
         </Route>
       </Routes>
     </main>

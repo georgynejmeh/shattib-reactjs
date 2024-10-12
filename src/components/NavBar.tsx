@@ -13,9 +13,11 @@ import {
 
 const NavBar = () => {
   return (
-    <nav className="flex items-center justify-evenly py-4">
+    <nav className="flex items-center justify-evenly border-b py-4">
       <img src={shattibLogoRow} alt="" />
-      <span>الصفحة الرئيسية</span>
+      <Link to={"/home"}>
+        <span>الصفحة الرئيسية</span>
+      </Link>
       <div className="flex">
         <img src={shattibIcon} alt="" />
         <div className="flex">
@@ -23,6 +25,12 @@ const NavBar = () => {
           <img src={downArrowIcon} alt="" />
         </div>
       </div>
+      <Link to={"/home"}>
+        <span>جميع المنتجات</span>
+      </Link>
+      <Link to={"/conditions"}>
+        <span>كراسات الشروط</span>
+      </Link>
       <div className="w-96">
         <TextInput icon={searchIcon} placeholder="البحث عن المنتجات" />
       </div>
@@ -32,11 +40,13 @@ const NavBar = () => {
           <span>السلة</span>
         </div>
       </Link>
-      <div className="flex flex-col items-center">
-        <img src={heartIcon} alt="" />
-        <span>المفضلة</span>
-      </div>
-      <div className="">
+      <Link to={"/wishlist"}>
+        <div className="flex flex-col items-center">
+          <img src={heartIcon} alt="" />
+          <span>المفضلة</span>
+        </div>
+      </Link>
+      <div>
         <ButtonGold>طلب عرض سعر</ButtonGold>
       </div>
       <div className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full">
