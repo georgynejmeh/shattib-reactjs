@@ -6,6 +6,7 @@ interface Props {
   password?: boolean;
   placeholder?: string;
   blackTitle?: boolean;
+  big?: boolean;
 }
 
 const TextInput = ({
@@ -14,11 +15,12 @@ const TextInput = ({
   password = false,
   placeholder = "",
   blackTitle = false,
+  big = false,
 }: Props) => {
   const [hidden, setHidden] = useState(password);
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col h-full">
         <label
           className={
             blackTitle
@@ -28,19 +30,26 @@ const TextInput = ({
         >
           {title}
         </label>
-        <div className="relative">
+        <div className="relative h-full">
           <span className="absolute inset-y-0 right-0 flex items-center pr-3">
             <img src={icon} />
           </span>
-          <input
-            type={hidden ? "password" : "text"}
-            className={
-              icon
-                ? "w-full py-3 pl-10 pr-10 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
-                : "w-full py-3 pl-10 pr-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
-            }
-            placeholder={placeholder}
-          />
+          {big ? (
+            <textarea
+              className="resize-none h-full w-full py-3 ps-3 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
+              placeholder={placeholder}
+            />
+          ) : (
+            <input
+              type={hidden ? "password" : "text"}
+              className={
+                icon
+                  ? "h-full w-full py-3 pl-10 pr-10 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
+                  : "h-full w-full py-3 pl-10 pr-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
+              }
+              placeholder={placeholder}
+            />
+          )}
           {password ? (
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <img onClick={() => setHidden(!hidden)} src={eyeIcon} />

@@ -3,23 +3,18 @@ import {
   ProductDetailsCard,
   LeftRightButtonsCircle,
   MainPadding,
+  SectionTitles,
 } from ".";
 
 const ProductPage = () => {
   return (
     <main>
       <MainPadding>
-        <div className="flex gap-2">
-          <button>
-            <span className="text-gray-500">الأدوات الصحية</span>
-          </button>
-          <span className="text-gray-500">&gt;</span>
-          <button>
-            <span className="text-gray-500">طقم شطاف</span>
-          </button>
-          <span className="text-gray-500">&gt;</span>
-          <span className="font-bold">طقم شطاف WG006</span>
-        </div>
+        <SectionTitles
+          title01="الأدوات الصحية"
+          title02="طقم شطاف"
+          endTitle="طقم شطاف WG006"
+        />
         <section className="flex justify-center items-center h-screen my-8">
           <ProductDetailsCard />
         </section>

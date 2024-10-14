@@ -23,6 +23,8 @@ export { default as doubleLeftArrowIcon } from "../assets/icon-double-left-arrow
 export { default as linkIcon } from "../assets/icon-link.svg";
 export { default as addToBoxIcon } from "../assets/icon-add-box.svg";
 export { default as plusCircleIcon } from "../assets/icon-plus-circle.svg";
+export { default as uploadIcon } from "../assets/icon-upload.svg";
+export { default as plusCircleGoldIcon } from "../assets/icon-plus-circle-gold.svg";
 
 // -- logos --
 export { default as shattibLogoCol } from "../assets/shattib-logo-col.svg";
@@ -48,6 +50,9 @@ export { default as RoundButton } from "../components/RoundButton";
 export { default as ConditionCard } from "../components/ConditionCard";
 export { default as MainPadding } from "../components/MainPadding";
 export { default as GoldConditionCard } from "../components/GoldConditionCard";
+export { default as SectionTitles } from "../components/SectionTitles";
+export { default as ProductsFilterViewControls } from "../components/ProductsFilterViewControls";
+export { default as CategoryFilterCard } from "../components/CategoryFilterCard";
 
 // -- vids --
 export { default as video01 } from "../assets/vids/-5edc-414b-85d9-12f636869104.mp4";

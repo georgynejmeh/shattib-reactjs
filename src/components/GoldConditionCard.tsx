@@ -1,4 +1,4 @@
-import { categoryImg01, categoryImg02, categoryImg03, eyeIcon } from ".";
+import { categoryImg01, categoryImg02, categoryImg03, trashCanIcon } from ".";
 
 interface Temp {
   number: 1 | 2 | 3;
@@ -33,8 +33,8 @@ const GoldConditionCard = ({ number }: Temp) => {
           أضف معلومات
         </button>
         <button>
-          <div className="flex">
-            <img src={eyeIcon} alt="" />
+          <div className="flex gap-2">
+            <img src={trashCanIcon} alt="" />
             <span>إزالة</span>
           </div>
         </button>

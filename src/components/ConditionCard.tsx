@@ -33,8 +33,12 @@ const ConditionCard = ({ status }: Props) => {
           </div>
         </div>
       </div>
-      <div className="px-2 pt-2">
-        <img className="rounded-xl" src={categoryImg01} alt="" />
+      <div className="px-2 pt-2 h-40">
+        <img
+          className="rounded-xl object-cover w-full h-full"
+          src={categoryImg01}
+          alt=""
+        />
       </div>
     </div>
   );

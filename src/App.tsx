@@ -10,6 +10,8 @@ import WishListPage from "./pages/WishListPage";
 import ConditionDocsPage from "./pages/ConditionDocsPage";
 import NewConditionPage from "./pages/NewConditionPage";
 import ConfirmNewConditionPage from "./pages/ConfirmNewConditionPage";
+import PriceRequestPage from "./pages/PriceRequestPage";
+import MainCategoryPage from "./pages/MainCategoryPage";
 
 const App = () => {
   return (
@@ -21,6 +23,7 @@ const App = () => {
         <Route element={<MainLayout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/product" element={<ProductPage />} />
+          <Route path="/category" element={<MainCategoryPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<WishListPage />} />
           <Route path="/conditions" element={<ConditionDocsPage />} />
@@ -29,6 +32,7 @@ const App = () => {
             path="/conditions/new/confirm"
             element={<ConfirmNewConditionPage />}
           />
+          <Route path="/price-request" element={<PriceRequestPage />} />
         </Route>
       </Routes>
     </main>

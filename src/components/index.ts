@@ -80,3 +80,14 @@ export { default as categoryImg03 } from "../assets/imgs/fd7439ff7ea7849bd3185a1
 // -- Left Right Buttons Cricle --
 export { default as leftArrowCircleIcon } from "../assets/icon-left-arrow-circle.svg";
 export { default as rightArrowCircleIcon } from "../assets/icon-right-arrow-circle.svg";
+
+// -- Products Filter View Controls --
+export { default as fourDotsMenu } from "../assets/icon-four-dots-menu.svg";
+export { default as listMenu } from "../assets/icon-list-menu.svg";
+export { default as DropDownMenuButton } from "../components/DropDownMenuButton";
+
+// -- Category Filter Card --
+export { default as priceSlider } from "../assets/price-slider.svg";
+
+// -- Gold Condition Card --
+export { default as trashCanIcon } from "../assets/icon-trash-can.svg";

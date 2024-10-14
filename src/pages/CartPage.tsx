@@ -1,4 +1,5 @@
 import { Button, cartIcon, CartItemCard } from ".";
+import { DropDownMenuButton } from "../components";
 import MainPadding from "../components/MainPadding";
 
 const CartPage = () => {
@@ -8,6 +9,11 @@ const CartPage = () => {
         <div className="flex items-center gap-2 pb-8">
           <img className="w-12 h-12" src={cartIcon} alt="" />
           <span className="text-2xl font-bold text-gray-500">السلة</span>
+        </div>
+        <div className="p-2 w-full flex flex-col">
+          <div className="w-32 self-end">
+            <DropDownMenuButton bordered>طلبات العينة</DropDownMenuButton>
+          </div>
         </div>
         <div className="w-screen">
           <div className="w-3/4">

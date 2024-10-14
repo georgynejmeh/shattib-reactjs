@@ -1,4 +1,9 @@
-import { MainPadding, ButtonGold, plusCircleIcon, GoldConditionCard } from ".";
+import {
+  MainPadding,
+  ButtonGold,
+  GoldConditionCard,
+  plusCircleGoldIcon,
+} from ".";
 
 const ConfirmNewConditionPage = () => {
   return (
@@ -10,8 +15,8 @@ const ConfirmNewConditionPage = () => {
             <h2>التصنيفات المختارة</h2>
             <button>
               <div className="flex gap-2">
-                <img src={plusCircleIcon} alt="" />
-                <span>إضافة المزيد</span>
+                <img src={plusCircleGoldIcon} alt="" />
+                <span className="text-yellow-600">إضافة المزيد</span>
               </div>
             </button>
           </div>
