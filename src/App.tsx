@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import HomePage from "./pages/HomePage";
 import IntroPage from "./pages/IntroPage";
 import LoginPage from "./pages/LoginPage";
@@ -12,8 +13,16 @@ import NewConditionPage from "./pages/NewConditionPage";
 import ConfirmNewConditionPage from "./pages/ConfirmNewConditionPage";
 import PriceRequestPage from "./pages/PriceRequestPage";
 import MainCategoryPage from "./pages/MainCategoryPage";
+import PriceRequestSecondPage from "./pages/PriceRequestSecondPage";
 
 const App = () => {
+  // return to the top of the page on navigation
+  // FIX for: keep the same scroll distance on navigation
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <main dir="rtl">
       <Routes>
@@ -33,6 +42,7 @@ const App = () => {
             element={<ConfirmNewConditionPage />}
           />
           <Route path="/price-request" element={<PriceRequestPage />} />
+          <Route path="/price-request-2" element={<PriceRequestSecondPage />} />
         </Route>
       </Routes>
     </main>

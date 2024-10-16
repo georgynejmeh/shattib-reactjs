@@ -1,6 +1,10 @@
-import { Button, cartIcon, CartItemCard } from ".";
-import { DropDownMenuButton } from "../components";
-import MainPadding from "../components/MainPadding";
+import {
+  Button,
+  cartIcon,
+  CartItemCard,
+  DropDownMenuButton,
+  MainPadding,
+} from ".";
 
 const CartPage = () => {
   return (

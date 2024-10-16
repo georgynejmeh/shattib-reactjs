@@ -8,6 +8,7 @@ import {
   TitleNumber,
   QuantityControls,
   AccentText,
+  Link,
 } from ".";
 
 const ProductDetailsCard = () => {
@@ -22,12 +23,14 @@ const ProductDetailsCard = () => {
           <img src={priceTagIcon} alt="" />
           <AccentText>50 - 70 ريال</AccentText>
 
-          <button>
-            <div className="flex items-center gap-2">
-              <span className="underline">طلب عرض سعر</span>
-              <img className="h-4" src={linkIcon} alt="" />
-            </div>
-          </button>
+          <Link to={"/price-request"}>
+            <button>
+              <div className="flex items-center gap-2">
+                <span className="underline">طلب عرض سعر</span>
+                <img className="h-4" src={linkIcon} alt="" />
+              </div>
+            </button>
+          </Link>
         </div>
         <hr />
         <div>
@@ -85,7 +88,7 @@ const ProductDetailsCard = () => {
           </TitleNumber>
         </div>
         <hr />
-        <div className="flex gap-4">
+        <div className="flex gap-4 w-52">
           <span className="text-lg">الكمية</span>
           <QuantityControls />
         </div>

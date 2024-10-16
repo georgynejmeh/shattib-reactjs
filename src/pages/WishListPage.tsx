@@ -1,9 +1,9 @@
-import { addToBoxIcon, Button, CartItemCard } from ".";
+import { addToBoxIcon, Button, CartItemCard, MainPadding } from ".";
 
 const WishListPage = () => {
   return (
-    <>
-      <main className="flex flex-col gap-8 px-32">
+    <main>
+      <MainPadding>
         <section className="flex flex-col gap-4 py-2">
           <h1 className="text-2xl font-bold">قائمة الرغبات</h1>
           <h2 className="text-xl text-gray-400">
@@ -25,8 +25,8 @@ const WishListPage = () => {
           <CartItemCard />
           <CartItemCard />
         </section>
-      </main>
-    </>
+      </MainPadding>
+    </main>
   );
 };
 

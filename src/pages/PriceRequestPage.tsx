@@ -1,4 +1,5 @@
-import { ButtonGold, MainPadding, TextInput, uploadIcon } from ".";
+import { ButtonGold, Link, MainPadding, TextInput, uploadIcon } from ".";
+import { QuantityControls } from "../components";
 
 const PriceRequestPage = () => {
   return (
@@ -29,7 +30,14 @@ const PriceRequestPage = () => {
             />
           </div>
           <div className="w-full">
-            <TextInput blackTitle title="الكمية" />
+            <label className="flex self-start mb-2 text-sm">الكمية</label>
+            <div className="flex flex-col border rounded p-2">
+              <div className="w-36 self-end">
+                <QuantityControls />
+              </div>
+            </div>
+
+            {/* <TextInput blackTitle title="الكمية" /> */}
           </div>
           <div className="w-full">
             <TextInput blackTitle title="الوحدة" />
@@ -59,7 +67,9 @@ const PriceRequestPage = () => {
 
         <div className="flex flex-col w-full">
           <div className="w-32 self-end">
-            <ButtonGold>التالي</ButtonGold>
+            <Link to={"/price-request-2"}>
+              <ButtonGold>التالي</ButtonGold>
+            </Link>
           </div>
         </div>
       </MainPadding>
