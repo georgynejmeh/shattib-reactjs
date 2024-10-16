@@ -96,3 +96,6 @@ export { default as trashCanIcon } from "../assets/svg/icon-trash-can.svg";
 export { default as closeCircleIcon } from "../assets/svg/icon-close-circle.svg";
 export { default as goldEngineerIcon } from "../assets/svg/icon-gold-engineer.svg";
 export { useEngineerRequest } from "../hooks/useEngineerRequestModal";
+
+// -- Upload File --
+export { default as uploadIcon } from "../assets/svg/icon-upload.svg";

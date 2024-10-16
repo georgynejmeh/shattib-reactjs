@@ -1,4 +1,4 @@
-import { ButtonGold, Link, MainPadding, TextInput, uploadIcon } from ".";
+import { ButtonGold, Link, MainPadding, TextInput, UploadFile } from ".";
 import { QuantityControls } from "../components";
 
 const PriceRequestPage = () => {
@@ -36,8 +36,6 @@ const PriceRequestPage = () => {
                 <QuantityControls />
               </div>
             </div>
-
-            {/* <TextInput blackTitle title="الكمية" /> */}
           </div>
           <div className="w-full">
             <TextInput blackTitle title="الوحدة" />
@@ -54,14 +52,8 @@ const PriceRequestPage = () => {
             />
           </div>
 
-          <div className="flex flex-col w-1/2 h-full gap-2">
-            <span className="text-sm">إرفاق الملفات</span>
-            <div className="flex justify-center items-center w-full h-full rounded-xl border-dashed border-gray-200 border-8 bg-gray-100">
-              <div className="flex flex-col justify-center items-center gap-4">
-                <img className="w-16" src={uploadIcon} alt="" />
-                <span className="text-blue-950 font-bold">أضف ملف أو صورة</span>
-              </div>
-            </div>
+          <div className="w-1/2">
+            <UploadFile title="إرفاق الملفات" subTitle="أضف ملف أو صورة" />
           </div>
         </div>
 

@@ -14,6 +14,7 @@ import ConfirmNewConditionPage from "./pages/ConfirmNewConditionPage";
 import PriceRequestPage from "./pages/PriceRequestPage";
 import MainCategoryPage from "./pages/MainCategoryPage";
 import PriceRequestSecondPage from "./pages/PriceRequestSecondPage";
+import DocPage from "./pages/DocPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<WishListPage />} />
           <Route path="/conditions" element={<ConditionDocsPage />} />
+          <Route path="/conditions/doc" element={<DocPage />} />
           <Route path="/conditions/new" element={<NewConditionPage />} />
           <Route
             path="/conditions/new/confirm"

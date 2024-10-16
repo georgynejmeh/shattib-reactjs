@@ -14,7 +14,9 @@ const CartItemCard = ({ numbered }: Props) => {
           <h1 className="text-xl font-bold">طقم شطاف WG006</h1>
           <h2 className="text-xl font-bold text-gray-400">طقم شطاف</h2>
         </div>
-        <QuantityControls />
+        <div className="w-32">
+          <QuantityControls />
+        </div>
         <AccentText>50 - 70 ريال</AccentText>
       </div>
     </div>

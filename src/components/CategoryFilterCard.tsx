@@ -33,7 +33,7 @@ const CategoryFilterCard = () => {
         <div className="w-36">
           <Button size="md">إعادة تعيين</Button>
         </div>
-        <div className="w-24">
+        <div className="w-28">
           <Button size="md">تطبيق</Button>
         </div>
       </div>

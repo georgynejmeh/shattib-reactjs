@@ -21,9 +21,9 @@ export { default as personIcon } from "../assets/svg/icon-person.svg";
 export { default as phoneIcon } from "../assets/svg/icon-phone.svg";
 export { default as doubleLeftArrowIcon } from "../assets/svg/icon-double-left-arrow.svg";
 export { default as linkIcon } from "../assets/svg/icon-link.svg";
+export { default as goldLinkIcon } from "../assets/svg/icon-link-gold.svg";
 export { default as addToBoxIcon } from "../assets/svg/icon-add-box.svg";
 export { default as plusCircleIcon } from "../assets/svg/icon-plus-circle.svg";
-export { default as uploadIcon } from "../assets/svg/icon-upload.svg";
 export { default as plusCircleGoldIcon } from "../assets/svg/icon-plus-circle-gold.svg";
 
 // -- logos --
@@ -54,7 +54,12 @@ export { default as SectionTitles } from "../components/SectionTitles";
 export { default as ProductsFilterViewControls } from "../components/ProductsFilterViewControls";
 export { default as CategoryFilterCard } from "../components/CategoryFilterCard";
 export { default as DropDownMenuButton } from "../components/DropDownMenuButton";
+export { default as AccentText } from "../components/AccentText";
+export { default as UploadFile } from "../components/UploadFile";
 
 // -- vids --
 export { default as video01 } from "../assets/vids/-5edc-414b-85d9-12f636869104.mp4";
 export { default as video02 } from "../assets/vids/-1798-4841-a8b9-f315b7c2d6f6.mp4";
+
+// -- imgs --
+export { default as categoryImg01 } from "../assets/imgs/65883cc0a42a6f52d4e8bd346f1c376d.jpg";
