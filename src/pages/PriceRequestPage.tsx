@@ -1,4 +1,11 @@
-import { ButtonGold, Link, MainPadding, TextInput, UploadFile } from ".";
+import {
+  ButtonGold,
+  DropDownMenu,
+  Link,
+  MainPadding,
+  TextInput,
+  UploadFile,
+} from ".";
 import { QuantityControls } from "../components";
 
 const PriceRequestPage = () => {
@@ -23,8 +30,7 @@ const PriceRequestPage = () => {
 
         <div className="flex w-full gap-4 my-4">
           <div className="w-full">
-            <TextInput
-              blackTitle
+            <DropDownMenu
               title="اسم المنتج"
               placeholder="أدخل أو اختر اسم المنتج"
             />
@@ -38,7 +44,7 @@ const PriceRequestPage = () => {
             </div>
           </div>
           <div className="w-full">
-            <TextInput blackTitle title="الوحدة" />
+            <DropDownMenu title="الوحدة" />
           </div>
         </div>
 

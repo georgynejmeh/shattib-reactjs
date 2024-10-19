@@ -99,3 +99,6 @@ export { useEngineerRequest } from "../hooks/useEngineerRequestModal";
 
 // -- Upload File --
 export { default as uploadIcon } from "../assets/svg/icon-upload.svg";
+
+// -- Drop Down Menu --
+export { default as downArrowGrayIcon } from "../assets/svg/icon-down-arrow-gray.svg";

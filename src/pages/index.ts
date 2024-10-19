@@ -56,6 +56,7 @@ export { default as CategoryFilterCard } from "../components/CategoryFilterCard"
 export { default as DropDownMenuButton } from "../components/DropDownMenuButton";
 export { default as AccentText } from "../components/AccentText";
 export { default as UploadFile } from "../components/UploadFile";
+export { default as DropDownMenu } from "../components/DropDownMenu";
 
 // -- vids --
 export { default as video01 } from "../assets/vids/-5edc-414b-85d9-12f636869104.mp4";
