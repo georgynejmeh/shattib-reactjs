@@ -1,4 +1,4 @@
-import { addToBoxIcon, Button, CartItemCard, MainPadding } from ".";
+import { addToBoxIcon, Button, CartItemCard, MainPadding } from "..";
 
 const WishListPage = () => {
   return (

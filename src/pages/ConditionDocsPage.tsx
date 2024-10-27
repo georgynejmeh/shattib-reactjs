@@ -5,7 +5,7 @@ import {
   Link,
   MainPadding,
   RoundButton,
-} from ".";
+} from "..";
 
 const ConditionDocsPage = () => {
   return (

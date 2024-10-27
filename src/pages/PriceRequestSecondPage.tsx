@@ -1,4 +1,4 @@
-import { ButtonGold, Link, MainPadding, TextInput } from ".";
+import { ButtonGold, Link, MainPadding, TextInput } from "..";
 
 const PriceRequestSecondPage = () => {
   return (

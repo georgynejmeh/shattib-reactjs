@@ -5,7 +5,7 @@ import {
   MainPadding,
   TextInput,
   UploadFile,
-} from ".";
+} from "..";
 import { QuantityControls } from "../components";
 
 const PriceRequestPage = () => {

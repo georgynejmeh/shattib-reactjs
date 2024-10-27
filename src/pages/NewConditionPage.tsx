@@ -4,7 +4,7 @@ import {
   Link,
   MainPadding,
   TextInput,
-} from ".";
+} from "..";
 
 const NewConditionPage = () => {
   return (

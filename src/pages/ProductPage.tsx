@@ -4,7 +4,7 @@ import {
   LeftRightButtonsCircle,
   MainPadding,
   SectionTitles,
-} from ".";
+} from "..";
 
 const ProductPage = () => {
   return (

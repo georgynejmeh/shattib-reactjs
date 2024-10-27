@@ -7,7 +7,7 @@ import {
   ProductsFilterViewControls,
   SectionTitles,
   TitleNumber,
-} from ".";
+} from "..";
 
 const MainCategoryPage = () => {
   return (

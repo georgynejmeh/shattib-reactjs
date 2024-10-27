@@ -3,7 +3,7 @@ import {
   ButtonGold,
   GoldConditionCard,
   plusCircleGoldIcon,
-} from ".";
+} from "..";
 
 const ConfirmNewConditionPage = () => {
   return (

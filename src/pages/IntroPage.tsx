@@ -6,7 +6,7 @@ import {
   RegisterCompanyCard,
   RegisterPersonCard,
   Link,
-} from ".";
+} from "..";
 
 const IntroPage = () => {
   return (

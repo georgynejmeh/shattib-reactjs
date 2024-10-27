@@ -5,7 +5,7 @@ import {
   MainPadding,
   SectionTitles,
   UploadFile,
-} from ".";
+} from "..";
 
 const DocPage = () => {
   return (

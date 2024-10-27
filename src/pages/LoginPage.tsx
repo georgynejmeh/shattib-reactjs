@@ -5,7 +5,7 @@ import {
   Button,
   registerBanner,
   Link,
-} from ".";
+} from "..";
 
 const LoginPage = () => {
   return (

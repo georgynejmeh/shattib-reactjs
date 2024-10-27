@@ -102,3 +102,11 @@ export { default as uploadIcon } from "../assets/svg/icon-upload.svg";
 
 // -- Drop Down Menu --
 export { default as downArrowGrayIcon } from "../assets/svg/icon-down-arrow-gray.svg";
+
+// -- Main Slide Show --
+export { default as mainCoverImg01 } from "/assets/imgs/cover/main/a0a9cb4b4c69c91a762cbf2ba0361a29.jpg";
+export { default as mainCoverImg02 } from "/assets/imgs/cover/main/b97115c4f6b6aa207413091ee7d6f245.jpg";
+export { default as mainCoverImg03 } from "/assets/imgs/cover/main/eaea4ab7981d2fd41696c3ed9db60e84.jpg";
+
+// -- Banner Button --
+export { default as expandCoverImg03 } from "/assets/imgs/cover/expand/8d0f8db99c4dd7e36a64210234efce24.jpg";

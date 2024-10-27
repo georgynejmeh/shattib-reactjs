@@ -4,7 +4,7 @@ import {
   CartItemCard,
   DropDownMenuButton,
   MainPadding,
-} from ".";
+} from "..";
 
 const CartPage = () => {
   return (
