@@ -1,4 +1,4 @@
-import { RegisterCard, yellowBuilding } from ".";
+import { RegisterCard, yellowBuilding } from "..";
 
 const RegisterPersonCard = () => {
   return (

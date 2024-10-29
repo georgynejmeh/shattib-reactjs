@@ -3,10 +3,10 @@ import {
   DropDownMenu,
   Link,
   MainPadding,
+  QuantityControls,
   TextInput,
   UploadFile,
 } from "..";
-import { QuantityControls } from "../components";
 
 const PriceRequestPage = () => {
   return (

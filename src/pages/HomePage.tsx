@@ -8,9 +8,15 @@ import {
   TitleNumber,
   CategoriesButtonListHorizontal,
   LeftRightButtonsCircle,
+  MainSlideShow,
+  BannerButton,
+  categoryImg01,
+  CategoryCard,
+  Link,
+  categoryImg02,
+  categoryImg03,
+  categoryImg04,
 } from "..";
-import BannerButton from "../components/BannerButton";
-import MainSlideShow from "../components/MainSlideShow";
 
 const HomePage = () => {
   return (
@@ -70,9 +76,40 @@ const HomePage = () => {
             <div className="me-2 h-16 w-2 bg-yellow-200" />
             <TitleNumber subTitle="17">التصنيفات</TitleNumber>
           </div>
+
           <CategoriesButtonListHorizontal />
+
+          {/* CATEGORIES HORIZONTAL LIST */}
+          <section className="pt-16">
+            <div className="mb-16">
+              <h1 className="text-4xl font-bold text-gray-800 mb-6">الرخام</h1>
+              <div className="flex gap-4 mb-8">
+                <h2 className="text-4xl font-bold text-gray-500">
+                  التصنيفات الفرعية
+                </h2>
+                <h2 className="text-4xl font-bold text-gray-300">4</h2>
+              </div>
+              <div className="flex gap-8">
+                <Link to={"/admin/category/1"}>
+                  <CategoryCard img={categoryImg01} num="8">
+                    رخام الأرضيات الداخلية والخارجية
+                  </CategoryCard>
+                </Link>
+                <CategoryCard img={categoryImg02} num="8">
+                  رخام المطابخ والحمامات
+                </CategoryCard>
+                <CategoryCard img={categoryImg03} num="8">
+                  رخام الجدران
+                </CategoryCard>
+                <CategoryCard img={categoryImg04} num="8">
+                  رخام الواجهات
+                </CategoryCard>
+              </div>
+            </div>
+          </section>
+
           <div className="flex items-center justify-between py-8">
-            <TitleNumber subTitle="500 منتج">مواد البناء</TitleNumber>
+            <TitleNumber subTitle="500 منتج">المتنجات</TitleNumber>
             <div className="flex">
               <span className="p-4">عرض الكل</span>
               <img src={doubleLeftArrowIcon} alt="" />
@@ -80,7 +117,37 @@ const HomePage = () => {
           </div>
           <ProductListHorizontal />
           <LeftRightButtonsCircle />
+
+          {/* CATEGORIES HORIZONTAL LIST */}
+          <section>
+            <div className="mb-16">
+              <h1 className="text-4xl font-bold text-gray-800 mb-6">الرخام</h1>
+              <div className="flex gap-4 mb-8">
+                <h2 className="text-4xl font-bold text-gray-500">
+                  التصنيفات الفرعية
+                </h2>
+                <h2 className="text-4xl font-bold text-gray-300">4</h2>
+              </div>
+              <div className="flex gap-8">
+                <Link to={"/admin/category/1"}>
+                  <CategoryCard img={categoryImg01} num="8">
+                    رخام الأرضيات الداخلية والخارجية
+                  </CategoryCard>
+                </Link>
+                <CategoryCard img={categoryImg02} num="8">
+                  رخام المطابخ والحمامات
+                </CategoryCard>
+                <CategoryCard img={categoryImg03} num="8">
+                  رخام الجدران
+                </CategoryCard>
+                <CategoryCard img={categoryImg04} num="8">
+                  رخام الواجهات
+                </CategoryCard>
+              </div>
+            </div>
+          </section>
         </section>
+
         <section className="p-8">
           <TitleNumber subTitle="20">التصنيفات الفرعية</TitleNumber>
           <CategoryListHorizontal />
@@ -90,6 +157,7 @@ const HomePage = () => {
           <img src={doubleLeftArrowIcon} alt="" />
           <span className="p-4">عرض جميع التصنيفات</span>
         </div>
+
         <CompaniesBanner />
       </div>
     </>

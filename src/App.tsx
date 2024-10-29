@@ -15,6 +15,13 @@ import PriceRequestPage from "./pages/PriceRequestPage";
 import MainCategoryPage from "./pages/MainCategoryPage";
 import PriceRequestSecondPage from "./pages/PriceRequestSecondPage";
 import DocPage from "./pages/DocPage";
+import AdminLayout from "./layouts/AdminLayout";
+import AdminNewProductSecondPage from "./pages/admin/AdminNewProductSecondPage";
+import AdminNewProductPage from "./pages/admin/AdminNewProductPage";
+import AdminProductsPage from "./pages/admin/AdminProductsPage";
+import AdminHomePage from "./pages/admin/AdminHomePage";
+import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
+import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -46,6 +53,18 @@ const App = () => {
           <Route path="/price-request" element={<PriceRequestPage />} />
           <Route path="/price-request-2" element={<PriceRequestSecondPage />} />
         </Route>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/home" element={<AdminHomePage />} />
+          <Route path="/admin/products" element={<AdminProductsPage />} />
+          <Route path="/admin/categories" element={<AdminCategoriesPage />} />
+          <Route path="/admin/category/1" element={<AdminCategoryPage />} />
+          <Route path="/admin/product/new" element={<AdminNewProductPage />} />
+          <Route
+            path="/admin/product/new/2"
+            element={<AdminNewProductSecondPage />}
+          />
+        </Route>
+        button
       </Routes>
     </main>
   );

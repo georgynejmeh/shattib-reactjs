@@ -1,4 +1,4 @@
-import { uploadIcon } from ".";
+import { uploadIcon } from "..";
 
 interface Props {
   title: string;

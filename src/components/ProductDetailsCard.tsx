@@ -9,7 +9,7 @@ import {
   QuantityControls,
   AccentText,
   Link,
-} from ".";
+} from "..";
 
 const ProductDetailsCard = () => {
   return (

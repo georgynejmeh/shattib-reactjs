@@ -1,4 +1,4 @@
-import { AccentText, productImg, QuantityControls } from ".";
+import { AccentText, productImg, QuantityControls } from "..";
 
 interface Props {
   numbered?: boolean;

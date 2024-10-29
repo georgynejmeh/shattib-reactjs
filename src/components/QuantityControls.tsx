@@ -1,4 +1,4 @@
-import { minusCircleIcon, plusCircleIcon, useState } from ".";
+import { minusCircleIcon, plusCircleIcon, useState } from "..";
 
 const QuantityControls = () => {
   const [count, setCount] = useState(1);

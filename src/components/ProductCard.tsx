@@ -7,7 +7,7 @@ import {
   redHeartIcon,
   AccentText,
   ButtonGold,
-} from ".";
+} from "..";
 
 const ProductCard = () => {
   const [active, setActive] = useState(false);

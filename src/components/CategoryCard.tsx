@@ -8,9 +8,9 @@ const CategoryCard = ({ children, img, num = "0" }: Props) => {
   return (
     <div className="h-48 w-56">
       <div className="flex justify-center items-center h-4/5 rounded-xl overflow-hidden">
-        <img src={img} alt="" />
+        <img className="w-full h-full object-cover" src={img} alt="" />
       </div>
-      <div className="flex justify-between p-2">
+      <div className="flex justify-between p-2 gap-2">
         <span>{children}</span>
         <span>{num}</span>
       </div>

@@ -10,12 +10,12 @@ import {
   ButtonGold,
   Link,
   useEngineerRequest,
-} from ".";
+} from "..";
 
 const NavBar = () => {
   const { setIsShownEngineerRequestModal } = useEngineerRequest();
   return (
-    <nav className="flex items-center justify-evenly border-b py-4">
+    <nav className="flex items-center justify-evenly border-b py-2">
       <img src={shattibLogoRow} alt="" />
       <Link to={"/home"}>
         <span>الصفحة الرئيسية</span>
@@ -64,6 +64,7 @@ const NavBar = () => {
       <div className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full">
         <img src={accountIcon} alt="" />
       </div>
+      <span>EN</span>
     </nav>
   );
 };

@@ -1,4 +1,4 @@
-import { AccentText, categoryImg01, Link } from ".";
+import { AccentText, categoryImg01, Link } from "..";
 
 interface Props {
   status: "معلًقة" | "مقبولة" | "مرفوضة";

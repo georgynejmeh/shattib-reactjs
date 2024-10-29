@@ -4,7 +4,7 @@ import {
   mainCoverImg03,
   useState,
   useEffect,
-} from ".";
+} from "..";
 
 const MainSlideShow = () => {
   const [index, setIndex] = useState(0);

@@ -2,7 +2,7 @@ import {
   firstPageBanner,
   shattibLogoRow,
   earthIcon,
-  shattibText,
+  shattibTextDecoration,
   RegisterCompanyCard,
   RegisterPersonCard,
   Link,
@@ -24,8 +24,8 @@ const IntroPage = () => {
         </div>
       </div>
       <div className="flex flex-col items-start px-24">
-        <img src={shattibText} alt="" />
-        <span className="pe-8">منصة شاملة لطلب مواد التشطيب بسهولة وسرعة</span>
+        <img className="pt-2" src={shattibTextDecoration} alt="" />
+        <span className="pt-2">منصة شاملة لطلب مواد التشطيب بسهولة وسرعة</span>
         <span className="pt-8 pe-16 font-bold">اختر نوع الحساب</span>
         <div className="flex place-self-center justify-evenly w-2/3 pt-8 max-lg:flex-col max-lg:h-svh">
           <Link to={"/register"}>

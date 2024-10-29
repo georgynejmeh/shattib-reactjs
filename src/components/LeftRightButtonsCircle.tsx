@@ -1,4 +1,4 @@
-import { leftArrowCircleIcon, rightArrowCircleIcon } from ".";
+import { leftArrowCircleIcon, rightArrowCircleIcon } from "..";
 
 const LeftRightButtonsCircle = () => {
   return (

@@ -6,7 +6,7 @@ import {
   RoundButton,
   useState,
   useEffect,
-} from ".";
+} from "..";
 
 const SalesSlideShow = () => {
   const [index, setIndex] = useState(0);

@@ -1,4 +1,4 @@
-import { useState, eyeIcon } from ".";
+import { useState, eyeIcon } from "..";
 
 interface Props {
   title?: string;
@@ -21,15 +21,18 @@ const TextInput = ({
   return (
     <>
       <div className="flex flex-col h-full">
-        <label
-          className={
-            blackTitle
-              ? "flex self-start mb-2 text-sm"
-              : "flex self-start mb-2 text-gray-400 text-sm font-medium"
-          }
-        >
-          {title}
-        </label>
+        {title ? (
+          <label
+            className={
+              blackTitle
+                ? "flex self-start my-2 text-sm"
+                : "flex self-start my-2 text-gray-400 text-sm font-medium"
+            }
+          >
+            {title}
+          </label>
+        ) : null}
+
         <div className="relative h-full">
           <span className="absolute inset-y-0 right-0 flex items-center pr-3">
             <img src={icon} />

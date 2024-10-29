@@ -17,7 +17,7 @@ const RegisterPage = () => {
           <span className="text-yellow-600 text-2xl pb-4">
             أهلاً بك في شطّب!
           </span>
-          <span className="text-2xl">أنشاء حساب</span>
+          <span className="text-2xl">إنشاء حساب</span>
           <form className="py-4" action="">
             <TextInput title="الاسم" icon={personIcon} />
             <TextInput title="البريد الالكتروني" icon={emailIcon} />
@@ -30,7 +30,11 @@ const RegisterPage = () => {
             />
           </form>
           <div className="flex flex-col items-center">
-            <Button>إنشاء حساب</Button>
+            <div className="w-full">
+              <Link to={"/admin/product/new"}>
+                <Button>إنشاء حساب</Button>
+              </Link>
+            </div>
             <span className="pt-4">
               لديك حساب؟{" "}
               <Link to={"/login"}>

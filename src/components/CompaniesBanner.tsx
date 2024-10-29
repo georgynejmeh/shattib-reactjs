@@ -6,7 +6,7 @@ import {
   prewLogo,
   vblockLogo,
   zonexLogo,
-} from ".";
+} from "..";
 
 const CompaniesBanner = () => {
   return (

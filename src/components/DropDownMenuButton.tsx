@@ -1,4 +1,4 @@
-import { downArrowIcon } from ".";
+import { downArrowIcon } from "..";
 
 interface Props {
   children: string;

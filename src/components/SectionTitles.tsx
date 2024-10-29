@@ -1,4 +1,4 @@
-import { Link } from ".";
+import { Link } from "..";
 
 interface Props {
   title01?: string;

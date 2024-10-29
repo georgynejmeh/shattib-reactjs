@@ -1,5 +1,4 @@
-import { priceSlider } from ".";
-import Button from "./Button";
+import { Button, priceSlider } from "..";
 
 const CategoryFilterCard = () => {
   return (

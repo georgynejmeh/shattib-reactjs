@@ -1,4 +1,4 @@
-import { useState, loginIcon } from ".";
+import { useState, loginIcon } from "..";
 
 interface Props {
   image: string;

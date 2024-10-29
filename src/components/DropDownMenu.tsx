@@ -1,4 +1,4 @@
-import { downArrowGrayIcon } from ".";
+import { downArrowGrayIcon } from "..";
 
 interface Props {
   title?: string;

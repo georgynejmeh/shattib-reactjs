@@ -1,4 +1,4 @@
-import { categoryImg01, categoryImg02, categoryImg03, trashCanIcon } from ".";
+import { categoryImg01, categoryImg02, categoryImg03, trashCanIcon } from "..";
 
 interface Temp {
   number: 1 | 2 | 3;

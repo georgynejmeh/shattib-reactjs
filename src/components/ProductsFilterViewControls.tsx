@@ -1,4 +1,4 @@
-import { DropDownMenuButton, fourDotsMenu, listMenu } from ".";
+import { DropDownMenuButton, fourDotsMenu, listMenu } from "..";
 
 const ProductsFilterViewControls = () => {
   return (
