@@ -109,17 +109,19 @@ const HomePage = () => {
           </section>
 
           <div className="flex items-center justify-between py-8">
-            <TitleNumber subTitle="500 منتج">المتنجات</TitleNumber>
+            <TitleNumber version={2} subTitle="500 منتج">
+              المتنجات
+            </TitleNumber>
             <div className="flex">
               <span className="p-4">عرض الكل</span>
               <img src={doubleLeftArrowIcon} alt="" />
             </div>
           </div>
           <ProductListHorizontal />
-          <LeftRightButtonsCircle />
+          {/* <LeftRightButtonsCircle /> */}
 
           {/* CATEGORIES HORIZONTAL LIST */}
-          <section>
+          <section className="mt-32">
             <div className="mb-16">
               <h1 className="text-4xl font-bold text-gray-800 mb-6">الرخام</h1>
               <div className="flex gap-4 mb-8">
@@ -149,14 +151,16 @@ const HomePage = () => {
         </section>
 
         <section className="p-8">
-          <TitleNumber subTitle="20">التصنيفات الفرعية</TitleNumber>
+          <TitleNumber version={2} subTitle="20">
+            التصنيفات الفرعية
+          </TitleNumber>
           <CategoryListHorizontal />
           <LeftRightButtonsCircle />
         </section>
-        <div className="flex flex-row-reverse pe-8">
+        {/* <div className="flex flex-row-reverse pe-8">
           <img src={doubleLeftArrowIcon} alt="" />
           <span className="p-4">عرض جميع التصنيفات</span>
-        </div>
+        </div> */}
 
         <CompaniesBanner />
       </div>

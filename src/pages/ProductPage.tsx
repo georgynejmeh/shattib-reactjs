@@ -15,7 +15,7 @@ const ProductPage = () => {
           title02="طقم شطاف"
           endTitle="طقم شطاف WG006"
         />
-        <section className="flex justify-center items-center h-screen my-8">
+        <section className="flex justify-center items-center h-screen my-16">
           <ProductDetailsCard />
         </section>
         <section className="flex flex-col gap-8 py-8">
