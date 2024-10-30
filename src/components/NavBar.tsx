@@ -1,41 +1,26 @@
 import {
   shattibLogoRow,
-  shattibIcon,
-  downArrowIcon,
   searchIcon,
   cartIcon,
   heartIcon,
   accountIcon,
   TextInput,
-  ButtonGold,
   Link,
-  useEngineerRequest,
+  NavBarCategoriesDropdownMenu,
 } from "..";
 
 const NavBar = () => {
-  const { setIsShownEngineerRequestModal } = useEngineerRequest();
+  // const { setIsShownEngineerRequestModal } = useEngineerRequest();
   return (
-    <nav className="flex items-center justify-evenly border-b py-2">
+    <nav className="flex items-center justify-between border-b py-2 px-8">
       <img src={shattibLogoRow} alt="" />
       <Link to={"/home"}>
         <span>الصفحة الرئيسية</span>
       </Link>
-      <Link to={"/category"}>
-        <button>
-          <div className="flex items-center">
-            <img src={shattibIcon} alt="" />
-            <div className="flex">
-              <span className="px-2">التصنيفات</span>
-              <div className="w-4 flex justify-center items-center">
-                <img className="w-full h-full" src={downArrowIcon} alt="" />
-              </div>
-            </div>
-          </div>
-        </button>
-      </Link>
-      <Link to={"/home"}>
+      <NavBarCategoriesDropdownMenu />
+      {/* <Link to={"/home"}>
         <span>جميع المنتجات</span>
-      </Link>
+      </Link> */}
       <Link to={"/conditions"}>
         <span>كراسات الشروط</span>
       </Link>
@@ -43,7 +28,10 @@ const NavBar = () => {
         <TextInput icon={searchIcon} placeholder="البحث عن المنتجات" />
       </div>
       <Link to={"/cart"}>
-        <div className="flex flex-col items-center">
+        <div className="relative flex flex-col items-center">
+          <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
+            4
+          </div>
           <img src={cartIcon} alt="" />
           <span>السلة</span>
         </div>
@@ -54,13 +42,13 @@ const NavBar = () => {
           <span>المفضلة</span>
         </div>
       </Link>
-      <div
+      {/* <div
         onClick={() => {
           setIsShownEngineerRequestModal(true);
         }}
       >
         <ButtonGold>طلب عرض سعر</ButtonGold>
-      </div>
+      </div> */}
       <div className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full">
         <img src={accountIcon} alt="" />
       </div>

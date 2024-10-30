@@ -1,4 +1,4 @@
-import { AccentText, categoryImg01, Link } from "..";
+import { AccentText, Link, subCategoryImg01 } from "..";
 
 interface Props {
   status: "معلًقة" | "مقبولة" | "مرفوضة";
@@ -37,7 +37,7 @@ const ConditionCard = ({ status }: Props) => {
         <div className="px-2 pt-2 h-40">
           <img
             className="rounded-xl object-cover w-full h-full"
-            src={categoryImg01}
+            src={subCategoryImg01}
             alt=""
           />
         </div>
