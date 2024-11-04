@@ -1,6 +1,10 @@
-import { leftArrowIcon, ProductCard } from "..";
+import { leftArrowIcon, ProductCard, useApi } from "..";
+import { ProductHomePage } from "../models/Product";
 
 const ProductListHorizontal = () => {
+  const { isLoading, error, data } = useApi<ProductHomePage[]>(
+    "Products/GetProductsForHomePage"
+  );
   return (
     <div className="relative">
       <div className="absolute z-10 -right-4 top-36 flex justify-between w-full">
@@ -13,13 +17,24 @@ const ProductListHorizontal = () => {
       </div>
 
       <div className="inline-flex py-4 gap-8">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {isLoading ? (
+          <ProductCard />
+        ) : error ? (
+          <>
+            <ProductCard />
+            {console.log("Error: ", error)}
+          </>
+        ) : data ? (
+          data.map((product) => (
+            <ProductCard
+              key={product.id}
+              name={product.name}
+              price={product.price}
+            />
+          ))
+        ) : (
+          <ProductCard />
+        )}
       </div>
     </div>
   );

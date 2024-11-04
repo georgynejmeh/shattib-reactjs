@@ -7,6 +7,11 @@ interface Props {
   placeholder?: string;
   blackTitle?: boolean;
   big?: boolean;
+  name?: string;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  value?: string;
 }
 
 const TextInput = ({
@@ -16,6 +21,9 @@ const TextInput = ({
   placeholder = "",
   blackTitle = false,
   big = false,
+  name,
+  onChange,
+  value,
 }: Props) => {
   const [hidden, setHidden] = useState(password);
   return (
@@ -41,6 +49,9 @@ const TextInput = ({
             <textarea
               className="resize-none h-full w-full py-3 ps-3 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
               placeholder={placeholder}
+              name={name}
+              onChange={onChange}
+              value={value}
             />
           ) : (
             <input
@@ -51,6 +62,9 @@ const TextInput = ({
                   : "h-full w-full py-3 pl-10 pr-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
               }
               placeholder={placeholder}
+              name={name}
+              onChange={onChange}
+              value={value}
             />
           )}
           {password ? (

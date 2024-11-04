@@ -16,12 +16,11 @@ import MainCategoryPage from "./pages/MainCategoryPage";
 import PriceRequestSecondPage from "./pages/PriceRequestSecondPage";
 import DocPage from "./pages/DocPage";
 import AdminLayout from "./layouts/AdminLayout";
-import AdminNewProductSecondPage from "./pages/admin/AdminNewProductSecondPage";
-import AdminNewProductPage from "./pages/admin/AdminNewProductPage";
 import AdminProductsPage from "./pages/admin/AdminProductsPage";
 import AdminHomePage from "./pages/admin/AdminHomePage";
 import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
 import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
+import AdminNewProductContainer from "./pages/admin/AdminNewProductContainer";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -58,10 +57,13 @@ const App = () => {
           <Route path="/admin/products" element={<AdminProductsPage />} />
           <Route path="/admin/categories" element={<AdminCategoriesPage />} />
           <Route path="/admin/category/1" element={<AdminCategoryPage />} />
-          <Route path="/admin/product/new" element={<AdminNewProductPage />} />
+          <Route
+            path="/admin/product/new"
+            element={<AdminNewProductContainer />}
+          />
           <Route
             path="/admin/product/new/2"
-            element={<AdminNewProductSecondPage />}
+            element={<AdminNewProductContainer />}
           />
         </Route>
         button

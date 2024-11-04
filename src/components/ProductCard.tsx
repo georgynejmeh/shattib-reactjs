@@ -9,7 +9,12 @@ import {
   ButtonGold,
 } from "..";
 
-const ProductCard = () => {
+interface Props {
+  name?: string;
+  price?: number;
+}
+
+const ProductCard = ({ name = "جاري التحميل...", price = 0 }: Props) => {
   const [active, setActive] = useState(false);
   return (
     <div className="pb-2 h-80 w-64 rounded-xl bg-gray-50 shadow shadow-gray-500 transition-all duration-700 hover:bg-amber-100">
@@ -29,11 +34,13 @@ const ProductCard = () => {
       </div>
       <Link to={"/product"}>
         <div className="h-1/2 flex flex-col justify-between p-2">
-          <h2 className="text-lg font-bold">طقم شطاف WG 006</h2>
+          {/* <h2 className="text-lg font-bold">طقم شطاف WG 006</h2> */}
+          <h2 className="text-lg font-bold">{name}</h2>
           {/* <span className="text-sm text-gray-600 py-1">طقم شطاف</span>
           <p>إمكانية التحكم بالمياه من خلال عصا سهلة الاستخدام</p> */}
           <span>
-            <AccentText>50 ريال</AccentText>
+            {/* <AccentText>50 ريال</AccentText> */}
+            <AccentText>{price} ريال</AccentText>
           </span>
           <div className="mx-2 my-1">
             <ButtonGold>

@@ -1,14 +1,27 @@
 import {
   ButtonGold,
   Link,
+  Navigate,
   NewProductHeaderText,
   TextInput,
   UploadFile,
+  useApi,
 } from "../..";
+import { MyFormData } from "./AdminNewProductContainer";
 
-const AdminNewProductSecondPage = () => {
+interface Props {
+  formData: MyFormData;
+  onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+}
+
+const AdminNewProductSecondPage = ({ formData, onInputChange }: Props) => {
+  const { postData, isLoading, error, data } = useApi("Products", "POST");
   return (
     <main>
+      {data ? <Navigate to={"/admin/home"} /> : null}
+
       <NewProductHeaderText second />
 
       <section className="flex flex-col p-main">
@@ -31,6 +44,9 @@ const AdminNewProductSecondPage = () => {
               blackTitle
               title="سياسة الإرجاع والاستبدال"
               placeholder="سياسة الإرجاع والاستبدال"
+              name="RetrivalAndReplacing"
+              value={formData.RetrivalAndReplacing}
+              onChange={onInputChange}
             />
           </div>
         </div>
@@ -50,6 +66,9 @@ const AdminNewProductSecondPage = () => {
               blackTitle
               title="الملاحظات"
               placeholder="ملاحظات إضافية"
+              name="Notes"
+              value={formData.Notes}
+              onChange={onInputChange}
             />
           </div>
         </div>
@@ -64,10 +83,17 @@ const AdminNewProductSecondPage = () => {
               السابق
             </button>
           </Link>
-          <Link className="w-full" to={"/admin/product/new"}>
-            <ButtonGold>أضف المنتج</ButtonGold>
-          </Link>
+          {/* <Link className="w-full" to={"/admin/product/new"}> */}
+          <ButtonGold onClick={() => postData(formData)}>
+            {isLoading ? "التحميل..." : "أضف المنتج"}
+          </ButtonGold>
+          {/* </Link> */}
         </div>
+        {error ? (
+          <span className="py-4 text-red-600 font-bold self-end">
+            حدث خطأ! الرجاء إعادة المحاولة
+          </span>
+        ) : null}
       </section>
     </main>
   );

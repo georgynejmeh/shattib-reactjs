@@ -2,11 +2,13 @@ import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
+  onClick?: () => void;
 }
 
-const ButtonGold = ({ children }: Props) => {
+const ButtonGold = ({ children, onClick }: Props) => {
   return (
     <button
+      onClick={onClick}
       className={
         "w-full px-4 py-1 text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded hover:bg-secondary"
       }
