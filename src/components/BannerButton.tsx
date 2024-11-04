@@ -18,12 +18,12 @@ const BannerButton = () => {
         </div>
         <br />
         <br />
-        <div className="shadow">
+        <div className="flex w-44 h-12 shadow">
           <ButtonGold>طلب استشارة</ButtonGold>
         </div>
       </div>
       <img
-        className="w-full h-full object-cover absolute opacity-100"
+        className="w-full h-full object-cover absolute opacity-100 blur-sm"
         src={expandCoverImg03}
         alt=""
       />

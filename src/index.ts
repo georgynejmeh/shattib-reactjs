@@ -1,4 +1,4 @@
-export { Link, Navigate, useLocation } from "react-router-dom";
+export { Link, Navigate, useLocation, useParams } from "react-router-dom";
 export { useState, useEffect, useRef } from "react";
 export { useApi } from "./hooks/useApi";
 
@@ -34,11 +34,16 @@ export { default as doubleLeftArrowIcon } from "./assets/svg/icon-double-left-ar
 export { default as linkIcon } from "./assets/svg/icon-link.svg";
 export { default as goldLinkIcon } from "./assets/svg/icon-link-gold.svg";
 export { default as addToBoxIcon } from "./assets/svg/icon-add-box.svg";
+export { default as addToBoxBlackIcon } from "./assets/svg/icon-add-box-black.svg";
 export { default as plusCircleIcon } from "./assets/svg/icon-plus-circle.svg";
 export { default as plusCircleGoldIcon } from "./assets/svg/icon-plus-circle-gold.svg";
 export { default as leftArrowIcon } from "./assets/svg/icon-left-arrow.svg";
 export { default as plusCircleOutlineWhiteIcon } from "./assets/svg/icon-plus-circle-outline-white.svg";
 export { default as attachmentIcon } from "./assets/svg/icon-attachment.svg";
+export { default as purpleParagraphIcon } from "./assets/svg/icon-paragraph-purple.svg";
+export { default as drawerIcon } from "./assets/svg/icon-drawer.svg";
+export { default as truckIcon } from "./assets/svg/icon-truck.svg";
+export { default as databaseIcon } from "./assets/svg/icon-database.svg";
 // -- social media --
 export { default as facebookIcon } from "./assets/svg/icon-facebook.svg";
 export { default as instagramIcon } from "./assets/svg/icon-instagram.svg";
@@ -146,6 +151,8 @@ export { default as NewProductHeaderText } from "./components/NewProductHeaderTe
 export { default as PaginationButtons } from "./components/PaginationButtons";
 export { default as CatDropdownItem } from "./components/CatDropdownItem";
 export { default as NavBarCategoriesDropdownMenu } from "./components/NavBarCategoriesDropdownMenu";
+export { default as OrdersTableRow } from "./components/OrdersTableRow";
+export { default as OrderItem } from "./components/OrderItem";
 
 //
 //

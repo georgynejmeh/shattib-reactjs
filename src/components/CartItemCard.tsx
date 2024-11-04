@@ -1,10 +1,11 @@
-import { AccentText, productImg, QuantityControls } from "..";
+import { AccentText, productImg, QuantityControls, redTrashIcon } from "..";
 
 interface Props {
   numbered?: boolean;
+  remove?: boolean;
 }
 
-const CartItemCard = ({ numbered }: Props) => {
+const CartItemCard = ({ numbered, remove }: Props) => {
   return (
     <div className="flex items-center gap-12 my-8">
       {numbered ? <h1 className="text-2xl font-bold">1</h1> : null}
@@ -17,7 +18,15 @@ const CartItemCard = ({ numbered }: Props) => {
         <div className="w-32">
           <QuantityControls />
         </div>
-        <AccentText>50 - 70 ريال</AccentText>
+        <AccentText>200 ريال</AccentText>
+        {remove ? (
+          <button>
+            <div className="flex gap-2">
+              <img src={redTrashIcon} />
+              <span className="text-red-500 font-bold">إزالة</span>
+            </div>
+          </button>
+        ) : null}
       </div>
     </div>
   );

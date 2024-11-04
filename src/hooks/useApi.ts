@@ -18,13 +18,16 @@ export function useApi<T>(endpoint: string, method?: "POST") {
         await fetch(`${apiUrl}${endpoint}`)
           .then(async (res) => {
             setIsLoading(false);
+            setError(false);
             setData(await res.json());
           })
           .catch((err) => {
+            setIsLoading(false);
             setError(true);
             console.log("useApi Error: ", err);
           });
       } catch (error) {
+        setIsLoading(false);
         setError(true);
         console.log("useApi Exception: ", error);
       }

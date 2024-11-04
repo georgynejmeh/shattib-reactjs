@@ -12,14 +12,19 @@ import {
 interface Props {
   name?: string;
   price?: number;
+  id?: number;
 }
 
-const ProductCard = ({ name = "جاري التحميل...", price = 0 }: Props) => {
+const ProductCard = ({
+  name = "جاري التحميل...",
+  price = 0,
+  id = 0,
+}: Props) => {
   const [active, setActive] = useState(false);
   return (
     <div className="pb-2 h-80 w-64 rounded-xl bg-gray-50 shadow shadow-gray-500 transition-all duration-700 hover:bg-amber-100">
       <div className="relative h-1/2">
-        <Link to={"/product"}>
+        <Link to={`/product/${id}`}>
           <img
             className="rounded-t-xl h-full w-full object-cover"
             src={testImg}
@@ -32,7 +37,7 @@ const ProductCard = ({ name = "جاري التحميل...", price = 0 }: Props) 
           </div>
         </button>
       </div>
-      <Link to={"/product"}>
+      <Link to={`/product/${id}`}>
         <div className="h-1/2 flex flex-col justify-between p-2">
           {/* <h2 className="text-lg font-bold">طقم شطاف WG 006</h2> */}
           <h2 className="text-lg font-bold">{name}</h2>

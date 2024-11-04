@@ -5,6 +5,7 @@ interface Props {
   size?: "md";
   version?: 1 | 2;
   column?: boolean;
+  inverse?: boolean;
 }
 
 const TitleNumber = ({
@@ -14,6 +15,7 @@ const TitleNumber = ({
   justifyBetween = false,
   version = 1,
   column = false,
+  inverse = false,
 }: Props) => {
   return version === 2 ? (
     <div
@@ -34,8 +36,12 @@ const TitleNumber = ({
         (column ? " flex-col items-center justify-center " : " ")
       }
     >
-      <h1 className="text-xl font-bold">{children}</h1>
-      <h2 className="text-xl font-bold text-gray-400">{subTitle}</h2>
+      <h1 className={`text-xl ${inverse ? "text-gray-400" : "font-bold"}`}>
+        {children}
+      </h1>
+      <h2 className={`text-xl ${inverse ? "" : "text-gray-400 font-bold"}`}>
+        {subTitle}
+      </h2>
     </div>
   );
 };

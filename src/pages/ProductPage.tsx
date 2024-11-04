@@ -4,9 +4,14 @@ import {
   LeftRightButtonsCircle,
   MainPadding,
   SectionTitles,
+  useApi,
+  useParams,
 } from "..";
+import { Product } from "../models/Product";
 
 const ProductPage = () => {
+  const { id } = useParams();
+  const { isLoading, error, data } = useApi<Product>(`Product/${id}`);
   return (
     <main>
       <MainPadding>
@@ -16,7 +21,13 @@ const ProductPage = () => {
           endTitle="طقم شطاف WG006"
         />
         <section className="flex justify-center items-center h-screen my-16">
-          <ProductDetailsCard />
+          {isLoading ? (
+            <span className="text-4xl font-bold">جاري التحميل...</span>
+          ) : error ? (
+            <ProductDetailsCard />
+          ) : data ? (
+            <ProductDetailsCard data={data} />
+          ) : null}
         </section>
         <section className="flex flex-col gap-8 py-8">
           <h1 className="text-3xl font-bold">الوصف</h1>
