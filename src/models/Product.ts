@@ -12,6 +12,7 @@ export interface Product {
   deaf: string;
   retrivalAndReplacing: string;
   notes: string;
+  warehouseCode: string;
   images: Image[];
   productSpecifications: ProductSpecifications[];
 }
@@ -20,6 +21,8 @@ export interface ProductHomePage {
   id: number;
   name: string;
   price: number;
+  mainImagePath: string;
+  warehouseCode: string;
 }
 
 interface Image {

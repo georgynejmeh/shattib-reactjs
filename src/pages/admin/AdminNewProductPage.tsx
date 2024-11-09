@@ -8,7 +8,7 @@ interface Props {
   ) => void;
 }
 
-const AdminNewProductPage = ({ formData, onInputChange }: Props) => {
+const AdminNewProductPage: React.FC<Props> = ({ formData, onInputChange }) => {
   return (
     <main>
       <NewProductHeaderText />
@@ -31,6 +31,9 @@ const AdminNewProductPage = ({ formData, onInputChange }: Props) => {
                 blackTitle
                 title="رمز التخزين في شطب"
                 placeholder="أدخل رمز التخزين"
+                name="WareHouseCode"
+                value={formData.WareHouseCode}
+                onChange={onInputChange}
               />
             </div>
             <div className="w-full">
@@ -39,7 +42,7 @@ const AdminNewProductPage = ({ formData, onInputChange }: Props) => {
                 title="تكلفة المنتج"
                 placeholder="0.0 ريال"
                 name="Price"
-                value={formData.Price}
+                value={formData.Price.toString()}
                 onChange={onInputChange}
               />
             </div>
@@ -72,13 +75,13 @@ const AdminNewProductPage = ({ formData, onInputChange }: Props) => {
         </section>
         <section>
           <div className="flex w-full gap-4">
-            <div className="w-full">
+            {/* <div className="w-full">
               <TextInput
                 blackTitle
                 title="الكمية المتوفرة"
                 placeholder="أدخل الكمية المتوفرة"
               />
-            </div>
+            </div> */}
             <div className="w-full">
               <TextInput
                 blackTitle
@@ -103,16 +106,13 @@ const AdminNewProductPage = ({ formData, onInputChange }: Props) => {
         </section>
         <section>
           <div className="flex w-full gap-4">
-            <div className="w-full">
+            {/* <div className="w-full">
               <TextInput
                 blackTitle
                 title="المواصفات"
                 placeholder="مواصفات المنتج"
-                name="Deaf"
-                value={formData.Deaf}
-                onChange={onInputChange}
               />
-            </div>
+            </div> */}
             <div className="w-full">
               <TextInput
                 blackTitle

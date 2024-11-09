@@ -9,13 +9,33 @@ import {
   Navigate,
   useState,
 } from "..";
+import { Login } from "../models/Login";
 
 const LoginPage = () => {
-  const { postData, isLoading, error, data } = useApi("login", "POST");
+  const { postData, isLoading, error, data } = useApi<Login>(
+    "Accounts/Login",
+    "POST"
+  );
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  // Function to handle login
+  const handleLogin = async () => {
+    await postData(formData);
+
+    if (data?.accessToken) {
+      // Save tokens in localStorage
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+
+      // Navigate to the home page
+      return <Navigate to="/home" />;
+    } else {
+      console.error("Login failed", data);
+    }
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,6 +46,12 @@ const LoginPage = () => {
 
   return (
     <>
+      {data ? (
+        <>
+          {localStorage.setItem("accessToken", data.accessToken)}
+          <>{console.log(data, "from body of login first line")}</>
+        </>
+      ) : null}
       {data ? <Navigate to={"/home"} /> : null}
       <div className="flex max-md:flex-col justify-center items-center min-h-screen">
         <div className="w-1/4 max-md:w-1/2 flex flex-col justify-center">
@@ -49,11 +75,9 @@ const LoginPage = () => {
             />
           </form>
           <div className="flex flex-col items-center">
-            {/* <Link className="w-full" to={"/home"}> */}
-            <Button onClick={() => postData(formData)}>
+            <Button onClick={handleLogin}>
               {isLoading ? "جاري التسجيل..." : "تسجيل الدخول"}
             </Button>
-            {/* </Link> */}
             {error ? (
               <span className="pt-4 text-red-600 font-bold">
                 حدث خطأ! الرجاء إعادة المحاولة

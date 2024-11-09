@@ -8,7 +8,7 @@ export interface MyFormData {
   Name: string;
   Description: string;
   Features: string;
-  Price: string;
+  Price: number;
   MeasurementUnit: string;
   Meaurements: string;
   ManufacturingCountry: string;
@@ -16,20 +16,21 @@ export interface MyFormData {
   Deaf: string;
   RetrivalAndReplacing: string;
   Notes: string;
+  WareHouseCode: string;
   Specifications: {
     name: string;
     value: string;
   };
-  Images: string;
+  Images?: File[];
 }
 
-const AdminNewProductContainer = () => {
+const AdminNewProductContainer: React.FC = () => {
   const [formData, setFormData] = useState<MyFormData>({
     SubCategoryId: 1,
     Name: "",
     Description: "",
     Features: "",
-    Price: "",
+    Price: 0.0,
     MeasurementUnit: "",
     Meaurements: "",
     ManufacturingCountry: "",
@@ -37,19 +38,24 @@ const AdminNewProductContainer = () => {
     Deaf: "",
     RetrivalAndReplacing: "",
     Notes: "",
+    WareHouseCode: "",
     Specifications: { name: "", value: "" },
-    Images: "",
   });
+
+  const location = useLocation();
+  const isSecondPage = location.pathname === "/admin/product/new/2";
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
 
-  const location = useLocation();
-  const isSecondPage = location.pathname === "/admin/product/new/2";
+    // Update the specific field in the formData state
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   return (
     <>
@@ -57,6 +63,7 @@ const AdminNewProductContainer = () => {
         <AdminNewProductSecondPage
           formData={formData}
           onInputChange={handleInputChange}
+          setFormData={setFormData}
         />
       ) : (
         <AdminNewProductPage

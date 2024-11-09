@@ -7,7 +7,9 @@ import {
   AccentText,
   ButtonGold,
   heartIcon,
+  useState,
 } from "..";
+import { CartItem } from "../models/CartItem";
 import { Product } from "../models/Product";
 
 interface Props {
@@ -15,6 +17,29 @@ interface Props {
 }
 
 const ProductDetailsCard = ({ data }: Props) => {
+  const [quantity, setQuantity] = useState(1); // Track quantity
+  // Add product to cart in localStorage
+  const handleAddToCart = () => {
+    if (data) {
+      const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      const productInCart = existingCart.find(
+        (item: CartItem) => item.productId === data.id
+      );
+
+      if (productInCart) {
+        // If the product already exists in the cart, update its quantity
+        productInCart.quantity += quantity;
+      } else {
+        // If the product is not in the cart, add it
+        existingCart.push({ ...data, quantity });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(existingCart));
+      alert("تمت إضافة المنتج للسلة");
+    }
+  };
+
   // TODO DELETE
   const temp = [1, 2, 3, 4, 5];
 
@@ -93,18 +118,24 @@ const ProductDetailsCard = ({ data }: Props) => {
             </div>
 
             <div className="flex justify-around">
-              <TitleNumber
-                column
-                subTitle={`${data.meaurements} ${data.measurementUnit}`}
-              >
-                القياس
-              </TitleNumber>
-              <TitleNumber column subTitle={data.manufacturingCountry}>
-                بلد التصنيع
-              </TitleNumber>
-              <TitleNumber column subTitle={data.retrivalAndReplacing}>
-                الضمان
-              </TitleNumber>
+              <div className="w-full">
+                <TitleNumber
+                  column
+                  subTitle={`${data.meaurements} ${data.measurementUnit}`}
+                >
+                  القياس
+                </TitleNumber>
+              </div>
+              <div className="w-full">
+                <TitleNumber column subTitle={data.manufacturingCountry}>
+                  بلد التصنيع
+                </TitleNumber>
+              </div>
+              <div className="w-full">
+                <TitleNumber column subTitle={data.retrivalAndReplacing}>
+                  الضمان
+                </TitleNumber>
+              </div>
             </div>
             {/* <TitleNumber size="md" subTitle="حجم موحد">
               الحجم
@@ -118,10 +149,10 @@ const ProductDetailsCard = ({ data }: Props) => {
 
           <div className="flex gap-4 w-52">
             <span className="text-lg">الكمية</span>
-            <QuantityControls />
+            <QuantityControls quantity={quantity} onChange={setQuantity} />
           </div>
           <div className="w-80 flex flex-col gap-4">
-            <ButtonGold>
+            <ButtonGold onClick={handleAddToCart}>
               <div className="flex justify-center gap-2">
                 <img src={addToCartIcon} alt="" />
                 <span>أضف إلى السلة</span>
@@ -163,8 +194,8 @@ const ProductDetailsCard = ({ data }: Props) => {
           </div>
           <div className="flex flex-wrap gap-3">
             {/* TODO DELETE LOOP */}
-            {temp.map(() => (
-              <div className="w-24 h-16 rounded-xl overflow-hidden">
+            {temp.map((index) => (
+              <div key={index} className="w-24 h-16 rounded-xl overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
                   src={productImg}
@@ -273,10 +304,10 @@ const ProductDetailsCard = ({ data }: Props) => {
 
           <div className="flex gap-4 w-52">
             <span className="text-lg">الكمية</span>
-            <QuantityControls />
+            <QuantityControls quantity={quantity} onChange={setQuantity} />
           </div>
           <div className="w-80 flex flex-col gap-4">
-            <ButtonGold>
+            <ButtonGold onClick={handleAddToCart}>
               <div className="flex justify-center gap-2">
                 <img src={addToCartIcon} alt="" />
                 <span>أضف إلى السلة</span>
@@ -318,8 +349,8 @@ const ProductDetailsCard = ({ data }: Props) => {
           </div>
           <div className="flex flex-wrap gap-3">
             {/* TODO DELETE LOOP */}
-            {temp.map(() => (
-              <div className="w-24 h-16 rounded-xl overflow-hidden">
+            {temp.map((index) => (
+              <div key={index} className="w-24 h-16 rounded-xl overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
                   src={productImg}

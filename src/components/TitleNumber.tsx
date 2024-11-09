@@ -39,7 +39,11 @@ const TitleNumber = ({
       <h1 className={`text-xl ${inverse ? "text-gray-400" : "font-bold"}`}>
         {children}
       </h1>
-      <h2 className={`text-xl ${inverse ? "" : "text-gray-400 font-bold"}`}>
+      <h2
+        className={`text-xl ${
+          inverse ? "" : "text-gray-400 font-bold text-center"
+        }`}
+      >
         {subTitle}
       </h2>
     </div>

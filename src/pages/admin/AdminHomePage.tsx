@@ -2,11 +2,12 @@ import {
   CategoriesButtonListHorizontal,
   PaginationButtons,
   ProductCard,
+  useApi,
 } from "../..";
+import { ProductHomePage } from "../../models/Product";
 
 const AdminHomePage = () => {
-  // TODO DELETE
-  const temp = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+  const { isLoading, error, data } = useApi<ProductHomePage[]>("Products");
   return (
     <main className="p-main">
       <h1 className="text-4xl font-bold text-primary mb-8">المنتجات</h1>
@@ -14,9 +15,22 @@ const AdminHomePage = () => {
       <div className="flex flex-col items-center">
         <div className="flex flex-wrap mt-8 gap-8">
           {/* TODO DELETE LOOP */}
-          {temp.map(() => (
+          {isLoading ? (
             <ProductCard />
-          ))}
+          ) : error ? (
+            <ProductCard name="حدث خطأ!" />
+          ) : data ? (
+            data.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+              />
+            ))
+          ) : (
+            <ProductCard name=" " />
+          )}
         </div>
         <PaginationButtons />
       </div>

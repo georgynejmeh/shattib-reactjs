@@ -1,20 +1,66 @@
+import React, { useState } from "react";
 import {
   goldEngineerIcon,
   Button,
   closeCircleIcon,
   TextInput,
   useEngineerRequest,
+  useApi, // Import your API hook
 } from "..";
 
 const EngineerRequestCardModal = () => {
   const { isShownEngineerRequestModal, setIsShownEngineerRequestModal } =
     useEngineerRequest();
 
+  // Track form state
+  const [formData, setFormData] = useState({
+    phoneNumber: "",
+    consultationTopic: "",
+    engineerSpecification: "",
+    projectCategory: "",
+    details: "",
+    // status: "pending",
+    // dateOfRequest: "2024-11-08", // Default date (can be dynamic if needed)
+  });
+
+  const { postData, isLoading, error } = useApi(
+    "Consultations",
+    "POST",
+    true,
+    true
+  ); // Assume this handles token as well
+
+  // Function to handle form field changes
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async () => {
+    try {
+      await postData(formData); // POST the form data to the API
+      if (error) {
+        alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
+      } else {
+        setIsShownEngineerRequestModal(false); // Close the modal on success
+        alert("طلبك تم إرساله بنجاح!"); // Optional success message
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("حدث خطأ في الاتصال. الرجاء المحاولة لاحقاً.");
+    }
+  };
+
+  // Prevent body scrolling when modal is shown
   if (isShownEngineerRequestModal) {
-    console.log("modal true");
     document.body.classList.add("overflow-hidden");
   } else {
-    console.log("modal false");
     document.body.classList.remove("overflow-hidden");
   }
 
@@ -34,33 +80,39 @@ const EngineerRequestCardModal = () => {
         <div className="flex flex-col gap-4 py-8">
           <div className="flex">
             <div className="w-full px-8 flex flex-col gap-4">
-              <TextInput blackTitle title="الاسم" placeholder="الاسم" />
               <TextInput
                 blackTitle
                 title="رقم الهاتف"
                 placeholder="رقم الهاتف"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleInputChange}
               />
               <TextInput
                 blackTitle
                 title="اختصاص المهندس"
                 placeholder="اختصاص المهندس"
+                name="engineerSpecification"
+                value={formData.engineerSpecification}
+                onChange={handleInputChange}
               />
             </div>
             <div className="w-full px-8 flex flex-col gap-4">
               <TextInput
                 blackTitle
-                title="البريد الالكتروني"
-                placeholder="البريد الالكتروني"
-              />
-              <TextInput
-                blackTitle
                 title="موضوع الطلب"
                 placeholder="موضوع الطلب"
+                name="consultationTopic"
+                value={formData.consultationTopic}
+                onChange={handleInputChange}
               />
               <TextInput
                 blackTitle
                 title="نوع المشروع"
                 placeholder="نوع المشروع"
+                name="projectCategory"
+                value={formData.projectCategory}
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -70,11 +122,16 @@ const EngineerRequestCardModal = () => {
               blackTitle
               title="تفاصيل الطلب"
               placeholder="تفاصيل ومعلومات إضافية"
+              name="details"
+              value={formData.details}
+              onChange={handleInputChange}
             />
           </div>
           <div className="w-full flex justify-center pt-4">
             <div className="w-48">
-              <Button size="md">إرسال الطلب</Button>
+              <Button size="md" onClick={handleSubmit}>
+                {isLoading ? "جاري الإرسال..." : "إرسال الطلب"}
+              </Button>
             </div>
           </div>
         </div>

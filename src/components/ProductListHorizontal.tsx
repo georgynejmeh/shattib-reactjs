@@ -2,9 +2,7 @@ import { leftArrowIcon, ProductCard, useApi } from "..";
 import { ProductHomePage } from "../models/Product";
 
 const ProductListHorizontal = () => {
-  const { isLoading, error, data } = useApi<ProductHomePage[]>(
-    "Products/GetProductsForHomePage"
-  );
+  const { isLoading, error, data } = useApi<ProductHomePage[]>("Products");
   return (
     <div className="relative">
       <div className="absolute z-10 -right-4 top-36 flex justify-between w-full">

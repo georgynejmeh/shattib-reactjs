@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const ButtonGold = ({ children, onClick }: Props) => {

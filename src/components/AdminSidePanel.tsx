@@ -22,8 +22,13 @@ const AdminSidePanel = () => {
         <Link to={"/admin/categories"}>
           <SidePanelItem icon={smallShattibIcon}>التصنيفات</SidePanelItem>
         </Link>
-        <SidePanelItem icon={docIcon}>الطلبات</SidePanelItem>
-        <SidePanelItem icon={twoPapersIcon}>الكراسات</SidePanelItem>
+        <Link to={"/admin/orders"}>
+          <SidePanelItem icon={docIcon}>الطلبات</SidePanelItem>
+        </Link>
+        <Link to={"/admin/criterias"}>
+          <SidePanelItem icon={twoPapersIcon}>الكراسات</SidePanelItem>
+        </Link>
+        <Link to={"/admin/consultations"}>استشارات</Link>
       </div>
       <div>
         <SidePanelItem icon={redLogoutIcon}>تسجيل الخروج</SidePanelItem>

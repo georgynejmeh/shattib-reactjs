@@ -1,6 +1,7 @@
-import { ButtonGold, expandCoverImg03 } from "..";
+import { ButtonGold, expandCoverImg03, useEngineerRequest } from "..";
 
 const BannerButton = () => {
+  const { setIsShownEngineerRequestModal } = useEngineerRequest();
   return (
     <div className="relative grid rounded-3xl overflow-hidden w-2/3 h-2/3">
       <div className="absolute right-4 w-32 h-28 bg-black bg-opacity-25 rounded-bl rounded-br z-20">
@@ -18,7 +19,10 @@ const BannerButton = () => {
         </div>
         <br />
         <br />
-        <div className="flex w-44 h-12 shadow">
+        <div
+          onClick={() => setIsShownEngineerRequestModal(true)}
+          className="flex w-44 h-12 shadow"
+        >
           <ButtonGold>طلب استشارة</ButtonGold>
         </div>
       </div>

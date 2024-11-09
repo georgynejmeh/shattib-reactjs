@@ -21,8 +21,10 @@ import AdminHomePage from "./pages/admin/AdminHomePage";
 import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
 import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
 import AdminNewProductContainer from "./pages/admin/AdminNewProductContainer";
-import OrdersPage from "./pages/OrdersPage";
-import OrderPage from "./pages/OrderPage";
+import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
+import AdminOrderPage from "./pages/admin/AdminOrderPage";
+import AdminCriteriaPage from "./pages/admin/AdminCriteriaPage";
+import AdminConsultationsPage from "./pages/admin/AdminConsultationsPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -44,8 +46,7 @@ const App = () => {
           <Route path="/category" element={<MainCategoryPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<WishListPage />} />
-          <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/order" element={<OrderPage />} />
+
           <Route path="/conditions" element={<ConditionDocsPage />} />
           <Route path="/conditions/doc" element={<DocPage />} />
           <Route path="/conditions/new" element={<NewConditionPage />} />
@@ -68,6 +69,13 @@ const App = () => {
           <Route
             path="/admin/product/new/2"
             element={<AdminNewProductContainer />}
+          />
+          <Route path="/admin/order/:id" element={<AdminOrderPage />} />
+          <Route path="/admin/orders" element={<AdminOrdersPage />} />
+          <Route path="/admin/criterias" element={<AdminCriteriaPage />} />
+          <Route
+            path="/admin/consultations"
+            element={<AdminConsultationsPage />}
           />
         </Route>
         button

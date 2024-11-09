@@ -20,6 +20,34 @@ const ProductCard = ({
   price = 0,
   id = 0,
 }: Props) => {
+  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    const existingProductIndex = currentCart.findIndex(
+      (item: { productId: number }) => item.productId === id
+    );
+
+    if (existingProductIndex > -1) {
+      currentCart[existingProductIndex].quantity += 1;
+    } else {
+      currentCart.push({
+        productId: id,
+        quantity: 1,
+        name: name,
+        price: price,
+      });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(currentCart));
+
+    alert(`${name} أُضيفت إلى السلة`);
+
+    window.dispatchEvent(new Event("storage"));
+  };
+
   const [active, setActive] = useState(false);
   return (
     <div className="pb-2 h-80 w-64 rounded-xl bg-gray-50 shadow shadow-gray-500 transition-all duration-700 hover:bg-amber-100">
@@ -48,9 +76,9 @@ const ProductCard = ({
             <AccentText>{price} ريال</AccentText>
           </span>
           <div className="mx-2 my-1">
-            <ButtonGold>
+            <ButtonGold onClick={handleAddToCart}>
               <div className="flex justify-center">
-                أضف إلى السلة{" "}
+                أضف إلى السلة
                 <img className="ps-2" src={addToCartIcon} alt="" />
               </div>
             </ButtonGold>

@@ -3,9 +3,10 @@ import { uploadIcon, useState, useRef } from "..";
 interface Props {
   title: string;
   subTitle: string;
+  onImageChange?: (image: File) => void; // Accepts a File object when an image is selected
 }
 
-const UploadFile = ({ title, subTitle }: Props) => {
+const UploadFile = ({ title, subTitle, onImageChange }: Props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
@@ -15,9 +16,13 @@ const UploadFile = ({ title, subTitle }: Props) => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setImageSrc(url);
+    if (file && onImageChange) {
+      onImageChange(file); // Call the passed in function to update formData
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result as string); // Set the image preview source
+      };
+      reader.readAsDataURL(file); // Read the image as a data URL for preview
     }
   };
 
@@ -34,7 +39,7 @@ const UploadFile = ({ title, subTitle }: Props) => {
               className="w-full h-full object-cover"
               src={imageSrc}
               alt="Uploaded"
-            /> // Show uploaded image
+            /> // Show uploaded image preview
           ) : (
             <>
               <img className="w-16" src={uploadIcon} alt="" />
@@ -46,8 +51,8 @@ const UploadFile = ({ title, subTitle }: Props) => {
       <input
         type="file"
         ref={fileInputRef}
-        className="hidden" // Hide the input element
-        onChange={handleFileChange} // Handle file change
+        className="hidden"
+        onChange={handleFileChange}
       />
     </div>
   );

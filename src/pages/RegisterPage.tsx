@@ -13,14 +13,17 @@ import {
 } from "..";
 
 const RegisterPage = () => {
-  const { postData, isLoading, error, data } = useApi("register", "POST");
+  const { postData, isLoading, error, data } = useApi(
+    "Accounts/Register",
+    "POST"
+  );
 
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    phone: "",
+    // phone: "",
     password: "",
-    role: "user",
+    role: "Client", //Business,
   });
 
   const handleInputChange = (
@@ -58,7 +61,7 @@ const RegisterPage = () => {
               onChange={handleInputChange}
             />
             <TextInput
-              name="phone"
+              name="phoneNumber"
               title="رقم الهاتف"
               icon={phoneIcon}
               onChange={handleInputChange}
@@ -75,7 +78,7 @@ const RegisterPage = () => {
               password={true}
               title="تأكيد كلمة المرور"
               icon={lockIcon}
-              onChange={handleInputChange}
+              // onChange={handleInputChange}
             />
           </form>
           <div className="flex flex-col items-center">

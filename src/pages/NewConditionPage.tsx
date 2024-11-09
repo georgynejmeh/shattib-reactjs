@@ -1,12 +1,19 @@
 import {
   ButtonGold,
+  CategoryCard,
+  categoryImg01,
   CategoryListHorizontal,
   Link,
   MainPadding,
   TextInput,
+  useApi,
 } from "..";
+import { Category } from "../models/Category";
 
 const NewConditionPage = () => {
+  const { isLoading, error, data } = useApi<Category[]>(
+    "SeededValues/Categories"
+  );
   return (
     <main>
       <MainPadding>
@@ -20,6 +27,15 @@ const NewConditionPage = () => {
         <h2 className="text-xl">التصنيفات</h2>
         <section className="py-4 overflow-hidden">
           <h3 className="text-gray-500">حدد التصنيفات التي تبحث عنها</h3>
+          {isLoading ? (
+            <span>جاري التحميل...</span>
+          ) : error ? (
+            <span>حدث خطأّ!</span>
+          ) : data ? (
+            data.map((category) => (
+              <CategoryCard img={categoryImg01}>{category.name}</CategoryCard>
+            ))
+          ) : null}
           <CategoryListHorizontal />
           <CategoryListHorizontal />
         </section>

@@ -5,7 +5,7 @@ import {
   NewProductHeaderText,
   TextInput,
   UploadFile,
-  useApi,
+  usePostForm,
 } from "../..";
 import { MyFormData } from "./AdminNewProductContainer";
 
@@ -14,10 +14,75 @@ interface Props {
   onInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  setFormData: React.Dispatch<React.SetStateAction<MyFormData>>;
 }
 
-const AdminNewProductSecondPage = ({ formData, onInputChange }: Props) => {
-  const { postData, isLoading, error, data } = useApi("Products", "POST");
+const AdminNewProductSecondPage = ({
+  formData,
+  onInputChange,
+  setFormData,
+}: Props) => {
+  const { postData, isLoading, error, data } = usePostForm("Products", "POST");
+
+  // const handleSubmit = async () => {
+  //   const formDataToSend = new FormData();
+
+  //   // Append form data to FormData object
+  //   for (const key in formData) {
+  //     if (Object.prototype.hasOwnProperty.call(formData, key)) {
+  //       const value = formData[key as keyof MyFormData];
+  //       if (value instanceof File) {
+  //         // If the value is a file (e.g., Images), append it as FormData
+  //         formDataToSend.append(key, value);
+  //       } else {
+  //         // Otherwise, append it as a regular form field
+  //         formDataToSend.append(key, value as string);
+  //       }
+  //     }
+  //   }
+
+  //   // Use the API hook to send the data
+  //   postData(formDataToSend);
+  // };
+
+  // const handleImageChange = (image: File) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     Images: image ? [image] : [], // Store image in an array or pass multiple files if needed
+  //   }));
+  // };
+
+  const handleSubmit = async () => {
+    const formDataToSend = new FormData();
+
+    // Append form data to FormData object
+    for (const key in formData) {
+      if (Object.prototype.hasOwnProperty.call(formData, key)) {
+        const value = formData[key as keyof MyFormData];
+        if (value instanceof File) {
+          // If the value is a file (e.g., Images), append it as FormData
+          formDataToSend.append(key, value);
+        } else if (Array.isArray(value)) {
+          // If the value is an array (e.g., Images), iterate over the array and append each file
+          value.forEach((file) => formDataToSend.append(key, file));
+        } else {
+          // Otherwise, append it as a regular form field
+          formDataToSend.append(key, value as string);
+        }
+      }
+    }
+
+    // Use the API hook to send the data
+    postData(formDataToSend);
+  };
+
+  const handleImageChange = (image: File) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      Images: [image], // Store image in an array, even if only one image is selected
+    }));
+  };
+
   return (
     <main>
       {data ? <Navigate to={"/admin/home"} /> : null}
@@ -31,6 +96,9 @@ const AdminNewProductSecondPage = ({ formData, onInputChange }: Props) => {
               blackTitle
               title="الضمان"
               placeholder="أدخل مدة الضمان"
+              name="Deaf"
+              value={formData.Deaf}
+              onChange={onInputChange}
             />
             <TextInput
               blackTitle
@@ -52,14 +120,14 @@ const AdminNewProductSecondPage = ({ formData, onInputChange }: Props) => {
         </div>
 
         <div className="w-full h-40 flex gap-8 mt-8">
-          <div className="w-full">
+          {/* <div className="w-full">
             <TextInput
               big
               blackTitle
               title="شهادات هيئة المقاييس والجودة"
               placeholder="أضف شهادات المنتج إن وجدت"
             />
-          </div>
+          </div> */}
           <div className="w-full">
             <TextInput
               big
@@ -74,7 +142,11 @@ const AdminNewProductSecondPage = ({ formData, onInputChange }: Props) => {
         </div>
 
         <div className="w-1/2 pe-4 h-80 mt-8">
-          <UploadFile title="صورة المنتج" subTitle="ارفع صورة المنتج" />
+          <UploadFile
+            title="صورة المنتج"
+            subTitle="ارفع صورة المنتج"
+            onImageChange={handleImageChange}
+          />
         </div>
 
         <div className="flex w-80 gap-4 self-end mt-8">
@@ -84,7 +156,8 @@ const AdminNewProductSecondPage = ({ formData, onInputChange }: Props) => {
             </button>
           </Link>
           {/* <Link className="w-full" to={"/admin/product/new"}> */}
-          <ButtonGold onClick={() => postData(formData)}>
+          <ButtonGold onClick={handleSubmit}>
+            {/* <ButtonGold onClick={() => postData(formData)}> */}
             {isLoading ? "التحميل..." : "أضف المنتج"}
           </ButtonGold>
           {/* </Link> */}

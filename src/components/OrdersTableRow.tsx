@@ -1,22 +1,48 @@
 import { Link, purpleParagraphIcon, redTrashIcon } from "..";
+import { useConfirmDelete } from "../hooks/useConfirmDeleteModal";
+import { OrderItem } from "../models/Order";
 import AccentText from "./AccentText";
 
 interface Props {
-  status: "قيد المعالجة" | "مقبول" | "مرفوض" | "مكتمل";
+  id: number;
+  status: "قيد المعالجة" | "مقبول" | "مرفوض" | "مكتمل" | string;
+  totalPrice: number;
+  orderItems: OrderItem[];
+  dateOfArrival: string;
+  dateOfOrder: string;
 }
 
-const OrdersTableRow = ({ status }: Props) => {
+const OrdersTableRow = ({
+  id,
+  status,
+  totalPrice,
+  orderItems,
+  dateOfArrival,
+  dateOfOrder,
+}: Props) => {
+  const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
+    useConfirmDelete();
+  setEndpoint("Orders");
+
+  let totalQty = 0;
+  orderItems.map((order) => {
+    totalQty += order.quantitiy;
+  });
+
   return (
     <tr>
-      <td>#12345647</td>
-      <td>15/8/2024</td>
+      <td>#{id}</td>
+      <td>{dateOfOrder.substring(0, 10)}</td>
       <td className="min-w-52 max-w-52">
-        طقم شطاف WC213، لوح رخام، لوح خشب مطبخ طقم شطاف WC213، لوح رخام، لوح خشب
-        مطبخ طقم شطاف WC213، لوح رخام، لوح خشب مطبخ طقم شطاف WC213، لوح رخام،
+        {orderItems.map((orderItem, index) => (
+          <span>{`${orderItem.productName}${
+            index === orderItems.length - 1 ? "" : "،"
+          } `}</span>
+        ))}
       </td>
-      <td>8</td>
+      <td>{totalQty}</td>
       <td>
-        <AccentText>320 ريال</AccentText>
+        <AccentText>{totalPrice} ريال</AccentText>
       </td>
       <td>
         <div
@@ -36,13 +62,21 @@ const OrdersTableRow = ({ status }: Props) => {
           {status}
         </div>
       </td>
-      <td>16/8/2024</td>
+      <td>{dateOfArrival}</td>
       <td>
         <div className="mx-auto flex justify-center gap-4">
-          <Link to={"/order"} className="flex items-center justify-center">
+          <Link
+            to={`/admin/order/${id}`}
+            className="flex items-center justify-center"
+          >
             <img src={purpleParagraphIcon} alt="" />
           </Link>
-          <button>
+          <button
+            onClick={() => {
+              setId(id);
+              setIsShownConfirmDeleteModal(true);
+            }}
+          >
             <img src={redTrashIcon} alt="" />
           </button>
         </div>
