@@ -170,7 +170,7 @@ const HomePage = () => {
           <LeftRightButtonsCircle />
         </section>
         {/* <div className="flex flex-row-reverse pe-8">
-          <img src={doubleLeftArrowIcon} alt="" />
+          <img src={doubleLeftArrowIcon} alt="" /> 
           <span className="p-4">عرض جميع التصنيفات</span>
         </div> */}
 
