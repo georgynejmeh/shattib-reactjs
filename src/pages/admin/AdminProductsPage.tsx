@@ -104,7 +104,7 @@ const AdminProductsPage = () => {
                       >
                         <img src={redTrashIcon} alt="" />
                       </button>
-                    </div>
+                    </div> 
                   </td>
                 </tr>
               ))} */}
