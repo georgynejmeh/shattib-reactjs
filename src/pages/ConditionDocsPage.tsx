@@ -14,10 +14,10 @@ const ConditionDocsPage = () => {
   return (
     <main>
       <MainPadding>
-        <section className="flex items-center">
+        <section className="flex items-center max-lg:flex-col max-lg:w-full">
           <h1 className="text-nowrap text-2xl font-bold pb-4">كراسات الشروط</h1>
           <div className="grid w-full">
-            <div className="felx justify-self-center">
+            <div className="felx justify-self-center max-lg:mb-4">
               <RoundButton active>الكل</RoundButton>
               <RoundButton>معلًقة</RoundButton>
               <RoundButton>مقبولة</RoundButton>
@@ -39,7 +39,7 @@ const ConditionDocsPage = () => {
             </AccentText> */}
           </Link>
         </section>
-        <section className="flex flex-wrap gap-8 my-16">
+        <section className="flex flex-wrap gap-8 my-16 max-lg:justify-center">
           {isLoading ? (
             <span></span>
           ) : error ? (

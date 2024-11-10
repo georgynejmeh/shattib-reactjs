@@ -45,6 +45,7 @@ export { default as purpleParagraphIcon } from "./assets/svg/icon-paragraph-purp
 export { default as drawerIcon } from "./assets/svg/icon-drawer.svg";
 export { default as truckIcon } from "./assets/svg/icon-truck.svg";
 export { default as databaseIcon } from "./assets/svg/icon-database.svg";
+export { default as menuIcon } from "./assets/svg/icon-menu.svg";
 // -- social media --
 export { default as facebookIcon } from "./assets/svg/icon-facebook.svg";
 export { default as instagramIcon } from "./assets/svg/icon-instagram.svg";
@@ -90,9 +91,15 @@ export { default as smallShattibIcon } from "./assets/svg/icon-shattib-sm.svg";
 export { default as docIcon } from "./assets/svg/icon-doc-sm.svg";
 export { default as twoPapersIcon } from "./assets/svg/icon-two-papers.svg";
 export { default as redLogoutIcon } from "./assets/svg/icon-logout-red.svg";
+export { default as statisticsIcon } from "./assets/svg/icon-statistics.svg";
 // -- Admin Products --
 export { default as bluePenIcon } from "./assets/svg/icon-pen-blue.svg";
 export { default as redTrashIcon } from "./assets/svg/icon-trash-red.svg";
+// -- Admin Statistics --
+export { default as grayCompanyIcon } from "./assets/svg/icon-company-gray.svg";
+export { default as grayPersonIcon } from "./assets/svg/icon-person-gray.svg";
+export { default as grayCartIcon } from "./assets/svg/icon-cart-gray.svg";
+export { default as grayCubeIcon } from "./assets/svg/icon-cube-gray.svg";
 
 //
 //
@@ -155,6 +162,7 @@ export { default as NavBarCategoriesDropdownMenu } from "./components/NavBarCate
 export { default as OrdersTableRow } from "./components/OrdersTableRow";
 export { default as OrderItem } from "./components/OrderItem";
 export { default as CriteriaDetailsPopupForm } from "./components/CriteriaDetailsPopupForm";
+export { default as StatisticsCard } from "./components/StatisticsCard";
 
 //
 //

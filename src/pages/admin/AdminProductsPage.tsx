@@ -44,10 +44,12 @@ const AdminProductsPage = () => {
                   <tr key={product.id}>
                     <td>{product.warehouseCode}</td>
                     <td>
-                      <div className="flex items-center justify-center gap-4">
+                      <div className="flex items-center justify-start gap-4">
                         <img
                           className=" h-16 aspect-video rounded object-cover"
-                          src={productImg}
+                          src={`${import.meta.env.VITE_IMG_URL}${
+                            product.mainImagePath
+                          }`}
                           alt=""
                         />
                         <span>{product.name}</span>

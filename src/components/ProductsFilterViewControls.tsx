@@ -2,7 +2,7 @@ import { DropDownMenuButton, fourDotsMenu, listMenu } from "..";
 
 const ProductsFilterViewControls = () => {
   return (
-    <div className="m-4 mb-12 flex justify-between p-4 border-4 rounded-xl w-full h-16">
+    <div className="m-4 mb-12 flex justify-between p-4 border-4 rounded-xl w-full h-16 max-lg:m-0 max-lg:my-4 max-lg:flex-col max-lg:gap-4 max-lg:w-fit max-lg:h-fit">
       <div className="flex gap-4">
         <button>
           <img src={listMenu} alt="" />

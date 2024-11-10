@@ -3,7 +3,7 @@ import { ButtonGold, expandCoverImg03, useEngineerRequest } from "..";
 const BannerButton = () => {
   const { setIsShownEngineerRequestModal } = useEngineerRequest();
   return (
-    <div className="relative grid rounded-3xl overflow-hidden w-2/3 h-2/3">
+    <div className="relative grid rounded-3xl overflow-hidden w-2/3 h-2/3 max-lg:h-5/6 max-lg:w-11/12">
       <div className="absolute right-4 w-32 h-28 bg-black bg-opacity-25 rounded-bl rounded-br z-20">
         <div className="h-full flex flex-col items-center justify-center text-white">
           <h1 className="text-2xl">توسيع</h1>
@@ -11,7 +11,7 @@ const BannerButton = () => {
         </div>
       </div>
       <div className="absolute right-0 z-10 flex flex-col items-center justify-center rounded-3xl h-full w-full bg-opacity-35 bg-black">
-        <div className="w-5/6 text-white text-4xl font-bold transition-all duration-700">
+        <div className="w-5/6 text-white text-4xl font-bold transition-all duration-700 max-lg:text-lg">
           <h1>
             "احصل على استشارة احترافية من مهندسين ذوي خبرة لرفع مساحة مشاريعك .
           </h1>

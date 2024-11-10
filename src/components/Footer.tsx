@@ -11,7 +11,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="flex items-center justify-around w-full py-32 bg-slate-800">
+    <footer className="flex items-center justify-around w-full py-32 bg-slate-800 max-lg:flex-col max-lg:gap-8">
       <div className="flex flex-col gap-4">
         <img src={shattibLogoCol} alt="" />
         <div className="flex items-center gap-1">
@@ -23,7 +23,7 @@ const Footer = () => {
           <img src={whatsappIcon} alt="" />
         </div>
       </div>
-      <div className="flex gap-8 h-1/2">
+      <div className="flex gap-8 h-1/2 max-lg:flex-col">
         <img src={paragraphPlaceholder} alt="" />
         <img src={paragraphPlaceholder} alt="" />
         <img src={paragraphPlaceholder} alt="" />

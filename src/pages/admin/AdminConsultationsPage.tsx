@@ -9,7 +9,7 @@ const AdminConsultationsPage = () => {
       <div>AdminConsultationsPage</div>
       <ul>
         {data?.map((consultation) => (
-          <li>
+          <div className="flex gap-2">
             <div>{consultation.id}</div>
             <div>{consultation.consultationTopic}</div>
             <div>{consultation.status}</div>
@@ -19,7 +19,7 @@ const AdminConsultationsPage = () => {
             <div>{consultation.dateOfRequest}</div>
             <div>{consultation.details}</div>
             <div>{consultation.userId}</div>
-          </li>
+          </div>
         ))}
       </ul>
     </>

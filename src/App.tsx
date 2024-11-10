@@ -25,6 +25,7 @@ import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderPage from "./pages/admin/AdminOrderPage";
 import AdminCriteriaPage from "./pages/admin/AdminCriteriaPage";
 import AdminConsultationsPage from "./pages/admin/AdminConsultationsPage";
+import StatisticsPage from "./pages/admin/StatisticsPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -77,6 +78,7 @@ const App = () => {
             path="/admin/consultations"
             element={<AdminConsultationsPage />}
           />
+          <Route path="/admin/statistics" element={<StatisticsPage />} />
         </Route>
         button
       </Routes>

@@ -46,13 +46,13 @@ const MainCategoryPage = ({ categoryId = 1 }: Props) => {
         <TitleNumber subTitle="20">التصنفات الفرعية</TitleNumber>
         <CategoryListHorizontal />
         <LeftRightButtonsCircle />
-        <section className="flex w-full">
-          <div>
+        <section className="flex max-lg:flex-col max-lg:w-full">
+          <div className="max-lg:w-full max-lg:flex max-lg:flex-col max-lg:items-center">
             <CategoryFilterCard />
           </div>
-          <div className="w-full">
+          <div className="max-lg:w-full max-lg:flex max-lg:flex-col max-lg:items-center">
             <ProductsFilterViewControls />
-            <section className="flex flex-wrap gap-8">
+            <section className="flex flex-wrap gap-8 max-lg:justify-center">
               {isLoading ? (
                 <ProductCard />
               ) : error ? (
