@@ -154,6 +154,7 @@ export { default as CatDropdownItem } from "./components/CatDropdownItem";
 export { default as NavBarCategoriesDropdownMenu } from "./components/NavBarCategoriesDropdownMenu";
 export { default as OrdersTableRow } from "./components/OrdersTableRow";
 export { default as OrderItem } from "./components/OrderItem";
+export { default as CriteriaDetailsPopupForm } from "./components/CriteriaDetailsPopupForm";
 
 //
 //

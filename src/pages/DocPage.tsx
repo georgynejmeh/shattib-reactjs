@@ -8,9 +8,54 @@ import {
   subCategoryImg01,
   TextInput,
   UploadFile,
+  useApi,
+  useParams,
+  useState,
 } from "..";
+import { usePostComment } from "../hooks/usePostComment";
+import { Comment } from "../models/Comment";
 
 const DocPage = () => {
+  const { id } = useParams();
+
+  const { postData } = usePostComment(`Criterias/${id}/Comments`); // custom hook to handle API request
+  const [message, setMessage] = useState("");
+  const [file, setFile] = useState(null);
+
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFile(file);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("message", message);
+    if (file) {
+      formData.append("attachment", file);
+    }
+
+    try {
+      console.log("doc page formdata");
+      formData.forEach((i) => console.log(i));
+      await postData(formData); // Post the data including the file
+      setMessage(""); // Clear the input field after submission
+      setFile(null); // Clear the file input
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
+  };
+
+  const { isLoading, error, data } = useApi<Comment[]>(
+    `Criterias/${id}/Comments`
+  );
   // TODO DELETE
   const temp = [1, 2];
   return (
@@ -91,6 +136,28 @@ const DocPage = () => {
             <h2 className="text-xl from-black">التعليقات</h2>
             <div>
               <div className="w-2/3 rounded-t-xl border">
+                {isLoading ? (
+                  <span>جاري التحميل...</span>
+                ) : error ? (
+                  <span>حدث خطأ!</span>
+                ) : data ? (
+                  data.map((comment) => (
+                    /* Comment */
+                    <div className="flex flex-col gap-4 p-8">
+                      {/* Profile Pic - Name - Date */}
+                      <div className="flex items-center gap-4">
+                        <div className="w-16 h-16 rounded-full bg-gray-200" />
+                        <div className="flex flex-col">
+                          <span className="text-lg">اسم المستخدم</span>
+                          <span className="text-s text-gray-400">
+                            قبل 10 دقائق
+                          </span>
+                        </div>
+                      </div>
+                      <p>{comment.message}</p>
+                    </div>
+                  ))
+                ) : null}
                 {temp.map(() => (
                   /* Comment */
                   <div className="flex flex-col gap-4 p-8">
@@ -113,15 +180,30 @@ const DocPage = () => {
                 ))}
               </div>
               <div className="flex flex-col w-2/3 rounded-b-xl border p-4 gap-2">
-                <div className="flex gap-2">
-                  <div className="w-full">
-                    <TextInput big placeholder="أضف تعليق" />
+                <form onSubmit={handleSubmit}>
+                  <div className="flex gap-2">
+                    <div className="w-full">
+                      <TextInput
+                        value={message}
+                        onChange={handleMessageChange}
+                        big
+                        placeholder="أضف تعليق"
+                      />
+                    </div>
+                    <label htmlFor="attachment" className="cursor-pointer">
+                      <img src={attachmentIcon} alt="attachment" />
+                      <input
+                        id="attachment"
+                        type="file"
+                        className="hidden"
+                        onChange={handleFileChange}
+                      />
+                    </label>
                   </div>
-                  <img src={attachmentIcon} alt="" />
-                </div>
-                <div className="w-20 self-end">
-                  <ButtonGold>إرسال</ButtonGold>
-                </div>
+                  <div className="w-20 self-end">
+                    <ButtonGold onClick={handleSubmit}>إرسال</ButtonGold>
+                  </div>
+                </form>
               </div>
             </div>
           </section>

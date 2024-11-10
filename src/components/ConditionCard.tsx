@@ -1,12 +1,13 @@
 import { AccentText, Link, subCategoryImg01 } from "..";
 
 interface Props {
+  id?: number;
   status: "معلًقة" | "مقبولة" | "مرفوضة";
 }
 
-const ConditionCard = ({ status }: Props) => {
+const ConditionCard = ({ id = 0, status }: Props) => {
   return (
-    <Link to={"doc"}>
+    <Link to={`doc/${id}`}>
       <div className="w-72 h-72 flex flex-col justify-between rounded-xl bg-gray-100 shadow p-4">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold self-center">كراسة مواد بناء</h1>

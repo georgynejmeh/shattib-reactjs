@@ -43,7 +43,7 @@ const ProductCard = ({
 
     localStorage.setItem("cart", JSON.stringify(currentCart));
 
-    alert(`${name} أُضيفت إلى السلة`);
+    alert("تمت إضافة المنتج للسلة");
 
     window.dispatchEvent(new Event("storage"));
   };

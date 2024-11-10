@@ -1,22 +1,28 @@
-import { useState } from "..";
+import { categoryImg01 } from "..";
 
 interface Props {
   children: string;
-  img: string;
+  id?: number;
+  img?: string;
   num?: string;
+  onClick?: () => void;
+  selected?: boolean;
 }
 
-const CategoryCard = ({ children, img, num = "0" }: Props) => {
-  const [isClicked, setIsClicked] = useState(false);
+const CategoryCard = ({ children, id, img, num, onClick, selected }: Props) => {
   return (
     <div
-      onClick={() => setIsClicked(!isClicked)}
+      onClick={onClick}
       className={`h-48 w-56 rounded-xl ${
-        isClicked ? "bg-primary text-white" : "hover:bg-yellow-100"
+        selected ? "bg-primary text-white" : "hover:bg-amber-100"
       }`}
     >
       <div className="flex justify-center items-center h-4/5 rounded-xl overflow-hidden">
-        <img className="w-full h-full object-cover" src={img} alt="" />
+        <img
+          className="w-full h-full object-cover"
+          src={categoryImg01}
+          alt=""
+        />
       </div>
       <div className="flex justify-between p-2 gap-2">
         <span>{children}</span>

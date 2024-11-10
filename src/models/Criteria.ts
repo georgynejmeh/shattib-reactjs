@@ -2,17 +2,7 @@ export interface Cirteria {
   id: number;
   title: string;
   status: string;
-  criteriaItems: [
-    {
-      categoryId: number;
-      categoryName: string;
-      productName: string;
-      description: string;
-      amount: number;
-      measurementUnit: string;
-      image: string;
-    }
-  ];
+  criteriaItems: CirteriaItem[];
   comments: [
     {
       id: number;
@@ -28,4 +18,17 @@ export interface Cirteria {
       accepted: boolean;
     }
   ];
+}
+
+export interface CirteriaItem {
+  categoryId: number;
+  productName: string;
+  description: string;
+  amount: number;
+  measurementUnit: string;
+}
+
+export interface PostCriteria {
+  Title: string;
+  CriteriaItems: CirteriaItem[];
 }

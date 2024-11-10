@@ -48,7 +48,7 @@ const App = () => {
           <Route path="/wishlist" element={<WishListPage />} />
 
           <Route path="/conditions" element={<ConditionDocsPage />} />
-          <Route path="/conditions/doc" element={<DocPage />} />
+          <Route path="/conditions/doc/:id" element={<DocPage />} />
           <Route path="/conditions/new" element={<NewConditionPage />} />
           <Route
             path="/conditions/new/confirm"

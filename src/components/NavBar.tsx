@@ -7,27 +7,25 @@ import {
   TextInput,
   Link,
   NavBarCategoriesDropdownMenu,
-  useEffect,
-  useState,
 } from "..";
 
 const NavBar = () => {
-  const [cartItemCount, setCartItemCount] = useState<number>(0);
+  // const [cartItemCount, setCartItemCount] = useState<number>(0);
 
-  // Function to update cart item count from localStorage
-  const updateCartItemCount = () => {
-    const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const totalItems = currentCart.reduce(
-      (total: number, item: { quantity: number }) => total + item.quantity,
-      0
-    );
-    setCartItemCount(totalItems);
-  };
+  // // Function to update cart item count from localStorage
+  // const updateCartItemCount = () => {
+  //   const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  //   const totalItems = currentCart.reduce(
+  //     (total: number, item: { quantity: number }) => total + item.quantity,
+  //     0
+  //   );
+  //   setCartItemCount(totalItems);
+  // };
 
-  // Call updateCartItemCount when the component mounts
-  useEffect(() => {
-    updateCartItemCount();
-  }, []);
+  // // Call updateCartItemCount when the component mounts
+  // useEffect(() => {
+  //   updateCartItemCount();
+  // }, []);
 
   // const { setIsShownEngineerRequestModal } = useEngineerRequest();
   return (
@@ -48,9 +46,9 @@ const NavBar = () => {
       </div>
       <Link to={"/cart"}>
         <div className="relative flex flex-col items-center">
-          <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
+          {/* <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
             {cartItemCount}
-          </div>
+          </div> */}
           <img src={cartIcon} alt="" />
           <span>السلة</span>
         </div>

@@ -20,24 +20,29 @@ const ProductDetailsCard = ({ data }: Props) => {
   const [quantity, setQuantity] = useState(1); // Track quantity
   // Add product to cart in localStorage
   const handleAddToCart = () => {
-    if (data) {
-      const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-      const productInCart = existingCart.find(
+    let productInCart;
+    if (data) {
+      productInCart = existingCart.find(
         (item: CartItem) => item.productId === data.id
       );
-
-      if (productInCart) {
-        // If the product already exists in the cart, update its quantity
-        productInCart.quantity += quantity;
-      } else {
-        // If the product is not in the cart, add it
-        existingCart.push({ ...data, quantity });
-      }
-
-      localStorage.setItem("cart", JSON.stringify(existingCart));
-      alert("تمت إضافة المنتج للسلة");
+    } else {
+      productInCart = existingCart.find(
+        (item: CartItem) => item.productId === 0
+      );
     }
+
+    if (productInCart) {
+      // If the product already exists in the cart, update its quantity
+      productInCart.quantity += quantity;
+    } else {
+      // If the product is not in the cart, add it
+      existingCart.push({ ...data, quantity });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+    alert("تمت إضافة المنتج للسلة");
   };
 
   // TODO DELETE
