@@ -7,7 +7,13 @@ interface Props {
   setPopupShown: (popupShown: boolean) => void;
 }
 
-const GoldConditionCard = ({ popupShown, setPopupShown, name, id }: Props) => {
+const GoldConditionCard = ({
+  popupShown,
+  setPopupShown,
+  name,
+}: // id,
+
+Props) => {
   return (
     <div className="w-60 h-52">
       <div className="w-full h-full bg-amber-200">

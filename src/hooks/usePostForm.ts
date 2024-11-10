@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 export function usePostForm<T>(
   endpoint: string,
-  method?: "POST",
-  isToken?: boolean
+  method?: "POST"
+  // isToken?: boolean
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null); // Change error to be a string for the message

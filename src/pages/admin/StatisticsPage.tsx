@@ -13,32 +13,37 @@ import { StatisticsNumber } from "../../models/StatisticsNumber";
 
 const StatisticsPage = () => {
   const {
-    isLoading: clientsLoading,
-    error: clientsError,
+    // isLoading: clientsLoading,
+    // error: clientsError,
     data: clientsData,
   } = useApi<StatisticsNumber>("Statistics/GetClients");
   const {
-    isLoading: businessesLoading,
-    error: businessesError,
+    // isLoading: businessesLoading,
+    // error: businessesError,
     data: businessesData,
   } = useApi<StatisticsNumber>("Statistics/GetBusinesses");
   const {
-    isLoading: ordersLoading,
-    error: ordersError,
+    // isLoading: ordersLoading,
+    // error: ordersError,
     data: ordersData,
   } = useApi<StatisticsNumber>("Statistics/GetOrders");
   const {
-    isLoading: productsLoading,
-    error: productsError,
+    // isLoading: productsLoading,
+    // error: productsError,
     data: productsData,
   } = useApi<StatisticsNumber>("Statistics/GetProducts");
   const {
-    isLoading: profitsLoading,
-    error: profitsError,
+    // isLoading: profitsLoading,
+    // error: profitsError,
     data: profitsData,
-  } = useApi<StatisticsNumber>(
-    "Statistics/GetProfits?Day=8&Month=11&Year=2024"
-  );
+  } = useApi<{
+    miniProfitsDtos: {
+      dateOfOrder: string;
+      username: string;
+      totalPrice: number;
+    }[];
+    total: number;
+  }>("Statistics/GetProfits?Day=11&Month=11&Year=2024");
 
   // TODO DELETE
   const temp = ["ياسر القحطاني", "سلمان الفرج", "سالم الدوسري", "محمد العويس"];
@@ -82,11 +87,11 @@ const StatisticsPage = () => {
           <div className="flex items-center gap-4 py-4">
             <button className="bg-gray-100 rounded">
               <div className="flex w-24 gap-2 justify-center">
-                <span>اوكتوبر</span>
+                <span>11 توفمبر</span>
                 <img className="w-4" src={downArrowIcon} alt="" />
               </div>
             </button>
-            <AccentText>12500 ريال</AccentText>
+            <AccentText>{profitsData?.total || 0} ريال</AccentText>
           </div>
           <img src="/src/assets/imgs/temp/chart.png" alt="" />
         </div>

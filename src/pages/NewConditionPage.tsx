@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
   ButtonGold,
   CategoryCard,
-  CategoryListHorizontal,
+  // CategoryListHorizontal,
   Link,
   MainPadding,
   TextInput,

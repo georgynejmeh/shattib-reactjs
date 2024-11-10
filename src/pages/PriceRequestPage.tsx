@@ -39,7 +39,7 @@ const PriceRequestPage = () => {
             <label className="flex self-start mb-2 text-sm">الكمية</label>
             <div className="flex flex-col border rounded p-2">
               <div className="w-36 self-end">
-                <QuantityControls />
+                <QuantityControls onChange={() => {}} />
               </div>
             </div>
           </div>

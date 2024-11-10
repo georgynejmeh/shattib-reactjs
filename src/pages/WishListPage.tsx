@@ -1,6 +1,7 @@
 import { addToBoxIcon, Button, CartItemCard, MainPadding } from "..";
 
 const WishListPage = () => {
+  const temp = [1, 2, 3];
   return (
     <main>
       <MainPadding>
@@ -21,9 +22,17 @@ const WishListPage = () => {
               </Button>
             </div>
           </div>
-          <CartItemCard />
-          <CartItemCard />
-          <CartItemCard />
+          {temp.map((index) => (
+            <CartItemCard
+              key={index}
+              name="طقم شطاف WG004"
+              price={0}
+              productId={0}
+              onQuantityChange={() => {}}
+              quantity={1}
+              onRemove={() => {}}
+            />
+          ))}
         </section>
       </MainPadding>
     </main>

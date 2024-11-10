@@ -25,7 +25,7 @@ const ConfirmNewConditionPage = () => {
   const [images, setImages] = useState<File[]>([]); // Store images separately in a list
 
   useEffect(() => {
-    const criteriaTitle = localStorage.getItem("criteriaTitle");
+    // const criteriaTitle = localStorage.getItem("criteriaTitle");
     const selectedCategories = localStorage.getItem("selectedCategories");
     const selectedCategoryNames = localStorage.getItem("selectedCategoryNames");
 

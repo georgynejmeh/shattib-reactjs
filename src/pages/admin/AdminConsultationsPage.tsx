@@ -2,7 +2,10 @@ import { useApi } from "../../hooks/useApi";
 import { Consultation } from "../../models/Consultation";
 
 const AdminConsultationsPage = () => {
-  const { isLoading, error, data } = useApi<Consultation[]>("Consultations");
+  const {
+    //  isLoading, error,
+    data,
+  } = useApi<Consultation[]>("Consultations");
   console.log(data);
   return (
     <>

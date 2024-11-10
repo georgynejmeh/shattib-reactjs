@@ -1,7 +1,7 @@
 import {
   bluePenIcon,
   PaginationButtons,
-  productImg,
+  // productImg,
   redTrashIcon,
   useApi,
 } from "../..";

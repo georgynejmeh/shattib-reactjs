@@ -5,7 +5,7 @@ import {
   ButtonGold,
   MainPadding,
   SectionTitles,
-  subCategoryImg01,
+  // subCategoryImg01,
   TextInput,
   UploadFile,
   useApi,
@@ -22,20 +22,22 @@ const DocPage = () => {
 
   const { postData } = usePostComment(`Criterias/${id}/Comments`); // custom hook to handle API request
   const [message, setMessage] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
 
-  const handleMessageChange = (e) => {
+  const handleMessageChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setMessage(e.target.value);
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
     if (file) {
       setFile(file);
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData();

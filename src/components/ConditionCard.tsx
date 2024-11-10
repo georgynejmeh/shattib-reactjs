@@ -1,4 +1,9 @@
-import { AccentText, categoryImg01, Link, subCategoryImg01 } from "..";
+import {
+  AccentText,
+  categoryImg01,
+  Link,
+  // subCategoryImg01
+} from "..";
 import { Cirteria } from "../models/Criteria";
 
 interface Props {

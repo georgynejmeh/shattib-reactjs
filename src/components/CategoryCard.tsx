@@ -9,7 +9,13 @@ interface Props {
   selected?: boolean;
 }
 
-const CategoryCard = ({ children, id, img, num, onClick, selected }: Props) => {
+const CategoryCard = ({
+  children,
+  // id, img,
+  num,
+  onClick,
+  selected,
+}: Props) => {
   return (
     <div
       onClick={onClick}
