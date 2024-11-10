@@ -68,11 +68,17 @@ const ConfirmNewConditionPage = () => {
     };
 
     const formData = new FormData();
-    formData.append("data", JSON.stringify(postCriteria));
+    formData.append("Title", postCriteria.Title);
+    formData.append(
+      "CriteriaItems",
+      JSON.stringify(postCriteria.CriteriaItems)
+    );
 
+    // formData.append(`images`, images); // Add images directly
     // Attach images separately (not embedded in CriteriaItems)
     images.forEach((image, index) => {
-      formData.append(`images[${index}]`, image); // Add images directly
+      // formData.append(`images[${index}]`, image); // Add images directly
+      formData.append(`images`, image); // Add images directly
     });
 
     try {
