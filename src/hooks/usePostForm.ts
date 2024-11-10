@@ -17,7 +17,7 @@ export function usePostForm<T>(
     async function getData() {
       setIsLoading(true);
       try {
-        const apiUrl = "http://26.225.50.6:5264/api/";
+        const apiUrl = `${import.meta.env.VITE_API_URL}`;
         console.log(`${apiUrl}${endpoint}`);
         const response = await fetch(`${apiUrl}${endpoint}`);
 
@@ -45,7 +45,7 @@ export function usePostForm<T>(
   async function postData(body: FormData) {
     setIsLoading(true);
     try {
-      const apiUrl = "http://26.225.50.6:5264/api/";
+      const apiUrl = `${import.meta.env.VITE_API_URL}`;
       const requestOptions = {
         method: "POST",
         body,

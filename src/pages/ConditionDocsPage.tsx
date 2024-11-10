@@ -5,9 +5,12 @@ import {
   MainPadding,
   plusCircleOutlineWhiteIcon,
   RoundButton,
+  useApi,
 } from "..";
+import { Cirteria } from "../models/Criteria";
 
 const ConditionDocsPage = () => {
+  const { isLoading, error, data } = useApi<Cirteria[]>("Criteria/GetAll");
   return (
     <main>
       <MainPadding>
@@ -37,14 +40,27 @@ const ConditionDocsPage = () => {
           </Link>
         </section>
         <section className="flex flex-wrap gap-8 my-16">
-          <ConditionCard status="مرفوضة" />
+          {isLoading ? (
+            <span></span>
+          ) : error ? (
+            <span></span>
+          ) : data ? (
+            data.map((criteria) => (
+              <ConditionCard
+                key={criteria.id}
+                criteria={criteria}
+                status={criteria.status}
+              />
+            ))
+          ) : null}
+          {/* <ConditionCard status="مرفوضة" />
           <ConditionCard status="معلًقة" />
           <ConditionCard status="مقبولة" />
           <ConditionCard status="مرفوضة" />
           <ConditionCard status="معلًقة" />
           <ConditionCard status="مقبولة" />
           <ConditionCard status="مرفوضة" />
-          <ConditionCard status="معلًقة" />
+          <ConditionCard status="معلًقة" /> */}
         </section>
       </MainPadding>
     </main>

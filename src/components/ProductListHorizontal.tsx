@@ -14,7 +14,7 @@ const ProductListHorizontal = () => {
         </button>
       </div>
 
-      <div className="inline-flex py-4 gap-8">
+      <div className="flex py-4 gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
         {isLoading ? (
           <ProductCard />
         ) : error ? (
@@ -24,12 +24,16 @@ const ProductListHorizontal = () => {
           </>
         ) : data ? (
           data.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-            />
+            <div key={product.id}>
+              <ProductCard
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={`${import.meta.env.VITE_IMG_URL}${
+                  product.mainImagePath
+                }`}
+              />
+            </div>
           ))
         ) : (
           <ProductCard />

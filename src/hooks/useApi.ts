@@ -18,7 +18,7 @@ export function useApi<T>(
     async function getData() {
       setIsLoading(true);
       try {
-        const apiUrl = "http://26.225.50.6:5264/api/";
+        const apiUrl = `${import.meta.env.VITE_API_URL}`;
         console.log(`${apiUrl}${endpoint}`);
         await fetch(`${apiUrl}${endpoint}`)
           .then(async (res) => {
@@ -48,7 +48,7 @@ export function useApi<T>(
 
     setIsLoading(true);
     try {
-      const apiUrl = "http://26.225.50.6:5264/api/";
+      const apiUrl = `${import.meta.env.VITE_API_URL}`;
       console.log(`${apiUrl}${endpoint}`);
       let headers = {};
       if (token) {
@@ -90,7 +90,7 @@ export function useApi<T>(
   async function deleteData(id: number) {
     setIsLoading(true);
     try {
-      const apiUrl = "http://26.225.50.6:5264/api/";
+      const apiUrl = `${import.meta.env.VITE_API_URL}`;
       console.log(`${apiUrl}${endpoint}/${id}`);
       const requestOptions = {
         method: "DELETE",

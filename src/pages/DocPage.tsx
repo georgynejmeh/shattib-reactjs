@@ -13,10 +13,12 @@ import {
   useState,
 } from "..";
 import { usePostComment } from "../hooks/usePostComment";
-import { Comment } from "../models/Comment";
+import { CirteriaGet } from "../models/Criteria";
 
 const DocPage = () => {
   const { id } = useParams();
+
+  const { isLoading, error, data } = useApi<CirteriaGet>(`Criteria/${id}`);
 
   const { postData } = usePostComment(`Criterias/${id}/Comments`); // custom hook to handle API request
   const [message, setMessage] = useState("");
@@ -53,9 +55,9 @@ const DocPage = () => {
     }
   };
 
-  const { isLoading, error, data } = useApi<Comment[]>(
-    `Criterias/${id}/Comments`
-  );
+  // const { isLoading, error, data } = useApi<Comment[]>(
+  //   `Criterias/${id}/Comments`
+  // );
   // TODO DELETE
   const temp = [1, 2];
   return (
@@ -86,20 +88,22 @@ const DocPage = () => {
             </div>
             <h2 className="text-xl font-bold">المرفقات</h2>
             <div className="flex gap-4 w-full">
-              <div className="rounded-xl w-1/3 overflow-hidden">
+              {data?.criteriaItems.map((item, index) => (
+                <div key={index} className="rounded-xl w-1/3 overflow-hidden">
+                  <img
+                    className="w-full h-full object-cover"
+                    src={`${import.meta.env.VITE_IMG_URL}${item.image}`}
+                    alt=""
+                  />
+                </div>
+              ))}
+              {/* <div className="rounded-xl w-1/3 overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
                   src={subCategoryImg01}
                   alt=""
                 />
-              </div>
-              <div className="rounded-xl w-1/3 overflow-hidden">
-                <img
-                  className="w-full h-full object-cover"
-                  src={subCategoryImg01}
-                  alt=""
-                />
-              </div>
+              </div> */}
             </div>
           </section>
           <section className="flex flex-col items-center gap-8 w-1/2">
@@ -141,23 +145,24 @@ const DocPage = () => {
                 ) : error ? (
                   <span>حدث خطأ!</span>
                 ) : data ? (
-                  data.map((comment) => (
-                    /* Comment */
-                    <div className="flex flex-col gap-4 p-8">
-                      {/* Profile Pic - Name - Date */}
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 rounded-full bg-gray-200" />
-                        <div className="flex flex-col">
-                          <span className="text-lg">اسم المستخدم</span>
-                          <span className="text-s text-gray-400">
-                            قبل 10 دقائق
-                          </span>
-                        </div>
-                      </div>
-                      <p>{comment.message}</p>
-                    </div>
-                  ))
-                ) : null}
+                  <></>
+                ) : // data.map((comment) => (
+                //   /* Comment */
+                //   <div className="flex flex-col gap-4 p-8">
+                //     {/* Profile Pic - Name - Date */}
+                //     <div className="flex items-center gap-4">
+                //       <div className="w-16 h-16 rounded-full bg-gray-200" />
+                //       <div className="flex flex-col">
+                //         <span className="text-lg">اسم المستخدم</span>
+                //         <span className="text-s text-gray-400">
+                //           قبل 10 دقائق
+                //         </span>
+                //       </div>
+                //     </div>
+                //     <p>{comment.message}</p>
+                //   </div>
+                // ))
+                null}
                 {temp.map(() => (
                   /* Comment */
                   <div className="flex flex-col gap-4 p-8">

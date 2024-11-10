@@ -13,12 +13,14 @@ interface Props {
   name?: string;
   price?: number;
   id?: number;
+  image?: string;
 }
 
 const ProductCard = ({
   name = "جاري التحميل...",
   price = 0,
   id = 0,
+  image = testImg,
 }: Props) => {
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -55,7 +57,7 @@ const ProductCard = ({
         <Link to={`/product/${id}`}>
           <img
             className="rounded-t-xl h-full w-full object-cover"
-            src={testImg}
+            src={image}
             alt=""
           />
         </Link>

@@ -10,7 +10,7 @@ export function usePostComment<T>(endpoint: string) {
 
     setIsLoading(true);
     try {
-      const apiUrl = "http://26.225.50.6:5264/api/";
+      const apiUrl = `${import.meta.env.VITE_API_URL}`;
       const token = localStorage.getItem("accessToken");
       const requestOptions = {
         method: "POST",

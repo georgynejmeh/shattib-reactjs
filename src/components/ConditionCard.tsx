@@ -1,16 +1,22 @@
-import { AccentText, Link, subCategoryImg01 } from "..";
+import { AccentText, categoryImg01, Link, subCategoryImg01 } from "..";
+import { Cirteria } from "../models/Criteria";
 
 interface Props {
   id?: number;
-  status: "معلًقة" | "مقبولة" | "مرفوضة";
+  // status?: "معلًقة" | "مقبولة" | "مرفوضة";
+  status?: "Pending" | "Accepted" | "Rejected" | string;
+  criteria?: Cirteria;
 }
 
-const ConditionCard = ({ id = 0, status }: Props) => {
+const ConditionCard = ({ id = 0, status, criteria }: Props) => {
+  if (criteria) {
+    id = criteria.id;
+  }
   return (
     <Link to={`doc/${id}`}>
       <div className="w-72 h-72 flex flex-col justify-between rounded-xl bg-gray-100 shadow p-4">
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold self-center">كراسة مواد بناء</h1>
+          <h1 className="text-2xl font-bold self-center">{criteria?.title}</h1>
           <hr />
           <div className="flex justify-between">
             <div className="flex gap-2">
@@ -21,16 +27,22 @@ const ConditionCard = ({ id = 0, status }: Props) => {
               <span>الحالة</span>
               <span
                 className={
-                  status === "معلًقة"
+                  status === "Pending" //"معلًقة"
                     ? "font-bold text-blue-600"
-                    : status === "مقبولة"
+                    : status === "Accepted" //"مقبولة"
                     ? "font-bold text-green-600"
-                    : status === "مرفوضة"
+                    : status === "Rejected" //"مرفوضة"
                     ? "font-bold text-red-600"
                     : "font-bold"
                 }
               >
-                {status}
+                {status === "Pending" //"معلًقة"
+                  ? "معلًقة"
+                  : status === "Accepted" //"مقبولة"
+                  ? "مقبولة"
+                  : status === "Rejected" //"مرفوضة"
+                  ? "مرفوضة"
+                  : ""}
               </span>
             </div>
           </div>
@@ -38,7 +50,7 @@ const ConditionCard = ({ id = 0, status }: Props) => {
         <div className="px-2 pt-2 h-40">
           <img
             className="rounded-xl object-cover w-full h-full"
-            src={subCategoryImg01}
+            src={categoryImg01}
             alt=""
           />
         </div>

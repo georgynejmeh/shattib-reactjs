@@ -66,7 +66,7 @@ const NavBar = () => {
       >
         <ButtonGold>طلب عرض سعر</ButtonGold>
       </div> */}
-      <Link to={"/orders"}>
+      <Link to={""}>
         <div className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full">
           <img src={accountIcon} alt="" />
         </div>

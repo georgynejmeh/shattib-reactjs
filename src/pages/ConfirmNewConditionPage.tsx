@@ -69,17 +69,53 @@ const ConfirmNewConditionPage = () => {
 
     const formData = new FormData();
     formData.append("Title", postCriteria.Title);
-    formData.append(
-      "CriteriaItems",
-      JSON.stringify(postCriteria.CriteriaItems)
-    );
+
+    postCriteria.CriteriaItems.forEach((item, index) => {
+      formData.append(
+        `CriteriaItems[${index}].categoryId`,
+        JSON.stringify(item.categoryId)
+      );
+      formData.append(
+        `CriteriaItems[${index}].productName`,
+        JSON.stringify(item.productName)
+      );
+      formData.append(
+        `CriteriaItems[${index}].description`,
+        JSON.stringify(item.description)
+      );
+      formData.append(
+        `CriteriaItems[${index}].amount`,
+        JSON.stringify(item.amount)
+      );
+      formData.append(
+        `CriteriaItems[${index}].measurementUnit`,
+        JSON.stringify(item.measurementUnit)
+      );
+      formData.append(`CriteriaItems[${index}].image`, images[index]);
+    });
+
+    // Modify each item in CriteriaItems to include the image
+    // postCriteria.CriteriaItems.forEach((item, index) => {
+    //   const modifiedItem = {
+    //     ...item, // Spread the existing item
+    //     image: images[index], // Add the corresponding image to each item
+    //   };
+
+    //   // Append the modified item as a JSON string
+    //   formData.append("CriteriaItems", JSON.stringify(modifiedItem));
+    // });
+
+    // formData.append(
+    //   "CriteriaItems",
+    //   JSON.stringify(postCriteria.CriteriaItems)
+    // );
 
     // formData.append(`images`, images); // Add images directly
     // Attach images separately (not embedded in CriteriaItems)
-    images.forEach((image, index) => {
-      // formData.append(`images[${index}]`, image); // Add images directly
-      formData.append(`images`, image); // Add images directly
-    });
+    // images.forEach((image, index) => {
+    // formData.append(`images[${index}]`, image); // Add images directly
+    // formData.append(`images`, image); // Add images directly
+    // });
 
     try {
       await postData(formData);

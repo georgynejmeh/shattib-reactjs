@@ -9,7 +9,7 @@ export function usePostCriteria<T>(endpoint: string) {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("accessToken");
-      const apiUrl = "http://26.225.50.6:5264/api/";
+      const apiUrl = `${import.meta.env.VITE_API_URL}`;
       const requestOptions = {
         method: "POST",
         headers: {
