@@ -181,6 +181,7 @@ export { default as loadingVideo } from "/assets/videos/loading/video_2024-11-01
 export { default as testImg } from "./assets/imgs/493263f4f044e10db4127c423842f812.jpg";
 export { default as productImg } from "./assets/imgs/493263f4f044e10db4127c423842f812.jpg";
 export { default as billImg } from "/assets/imgs/bill/61e7906b8649987df57ebf45590de2bd.png";
+export { default as paymentReceiptImg } from "/assets/imgs/payment_receipt/6570f27a7f2f4b5cbd791b0b8531caa4.png";
 // -- Main Slide Show --
 export { default as mainCoverImg01 } from "/assets/imgs/cover/main/a0a9cb4b4c69c91a762cbf2ba0361a29.jpg";
 export { default as mainCoverImg02 } from "/assets/imgs/cover/main/b97115c4f6b6aa207413091ee7d6f245.jpg";

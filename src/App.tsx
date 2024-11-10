@@ -23,9 +23,10 @@ import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
 import AdminNewProductContainer from "./pages/admin/AdminNewProductContainer";
 import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderPage from "./pages/admin/AdminOrderPage";
-import AdminCriteriaPage from "./pages/admin/AdminCriteriaPage";
 import AdminConsultationsPage from "./pages/admin/AdminConsultationsPage";
 import StatisticsPage from "./pages/admin/StatisticsPage";
+import AdminCriteriasPage from "./pages/admin/AdminCriteriasPage";
+import AdminCriteriaPage from "./pages/admin/AdminCriteriaPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -73,12 +74,13 @@ const App = () => {
           />
           <Route path="/admin/order/:id" element={<AdminOrderPage />} />
           <Route path="/admin/orders" element={<AdminOrdersPage />} />
-          <Route path="/admin/criterias" element={<AdminCriteriaPage />} />
           <Route
             path="/admin/consultations"
             element={<AdminConsultationsPage />}
           />
           <Route path="/admin/statistics" element={<StatisticsPage />} />
+          <Route path="/admin/criterias" element={<AdminCriteriasPage />} />
+          <Route path="/admin/criterias/:id" element={<AdminCriteriaPage />} />
         </Route>
         button
       </Routes>
