@@ -52,7 +52,7 @@ const ProductDetailsCard = ({ data }: Props) => {
   if (data) {
     return (
       <>
-        <div className="max-lg:hidden flex rounded-xl w-5/6 bg-gray-100">
+        <div className="max-lg:hidden flex rounded-xl w-5/6 bg-gray-100 my-12">
           {/* Right section */}
           <section className="flex flex-col justify-between items-start gap-4 rounded-xl w-3/4 m-8">
             <div className="flex flex-col gap-4">
@@ -218,7 +218,7 @@ const ProductDetailsCard = ({ data }: Props) => {
         </div>
 
         {/* LG-MD-SM */}
-        <div className="lg:hidden flex flex-col rounded-xl w-full bg-gray-100">
+        <div className="lg:hidden flex flex-col rounded-xl w-full bg-gray-100 my-32">
           {/* Right section */}
           <section className="flex flex-col justify-between items-center gap-4 rounded-xl w-full p-4">
             <div className="flex flex-col gap-4">
