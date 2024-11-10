@@ -47,6 +47,26 @@ const NavBarCategoriesDropdownMenu = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isCatDropdown) setIsCatDropdown(false);
+    };
+
+    const isSmallScreen = window.innerWidth <= 1024; // Max screen size for 'lg' in Tailwind (1024px)
+
+    if (!isSmallScreen) {
+      // Add the scroll event listener only if the screen size is 'lg' or smaller
+      window.addEventListener("scroll", handleScroll);
+    }
+
+    // Clean up the event listener on unmount or when screen size changes
+    return () => {
+      if (isSmallScreen) {
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [isCatDropdown]);
+
   // window.addEventListener("scroll", () => {
   //   if (isCatDropdown) setIsCatDropdown(false);
   // });
