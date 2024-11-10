@@ -16,7 +16,7 @@ const SectionTitles = ({
   endTitle,
 }: Props) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 max-lg:items-center">
       <Link to={title01Link}>
         <span className="text-gray-500">{title01}</span>
       </Link>
