@@ -5,15 +5,16 @@ interface Props {
   name: string;
   popupShown: boolean;
   setPopupShown: (popupShown: boolean) => void;
+  removeCategory: (id: number) => void;
 }
 
 const GoldConditionCard = ({
   popupShown,
   setPopupShown,
   name,
-}: // id,
-
-Props) => {
+  id,
+  removeCategory,
+}: Props) => {
   return (
     <div className="w-60 h-52">
       <div className="w-full h-full bg-amber-200">
@@ -36,7 +37,7 @@ Props) => {
         >
           أضف معلومات
         </button>
-        <button>
+        <button onClick={() => removeCategory(id)}>
           <div className="flex gap-2">
             <img src={trashCanIcon} alt="" />
             <span>إزالة</span>

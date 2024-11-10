@@ -38,6 +38,30 @@ const ConfirmNewConditionPage = () => {
     }
   }, []);
 
+  // Remove category from state and localStorage
+  const removeCategory = (categoryId: number) => {
+    // Remove the category from the selectedCategories and selectedCategoryNames states
+    const updatedCategories = selectedCategories.filter(
+      (id) => id !== categoryId
+    );
+    const updatedCategoryNames = selectedCategoryNames.filter(
+      (_, index) => selectedCategories[index] !== categoryId
+    );
+
+    setSelectedCategories(updatedCategories);
+    setSelectedCategoryNames(updatedCategoryNames);
+
+    // Update localStorage to reflect the changes
+    localStorage.setItem(
+      "selectedCategories",
+      JSON.stringify(updatedCategories)
+    );
+    localStorage.setItem(
+      "selectedCategoryNames",
+      JSON.stringify(updatedCategoryNames)
+    );
+  };
+
   const handleAddProduct = (categoryId: number, product: CirteriaItem) => {
     setCategoryProducts((prev) => {
       const updatedMap = new Map(prev);
@@ -53,13 +77,18 @@ const ConfirmNewConditionPage = () => {
 
   const handleSubmit = async () => {
     const criteriaItems: CirteriaItem[] = [];
+
+    // Iterate through selected categories and add only those that are still in selectedCategories
     selectedCategories.forEach((categoryId) => {
-      const categoryData = categoryProducts.get(categoryId) || [];
-      categoryData.forEach((product) => {
-        criteriaItems.push({
-          ...product,
+      // Check if the category is still present in selectedCategories
+      if (categoryProducts.has(categoryId)) {
+        const categoryData = categoryProducts.get(categoryId) || [];
+        categoryData.forEach((product) => {
+          criteriaItems.push({
+            ...product,
+          });
         });
-      });
+      }
     });
 
     const postCriteria: PostCriteria = {
@@ -71,27 +100,29 @@ const ConfirmNewConditionPage = () => {
     formData.append("Title", postCriteria.Title);
 
     postCriteria.CriteriaItems.forEach((item, index) => {
-      formData.append(
-        `CriteriaItems[${index}].categoryId`,
-        JSON.stringify(item.categoryId)
-      );
-      formData.append(
-        `CriteriaItems[${index}].productName`,
-        JSON.stringify(item.productName)
-      );
-      formData.append(
-        `CriteriaItems[${index}].description`,
-        JSON.stringify(item.description)
-      );
-      formData.append(
-        `CriteriaItems[${index}].amount`,
-        JSON.stringify(item.amount)
-      );
-      formData.append(
-        `CriteriaItems[${index}].measurementUnit`,
-        JSON.stringify(item.measurementUnit)
-      );
-      formData.append(`CriteriaItems[${index}].image`, images[index]);
+      if (selectedCategories.includes(item.categoryId)) {
+        formData.append(
+          `CriteriaItems[${index}].categoryId`,
+          JSON.stringify(item.categoryId)
+        );
+        formData.append(
+          `CriteriaItems[${index}].productName`,
+          JSON.stringify(item.productName)
+        );
+        formData.append(
+          `CriteriaItems[${index}].description`,
+          JSON.stringify(item.description)
+        );
+        formData.append(
+          `CriteriaItems[${index}].amount`,
+          JSON.stringify(item.amount)
+        );
+        formData.append(
+          `CriteriaItems[${index}].measurementUnit`,
+          JSON.stringify(item.measurementUnit)
+        );
+        formData.append(`CriteriaItems[${index}].image`, images[index]);
+      }
     });
 
     // Modify each item in CriteriaItems to include the image
@@ -163,6 +194,7 @@ const ConfirmNewConditionPage = () => {
                   popupShown={popupShown}
                   setPopupShown={setPopupShown}
                   name={name}
+                  removeCategory={removeCategory}
                 />
               ))}
             </div>

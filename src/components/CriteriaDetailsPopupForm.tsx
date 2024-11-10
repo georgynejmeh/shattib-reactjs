@@ -1,6 +1,6 @@
 // CriteriaDetailsPopupForm.tsx
 import { useState } from "react";
-import { ButtonGold, TextInput, UploadFile } from "..";
+import { ButtonGold, closeCircleIcon, TextInput, UploadFile } from "..";
 import { CirteriaItem } from "../models/Criteria";
 
 interface Props {
@@ -42,7 +42,7 @@ const CriteriaDetailsPopupForm = ({
         <div className="w-full flex items-start justify-between">
           <h1 className="text-4xl font-bold">إضافة المنتج</h1>
           <button onClick={() => setIsShown(false)}>
-            <img src="closeCircleIcon.png" alt="Close" />
+            <img src={closeCircleIcon} alt="Close" />
           </button>
         </div>
 
@@ -87,8 +87,9 @@ const CriteriaDetailsPopupForm = ({
               placeholder="أدخل معلومات ووصف للمنتج"
             />
           </div>
-          <div className="w-1/3">
+          <div className="w-1/3 max-h-28 px-16">
             <UploadFile
+              containImg
               title="صورة المتنج"
               subTitle="إضف صورة المنتج"
               onImageChange={handleImageChange}

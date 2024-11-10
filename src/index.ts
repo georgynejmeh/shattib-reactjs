@@ -46,6 +46,7 @@ export { default as drawerIcon } from "./assets/svg/icon-drawer.svg";
 export { default as truckIcon } from "./assets/svg/icon-truck.svg";
 export { default as databaseIcon } from "./assets/svg/icon-database.svg";
 export { default as menuIcon } from "./assets/svg/icon-menu.svg";
+export { default as minusGrayIcon } from "./assets/svg/icon-minus-gray.svg";
 // -- social media --
 export { default as facebookIcon } from "./assets/svg/icon-facebook.svg";
 export { default as instagramIcon } from "./assets/svg/icon-instagram.svg";

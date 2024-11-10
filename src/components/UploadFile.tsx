@@ -4,9 +4,15 @@ interface Props {
   title: string;
   subTitle: string;
   onImageChange?: (image: File) => void; // Accepts a File object when an image is selected
+  containImg?: boolean;
 }
 
-const UploadFile = ({ title, subTitle, onImageChange }: Props) => {
+const UploadFile = ({
+  title,
+  subTitle,
+  onImageChange,
+  containImg = false,
+}: Props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
@@ -36,7 +42,9 @@ const UploadFile = ({ title, subTitle, onImageChange }: Props) => {
         <div className="w-full h-full flex flex-col justify-center items-center gap-4">
           {imageSrc ? (
             <img
-              className="w-full h-full object-cover"
+              className={`w-full h-full ${
+                containImg ? "object-contain" : "object-cover"
+              }`}
               src={imageSrc}
               alt="Uploaded"
             /> // Show uploaded image preview

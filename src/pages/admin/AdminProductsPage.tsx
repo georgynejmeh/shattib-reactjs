@@ -1,5 +1,6 @@
 import {
   bluePenIcon,
+  Link,
   PaginationButtons,
   // productImg,
   redTrashIcon,
@@ -60,9 +61,9 @@ const AdminProductsPage = () => {
                     <td>{product.price} ريال</td>
                     <td>
                       <div className="flex items-center justify-center gap-4">
-                        <button>
+                        <Link to={"/admin/product/new"}>
                           <img src={bluePenIcon} alt="" />
-                        </button>
+                        </Link>
                         <button
                           onClick={() => {
                             setId(product.id);

@@ -3,6 +3,7 @@ import {
   docIcon,
   homeIcon,
   Link,
+  minusGrayIcon,
   redLogoutIcon,
   SidePanelItem,
   smallShattibIcon,
@@ -32,10 +33,14 @@ const AdminSidePanel = () => {
         <Link to={"/admin/statistics"}>
           <SidePanelItem icon={statisticsIcon}>الإحصائيات</SidePanelItem>
         </Link>
-        <Link to={"/admin/consultations"}>استشارات</Link>
+        <Link to={"/admin/consultations"}>
+          <SidePanelItem icon={minusGrayIcon}>استشارات</SidePanelItem>
+        </Link>
       </div>
       <div>
-        <SidePanelItem icon={redLogoutIcon}>تسجيل الخروج</SidePanelItem>
+        <Link to={""}>
+          <SidePanelItem icon={redLogoutIcon}>تسجيل الخروج</SidePanelItem>
+        </Link>
       </div>
     </nav>
   );

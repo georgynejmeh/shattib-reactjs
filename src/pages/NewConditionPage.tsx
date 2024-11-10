@@ -44,17 +44,28 @@ const NewConditionPage = () => {
   }, [selectedCategories, selectedCategoryNames]);
 
   const handleCategorySelect = (categoryId: number, categoryName: string) => {
-    setSelectedCategories((prevSelected) =>
-      prevSelected.includes(categoryId)
-        ? prevSelected.filter((id) => id !== categoryId)
-        : [...prevSelected, categoryId]
-    );
+    // Update selected categories and names in the state
+    setSelectedCategories((prevSelected) => {
+      const updated = prevSelected.includes(categoryId)
+        ? prevSelected.filter((id) => id !== categoryId) // Deselect category
+        : [...prevSelected, categoryId]; // Select category
 
-    setSelectedCategoryNames((prevNames) =>
-      prevNames.includes(categoryName)
-        ? prevNames.filter((name) => name !== categoryName)
-        : [...prevNames, categoryName]
-    );
+      // Update localStorage with the updated selectedCategories
+      localStorage.setItem("selectedCategories", JSON.stringify(updated));
+
+      return updated;
+    });
+
+    setSelectedCategoryNames((prevNames) => {
+      const updated = prevNames.includes(categoryName)
+        ? prevNames.filter((name) => name !== categoryName) // Deselect category
+        : [...prevNames, categoryName]; // Select category
+
+      // Update localStorage with the updated selectedCategoryNames
+      localStorage.setItem("selectedCategoryNames", JSON.stringify(updated));
+
+      return updated;
+    });
   };
 
   // Retrieve from localStorage on initial load

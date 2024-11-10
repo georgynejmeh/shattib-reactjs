@@ -41,9 +41,9 @@ const ConditionDocsPage = () => {
         </section>
         <section className="flex flex-wrap gap-8 my-16 max-lg:justify-center">
           {isLoading ? (
-            <span></span>
+            <span>جاري التحميل...</span>
           ) : error ? (
-            <span></span>
+            <span>حدث خطأ!</span>
           ) : data ? (
             data.map((criteria) => (
               <ConditionCard
