@@ -55,7 +55,7 @@ const HomePage = () => {
           </div>
         </section>
         <section className="flex items-center justify-center h-screen">
-          <div className="absolute -z-10 h-48 w-full bg-amber-100" />
+          <div className="absolute -z-10 h-48 w-full" />
           <BannerButton />
         </section>
 

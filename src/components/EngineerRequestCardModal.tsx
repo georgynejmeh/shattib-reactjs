@@ -73,7 +73,7 @@ const EngineerRequestCardModal = () => {
         </div>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="w-full md:w-1/2 px-2">
+            <div className="w-full md:w-full px-2">
               <TextInput
                 blackTitle
                 title="رقم الهاتف"
@@ -83,7 +83,7 @@ const EngineerRequestCardModal = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="w-full md:w-1/2 px-2">
+            {/* <div className="w-full md:w-1/2 px-2">
               <TextInput
                 blackTitle
                 title="اختصاص المهندس"
@@ -92,7 +92,7 @@ const EngineerRequestCardModal = () => {
                 value={formData.engineerSpecification}
                 onChange={handleInputChange}
               />
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-col md:flex-row gap-4">
             <div className="w-full md:w-1/2 px-2">
