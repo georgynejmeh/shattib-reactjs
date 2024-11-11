@@ -1,34 +1,99 @@
+import React, { useState } from "react";
 import {
   ButtonGold,
   emailIcon,
   phoneIcon,
   shattibLogoCol,
   TextInput,
+  useApi,
 } from "..";
+// Adjust the path to where useApi is defined
 
-const ContactPage = () => {
+interface ContactFormData {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
+}
+
+const ContactPage: React.FC = () => {
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    message: "",
+  });
+
+  // Using the useApi hook for POST requests
+  const { postData, isLoading, error, data } = useApi<any>("ContactUs", "POST");
+
+  // Handle form input changes
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async () => {
+    await postData(formData);
+  };
+
   return (
     <main className="h-screen w-screen p-main bg-gray-300 flex justify-center items-center max-lg:h-max">
       <section className="flex items-center gap-16 max-lg:flex-col">
         <div className="flex flex-col gap-8">
           <h1 className="text-2xl font-bold">تواصل معنا</h1>
           <div className="lg:w-96">
-            <TextInput placeholder="الاسم" />
+            <TextInput
+              placeholder="الاسم"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
           </div>
-          <TextInput placeholder="الرقم" />
-          <TextInput placeholder="الايميل" />
-          <TextInput big placeholder="الرسالة" />
-          <ButtonGold>إرسال</ButtonGold>
+          <TextInput
+            placeholder="الرقم"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
+          />
+          <TextInput
+            placeholder="الايميل"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          <TextInput
+            big
+            placeholder="الرسالة"
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
+          />
+          <ButtonGold onClick={handleSubmit}>
+            {isLoading ? "إرسال..." : "إرسال"}
+          </ButtonGold>
+          {error && (
+            <p className="text-red-500">
+              Failed to send message. Please try again.
+            </p>
+          )}
+          {data && <p className="text-green-500">Message sent successfully!</p>}
         </div>
         <div className="w-1/2 flex flex-col gap-8">
-          <img src={shattibLogoCol} alt="" />
+          <img src={shattibLogoCol} alt="Shattib Logo" />
           <div className="flex gap-4">
-            <img src={phoneIcon} alt="" />
-            <span dir="ltr">+966111111111</span>
+            <img src={phoneIcon} alt="Phone" />
+            <span dir="ltr">+966 50 109 3007</span>
           </div>
           <div className="flex gap-4">
-            <img src={emailIcon} alt="" />
-            <span dir="ltr">shattibsa@gmail.com</span>
+            <img src={emailIcon} alt="Email" />
+            <span dir="ltr">support@shatib.com</span>
           </div>
         </div>
       </section>
