@@ -35,7 +35,7 @@ export interface CirteriaItem {
 
 export interface PostCriteria {
   Title: string;
-  CriteriaItems: CirteriaItem[];
+  CriteriaItems: PostCirteriaItem[];
 }
 
 export interface PostCirteriaItem {

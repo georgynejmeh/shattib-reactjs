@@ -9,7 +9,7 @@ import {
   Link,
   Navigate,
 } from "..";
-import { CirteriaItem, PostCriteria } from "../models/Criteria";
+import { PostCirteriaItem, PostCriteria } from "../models/Criteria";
 import { usePostCriteria } from "../hooks/usePostCriteria";
 
 const ConfirmNewConditionPage = () => {
@@ -21,7 +21,7 @@ const ConfirmNewConditionPage = () => {
   );
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [categoryProducts, setCategoryProducts] = useState<
-    Map<number, CirteriaItem[]>
+    Map<number, PostCirteriaItem[]>
   >(new Map());
   const [images, setImages] = useState<File[]>([]); // Store images separately in a list
 
@@ -63,7 +63,7 @@ const ConfirmNewConditionPage = () => {
     );
   };
 
-  const handleAddProduct = (categoryId: number, product: CirteriaItem) => {
+  const handleAddProduct = (categoryId: number, product: PostCirteriaItem) => {
     setCategoryProducts((prev) => {
       const updatedMap = new Map(prev);
       const existingProducts = updatedMap.get(categoryId) || [];
@@ -77,7 +77,7 @@ const ConfirmNewConditionPage = () => {
   };
 
   const handleSubmit = async () => {
-    const criteriaItems: CirteriaItem[] = [];
+    const criteriaItems: PostCirteriaItem[] = [];
 
     // Iterate through selected categories and add only those that are still in selectedCategories
     selectedCategories.forEach((categoryId) => {
