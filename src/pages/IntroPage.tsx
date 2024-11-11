@@ -17,7 +17,7 @@ const IntroPage = () => {
           <img className="w-screen" src={firstPageBanner} alt="" />
         </div>
         <div className="absolute w-full flex flex-row justify-between items-start p-8">
-          <img src={shattibLogoRow} alt="" />
+          {/* <img src={shattibLogoRow} alt="" /> */}
           <div className="flex items-center">
             <span>EN</span>
             <img className="ps-2" src={earthIcon} alt="" />

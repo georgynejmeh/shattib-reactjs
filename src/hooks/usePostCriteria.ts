@@ -9,7 +9,8 @@ export function usePostCriteria<T>(endpoint: string) {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("accessToken");
-      const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      // const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      const apiUrl = "https://shatib.com/api/";
       const requestOptions = {
         method: "POST",
         headers: {

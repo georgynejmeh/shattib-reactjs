@@ -17,7 +17,8 @@ export function usePostForm<T>(
     async function getData() {
       setIsLoading(true);
       try {
-        const apiUrl = `${import.meta.env.VITE_API_URL}`;
+        // const apiUrl = `${import.meta.env.VITE_API_URL}`;
+        const apiUrl = "https://shatib.com/api/";
         console.log(`${apiUrl}${endpoint}`);
         const response = await fetch(`${apiUrl}${endpoint}`);
 
@@ -45,7 +46,8 @@ export function usePostForm<T>(
   async function postData(body: FormData) {
     setIsLoading(true);
     try {
-      const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      // const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      const apiUrl = "https://shatib.com/api/";
       const requestOptions = {
         method: "POST",
         body,

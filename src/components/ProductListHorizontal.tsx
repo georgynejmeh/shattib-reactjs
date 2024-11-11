@@ -29,9 +29,7 @@ const ProductListHorizontal = () => {
                 id={product.id}
                 name={product.name}
                 price={product.price}
-                image={`${import.meta.env.VITE_IMG_URL}${
-                  product.mainImagePath
-                }`}
+                image={`${product.mainImagePath}`}
               />
             </div>
           ))

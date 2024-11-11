@@ -18,7 +18,8 @@ export function useApi<T>(
     async function getData() {
       setIsLoading(true);
       try {
-        const apiUrl = `${import.meta.env.VITE_API_URL}`;
+        // const apiUrl = `${import.meta.env.VITE_API_URL}`;
+        const apiUrl = "https://shatib.com/api/";
         console.log(`${apiUrl}${endpoint}`);
         await fetch(`${apiUrl}${endpoint}`)
           .then(async (res) => {
@@ -48,7 +49,8 @@ export function useApi<T>(
 
     setIsLoading(true);
     try {
-      const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      // const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      const apiUrl = "https://shatib.com/api/";
       console.log(`${apiUrl}${endpoint}`);
       let headers = {};
       if (token) {
@@ -90,7 +92,8 @@ export function useApi<T>(
   async function deleteData(id: number) {
     setIsLoading(true);
     try {
-      const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      // const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      const apiUrl = "https://shatib.com/api/";
       console.log(`${apiUrl}${endpoint}/${id}`);
       const requestOptions = {
         method: "DELETE",
