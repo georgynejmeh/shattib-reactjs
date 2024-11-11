@@ -8,13 +8,14 @@ const AdminConsultationsPage = () => {
   console.log(data);
   return (
     <main className="p-main">
+      <h1 className="text-2xl font-bold mb-8">الاستشارات</h1>
       <table className="orders-table">
         <thead>
           <tr>
             <th>الرمز</th>
             <th>الموضوع</th>
             <th>هاتف</th>
-            <th>اختصاص المهندس</th>
+            {/* <th>اختصاص المهندس</th> */}
             <th>تفاصيل</th>
             <th>فئة</th>
             <th>الحالة</th>
@@ -28,15 +29,25 @@ const AdminConsultationsPage = () => {
             <span>حدث خطأ!</span>
           ) : (
             data?.map((consultation) => (
-              <tr key={consultation.id} className="flex gap-2">
+              <tr key={consultation.id}>
                 <td>{consultation.id}</td>
                 <td>{consultation.consultationTopic}</td>
-                <td>{consultation.status}</td>
                 <td>{consultation.phoneNumber}</td>
-                <td>{consultation.engineerSpecification}</td>
+                {/* <td>{consultation.engineerSpecification}</td> */}
                 <td>{consultation.details}</td>
                 <td>{consultation.projectCategory}</td>
-                <td>{consultation.dateOfRequest}</td>
+                <td>
+                  {consultation.status === "Pending" ? (
+                    <div className="bg-yellow-100 w-32 py-1 rounded-full mx-auto">
+                      معلّق
+                    </div>
+                  ) : consultation.status === "Completed" ? (
+                    <div className="bg-yellow-100 w-32 py-1 rounded-full mx-auto">
+                      معالج
+                    </div>
+                  ) : null}
+                </td>
+                <td>{consultation.dateOfRequest.substring(0, 10)}</td>
                 {/* <td>{consultation.userId}</td> */}
               </tr>
             ))

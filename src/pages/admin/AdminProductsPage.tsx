@@ -28,7 +28,7 @@ const AdminProductsPage = () => {
                 <th>رمز التخزين</th>
                 <th>المنتج</th>
                 <th>التصنيف</th>
-                <th>الكمية</th>
+                {/* <th>الكمية</th> */}
                 <th>السعر</th>
                 <th>العمليات</th>
               </tr>
@@ -45,7 +45,7 @@ const AdminProductsPage = () => {
                   <tr key={product.id}>
                     <td>{product.warehouseCode}</td>
                     <td>
-                      <div className="flex items-center justify-start gap-4">
+                      <div className="flex items-center justify-start gap-4 ps-4">
                         <img
                           className=" h-16 aspect-video rounded object-cover"
                           src={`${product.mainImagePath}`}
@@ -55,7 +55,7 @@ const AdminProductsPage = () => {
                       </div>
                     </td>
                     <td>مواد الصحية</td>
-                    <td>150</td>
+                    {/* <td>150</td> */}
                     <td>{product.price} ريال</td>
                     <td>
                       <div className="flex items-center justify-center gap-4">

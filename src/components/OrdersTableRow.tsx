@@ -16,7 +16,7 @@ const OrdersTableRow = ({
   id,
   status,
   totalPrice,
-  orderItems,
+  // orderItems,
   dateOfArrival,
   dateOfOrder,
 }: Props) => {
@@ -24,23 +24,23 @@ const OrdersTableRow = ({
     useConfirmDelete();
   setEndpoint("Orders");
 
-  let totalQty = 0;
-  orderItems.map((order) => {
-    totalQty += order.quantitiy;
-  });
+  // let totalQty = 0;
+  // orderItems.map((order) => {
+  //   totalQty += order.quantitiy;
+  // });
 
   return (
     <tr>
       <td>#{id}</td>
       <td>{dateOfOrder.substring(0, 10)}</td>
-      <td className="min-w-52 max-w-52">
+      {/* <td className="min-w-52 max-w-52">
         {orderItems.map((orderItem, index) => (
           <span>{`${orderItem.productName}${
             index === orderItems.length - 1 ? "" : "،"
           } `}</span>
         ))}
-      </td>
-      <td>{totalQty}</td>
+      </td> */}
+      {/* <td>{totalQty}</td> */}
       <td>
         <AccentText>{totalPrice} ريال</AccentText>
       </td>
