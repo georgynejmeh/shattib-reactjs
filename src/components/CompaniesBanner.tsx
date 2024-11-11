@@ -57,7 +57,7 @@ const CompaniesBanner = () => {
         <h1 className="text-3xl font-bold text-gray-800 my-8 ps-8">الشركات</h1>
         <div className="relative flex items-center justify-center">
           <div className="w-full">
-            <div className="w-full h-screen bg-amber-100 bg-opacity-50 max-lg:py-96" />
+            <div className="w-full h-screen  bg-opacity-50 max-lg:py-96" />
             {/* <div className="w-full h-32 bg-amber-100 bg-opacity-50" />
           <div className="w-full h-16 bg-amber-200 bg-opacity-50" /> */}
           </div>
