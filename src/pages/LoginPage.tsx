@@ -31,11 +31,11 @@ const LoginPage = () => {
       localStorage.setItem("refreshToken", data.refreshToken);
 
       // Navigate to the home page
-      if (data.role === "Client") {
-        return <Navigate to="/home" />;
-      } else {
-        return <Navigate to="/conditions" />;
-      }
+      // if (data.role === "Client") {
+      //   return <Navigate to="/home" />;
+      // } else {
+      //   return <Navigate to="/conditions" />;
+      // }
     } else {
       console.error("Login failed", data);
     }
@@ -56,7 +56,13 @@ const LoginPage = () => {
           <>{console.log(data, "from body of login first line")}</>
         </>
       ) : null}
-      {data ? <Navigate to={"/home"} /> : null}
+      {data ? (
+        data.role === "Client" ? (
+          <Navigate to={"/home"} />
+        ) : (
+          <Navigate to={"/conditions"} />
+        )
+      ) : null}
       <div className="flex max-lg:flex-col justify-center items-center min-h-screen max-lg:p-8">
         <div className="w-1/4 flex flex-col justify-center max-lg:w-full">
           {" "}

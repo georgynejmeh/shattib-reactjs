@@ -96,7 +96,7 @@ const HomePage = () => {
 
           <div className="flex items-center justify-between py-8">
             <TitleNumber version={2} subTitle="">
-              المتنجات
+              المنتجات
             </TitleNumber>
             {/* <div className="flex">
               <span className="p-4">عرض الكل</span>

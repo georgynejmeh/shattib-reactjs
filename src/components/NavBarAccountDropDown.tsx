@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   consultationsIcon,
   downArrowIcon,
@@ -14,6 +15,7 @@ import {
 const NavBarAccountDropDown = () => {
   const [isDropdown, setIsDropdown] = useState(false);
   const buttonRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -90,7 +92,13 @@ const NavBarAccountDropDown = () => {
             </div>
           </button>
           <hr />
-          <button className="hover:bg-gray-100 px-4 py-2">
+          <button
+            className="hover:bg-gray-100 px-4 py-2"
+            onClick={() => {
+              localStorage.clear();
+              navigate("/");
+            }}
+          >
             <div className="flex gap-4 items-center">
               <img className="w-5" src={redLogoutIcon} alt="" />
               <span className="text-red-500">تسجيل الخروج</span>

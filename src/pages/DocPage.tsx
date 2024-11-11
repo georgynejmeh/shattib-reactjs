@@ -94,7 +94,7 @@ const DocPage = () => {
                 <div key={index} className="rounded-xl w-1/3 overflow-hidden">
                   <img
                     className="w-full h-full object-cover"
-                    src={`${import.meta.env.VITE_IMG_URL}${item.image}`}
+                    src={`${item.image}`}
                     alt=""
                   />
                 </div>
