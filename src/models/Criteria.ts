@@ -38,6 +38,14 @@ export interface PostCriteria {
   CriteriaItems: CirteriaItem[];
 }
 
+export interface PostCirteriaItem {
+  categoryId: number;
+  productName: string;
+  description: string;
+  amount: number;
+  measurementUnit: string;
+}
+
 export interface CirteriaGet {
   id: number;
   title: string;

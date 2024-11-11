@@ -1,13 +1,13 @@
 // CriteriaDetailsPopupForm.tsx
 import { useState } from "react";
 import { ButtonGold, closeCircleIcon, TextInput, UploadFile } from "..";
-import { CirteriaItem } from "../models/Criteria";
+import { PostCirteriaItem } from "../models/Criteria";
 
 interface Props {
   isShown: boolean;
   setIsShown: (isShown: boolean) => void;
   categoryId: number;
-  handleAddProduct: (categoryId: number, product: CirteriaItem) => void;
+  handleAddProduct: (categoryId: number, product: PostCirteriaItem) => void;
   handleImageChange: (image: File) => void; // Pass handleImageChange function
 }
 
@@ -25,7 +25,7 @@ const CriteriaDetailsPopupForm = ({
   if (!isShown) return null;
 
   const handleSubmit = () => {
-    const newProduct: CirteriaItem = {
+    const newProduct: PostCirteriaItem = {
       categoryId,
       productName,
       description,
