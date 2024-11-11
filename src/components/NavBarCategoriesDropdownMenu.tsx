@@ -91,7 +91,10 @@ const NavBarCategoriesDropdownMenu = () => {
         </div>
         {isCatDropdown ? (
           <div className="fixed z-50 top-16 h-screen max-lg:absolute max-lg:top-6">
-            <div className="flex flex-col flex-wrap h-1/2 bg-white max-lg:flex-nowrap max-lg:min-h-max max-lg:shadow">
+            <div
+              onMouseLeave={() => setIsCatDropdown(false)}
+              className="flex flex-col flex-wrap h-1/2 bg-white max-lg:flex-nowrap max-lg:min-h-max max-lg:shadow"
+            >
               {categories.map((item, index) => (
                 <Link
                   onClick={() => setIsCatDropdown(false)}

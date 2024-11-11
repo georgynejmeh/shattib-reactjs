@@ -66,7 +66,10 @@ const NavBarAccountDropDown = () => {
         <img className="w-3" src={downArrowIcon} alt="" />
       </div>
       {isDropdown ? (
-        <div className="absolute top-16 z-50 bg-white rounded shadow flex flex-col overflow-hidden max-lg:top-80">
+        <div
+          onMouseLeave={() => setIsDropdown(false)}
+          className="absolute top-16 z-50 bg-white rounded shadow flex flex-col overflow-hidden max-lg:top-80"
+        >
           <button className="hover:bg-gray-100 px-4 py-2">
             <div className="flex gap-4 items-center">
               <img className="w-5" src={ordersIcon} alt="" />

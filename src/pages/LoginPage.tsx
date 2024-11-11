@@ -69,7 +69,7 @@ const LoginPage = () => {
           <span className="text-yellow-600 text-2xl pb-4">
             أهلاً بك في شطّب!
           </span>
-          <span className="text-2xl">أنشاء حساب</span>
+          <span className="text-2xl">تسجيل دخول</span>
           <form className="py-4" action="">
             <TextInput
               name="email"
