@@ -6,31 +6,32 @@ import {
   useRef,
   useState,
 } from "..";
+import { categories } from "../assets/json/categories";
 
 const NavBarCategoriesDropdownMenu = () => {
   // const { data } = useApi<{ id: number; name: string }[]>(
   //   "SeededValues/Categories"
   // );
 
-  const categoriesList = [
-    "الرخام",
-    "البورسلان",
-    "السيراميك",
-    "الباركيه",
-    "النوافذ",
-    "الديكورات",
-    "الأبواب",
-    "الصفائح الحجرية",
-    "الجبس",
-    "الحجر",
-    "الدهانات",
-    "العوازل",
-    "البوابات الإلكترونية",
-    "مفاتيح وأفياش",
-    "مواد صحية وخزانات",
-    "التكييف",
-    "الإنارة",
-  ];
+  // const categoriesList = [
+  //   "الرخام",
+  //   "البورسلان",
+  //   "السيراميك",
+  //   "الباركيه",
+  //   "النوافذ",
+  //   "الديكورات",
+  //   "الأبواب",
+  //   "الصفائح الحجرية",
+  //   "الجبس",
+  //   "الحجر",
+  //   "الدهانات",
+  //   "العوازل",
+  //   "البوابات الإلكترونية",
+  //   "مفاتيح وأفياش",
+  //   "مواد صحية وخزانات",
+  //   "التكييف",
+  //   "الإنارة",
+  // ];
   const [isCatDropdown, setIsCatDropdown] = useState(false);
   const buttonRef = useRef<HTMLDivElement | null>(null);
 
@@ -91,13 +92,13 @@ const NavBarCategoriesDropdownMenu = () => {
         {isCatDropdown ? (
           <div className="fixed z-50 top-16 h-screen max-lg:absolute max-lg:top-6">
             <div className="flex flex-col flex-wrap h-1/2 bg-white max-lg:flex-nowrap max-lg:min-h-max max-lg:shadow">
-              {categoriesList.map((item, index) => (
+              {categories.map((item, index) => (
                 <Link
                   onClick={() => setIsCatDropdown(false)}
-                  to={"/category"}
+                  to={`/category/${item.id}/1`}
                   key={index}
                 >
-                  <CatDropdownItem>{item}</CatDropdownItem>
+                  <CatDropdownItem>{item.name}</CatDropdownItem>
                 </Link>
               ))}
             </div>

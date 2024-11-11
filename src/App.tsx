@@ -47,7 +47,7 @@ const App = () => {
         <Route element={<MainLayout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/category" element={<MainCategoryPage />} />
+          <Route path="/category/:id/:subId" element={<MainCategoryPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<WishListPage />} />
 

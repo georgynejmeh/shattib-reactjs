@@ -1,11 +1,13 @@
 interface Props {
   children: string;
   active?: boolean;
+  onClick?: () => void;
 }
 
-const RoundButton = ({ children, active = false }: Props) => {
+const RoundButton = ({ children, active = false, onClick }: Props) => {
   return (
     <button
+      onClick={onClick}
       className={
         active
           ? "rounded-full w-36 h-12 bg-secondary text-white me-4 active:bg-secondary active:text-white"

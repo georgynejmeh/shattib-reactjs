@@ -116,5 +116,38 @@ export function useApi<T>(
     }
   }
 
-  return { deleteData, postData, isLoading, error, data };
+  async function patchForm(body: FormData, isToken: boolean) {
+    setIsLoading(true);
+    const apiUrl = "https://shatib.com/api/";
+    try {
+      console.log(`${apiUrl}${endpoint}`);
+      let headers = {};
+      if (isToken) {
+        const token = localStorage.getItem("accessToken");
+        headers = { Authorization: `Bearer ${token}` };
+      }
+      const requestOptions = {
+        method: "PATCH",
+        body: body,
+        headers: headers,
+      };
+      console.log(requestOptions);
+      await fetch(`${apiUrl}${endpoint}`, requestOptions)
+        .then(async () => {
+          setIsLoading(false);
+          setError(false);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setError(true);
+          console.log("useApi Error: ", err);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      setError(true);
+      console.log("useApi Exception: ", error);
+    }
+  }
+
+  return { patchForm, deleteData, postData, isLoading, error, data };
 }

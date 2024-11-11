@@ -1,16 +1,53 @@
 import { useState, useEffect } from "react";
 import {
+  acImg01,
+  acImg04,
+  bathroomImg01,
   ButtonGold,
   CategoryCard,
+  decorsImg01,
+  doorsImg01,
+  edoorsImg01,
+  gypsumImg01,
+  insulationImg01,
   // CategoryListHorizontal,
   Link,
   MainPadding,
+  nwafezImg01,
+  paintsImg01,
+  panelsImg01,
+  parkehImg01,
+  porsalenImg01,
+  rkahmImg01,
+  siramikImg01,
+  stoneImg01,
+  switchesImg01,
   TextInput,
   useApi,
 } from "..";
 import { Category } from "../models/Category";
 
 const NewConditionPage = () => {
+  const categoryImgs = [
+    rkahmImg01,
+    porsalenImg01,
+    siramikImg01,
+    parkehImg01,
+    nwafezImg01,
+    decorsImg01,
+    doorsImg01,
+    panelsImg01,
+    gypsumImg01,
+    stoneImg01,
+    paintsImg01,
+    insulationImg01,
+    edoorsImg01,
+    switchesImg01,
+    bathroomImg01,
+    acImg01,
+    acImg04,
+  ];
+
   const { isLoading, error, data } = useApi<Category[]>(
     "SeededValues/Categories"
   );
@@ -116,10 +153,11 @@ const NewConditionPage = () => {
                 TEST
               </CategoryCard>
             ) : data ? (
-              data.map((category) => (
+              data.map((category, index) => (
                 <CategoryCard
                   key={category.id}
                   id={category.id}
+                  img={categoryImgs[index]}
                   onClick={() =>
                     handleCategorySelect(category.id, category.name)
                   }

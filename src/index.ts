@@ -172,6 +172,7 @@ export { default as CriteriaDetailsPopupForm } from "./components/CriteriaDetail
 export { default as StatisticsCard } from "./components/StatisticsCard";
 export { default as NavBarAccountDropDown } from "./components/NavBarAccountDropDown";
 export { default as CommentItem } from "./components/CommentItem";
+export { default as SubCategoriesUnderCategory } from "./components/SubCategoriesUnderCategory";
 // -- Categories List --
 export { default as Rkham } from "./components/categories/Rkham";
 export { default as Porsalen } from "./components/categories/Porsalen";
@@ -298,3 +299,9 @@ export { default as bathroomImg09 } from "/assets/imgs/categories/bathroom/bathr
 export { default as bathroomImg10 } from "/assets/imgs/categories/bathroom/bathroom10.jpg";
 export { default as bathroomImg11 } from "/assets/imgs/categories/bathroom/bathroom11.jpg";
 export { default as bathroomImg12 } from "/assets/imgs/categories/bathroom/bathroom12.jpg";
+export { default as parkehImg01 } from "/assets/imgs/categories/parkeh/parkeh01.jpg";
+export { default as parkehImg02 } from "/assets/imgs/categories/parkeh/parkeh02.jpg";
+export { default as parkehImg03 } from "/assets/imgs/categories/parkeh/parkeh03.jpg";
+export { default as edoorsImg01 } from "/assets/imgs/categories/edoors/edoors01.jpg";
+export { default as edoorsImg02 } from "/assets/imgs/categories/edoors/edoors02.jpg";
+export { default as edoorsImg03 } from "/assets/imgs/categories/edoors/edoors03.jpg";

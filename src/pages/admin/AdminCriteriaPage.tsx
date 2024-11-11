@@ -152,8 +152,8 @@ const AdminCriteriaPage = () => {
             <h2 className="text-xl from-black">التعليقات</h2>
             <div>
               <div className="w-2/3 rounded-t-xl border">
-                {data.comments.map(() => (
-                  <CommentItem />
+                {data.comments.map((comment) => (
+                  <CommentItem message={comment.message} />
                 ))}
               </div>
               <div className="flex flex-col w-2/3 rounded-b-xl border p-4 gap-2">

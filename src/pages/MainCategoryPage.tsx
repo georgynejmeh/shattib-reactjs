@@ -1,27 +1,37 @@
 import {
   CategoryFilterCard,
-  CategoryListHorizontal,
   MainPadding,
   ProductCard,
   ProductsFilterViewControls,
   SectionTitles,
+  SubCategoriesUnderCategory,
   TitleNumber,
   useApi,
   useEffect,
   useLocation,
+  useParams,
   useState,
 } from "..";
+import { subCategories } from "../assets/json/subCategories";
 import { ProductHomePage } from "../models/Product";
 
-interface Props {
-  categoryId?: number;
-}
+// interface Props {
+//   categoryId?: number;
+// }
 
-const MainCategoryPage = ({ categoryId = 1 }: Props) => {
+const MainCategoryPage = () => {
+  const { id, subId } = useParams();
+
+  const subCategory = subCategories.find(
+    (subCategory) =>
+      subCategory.id === parseInt(subId || "-1") &&
+      subCategory.categoryId === parseInt(id || "-1")
+  );
+
   const [maxPrice, setMaxPrice] = useState(10000);
   const [minPrice, setMinPrice] = useState(0);
   const { isLoading, error, data } = useApi<ProductHomePage[]>(
-    `Products?categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+    `Products?categoryId=${id}&subcategoryId=${subId}&minPrice=${minPrice}&maxPrice=${maxPrice}`
   );
 
   const location = useLocation();
@@ -38,12 +48,17 @@ const MainCategoryPage = ({ categoryId = 1 }: Props) => {
       <MainPadding>
         <SectionTitles
           title01="الصفحة الرئيسية"
+          title01Link="/home"
           title02="التصنيفات"
-          endTitle="مواد البناء"
+          title02Link="/home"
+          endTitle={subCategory?.name}
         />
-        <TitleNumber subTitle="">مواد البناء</TitleNumber>
+        <TitleNumber subTitle="">
+          {subCategory?.name || "غير معروف"}
+        </TitleNumber>
         <TitleNumber subTitle="">التصنفات الفرعية</TitleNumber>
-        <CategoryListHorizontal />
+        <SubCategoriesUnderCategory id={parseInt(id || "-1")} />
+        {/* <CategoryListHorizontal /> */}
         {/* <LeftRightButtonsCircle /> */}
         <section className="flex max-lg:flex-col max-lg:w-full">
           <div className="max-lg:w-full max-lg:flex max-lg:flex-col max-lg:items-center">

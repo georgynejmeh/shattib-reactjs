@@ -9,7 +9,9 @@ const MainLayout = () => {
     <EngineerRequestProvider>
       <NavBar />
       <EngineerRequestCardModal />
-      <Outlet />
+      <div className="mt-20 py-2">
+        <Outlet />
+      </div>
       <Footer />
     </EngineerRequestProvider>
   );

@@ -6,11 +6,25 @@ import {
   plusCircleOutlineWhiteIcon,
   RoundButton,
   useApi,
+  useState,
 } from "..";
 import { Cirteria } from "../models/Criteria";
 
 const ConditionDocsPage = () => {
-  const { isLoading, error, data } = useApi<Cirteria[]>("Criteria/GetAll");
+  // Track the selected filter (status)
+  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+
+  // Function to handle button click
+  const handleStatusChange = (status: string | null) => {
+    setStatusFilter(status);
+  };
+
+  // Use the API hook to fetch data with the status filter
+  const { isLoading, error, data } = useApi<Cirteria[]>(
+    statusFilter ? `Criteria/GetAll?status=${statusFilter}` : "Criteria/GetAll"
+  );
+
+  // const { isLoading, error, data } = useApi<Cirteria[]>("Criteria/GetAll");
   return (
     <main>
       <MainPadding>
@@ -18,10 +32,31 @@ const ConditionDocsPage = () => {
           <h1 className="text-nowrap text-2xl font-bold pb-4">كراسات الشروط</h1>
           <div className="grid w-full">
             <div className="felx justify-self-center max-lg:mb-4">
-              <RoundButton active>الكل</RoundButton>
-              <RoundButton>معلًقة</RoundButton>
-              <RoundButton>مقبولة</RoundButton>
-              <RoundButton>مرفوضة</RoundButton>
+              {/* Buttons for filtering by status */}
+              <RoundButton
+                active={statusFilter === null}
+                onClick={() => handleStatusChange(null)}
+              >
+                الكل
+              </RoundButton>
+              <RoundButton
+                active={statusFilter === "Pending"}
+                onClick={() => handleStatusChange("Pending")}
+              >
+                معلًقة
+              </RoundButton>
+              <RoundButton
+                active={statusFilter === "Accepted"}
+                onClick={() => handleStatusChange("Accepted")}
+              >
+                مقبولة
+              </RoundButton>
+              <RoundButton
+                active={statusFilter === "Rejected"}
+                onClick={() => handleStatusChange("Rejected")}
+              >
+                مرفوضة
+              </RoundButton>
             </div>
           </div>
           <Link to={"new"}>
@@ -48,6 +83,7 @@ const ConditionDocsPage = () => {
             data.map((criteria) => (
               <ConditionCard
                 key={criteria.id}
+                image={criteria.criteriaItems[0].image}
                 criteria={criteria}
                 status={criteria.status}
               />

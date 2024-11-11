@@ -1,6 +1,6 @@
 import {
-  AccentText,
-  categoryImg01,
+  // AccentText,
+  // categoryImg01,
   Link,
   // subCategoryImg01
 } from "..";
@@ -11,9 +11,10 @@ interface Props {
   // status?: "معلًقة" | "مقبولة" | "مرفوضة";
   status?: "Pending" | "Accepted" | "Rejected" | string;
   criteria?: Cirteria;
+  image?: string;
 }
 
-const ConditionCard = ({ id = 0, status, criteria }: Props) => {
+const ConditionCard = ({ id = 0, status, criteria, image }: Props) => {
   if (criteria) {
     id = criteria.id;
   }
@@ -23,11 +24,11 @@ const ConditionCard = ({ id = 0, status, criteria }: Props) => {
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold self-center">{criteria?.title}</h1>
           <hr />
-          <div className="flex justify-between">
-            <div className="flex gap-2">
+          <div className="flex justify-center">
+            {/* <div className="flex gap-2">
               <span>عدد التصنيفات</span>
               <AccentText size="sm">3</AccentText>
-            </div>
+            </div> */}
             <div className="flex gap-2">
               <span>الحالة</span>
               <span
@@ -55,7 +56,7 @@ const ConditionCard = ({ id = 0, status, criteria }: Props) => {
         <div className="px-2 pt-2 h-40">
           <img
             className="rounded-xl object-cover w-full h-full"
-            src={categoryImg01}
+            src={image}
             alt=""
           />
         </div>

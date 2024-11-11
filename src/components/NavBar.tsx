@@ -35,7 +35,7 @@ const NavBar = () => {
   // const { setIsShownEngineerRequestModal } = useEngineerRequest();
   return (
     <>
-      <div className="max-lg:hidden">
+      <div className="fixed top-0 z-50 w-full bg-white max-lg:hidden">
         <nav className="flex items-center justify-between border-b py-4 px-8">
           <img src={shattibLogoRow} alt="" />
           <Link to={"/home"}>
