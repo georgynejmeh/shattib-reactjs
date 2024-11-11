@@ -55,6 +55,7 @@ const AdminNewProductPage: React.FC<Props> = ({
                 title="تكلفة المنتج"
                 placeholder="0.0 ريال"
                 name="Price"
+                number
                 value={formData.Price.toString()}
                 onChange={onInputChange}
               />

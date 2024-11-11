@@ -6,7 +6,7 @@ export interface Product {
   features: string;
   price: number;
   measurementUnit: string;
-  meaurements: string;
+  measurements: string;
   manufacturingCountry: string;
   color: string;
   deaf: string;

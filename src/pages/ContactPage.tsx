@@ -25,7 +25,7 @@ const ContactPage: React.FC = () => {
   });
 
   // Using the useApi hook for POST requests
-  const { postData, isLoading, data } = useApi<any>("ContactUs", "POST");
+  const { postData, isLoading, data } = useApi<Response>("ContactUs", "POST");
 
   // Handle form input changes
   const handleInputChange = (

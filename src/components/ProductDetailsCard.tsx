@@ -128,7 +128,7 @@ const ProductDetailsCard = ({ data }: Props) => {
                 <div className="w-full">
                   <TitleNumber
                     column
-                    subTitle={`${data.meaurements} ${data.measurementUnit}`}
+                    subTitle={`${data.measurements} ${data.measurementUnit}`}
                   >
                     القياس
                   </TitleNumber>
@@ -323,7 +323,7 @@ const ProductDetailsCard = ({ data }: Props) => {
               <div className="flex justify-around w-full flex-wrap gap-4">
                 <TitleNumber
                   column
-                  subTitle={`${data.meaurements} ${data.measurementUnit}`}
+                  subTitle={`${data.measurements} ${data.measurementUnit}`}
                 >
                   القياس
                 </TitleNumber>

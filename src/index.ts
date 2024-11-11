@@ -184,6 +184,9 @@ export { default as Gypsum } from "./components/categories/Gypsum";
 export { default as Stone } from "./components/categories/Stone";
 export { default as Paints } from "./components/categories/Paints";
 export { default as Insulation } from "./components/categories/Insulation";
+export { default as AirCondition } from "./components/categories/AirCondition";
+export { default as Switches } from "./components/categories/Switches";
+export { default as Bathroom } from "./components/categories/Bathroom";
 
 //
 //
@@ -261,3 +264,36 @@ export { default as stoneImg03 } from "/assets/imgs/categories/stone/stone03.jpg
 export { default as insulationImg01 } from "/assets/imgs/categories/insulation/insulation01.jpg";
 export { default as insulationImg02 } from "/assets/imgs/categories/insulation/insulation02.jpg";
 export { default as insulationImg03 } from "/assets/imgs/categories/insulation/insulation03.jpg";
+export { default as acImg01 } from "/assets/imgs/categories/ac/ac01.jpg";
+export { default as acImg02 } from "/assets/imgs/categories/ac/ac02.jpg";
+export { default as acImg03 } from "/assets/imgs/categories/ac/ac03.jpg";
+export { default as acImg04 } from "/assets/imgs/categories/ac/ac04.jpg";
+export { default as switchesImg01 } from "/assets/imgs/categories/switches/switches01.jpg";
+export { default as switchesImg02 } from "/assets/imgs/categories/switches/switches02.jpg";
+export { default as switchesImg03 } from "/assets/imgs/categories/switches/switches03.jpg";
+export { default as switchesImg04 } from "/assets/imgs/categories/switches/switches04.jpg";
+export { default as switchesImg05 } from "/assets/imgs/categories/switches/switches05.jpg";
+export { default as switchesImg06 } from "/assets/imgs/categories/switches/switches06.jpg";
+export { default as switchesImg07 } from "/assets/imgs/categories/switches/switches07.jpg";
+export { default as switchesImg08 } from "/assets/imgs/categories/switches/switches08.jpg";
+export { default as switchesImg09 } from "/assets/imgs/categories/switches/switches09.jpg";
+export { default as switchesImg10 } from "/assets/imgs/categories/switches/switches10.jpg";
+export { default as switchesImg11 } from "/assets/imgs/categories/switches/switches11.jpg";
+export { default as switchesImg12 } from "/assets/imgs/categories/switches/switches12.jpg";
+export { default as switchesImg13 } from "/assets/imgs/categories/switches/switches13.jpg";
+export { default as switchesImg14 } from "/assets/imgs/categories/switches/switches14.jpg";
+export { default as switchesImg15 } from "/assets/imgs/categories/switches/switches15.jpg";
+export { default as switchesImg16 } from "/assets/imgs/categories/switches/switches16.jpg";
+export { default as switchesImg17 } from "/assets/imgs/categories/switches/switches17.jpg";
+export { default as bathroomImg01 } from "/assets/imgs/categories/bathroom/bathroom01.jpg";
+export { default as bathroomImg02 } from "/assets/imgs/categories/bathroom/bathroom02.jpg";
+export { default as bathroomImg03 } from "/assets/imgs/categories/bathroom/bathroom03.jpg";
+export { default as bathroomImg04 } from "/assets/imgs/categories/bathroom/bathroom04.jpg";
+export { default as bathroomImg05 } from "/assets/imgs/categories/bathroom/bathroom05.jpg";
+export { default as bathroomImg06 } from "/assets/imgs/categories/bathroom/bathroom06.jpg";
+export { default as bathroomImg07 } from "/assets/imgs/categories/bathroom/bathroom07.jpg";
+export { default as bathroomImg08 } from "/assets/imgs/categories/bathroom/bathroom08.jpg";
+export { default as bathroomImg09 } from "/assets/imgs/categories/bathroom/bathroom09.jpg";
+export { default as bathroomImg10 } from "/assets/imgs/categories/bathroom/bathroom10.jpg";
+export { default as bathroomImg11 } from "/assets/imgs/categories/bathroom/bathroom11.jpg";
+export { default as bathroomImg12 } from "/assets/imgs/categories/bathroom/bathroom12.jpg";

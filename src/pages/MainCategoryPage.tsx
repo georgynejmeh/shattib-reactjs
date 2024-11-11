@@ -1,7 +1,6 @@
 import {
   CategoryFilterCard,
   CategoryListHorizontal,
-  LeftRightButtonsCircle,
   MainPadding,
   ProductCard,
   ProductsFilterViewControls,
@@ -45,7 +44,7 @@ const MainCategoryPage = ({ categoryId = 1 }: Props) => {
         <TitleNumber subTitle="">مواد البناء</TitleNumber>
         <TitleNumber subTitle="">التصنفات الفرعية</TitleNumber>
         <CategoryListHorizontal />
-        <LeftRightButtonsCircle />
+        {/* <LeftRightButtonsCircle /> */}
         <section className="flex max-lg:flex-col max-lg:w-full">
           <div className="max-lg:w-full max-lg:flex max-lg:flex-col max-lg:items-center">
             <CategoryFilterCard />
@@ -63,6 +62,7 @@ const MainCategoryPage = ({ categoryId = 1 }: Props) => {
                     key={product.id}
                     id={product.id}
                     name={product.name}
+                    image={product.mainImagePath}
                     price={product.price}
                   />
                 ))

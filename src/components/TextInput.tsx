@@ -8,6 +8,7 @@ interface Props {
   blackTitle?: boolean;
   big?: boolean;
   name?: string;
+  number?: boolean;
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -22,6 +23,7 @@ const TextInput = ({
   blackTitle = false,
   big = false,
   name,
+  number = false,
   onChange,
   value,
 }: Props) => {
@@ -55,7 +57,7 @@ const TextInput = ({
             />
           ) : (
             <input
-              type={hidden ? "password" : "text"}
+              type={hidden ? "password" : number ? "number" : "text"}
               className={
                 icon
                   ? "h-full w-full py-3 pl-10 pr-10 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"

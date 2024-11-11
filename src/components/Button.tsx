@@ -3,13 +3,15 @@ import { ReactNode } from "react";
 interface Props {
   children: ReactNode;
   size?: "sm" | "md" | "lg";
+  disabeld?: boolean;
   onClick?: () => void;
 }
 
-const Button = ({ children, size, onClick }: Props) => {
+const Button = ({ children, size, disabeld, onClick }: Props) => {
   return (
     <button
       onClick={onClick}
+      disabled={disabeld}
       className={
         size === "md"
           ? "w-full px-8 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-slate-900 rounded-lg hover:bg-primary hover:text-black"

@@ -2,6 +2,7 @@ import {
   ButtonGold,
   cartIcon,
   CartItemCard,
+  Link,
   MainPadding,
   Navigate,
   RoundButton,
@@ -122,9 +123,11 @@ const CartPage = () => {
         {/* Buttons */}
         <div className="flex justify-end w-full max-lg:justify-center">
           <div className="flex gap-4 w-1/3 max-lg:flex-col max-lg:w-full">
-            <button className="border border-black rounded py-1 px-3 min-w-44">
-              إضافة منتجات
-            </button>
+            <Link to={"/home"}>
+              <button className="border border-black rounded py-1 px-3 min-w-44">
+                إضافة منتجات
+              </button>
+            </Link>
             <ButtonGold onClick={handleOrderSubmit}>
               {isLoading ? <span>تحميل...</span> : <span>إنشاء طلب</span>}
             </ButtonGold>

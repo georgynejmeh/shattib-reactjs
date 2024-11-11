@@ -2,10 +2,10 @@ import {
   consultationsIcon,
   downArrowIcon,
   gearIcon,
-  gpsIcon,
   ordersIcon,
   personOutlineIcon,
   redLogoutIcon,
+  shattibIcon,
   useEffect,
   useRef,
   useState,
@@ -85,8 +85,8 @@ const NavBarAccountDropDown = () => {
           </button>
           <button className="hover:bg-gray-100 px-4 py-2">
             <div className="flex gap-4 items-center">
-              <img className="w-5" src={gpsIcon} alt="" />
-              <span>العناوين والمواقع</span>
+              <img className="w-5" src={shattibIcon} alt="" />
+              <span>الضمانات</span>
             </div>
           </button>
           <hr />

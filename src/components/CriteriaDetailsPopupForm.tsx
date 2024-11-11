@@ -61,6 +61,7 @@ const CriteriaDetailsPopupForm = ({
               blackTitle
               title="الكمية"
               value={amount.toString()}
+              number
               onChange={(e) => setAmount(Number(e.target.value))}
               placeholder="أدخل الكمية"
             />

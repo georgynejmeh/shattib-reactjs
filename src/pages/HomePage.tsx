@@ -2,7 +2,6 @@ import {
   shattibText,
   shattibGoldIcon,
   CompaniesBanner,
-  doubleLeftArrowIcon,
   ProductListHorizontal,
   TitleNumber,
   CategoriesButtonListHorizontal,
@@ -21,6 +20,9 @@ import {
   Paints,
   Insulation,
   Link,
+  AirCondition,
+  Switches,
+  Bathroom,
 } from "..";
 
 const HomePage = () => {
@@ -96,10 +98,10 @@ const HomePage = () => {
             <TitleNumber version={2} subTitle="">
               المتنجات
             </TitleNumber>
-            <div className="flex">
+            {/* <div className="flex">
               <span className="p-4">عرض الكل</span>
               <img src={doubleLeftArrowIcon} alt="" />
-            </div>
+            </div> */}
           </div>
           <ProductListHorizontal />
           {/* <LeftRightButtonsCircle /> */}
@@ -115,6 +117,9 @@ const HomePage = () => {
           <Stone />
           <Paints />
           <Insulation />
+          <AirCondition />
+          <Switches />
+          <Bathroom />
         </section>
 
         {/* 

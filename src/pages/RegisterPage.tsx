@@ -13,6 +13,8 @@ import {
 } from "..";
 
 const RegisterPage = () => {
+  const userType = localStorage.getItem("userType") || "Client";
+
   const { postData, isLoading, error, data } = useApi(
     "Accounts/Register",
     "POST"
@@ -21,9 +23,9 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    // phone: "",
+    phoneNumber: "",
     password: "",
-    role: "Client", //Business,
+    role: userType,
   });
 
   const handleInputChange = (
@@ -37,6 +39,12 @@ const RegisterPage = () => {
   //   e.preventDefault();
   //   postData(formData);
   // };
+
+  // Form validation to check if all fields are filled and passwords match
+  const isFormValid = () => {
+    const { username, email, phoneNumber, password } = formData;
+    return username && email && phoneNumber && password;
+  };
 
   return (
     <>
@@ -84,7 +92,10 @@ const RegisterPage = () => {
           <div className="flex flex-col items-center">
             <div className="w-full">
               {/* <Link to={"/admin/product/new"}> */}
-              <Button onClick={() => postData(formData)}>
+              <Button
+                disabeld={!isFormValid()}
+                onClick={() => postData(formData)}
+              >
                 {isLoading ? "جاري التسجيل..." : "إنشاء حساب"}
               </Button>
               {/* </Link> */}

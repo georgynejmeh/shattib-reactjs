@@ -1,4 +1,4 @@
-import { addToBoxIcon, Button, CartItemCard, MainPadding } from "..";
+import { addToBoxIcon, Button, CartItemCard, Link, MainPadding } from "..";
 
 const WishListPage = () => {
   const favoriteItems: [{ name: string; price: number }] = JSON.parse(
@@ -17,14 +17,16 @@ const WishListPage = () => {
         </section>
         <section className="px-16">
           <div className="flex flex-row-reverse w-full">
-            <div className="w-44">
-              <Button size="md">
-                <div className="flex justify-center gap-4">
-                  <img src={addToBoxIcon} alt="" />
-                  <span>أضف منتج</span>
-                </div>
-              </Button>
-            </div>
+            <Link to={"/home"}>
+              <div className="w-44">
+                <Button size="md">
+                  <div className="flex justify-center gap-4">
+                    <img src={addToBoxIcon} alt="" />
+                    <span>أضف منتج</span>
+                  </div>
+                </Button>
+              </div>
+            </Link>
           </div>
           {favoriteItems.length > 0 ? (
             favoriteItems.map((item, index) => (
