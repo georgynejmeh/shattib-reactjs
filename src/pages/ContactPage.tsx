@@ -25,7 +25,7 @@ const ContactPage: React.FC = () => {
   });
 
   // Using the useApi hook for POST requests
-  const { postData, isLoading, error, data } = useApi<any>("ContactUs", "POST");
+  const { postData, isLoading, data } = useApi<any>("ContactUs", "POST");
 
   // Handle form input changes
   const handleInputChange = (
@@ -78,11 +78,7 @@ const ContactPage: React.FC = () => {
           <ButtonGold onClick={handleSubmit}>
             {isLoading ? "إرسال..." : "إرسال"}
           </ButtonGold>
-          {error && (
-            <p className="text-red-500">
-              Failed to send message. Please try again.
-            </p>
-          )}
+
           {data && <p className="text-green-500">Message sent successfully!</p>}
         </div>
         <div className="w-1/2 flex flex-col gap-8">
