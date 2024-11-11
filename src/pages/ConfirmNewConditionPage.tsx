@@ -7,12 +7,13 @@ import {
   plusCircleGoldIcon,
   CriteriaDetailsPopupForm,
   Link,
+  Navigate,
 } from "..";
 import { CirteriaItem, PostCriteria } from "../models/Criteria";
 import { usePostCriteria } from "../hooks/usePostCriteria";
 
 const ConfirmNewConditionPage = () => {
-  const { postData } = usePostCriteria("Criteria");
+  const { postData, data } = usePostCriteria("Criteria");
 
   const [popupShown, setPopupShown] = useState(false);
   const [selectedCategoryNames, setSelectedCategoryNames] = useState<string[]>(
@@ -165,6 +166,7 @@ const ConfirmNewConditionPage = () => {
 
   return (
     <>
+      {data && <Navigate to={"/conditions"} />}
       <CriteriaDetailsPopupForm
         isShown={popupShown}
         setIsShown={setPopupShown}

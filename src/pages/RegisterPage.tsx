@@ -48,13 +48,7 @@ const RegisterPage = () => {
 
   return (
     <>
-      {data ? (
-        userType === "Client" ? (
-          <Navigate to={"/home"} />
-        ) : (
-          <Navigate to={"/conditions"} />
-        )
-      ) : null}
+      {data ? <Navigate to={"/login"} /> : null}
       <div className="flex max-lg:flex-col justify-center items-center min-h-screen max-lg:p-8">
         <div className="w-1/4 flex flex-col justify-center max-lg:w-full">
           <span className="text-yellow-600 text-2xl pb-4">
