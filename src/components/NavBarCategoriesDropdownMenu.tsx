@@ -8,6 +8,10 @@ import {
 } from "..";
 
 const NavBarCategoriesDropdownMenu = () => {
+  // const { data } = useApi<{ id: number; name: string }[]>(
+  //   "SeededValues/Categories"
+  // );
+
   const categoriesList = [
     "الرخام",
     "البورسلان",

@@ -52,7 +52,14 @@ const AdminNewProductContainer: React.FC = () => {
   ) => {
     const { name, value } = e.target;
 
-    // Update the specific field in the formData state
+    // Ensure Price is a positive number
+    if (name === "Price" && value !== "") {
+      // Validate if the price is a positive number
+      if (isNaN(Number(value)) || Number(value) <= 0) {
+        return; // Do not update state if price is not a positive number
+      }
+    }
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,

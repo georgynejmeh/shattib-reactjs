@@ -171,6 +171,7 @@ export { default as OrderItem } from "./components/OrderItem";
 export { default as CriteriaDetailsPopupForm } from "./components/CriteriaDetailsPopupForm";
 export { default as StatisticsCard } from "./components/StatisticsCard";
 export { default as NavBarAccountDropDown } from "./components/NavBarAccountDropDown";
+export { default as CommentItem } from "./components/CommentItem";
 // -- Categories List --
 export { default as Rkham } from "./components/categories/Rkham";
 export { default as Porsalen } from "./components/categories/Porsalen";

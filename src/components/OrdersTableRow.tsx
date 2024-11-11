@@ -62,7 +62,7 @@ const OrdersTableRow = ({
           {status}
         </div>
       </td>
-      <td>{dateOfArrival}</td>
+      <td>{dateOfArrival || "غير محدد"}</td>
       <td>
         <div className="mx-auto flex justify-center gap-4">
           <Link

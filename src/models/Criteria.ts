@@ -2,6 +2,9 @@ export interface Cirteria {
   id: number;
   title: string;
   status: string; // Pending , Rejected, Accepted
+  phoneNumber: string;
+  userName: string;
+  DateOfCreation: string;
   criteriaItems: CirteriaItem[];
   comments: [
     {
@@ -22,10 +25,12 @@ export interface Cirteria {
 
 export interface CirteriaItem {
   categoryId: number;
+  categoryName: string;
   productName: string;
   description: string;
   amount: number;
   measurementUnit: string;
+  image: string;
 }
 
 export interface PostCriteria {

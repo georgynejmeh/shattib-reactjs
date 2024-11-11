@@ -83,6 +83,20 @@ const AdminNewProductSecondPage = ({
     }));
   };
 
+  // Validation function for the form
+  const isFormValid = () => {
+    // Check if the required fields are filled
+    const { Deaf, RetrivalAndReplacing, Notes, Images } = formData;
+
+    // Ensure that the required fields are not empty and the image is uploaded
+    return (
+      Deaf.trim() !== "" &&
+      RetrivalAndReplacing.trim() !== "" &&
+      Notes.trim() !== "" &&
+      Images
+    );
+  };
+
   return (
     <main>
       {data ? <Navigate to={"/admin/home"} /> : null}
@@ -156,7 +170,7 @@ const AdminNewProductSecondPage = ({
             </button>
           </Link>
           {/* <Link className="w-full" to={"/admin/product/new"}> */}
-          <ButtonGold onClick={handleSubmit}>
+          <ButtonGold disabled={!isFormValid()} onClick={handleSubmit}>
             {/* <ButtonGold onClick={() => postData(formData)}> */}
             {isLoading ? "التحميل..." : "أضف المنتج"}
           </ButtonGold>

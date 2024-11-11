@@ -9,13 +9,11 @@ import {
 } from "../..";
 
 import "../../App.css";
+import { Cirteria } from "../../models/Criteria";
 
 const AdminCriteriasPage = () => {
-  const temp = [1, 2, 3];
-  const {
-    // isLoading, error,
-    data,
-  } = useApi("Criteria/GetAll");
+  // const temp = [1, 2, 3];
+  const { isLoading, error, data } = useApi<Cirteria[]>("Criteria/GetAll");
   console.log(data);
   return (
     <main className="p-main">
@@ -39,27 +37,39 @@ const AdminCriteriasPage = () => {
           </tr>
         </thead>
         <tbody>
-          {temp.map(
-            (
-              // item,
-              index
-            ) => (
+          {isLoading ? (
+            <span>جاري التحميل...</span>
+          ) : error ? (
+            <span>حدث خطأ!</span>
+          ) : data ? (
+            data.map((criteria, index) => (
               <tr key={index}>
-                <td>#12345647</td>
-                <td>كراسة مواد بناء</td>
-                <td>محمد المحمد</td>
-                <td dir="ltr">+9661111111111</td>
-                <td>12/3/2024</td>
+                <td>#{criteria.id}</td>
+                <td>{criteria.title}</td>
+                <td>{criteria.userName}</td>
+                <td dir="ltr">{criteria.phoneNumber}</td>
+                <td>{criteria.DateOfCreation}</td>
                 <td>
-                  <div className="flex gap-4 w-full justify-center rounded-full bg-green-100 py-1">
-                    <span>مقبولة</span>
-                    <img className="w-3" src={downArrowIcon} alt="" />
-                  </div>
+                  {criteria.status === "Pending" ? (
+                    <div className="flex gap-4 w-32 mx-auto justify-center rounded-full bg-yellow-100 py-1">
+                      <span>قيد المعالجة</span>
+                      <img className="w-3" src={downArrowIcon} alt="" />
+                    </div>
+                  ) : criteria.status === "Rejected" ? (
+                    <div className="flex gap-4 w-32 mx-auto justify-center rounded-full bg-red-100 py-1">
+                      <span>مرفوضة</span>
+                      <img className="w-3" src={downArrowIcon} alt="" />
+                    </div>
+                  ) : criteria.status === "Accepted" ? (
+                    <div className="flex gap-4 w-32 mx-auto justify-center rounded-full bg-green-100 py-1">
+                      <span>مقبولة</span>
+                      <img className="w-3" src={downArrowIcon} alt="" />
+                    </div>
+                  ) : null}
                 </td>
                 <td>
                   <div className="flex gap-4 w-full justify-center">
-                    {/* TODO REPLACE WITH ID */}
-                    <Link to={`${index}`}>
+                    <Link to={`${criteria.id}`}>
                       <img src={bluePenIcon} alt="" />
                     </Link>
                     <button>
@@ -68,8 +78,8 @@ const AdminCriteriasPage = () => {
                   </div>
                 </td>
               </tr>
-            )
-          )}
+            ))
+          ) : null}
         </tbody>
       </table>
     </main>

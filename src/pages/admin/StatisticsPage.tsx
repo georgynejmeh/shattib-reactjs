@@ -1,6 +1,5 @@
 import {
   AccentText,
-  doubleLeftArrowIcon,
   downArrowIcon,
   grayCartIcon,
   grayCompanyIcon,
@@ -8,10 +7,35 @@ import {
   grayPersonIcon,
   StatisticsCard,
   useApi,
+  useState,
 } from "../..";
 import { StatisticsNumber } from "../../models/StatisticsNumber";
 
 const StatisticsPage = () => {
+  const [expanded, setExpanded] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState<string>("نوفمبر");
+  const [year] = useState<number>(2024);
+
+  const handleMonthChange = (month: string) => {
+    setSelectedMonth(month);
+    setExpanded(false);
+  };
+
+  const months = [
+    "يناير",
+    "فبراير",
+    "مارس",
+    "أبريل",
+    "مايو",
+    "يونيو",
+    "يوليو",
+    "أغسطس",
+    "سبتمبر",
+    "أكتوبر",
+    "نوفمبر",
+    "ديسمبر",
+  ];
+
   const {
     // isLoading: clientsLoading,
     // error: clientsError,
@@ -43,10 +67,14 @@ const StatisticsPage = () => {
       totalPrice: number;
     }[];
     total: number;
-  }>("Statistics/GetProfits?Day=11&Month=11&Year=2024");
+  }>(
+    `Statistics/GetProfits?Month=${
+      months.indexOf(selectedMonth) + 1
+    }&Year=${year}`
+  );
 
   // TODO DELETE
-  const temp = ["ياسر القحطاني", "سلمان الفرج", "سالم الدوسري", "محمد العويس"];
+  // const temp = ["ياسر القحطاني", "سلمان الفرج", "سالم الدوسري", "محمد العويس"];
   return (
     <main className="p-main">
       <AccentText>الإحصائيات</AccentText>
@@ -85,9 +113,12 @@ const StatisticsPage = () => {
         <div className="w-2/3">
           <h1 className="text-2xl font-bold">المبيعات الشهرية</h1>
           <div className="flex items-center gap-4 py-4">
-            <button className="bg-gray-100 rounded">
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="bg-gray-100 rounded"
+            >
               <div className="flex w-24 gap-2 justify-center">
-                <span>11 توفمبر</span>
+                <span>{selectedMonth}</span>
                 <img className="w-4" src={downArrowIcon} alt="" />
               </div>
             </button>
@@ -96,7 +127,20 @@ const StatisticsPage = () => {
           <img src="/src/assets/imgs/temp/chart.png" alt="" />
         </div>
 
-        <div className="w-1/3">
+        {expanded && (
+          <div className="absolute mt-20 flex flex-col bg-white rounded shadow-xl">
+            {months.map((month) => (
+              <button
+                onClick={() => handleMonthChange(month)}
+                className="hover:bg-gray-100 px-4 py-2"
+              >
+                <span>{month}</span>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/*   <div className="w-1/3">
           <div className="flex justify-between w-full mb-4">
             <h1 className="text-2xl font-bold">المشتركين الجدد</h1>
             <div className="flex items-center gap-2">
@@ -114,7 +158,7 @@ const StatisticsPage = () => {
                 شركات
               </button>
             </div>
-            {/* TODO DELETE LOOP */}
+          
             {temp.map((name) => (
               <div className="flex items-center gap-4 px-12 pt-4">
                 <div className="w-4 h-4 bg-gray-300 rounded-full"></div>
@@ -123,6 +167,7 @@ const StatisticsPage = () => {
             ))}
           </div>
         </div>
+          */}
       </section>
     </main>
   );

@@ -51,7 +51,7 @@ const AdminOrderPage = () => {
               <div className="flex items-center gap-4">
                 <img src={truckIcon} alt="" />
                 <span className="text-gray-400 font-bold">تاريخ التوصيل</span>
-                <span>{data.dateOfArrival}</span>
+                <span>{data.dateOfArrival || "غير محدد"}</span>
               </div>
               <div className="flex items-center gap-4">
                 <img src={databaseIcon} alt="" />

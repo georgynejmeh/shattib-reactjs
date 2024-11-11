@@ -21,6 +21,22 @@ const AdminNewProductPage: React.FC<Props> = ({
   onInputChange,
   handleSelectChange,
 }) => {
+  // Function to check if all required fields are filled
+  const isFormValid = () => {
+    return (
+      formData.Name !== "" &&
+      formData.WareHouseCode !== "" &&
+      formData.Price !== 0 &&
+      formData.SubCategoryId !== undefined &&
+      formData.Description !== "" &&
+      formData.Features !== "" &&
+      formData.MeasurementUnit !== "" &&
+      formData.Meaurements !== "" &&
+      formData.ManufacturingCountry !== "" &&
+      formData.Color !== ""
+    );
+  };
+
   const { data } = useApi<Subcateogry[]>("SeededValues/SubCategories");
   return (
     <main>
@@ -168,7 +184,7 @@ const AdminNewProductPage: React.FC<Props> = ({
 
         <div className="w-32 self-end pt-4">
           <Link to={"/admin/product/new/2"}>
-            <ButtonGold>التالي</ButtonGold>
+            <ButtonGold disabled={!isFormValid()}>التالي</ButtonGold>
           </Link>
         </div>
       </main>
