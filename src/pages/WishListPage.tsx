@@ -1,7 +1,11 @@
 import { addToBoxIcon, Button, CartItemCard, MainPadding } from "..";
 
 const WishListPage = () => {
-  const temp = [1, 2, 3];
+  const favoriteItems: [{ name: string; price: number }] = JSON.parse(
+    localStorage.getItem("favorites") || "[]"
+  );
+
+  // const temp = [1, 2, 3];
   return (
     <main>
       <MainPadding>
@@ -22,7 +26,23 @@ const WishListPage = () => {
               </Button>
             </div>
           </div>
-          {temp.map((index) => (
+          {favoriteItems.length > 0 ? (
+            favoriteItems.map((item, index) => (
+              <CartItemCard
+                key={index}
+                name={item.name}
+                price={item.price}
+                productId={0}
+                onQuantityChange={() => {}}
+                quantity={1}
+                onRemove={() => {}}
+                isQuantity={false}
+              />
+            ))
+          ) : (
+            <span>قائمة المفضلة</span>
+          )}
+          {/* {temp.map((index) => (
             <CartItemCard
               key={index}
               name="طقم شطاف WG004"
@@ -33,7 +53,7 @@ const WishListPage = () => {
               onRemove={() => {}}
               isQuantity={false}
             />
-          ))}
+          ))} */}
         </section>
       </MainPadding>
     </main>

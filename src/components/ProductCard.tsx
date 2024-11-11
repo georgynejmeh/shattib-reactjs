@@ -50,6 +50,23 @@ const ProductCard = ({
     window.dispatchEvent(new Event("storage"));
   };
 
+  const handleAddToFavorites = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    const existingProductIndex = favorites.findIndex(
+      (item: { productId: number }) => item.productId === id
+    );
+
+    if (existingProductIndex === -1) {
+      favorites.push({
+        productId: id,
+        name: name,
+        price: price,
+      });
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+  };
+
   const [active, setActive] = useState(false);
   return (
     <div className="pb-2 h-80 w-64 rounded-xl bg-gray-50 shadow shadow-gray-500 transition-all duration-700 hover:bg-amber-100">
@@ -61,7 +78,12 @@ const ProductCard = ({
             alt=""
           />
         </Link>
-        <button onClick={() => setActive(!active)}>
+        <button
+          onClick={() => {
+            setActive(!active);
+            handleAddToFavorites();
+          }}
+        >
           <div className="absolute top-0 m-2 flex items-center justify-center h-12 w-12 rounded-full bg-white transition-all duration-700 hover:bg-red-200">
             <img src={active ? redHeartIcon : heartIcon} alt="" />
           </div>
