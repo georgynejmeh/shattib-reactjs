@@ -31,7 +31,11 @@ const LoginPage = () => {
       localStorage.setItem("refreshToken", data.refreshToken);
 
       // Navigate to the home page
-      return <Navigate to="/home" />;
+      if (data.role === "Client") {
+        return <Navigate to="/home" />;
+      } else {
+        return <Navigate to="/conditions" />;
+      }
     } else {
       console.error("Login failed", data);
     }

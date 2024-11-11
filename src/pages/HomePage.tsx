@@ -46,11 +46,11 @@ const HomePage = () => {
               <span className="text-2xl text-white font-bold max-lg:text-lg">
                 منصة شاملة لمعاينة وطلب كافة مواد التشطيب النهائي
               </span>
-              <p className="text-2xl text-white max-lg:text-sm">
+              {/* <p className="text-2xl text-white max-lg:text-sm">
                 تسهيل عملية طلب العينات وإتمام عمليات الشراء بطريقة
                 <br /> مريحة وفعالة، والتأكد من توفر العينات أو المنتجات
                 <br /> المطلوبة قبل إتمام الحجز.
-              </p>
+              </p> */}
             </div>
           </div>
         </section>
@@ -83,7 +83,7 @@ const HomePage = () => {
         <section className="p-8">
           <div className="flex items-center mb-4">
             <img className="me-2" src={shattibGoldIcon} alt="" />
-            <div className="me-2 h-16 w-2 bg-yellow-200" />
+            {/* <div className="me-2 h-16 w-2 bg-yellow-200" /> */}
             <TitleNumber subTitle="">التصنيفات</TitleNumber>
           </div>
 

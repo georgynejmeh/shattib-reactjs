@@ -48,9 +48,7 @@ const AdminProductsPage = () => {
                       <div className="flex items-center justify-start gap-4">
                         <img
                           className=" h-16 aspect-video rounded object-cover"
-                          src={`${import.meta.env.VITE_IMG_URL}${
-                            product.mainImagePath
-                          }`}
+                          src={`${product.mainImagePath}`}
                           alt=""
                         />
                         <span>{product.name}</span>

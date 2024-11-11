@@ -8,10 +8,17 @@ import {
   useParams,
 } from "..";
 import { Product } from "../models/Product";
+import { useState } from "react";
 
 const ProductPage = () => {
   const { id } = useParams();
   const { isLoading, error, data } = useApi<Product>(`Products/${id}`);
+  const [isDescriptionOpen, setDescriptionOpen] = useState(false);
+
+  const toggleDescription = () => {
+    setDescriptionOpen(!isDescriptionOpen);
+  };
+
   return (
     <main>
       <MainPadding>
@@ -29,21 +36,19 @@ const ProductPage = () => {
             <ProductDetailsCard data={data} />
           ) : null}
         </section>
+
         <section className="flex flex-col gap-8 py-8">
-          <h1 className="text-3xl font-bold max-lg:text-xl">الوصف</h1>
-          <p className="text-2xl max-lg:text-lg">
-            {data?.description}
-            {/* طقم شطاف هو منتج أساسي للحمام يهدف إلى تقديم تجربة تنظيف شخصية صحية
-            وسهلة الاستخدام. يتكون الطقم من شطاف يدوي مصنوع من مواد عالية
-            الجودة، يضمن المتانة والفعالية في الأداء. يمكن تثبيت الشطاف بسهولة
-            بجانب المرحاض ويوفر تدفقًا مائيًا مضبوطًا يمكن التحكم به لتلبية
-            احتياجات النظافة الشخصية. يتميز الطقم بتصميم عصري ينسجم مع ديكور
-            الحمام، كما أنه يوفر راحة كبيرة للمستخدمين بفضل سهولة الاستخدام
-            والتحكم الكامل في تدفق المياه. سواء كنت تبحث عن حلول نظافة شخصية أو
-            إضافة عملية لحمامك، فإن طقم الشطاف يعد اختيارًا مثاليًا يجمع بين
-            الجودة والأداء. */}
-          </p>
+          <h1
+            onClick={toggleDescription}
+            className="text-2xl font-bold max-lg:text-xl cursor-pointer"
+          >
+            الوصف {isDescriptionOpen ? "▲" : "▼"}
+          </h1>
+          {isDescriptionOpen && (
+            <p className="text-2xl max-lg:text-lg">{data?.description}</p>
+          )}
         </section>
+
         <section className="py-8">
           <h1 className="text-3xl font-bold mb-8">منتجات متشابهة</h1>
           <ProductListHorizontal />

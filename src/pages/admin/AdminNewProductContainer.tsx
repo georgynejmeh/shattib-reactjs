@@ -46,7 +46,9 @@ const AdminNewProductContainer: React.FC = () => {
   const isSecondPage = location.pathname === "/admin/product/new/2";
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
 
@@ -54,6 +56,13 @@ const AdminNewProductContainer: React.FC = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (value: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      SubCategoryId: value,
     }));
   };
 
@@ -69,6 +78,7 @@ const AdminNewProductContainer: React.FC = () => {
         <AdminNewProductPage
           formData={formData}
           onInputChange={handleInputChange}
+          handleSelectChange={handleSelectChange}
         />
       )}
     </>

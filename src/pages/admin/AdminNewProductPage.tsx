@@ -1,4 +1,11 @@
-import { ButtonGold, Link, NewProductHeaderText, TextInput } from "../..";
+import {
+  ButtonGold,
+  Link,
+  NewProductHeaderText,
+  TextInput,
+  useApi,
+} from "../..";
+import { Subcateogry } from "../../models/Subcategory";
 import { MyFormData } from "./AdminNewProductContainer";
 
 interface Props {
@@ -6,9 +13,15 @@ interface Props {
   onInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  handleSelectChange: (value: number) => void;
 }
 
-const AdminNewProductPage: React.FC<Props> = ({ formData, onInputChange }) => {
+const AdminNewProductPage: React.FC<Props> = ({
+  formData,
+  onInputChange,
+  handleSelectChange,
+}) => {
+  const { data } = useApi<Subcateogry[]>("SeededValues/SubCategories");
   return (
     <main>
       <NewProductHeaderText />
@@ -45,6 +58,22 @@ const AdminNewProductPage: React.FC<Props> = ({ formData, onInputChange }) => {
                 value={formData.Price.toString()}
                 onChange={onInputChange}
               />
+            </div>
+            <div className="w-full">
+              <select
+                name="SubCategoryId"
+                id="SubCategoryId"
+                className="px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                onChange={(e) => {
+                  handleSelectChange(parseInt(e.target.value));
+                }}
+              >
+                <option value="">اختر الصنف الفرعي</option>
+                {data &&
+                  data.map((subCategory) => (
+                    <option value={subCategory.id}>{subCategory.name}</option>
+                  ))}
+              </select>
             </div>
           </div>
         </section>
