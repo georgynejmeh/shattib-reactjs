@@ -13,9 +13,14 @@ const BannerButton = () => {
       <div className="absolute right-0 z-10 flex flex-col items-center justify-center rounded-3xl h-full w-full bg-opacity-35 bg-black">
         <div className="w-5/6 text-white text-4xl font-bold transition-all duration-700 max-lg:text-lg">
           <h1>
+            خدمة الرفع المساحي تقدم لك قياسات دقيقة لمشروعك حيث سيتم تسجيل
+            المقاسات في صفحتك، مما يتيح لك طلب أي منتج بسهولة مع توفر المقاسات
+            المطلوبة
+          </h1>
+          {/* <h1>
             "احصل على استشارة احترافية من مهندسين ذوي خبرة لرفع مساحة مشاريعك .
           </h1>
-          <h1>اطلب استشارتك الآن وحقق رؤيتك بدعم من الخبراء."</h1>
+          <h1>اطلب استشارتك الآن وحقق رؤيتك بدعم من الخبراء."</h1> */}
         </div>
         <br />
         <br />

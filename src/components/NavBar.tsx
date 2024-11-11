@@ -3,15 +3,17 @@ import {
   searchIcon,
   cartIcon,
   heartIcon,
-  accountIcon,
   TextInput,
   Link,
   NavBarCategoriesDropdownMenu,
   useState,
   menuIcon,
+  NavBarAccountDropDown,
 } from "..";
 
 const NavBar = () => {
+  const userType = localStorage.getItem("userType") || "Client";
+
   const [isCollapsed, setIsCollapsed] = useState(true);
   // const [cartItemCount, setCartItemCount] = useState<number>(0);
 
@@ -43,7 +45,10 @@ const NavBar = () => {
           {/* <Link to={"/home"}>
         <span>جميع المنتجات</span>
       </Link> */}
-          <Link to={"/conditions"}>
+          <Link
+            className={userType === "Client" ? "hidden" : ""}
+            to={"/conditions"}
+          >
             <span>كراسات الشروط</span>
           </Link>
           <div className="w-96">
@@ -71,11 +76,10 @@ const NavBar = () => {
       >
         <ButtonGold>طلب عرض سعر</ButtonGold>
       </div> */}
-          <Link to={""}>
-            <div className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full">
-              <img src={accountIcon} alt="" />
-            </div>
-          </Link>
+          <div className="flex items-center justify-center w-12 h-12 rounded-full">
+            {/* <img src={accountIcon} alt="" /> */}
+            <NavBarAccountDropDown />
+          </div>
           <span>EN</span>
         </nav>
       </div>
@@ -96,13 +100,16 @@ const NavBar = () => {
             {/* <Link to={"/home"}>
         <span>جميع المنتجات</span>
       </Link> */}
-            <Link to={"/conditions"}>
+            <Link
+              className={userType === "Client" ? "hidden" : ""}
+              to={"/conditions"}
+            >
               <span>كراسات الشروط</span>
             </Link>
             <div className="w-96 max-lg:w-full max-lg:max-w-72">
               <TextInput icon={searchIcon} placeholder="البحث عن المنتجات" />
             </div>
-            <div className="lg:hidden flex items-center justify-between w-full">
+            <div className="lg:hidden flex items-center justify-between w-full gap-12">
               <Link to={"/cart"}>
                 <div className="relative flex flex-col items-center">
                   {/* <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
@@ -125,11 +132,10 @@ const NavBar = () => {
           >
           <ButtonGold>طلب عرض سعر</ButtonGold>
           </div> */}
-              <Link to={""}>
-                <div className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full">
-                  <img src={accountIcon} alt="" />
-                </div>
-              </Link>
+              <div className="flex items-center justify-center w-12 h-12 rounded-full">
+                {/* <img src={accountIcon} alt="" /> */}
+                <NavBarAccountDropDown />
+              </div>
               <span>EN</span>
             </div>
           </div>

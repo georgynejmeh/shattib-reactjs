@@ -4,18 +4,22 @@ import {
   CompaniesBanner,
   doubleLeftArrowIcon,
   ProductListHorizontal,
-  CategoryListHorizontal,
   TitleNumber,
   CategoriesButtonListHorizontal,
-  LeftRightButtonsCircle,
   MainSlideShow,
   BannerButton,
-  categoryImg01,
-  CategoryCard,
-  Link,
-  categoryImg02,
-  categoryImg03,
-  categoryImg04,
+  Rkham,
+  Porsalen,
+  Siramik,
+  Parkeh,
+  Nwafez,
+  Decors,
+  Doors,
+  Panels,
+  Gypsum,
+  Stone,
+  Paints,
+  Insulation,
 } from "..";
 
 const HomePage = () => {
@@ -34,7 +38,7 @@ const HomePage = () => {
             <div className="absolute top-0 pt-16 ps-32 flex flex-col gap-8 z-20 max-lg:pt-8 max-lg:ps-8">
               <img className="w-64 max-lg:w-48" src={shattibText} />
               <span className="text-2xl text-white font-bold max-lg:text-lg">
-                منصة شاملة لطلب مواد التشطيب بسهولة وسرعة
+                منصة شاملة لمعاينة وطلب كافة مواد التشطيب النهائي
               </span>
               <p className="text-2xl text-white max-lg:text-sm">
                 تسهيل عملية طلب العينات وإتمام عمليات الشراء بطريقة
@@ -74,48 +78,16 @@ const HomePage = () => {
           <div className="flex items-center mb-4">
             <img className="me-2" src={shattibGoldIcon} alt="" />
             <div className="me-2 h-16 w-2 bg-yellow-200" />
-            <TitleNumber subTitle="17">التصنيفات</TitleNumber>
+            <TitleNumber subTitle="">التصنيفات</TitleNumber>
           </div>
 
           <CategoriesButtonListHorizontal />
 
           {/* CATEGORIES HORIZONTAL LIST */}
-          <section className="pt-16">
-            <div className="mb-16">
-              <h1 className="text-4xl font-bold text-gray-800 mb-6">الرخام</h1>
-              <div className="flex gap-4 mb-8">
-                <h2 className="text-4xl font-bold text-gray-500">
-                  التصنيفات الفرعية
-                </h2>
-                <h2 className="text-4xl font-bold text-gray-300">4</h2>
-              </div>
-              <div className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
-                <Link to={"/admin/category/1"}>
-                  <CategoryCard img={categoryImg01} num="8">
-                    رخام الأرضيات الداخلية والخارجية
-                  </CategoryCard>
-                </Link>
-                <Link to={"/admin/category/1"}>
-                  <CategoryCard img={categoryImg02} num="8">
-                    رخام المطابخ والحمامات
-                  </CategoryCard>
-                </Link>
-                <Link to={"/admin/category/1"}>
-                  <CategoryCard img={categoryImg03} num="8">
-                    رخام الجدران
-                  </CategoryCard>
-                </Link>
-                <Link to={"/admin/category/1"}>
-                  <CategoryCard img={categoryImg04} num="8">
-                    رخام الواجهات
-                  </CategoryCard>
-                </Link>
-              </div>
-            </div>
-          </section>
+          <Rkham />
 
           <div className="flex items-center justify-between py-8">
-            <TitleNumber version={2} subTitle="500 منتج">
+            <TitleNumber version={2} subTitle="">
               المتنجات
             </TitleNumber>
             <div className="flex">
@@ -126,49 +98,27 @@ const HomePage = () => {
           <ProductListHorizontal />
           {/* <LeftRightButtonsCircle /> */}
 
-          {/* CATEGORIES HORIZONTAL LIST */}
-          <section className="mt-32">
-            <div className="mb-16">
-              <h1 className="text-4xl font-bold text-gray-800 mb-6">الرخام</h1>
-              <div className="flex gap-4 mb-8">
-                <h2 className="text-4xl font-bold text-gray-500">
-                  التصنيفات الفرعية
-                </h2>
-                <h2 className="text-4xl font-bold text-gray-300">4</h2>
-              </div>
-              <div className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
-                <Link to={"/admin/category/1"}>
-                  <CategoryCard img={categoryImg01} num="8">
-                    رخام الأرضيات الداخلية والخارجية
-                  </CategoryCard>
-                </Link>
-                <Link to={"/admin/category/1"}>
-                  <CategoryCard img={categoryImg02} num="8">
-                    رخام المطابخ والحمامات
-                  </CategoryCard>
-                </Link>
-                <Link to={"/admin/category/1"}>
-                  <CategoryCard img={categoryImg03} num="8">
-                    رخام الجدران
-                  </CategoryCard>
-                </Link>
-                <Link to={"/admin/category/1"}>
-                  <CategoryCard img={categoryImg04} num="8">
-                    رخام الواجهات
-                  </CategoryCard>
-                </Link>
-              </div>
-            </div>
-          </section>
+          <Porsalen />
+          <Siramik />
+          <Parkeh />
+          <Nwafez />
+          <Decors />
+          <Doors />
+          <Panels />
+          <Gypsum />
+          <Stone />
+          <Paints />
+          <Insulation />
         </section>
 
+        {/* 
         <section className="p-8">
-          <TitleNumber version={2} subTitle="20">
+          <TitleNumber version={2} subTitle="">
             التصنيفات الفرعية
           </TitleNumber>
           <CategoryListHorizontal />
           <LeftRightButtonsCircle />
-        </section>
+        </section> */}
         {/* <div className="flex flex-row-reverse pe-8">
           <img src={doubleLeftArrowIcon} alt="" /> 
           <span className="p-4">عرض جميع التصنيفات</span>

@@ -12,6 +12,7 @@ interface Props {
 const CategoryCard = ({
   children,
   // id, img,
+  img,
   num,
   onClick,
   selected,
@@ -26,7 +27,7 @@ const CategoryCard = ({
       <div className="flex justify-center items-center h-4/5 rounded-xl overflow-hidden">
         <img
           className="w-full h-full object-cover"
-          src={categoryImg01}
+          src={img || categoryImg01}
           alt=""
         />
       </div>

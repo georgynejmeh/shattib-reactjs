@@ -47,6 +47,7 @@ export { default as truckIcon } from "./assets/svg/icon-truck.svg";
 export { default as databaseIcon } from "./assets/svg/icon-database.svg";
 export { default as menuIcon } from "./assets/svg/icon-menu.svg";
 export { default as minusGrayIcon } from "./assets/svg/icon-minus-gray.svg";
+export { default as personOutlineIcon } from "./assets/svg/icon-person-outline.svg";
 // -- social media --
 export { default as facebookIcon } from "./assets/svg/icon-facebook.svg";
 export { default as instagramIcon } from "./assets/svg/icon-instagram.svg";
@@ -101,6 +102,11 @@ export { default as grayCompanyIcon } from "./assets/svg/icon-company-gray.svg";
 export { default as grayPersonIcon } from "./assets/svg/icon-person-gray.svg";
 export { default as grayCartIcon } from "./assets/svg/icon-cart-gray.svg";
 export { default as grayCubeIcon } from "./assets/svg/icon-cube-gray.svg";
+// -- Navbar Account Dropdown --
+export { default as ordersIcon } from "./assets/svg/icon-orders.svg";
+export { default as consultationsIcon } from "./assets/svg/icon-consultations.svg";
+export { default as gearIcon } from "./assets/svg/icon-gear.svg";
+export { default as gpsIcon } from "./assets/svg/icon-gps.svg";
 
 //
 //
@@ -164,6 +170,20 @@ export { default as OrdersTableRow } from "./components/OrdersTableRow";
 export { default as OrderItem } from "./components/OrderItem";
 export { default as CriteriaDetailsPopupForm } from "./components/CriteriaDetailsPopupForm";
 export { default as StatisticsCard } from "./components/StatisticsCard";
+export { default as NavBarAccountDropDown } from "./components/NavBarAccountDropDown";
+// -- Categories List --
+export { default as Rkham } from "./components/categories/Rkham";
+export { default as Porsalen } from "./components/categories/Porsalen";
+export { default as Siramik } from "./components/categories/Siramik";
+export { default as Parkeh } from "./components/categories/Parkeh";
+export { default as Nwafez } from "./components/categories/Nwafez";
+export { default as Decors } from "./components/categories/Decors";
+export { default as Doors } from "./components/categories/Doors";
+export { default as Panels } from "./components/categories/Panels";
+export { default as Gypsum } from "./components/categories/Gypsum";
+export { default as Stone } from "./components/categories/Stone";
+export { default as Paints } from "./components/categories/Paints";
+export { default as Insulation } from "./components/categories/Insulation";
 
 //
 //
@@ -203,3 +223,41 @@ export { default as categoryImg01 } from "/assets/imgs/categories/10ab0ba698d969
 export { default as categoryImg02 } from "/assets/imgs/categories/76dc0a18bb95d40eabedd701ad3a04f3.jpg";
 export { default as categoryImg03 } from "/assets/imgs/categories/82c4318a19cd340c8038138f8d9222ac.jpg";
 export { default as categoryImg04 } from "/assets/imgs/categories/41aba213cbc8691576b79c5d1475a351.jpg";
+// -- Categoires (one by one)
+export { default as decorsImg01 } from "/assets/imgs/categories/decors/decors01.jpg";
+export { default as doorsImg01 } from "/assets/imgs/categories/doors/doors01.jpg";
+export { default as doorsImg02 } from "/assets/imgs/categories/doors/doors02.jpg";
+export { default as doorsImg03 } from "/assets/imgs/categories/doors/doors03.jpg";
+export { default as gypsumImg01 } from "/assets/imgs/categories/gypsum/gypsum01.jpg";
+export { default as gypsumImg02 } from "/assets/imgs/categories/gypsum/gypsum02.jpg";
+export { default as nwafezImg01 } from "/assets/imgs/categories/nwafez/nwafez01.jpg";
+export { default as nwafezImg02 } from "/assets/imgs/categories/nwafez/nwafez02.jpg";
+export { default as nwafezImg03 } from "/assets/imgs/categories/nwafez/nwafez03.jpg";
+export { default as nwafezImg04 } from "/assets/imgs/categories/nwafez/nwafez04.jpg";
+export { default as paintsImg01 } from "/assets/imgs/categories/paints/paints01.jpg";
+export { default as paintsImg02 } from "/assets/imgs/categories/paints/paints02.jpg";
+export { default as paintsImg03 } from "/assets/imgs/categories/paints/paints03.jpg";
+export { default as paintsImg04 } from "/assets/imgs/categories/paints/paints04.jpg";
+export { default as panelsImg01 } from "/assets/imgs/categories/panels/panels01.jpg";
+export { default as panelsImg02 } from "/assets/imgs/categories/panels/panels02.jpg";
+export { default as panelsImg03 } from "/assets/imgs/categories/panels/panels03.jpg";
+export { default as panelsImg04 } from "/assets/imgs/categories/panels/panels04.jpg";
+export { default as porsalenImg01 } from "/assets/imgs/categories/porsalen/porsalen01.jpg";
+export { default as porsalenImg02 } from "/assets/imgs/categories/porsalen/porsalen02.jpg";
+export { default as porsalenImg03 } from "/assets/imgs/categories/porsalen/porsalen03.jpg";
+export { default as porsalenImg04 } from "/assets/imgs/categories/porsalen/porsalen04.jpg";
+export { default as rkahmImg01 } from "/assets/imgs/categories/rkham/rkham01.jpg";
+export { default as rkahmImg02 } from "/assets/imgs/categories/rkham/rkham02.jpg";
+export { default as rkahmImg03 } from "/assets/imgs/categories/rkham/rkham03.jpg";
+export { default as rkahmImg04 } from "/assets/imgs/categories/rkham/rkham04.jpg";
+export { default as rkahmImg05 } from "/assets/imgs/categories/rkham/rkham05.jpg";
+export { default as siramikImg01 } from "/assets/imgs/categories/siramik/siramik01.jpg";
+export { default as siramikImg02 } from "/assets/imgs/categories/siramik/siramik02.jpg";
+export { default as siramikImg03 } from "/assets/imgs/categories/siramik/siramik03.jpg";
+export { default as siramikImg04 } from "/assets/imgs/categories/siramik/siramik04.jpg";
+export { default as stoneImg01 } from "/assets/imgs/categories/stone/stone01.jpg";
+export { default as stoneImg02 } from "/assets/imgs/categories/stone/stone02.jpg";
+export { default as stoneImg03 } from "/assets/imgs/categories/stone/stone03.jpg";
+export { default as insulationImg01 } from "/assets/imgs/categories/insulation/insulation01.jpg";
+export { default as insulationImg02 } from "/assets/imgs/categories/insulation/insulation02.jpg";
+export { default as insulationImg03 } from "/assets/imgs/categories/insulation/insulation03.jpg";

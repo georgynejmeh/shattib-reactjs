@@ -25,25 +25,22 @@ const AdminCategoriesPage = () => {
         {temp.map(() => (
           <div className="mb-16">
             <h1 className="text-4xl font-bold text-gray-800 mb-6">الرخام</h1>
-            <div className="flex gap-4 mb-8">
-              <h2 className="text-4xl font-bold text-gray-500">
-                التصنيفات الفرعية
-              </h2>
-              <h2 className="text-4xl font-bold text-gray-300">4</h2>
-            </div>
+            <h2 className="text-4xl font-bold text-gray-500 mb-8">
+              التصنيفات الفرعية
+            </h2>
             <div className="flex gap-8">
               <Link to={"/admin/category/1"}>
-                <CategoryCard img={categoryImg01} num="8">
+                <CategoryCard img={categoryImg01} num="">
                   رخام الأرضيات الداخلية والخارجية
                 </CategoryCard>
               </Link>
-              <CategoryCard img={categoryImg02} num="8">
+              <CategoryCard img={categoryImg02} num="">
                 رخام المطابخ والحمامات
               </CategoryCard>
-              <CategoryCard img={categoryImg03} num="8">
+              <CategoryCard img={categoryImg03} num="">
                 رخام الجدران
               </CategoryCard>
-              <CategoryCard img={categoryImg04} num="8">
+              <CategoryCard img={categoryImg04} num="">
                 رخام الواجهات
               </CategoryCard>
             </div>

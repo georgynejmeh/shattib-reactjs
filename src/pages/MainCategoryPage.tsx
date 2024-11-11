@@ -42,8 +42,8 @@ const MainCategoryPage = ({ categoryId = 1 }: Props) => {
           title02="التصنيفات"
           endTitle="مواد البناء"
         />
-        <TitleNumber subTitle="500 منتج">مواد البناء</TitleNumber>
-        <TitleNumber subTitle="20">التصنفات الفرعية</TitleNumber>
+        <TitleNumber subTitle="">مواد البناء</TitleNumber>
+        <TitleNumber subTitle="">التصنفات الفرعية</TitleNumber>
         <CategoryListHorizontal />
         <LeftRightButtonsCircle />
         <section className="flex max-lg:flex-col max-lg:w-full">

@@ -1,14 +1,20 @@
-import { RegisterCard, yellowBuilding } from "..";
+import { bluePerson, RegisterCard } from "..";
 
 const RegisterPersonCard = () => {
   return (
-    <RegisterCard
-      image={yellowBuilding}
-      title="شركات"
-      desc="خدمات الشركات لعرض وشراء مواد التشطيب"
-      footer="دخول كشركة"
-      color="amber"
-    />
+    <div
+      onClick={() => {
+        localStorage.setItem("userType", "Client");
+      }}
+    >
+      <RegisterCard
+        image={bluePerson}
+        title="أفراد"
+        desc="خدمات الأفراد لتصفح وشراء مواد التشطيب"
+        footer="دخول كفرد"
+        color="sky"
+      />
+    </div>
   );
 };
 
