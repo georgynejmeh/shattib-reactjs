@@ -20,11 +20,17 @@ import {
   Stone,
   Paints,
   Insulation,
+  Link,
 } from "..";
 
 const HomePage = () => {
   return (
     <>
+      <Link to={"/contact"}>
+        <div className="fixed z-50 bottom-4 left-4 w-20 h-20 bg-indigo-950 rounded-full text-white flex items-center justify-center hover:bg-indigo-700">
+          تواصل معنا
+        </div>
+      </Link>
       <div>
         <section className="h-screen">
           <div className="relative h-full pb-32 overflow-hidden">

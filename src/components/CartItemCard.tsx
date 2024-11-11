@@ -9,6 +9,7 @@ interface Props {
   onQuantityChange: (productId: number, newQuantity: number) => void; // Add quantity change handler
   numbered?: boolean;
   remove?: boolean;
+  isQuantity?: boolean;
 }
 
 const CartItemCard = ({
@@ -18,6 +19,7 @@ const CartItemCard = ({
   price = 0,
   quantity = 1,
   productId = 0,
+  isQuantity = true,
   onRemove,
   onQuantityChange,
 }: Props) => {
@@ -40,12 +42,14 @@ const CartItemCard = ({
             طقم شطاف
           </h2>
         </div>
-        <div className="w-32 max-lg:w-full max-lg:max-w-32">
-          <QuantityControls
-            quantity={quantity}
-            onChange={handleQuantityChange} // Pass handler to update quantity
-          />
-        </div>
+        {isQuantity ? (
+          <div className="w-32 max-lg:w-full max-lg:max-w-32">
+            <QuantityControls
+              quantity={quantity}
+              onChange={handleQuantityChange} // Pass handler to update quantity
+            />
+          </div>
+        ) : null}
         <AccentText>{price} ريال</AccentText>
         {remove ? (
           <button onClick={() => onRemove(productId)}>

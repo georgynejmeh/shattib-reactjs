@@ -27,6 +27,7 @@ import AdminConsultationsPage from "./pages/admin/AdminConsultationsPage";
 import StatisticsPage from "./pages/admin/StatisticsPage";
 import AdminCriteriasPage from "./pages/admin/AdminCriteriasPage";
 import AdminCriteriaPage from "./pages/admin/AdminCriteriaPage";
+import ContactPage from "./pages/ContactPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/" element={<IntroPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route element={<MainLayout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />

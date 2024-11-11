@@ -31,6 +31,7 @@ const WishListPage = () => {
               onQuantityChange={() => {}}
               quantity={1}
               onRemove={() => {}}
+              isQuantity={false}
             />
           ))}
         </section>
