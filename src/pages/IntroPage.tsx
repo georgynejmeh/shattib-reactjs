@@ -1,6 +1,5 @@
 import {
   firstPageBanner,
-  shattibLogoRow,
   earthIcon,
   shattibTextDecoration,
   RegisterCompanyCard,
