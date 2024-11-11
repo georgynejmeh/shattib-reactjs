@@ -9,6 +9,7 @@ import {
 } from "..";
 
 const IntroPage = () => {
+  localStorage.clear();
   return (
     <>
       <div className="w-full flex justify-center">
