@@ -10,6 +10,7 @@ interface Props {
   orderItems: OrderItem[];
   dateOfArrival: string;
   dateOfOrder: string;
+  user?: boolean;
 }
 
 const OrdersTableRow = ({
@@ -19,6 +20,7 @@ const OrdersTableRow = ({
   // orderItems,
   dateOfArrival,
   dateOfOrder,
+  user = false,
 }: Props) => {
   const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
     useConfirmDelete();
@@ -66,7 +68,7 @@ const OrdersTableRow = ({
       <td>
         <div className="mx-auto flex justify-center gap-4">
           <Link
-            to={`/admin/order/${id}`}
+            to={user ? `/order/${id}` : `/admin/order/${id}`}
             className="flex items-center justify-center"
           >
             <img src={purpleParagraphIcon} alt="" />

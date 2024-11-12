@@ -45,7 +45,10 @@ const AdminCriteriaPage = () => {
           <TitleNumber inverse subTitle={data.title}>
             عنوان الكراسة
           </TitleNumber>
-          <TitleNumber inverse subTitle={data.userName}>
+          <TitleNumber
+            inverse
+            subTitle={data.displayName ? data.displayName : "لايوجد"}
+          >
             اسم الزبون
           </TitleNumber>
           <TitleNumber inverse subTitle={data.phoneNumber}>

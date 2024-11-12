@@ -1,7 +1,37 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-
+import HomePage from "./pages/HomePage";
+import IntroPage from "./pages/IntroPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import MainLayout from "./layouts/MainLayout";
+import ProductPage from "./pages/ProductPage";
+import CartPage from "./pages/CartPageContainer";
+import WishListPage from "./pages/WishListPage";
+import ConditionDocsPage from "./pages/ConditionDocsPage";
+import NewConditionPage from "./pages/NewConditionPage";
+import ConfirmNewConditionPage from "./pages/ConfirmNewConditionPage";
+import PriceRequestPage from "./pages/PriceRequestPage";
+import MainCategoryPage from "./pages/MainCategoryPage";
+import PriceRequestSecondPage from "./pages/PriceRequestSecondPage";
+import DocPage from "./pages/DocPage";
+import AdminLayout from "./layouts/AdminLayout";
+import AdminProductsPage from "./pages/admin/AdminProductsPage";
+import AdminHomePage from "./pages/admin/AdminHomePage";
+import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
+import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
+import AdminNewProductContainer from "./pages/admin/AdminNewProductContainer";
+import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
+import AdminOrderPage from "./pages/admin/AdminOrderPage";
+import AdminConsultationsPage from "./pages/admin/AdminConsultationsPage";
+import StatisticsPage from "./pages/admin/StatisticsPage";
+import AdminCriteriasPage from "./pages/admin/AdminCriteriasPage";
+import AdminCriteriaPage from "./pages/admin/AdminCriteriaPage";
 import ContactPage from "./pages/ContactPage";
+import SearchPage from "./pages/SearchPage";
+import OrderPage from "./pages/OrderPage";
+import OrdersPage from "./pages/OrdersPage";
+import AdminSamplesPage from "./pages/admin/AdminSamplesPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -14,8 +44,8 @@ const App = () => {
   return (
     <main dir="rtl">
       <Routes>
-        <Route path="/" element={<ContactPage />} />
-        {/* <Route path="/" element={<IntroPage />} />
+        <Route path="/" element={<IntroPage />} />
+        <Route path="/admin" element={<RegisterPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/contact" element={<ContactPage />} />
@@ -35,6 +65,9 @@ const App = () => {
           />
           <Route path="/price-request" element={<PriceRequestPage />} />
           <Route path="/price-request-2" element={<PriceRequestSecondPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/order/:id" element={<OrderPage />} />
         </Route>
         <Route element={<AdminLayout />}>
           <Route path="/admin/home" element={<AdminHomePage />} />
@@ -58,8 +91,10 @@ const App = () => {
           <Route path="/admin/statistics" element={<StatisticsPage />} />
           <Route path="/admin/criterias" element={<AdminCriteriasPage />} />
           <Route path="/admin/criterias/:id" element={<AdminCriteriaPage />} />
+          <Route path="/admin/search" element={<SearchPage />} />
+          <Route path="/admin/samples" element={<AdminSamplesPage />} />
         </Route>
-        button */}
+        button
       </Routes>
     </main>
   );

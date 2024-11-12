@@ -1,7 +1,6 @@
 import {
   ProductListHorizontal,
   ProductDetailsCard,
-  LeftRightButtonsCircle,
   MainPadding,
   SectionTitles,
   useApi,
@@ -52,7 +51,7 @@ const ProductPage = () => {
         <section className="py-8">
           <h1 className="text-3xl font-bold mb-8">منتجات متشابهة</h1>
           <ProductListHorizontal />
-          <LeftRightButtonsCircle />
+          {/* <LeftRightButtonsCircle /> */}
         </section>
       </MainPadding>
     </main>

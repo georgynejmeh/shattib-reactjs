@@ -9,13 +9,13 @@ import {
 } from "..";
 import { CartItem } from "../models/CartItem";
 
-const CartPage = () => {
+const SamplesPage = () => {
   const { isLoading, postData } = useApi("Orders", "POST", true);
   const [cart, setCart] = useState<CartItem[]>([]);
 
   // Load cart from localStorage when the component mounts
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const storedCart = JSON.parse(localStorage.getItem("samplesCart") || "[]");
     setCart(storedCart);
   }, []);
 
@@ -23,7 +23,7 @@ const CartPage = () => {
   const handleRemoveFromCart = (productId: number) => {
     const updatedCart = cart.filter((item) => item.productId !== productId);
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem("samplesCart", JSON.stringify(updatedCart));
   };
 
   // Function to update the quantity of an item in the cart
@@ -32,7 +32,7 @@ const CartPage = () => {
       item.productId === productId ? { ...item, quantity: newQuantity } : item
     );
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem("samplesCart", JSON.stringify(updatedCart));
   };
 
   // Calculate the total price of items in the cart
@@ -50,13 +50,13 @@ const CartPage = () => {
         productId: item.productId,
         quantity: item.quantity,
       })),
-      kind: "Order",
+      kind: "Sample",
     };
 
     try {
       await postData(orderData);
 
-      localStorage.removeItem("cart");
+      localStorage.removeItem("samplesCart");
 
       <Navigate to={"home"} />;
     } catch (error) {
@@ -79,7 +79,7 @@ const CartPage = () => {
 
           {/* Dynamically render Cart Items */}
           {cart.length === 0 ? (
-            <div className="text-center py-4">لا توجد منتجات في السلة</div>
+            <div className="text-center py-4">لا توجد عينات في السلة</div>
           ) : (
             cart.map((item, index) => (
               <CartItemCard
@@ -111,7 +111,7 @@ const CartPage = () => {
         <div className="flex gap-4 w-1/3 max-lg:flex-col max-lg:w-full">
           <Link to={"/home"}>
             <button className="border border-black rounded py-1 px-3 min-w-44">
-              إضافة منتجات
+              إضافة عينات
             </button>
           </Link>
           <ButtonGold onClick={handleOrderSubmit}>
@@ -123,4 +123,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default SamplesPage;

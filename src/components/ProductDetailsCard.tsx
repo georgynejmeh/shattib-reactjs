@@ -18,31 +18,63 @@ interface Props {
 
 const ProductDetailsCard = ({ data }: Props) => {
   const [quantity, setQuantity] = useState(1); // Track quantity
+  const handleRequestSample = () => {
+    const existingSamples = JSON.parse(
+      localStorage.getItem("samplesCart") || "[]"
+    );
+
+    if (data) {
+      // Check if the product already exists in the samples cart
+      const productInSamplesCart = existingSamples.find(
+        (item: CartItem) => item.productId === data.id
+      );
+
+      if (productInSamplesCart) {
+        // If the product already exists, update its quantity
+        productInSamplesCart.quantity += quantity;
+      } else {
+        // If the product is not in the samples cart, add it with only necessary data
+        existingSamples.push({
+          productId: data.id,
+          name: data.name,
+          price: data.price,
+          quantity: quantity,
+        });
+      }
+
+      // Save the updated samples cart to localStorage
+      localStorage.setItem("samplesCart", JSON.stringify(existingSamples));
+      alert("تمت إضافة طلب العينة");
+    }
+  };
+
   // Add product to cart in localStorage
   const handleAddToCart = () => {
     const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-    let productInCart;
     if (data) {
-      productInCart = existingCart.find(
+      // Check if the product already exists in the cart
+      const productInCart = existingCart.find(
         (item: CartItem) => item.productId === data.id
       );
-    } else {
-      productInCart = existingCart.find(
-        (item: CartItem) => item.productId === 0
-      );
-    }
 
-    if (productInCart) {
-      // If the product already exists in the cart, update its quantity
-      productInCart.quantity += quantity;
-    } else {
-      // If the product is not in the cart, add it
-      existingCart.push({ ...data, quantity });
-    }
+      if (productInCart) {
+        // If the product already exists, update its quantity
+        productInCart.quantity += quantity;
+      } else {
+        // If the product is not in the cart, add it with only necessary data
+        existingCart.push({
+          productId: data.id,
+          name: data.name,
+          price: data.price,
+          quantity: quantity,
+        });
+      }
 
-    localStorage.setItem("cart", JSON.stringify(existingCart));
-    alert("تمت إضافة المنتج للسلة");
+      // Save the updated cart to localStorage
+      localStorage.setItem("cart", JSON.stringify(existingCart));
+      alert("تمت إضافة المنتج للسلة");
+    }
   };
 
   // TODO DELETE
@@ -171,7 +203,10 @@ const ProductDetailsCard = ({ data }: Props) => {
                 <img src={addToCartIcon} alt="" />
               </div>
             </Button> */}
-              <button className="rounded border border-black py-1 bg-white">
+              <button
+                onClick={handleRequestSample}
+                className="rounded border border-black py-1 bg-white"
+              >
                 <div className="flex justify-center gap-2 text-black">
                   <img src={addToBoxBlackIcon} alt="" />
                   <span>طلب عينة</span>
@@ -361,7 +396,10 @@ const ProductDetailsCard = ({ data }: Props) => {
               <img src={addToCartIcon} alt="" />
             </div>
           </Button> */}
-              <button className="rounded border border-black py-1 bg-white">
+              <button
+                onClick={handleRequestSample}
+                className="rounded border border-black py-1 bg-white"
+              >
                 <div className="flex justify-center gap-2 text-black">
                   <img src={addToBoxBlackIcon} alt="" />
                   <span>طلب عينة</span>
@@ -489,7 +527,10 @@ const ProductDetailsCard = ({ data }: Props) => {
                 <img src={addToCartIcon} alt="" />
               </div>
             </Button> */}
-            <button className="rounded border border-black py-1 bg-white">
+            <button
+              onClick={handleRequestSample}
+              className="rounded border border-black py-1 bg-white"
+            >
               <div className="flex justify-center gap-2 text-black">
                 <img src={addToBoxBlackIcon} alt="" />
                 <span>طلب عينة</span>

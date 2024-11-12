@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export function useApi<T>(
   endpoint: string,
-  method?: "POST" | "DELETE",
+  method?: "POST" | "DELETE" | "GET",
   isToken?: boolean,
   noResponse?: boolean
 ) {
@@ -21,7 +21,16 @@ export function useApi<T>(
         // const apiUrl = `${import.meta.env.VITE_API_URL}`;
         const apiUrl = "https://shatib.com/api/";
         console.log(`${apiUrl}${endpoint}`);
-        await fetch(`${apiUrl}${endpoint}`)
+
+        let token;
+        let requestOptions;
+        if (isToken) {
+          token = localStorage.getItem("accessToken");
+          requestOptions = {
+            headers: { Authorization: `Bearer ${token}` },
+          };
+        }
+        await fetch(`${apiUrl}${endpoint}`, requestOptions)
           .then(async (res) => {
             setIsLoading(false);
             setError(false);

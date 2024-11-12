@@ -46,9 +46,11 @@ const AdminCriteriasPage = () => {
               <tr key={index}>
                 <td>#{criteria.id}</td>
                 <td>{criteria.title}</td>
-                <td>{criteria.userName}</td>
+                <td>
+                  {criteria.displayName ? criteria.displayName : "لايوجد"}
+                </td>
                 <td dir="ltr">{criteria.phoneNumber}</td>
-                <td>{criteria.DateOfCreation}</td>
+                <td>{criteria.dateOfCreation.substring(0, 10)}</td>
                 <td>
                   {criteria.status === "Pending" ? (
                     <div className="flex gap-4 w-32 mx-auto justify-center rounded-full bg-yellow-100 py-1">

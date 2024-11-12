@@ -1,8 +1,9 @@
-import { useState, eyeIcon } from "..";
+import { useState, eyeIcon, Link } from "..";
 
 interface Props {
   title?: string;
   icon?: string;
+  iconLink?: string;
   password?: boolean;
   placeholder?: string;
   blackTitle?: boolean;
@@ -18,6 +19,7 @@ interface Props {
 const TextInput = ({
   title,
   icon,
+  iconLink,
   password = false,
   placeholder = "",
   blackTitle = false,
@@ -44,9 +46,18 @@ const TextInput = ({
         ) : null}
 
         <div className="relative h-full">
-          <span className="absolute inset-y-0 right-0 flex items-center pr-3">
-            <img src={icon} />
-          </span>
+          {iconLink ? (
+            <Link
+              to={iconLink}
+              className="absolute inset-y-0 right-0 flex items-center pr-3"
+            >
+              <img src={icon} />
+            </Link>
+          ) : (
+            <span className="absolute inset-y-0 right-0 flex items-center pr-3">
+              <img src={icon} />
+            </span>
+          )}
           {big ? (
             <textarea
               className="resize-none h-full w-full py-3 ps-3 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"

@@ -6,14 +6,21 @@ import {
   searchIcon,
   shattibLogoRow,
   TextInput,
+  useState,
 } from "..";
 
 const AdminNavBar = () => {
+  const [searchValue, setSearchValue] = useState("");
   return (
     <nav className="fixed w-full z-10 flex bg-gray-100 shadow-xl items-center justify-between border-b py-2 px-8">
       <img src={shattibLogoRow} alt="" />
       <div className="w-1/2">
-        <TextInput icon={searchIcon} placeholder="البحث عن المنتجات" />
+        <TextInput
+          iconLink={`/admin/search?search=${searchValue}`}
+          icon={searchIcon}
+          placeholder="البحث عن المنتجات"
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
       </div>
 
       <div className="flex items-center gap-12">

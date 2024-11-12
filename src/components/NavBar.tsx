@@ -14,6 +14,7 @@ import {
 const NavBar = () => {
   const userType = localStorage.getItem("userType") || "Client";
 
+  const [searchValue, setSearchValue] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(true);
   // const [cartItemCount, setCartItemCount] = useState<number>(0);
 
@@ -52,7 +53,12 @@ const NavBar = () => {
             <span>كراسات الشروط</span>
           </Link>
           <div className="w-96">
-            <TextInput icon={searchIcon} placeholder="البحث عن المنتجات" />
+            <TextInput
+              icon={searchIcon}
+              iconLink={`/search?search=${searchValue}`}
+              onChange={(e) => setSearchValue(e.target.value)}
+              placeholder="البحث عن المنتجات"
+            />
           </div>
           <Link to={"/cart"}>
             <div className="relative flex flex-col items-center">

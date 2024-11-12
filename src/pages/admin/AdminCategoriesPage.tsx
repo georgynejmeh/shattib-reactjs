@@ -1,16 +1,25 @@
 import {
+  AirCondition,
+  Bathroom,
   CategoriesButtonListHorizontal,
-  CategoryCard,
-  categoryImg01,
-  categoryImg02,
-  categoryImg03,
-  categoryImg04,
-  Link,
+  Decors,
+  Doors,
+  Gypsum,
+  Insulation,
+  Nwafez,
+  Paints,
+  Panels,
+  Parkeh,
+  Porsalen,
+  Rkham,
+  Siramik,
+  Stone,
+  Switches,
 } from "../..";
 
 const AdminCategoriesPage = () => {
   // TODO DELETE
-  const temp = [1, 2];
+  // const temp = [1, 2];
   return (
     <main>
       <section className="pt-main px-main pb-4">
@@ -21,8 +30,23 @@ const AdminCategoriesPage = () => {
       <hr />
 
       <section className="p-main">
+        <Rkham />
+        <Porsalen />
+        <Siramik />
+        <Parkeh />
+        <Nwafez />
+        <Decors />
+        <Doors />
+        <Panels />
+        <Gypsum />
+        <Stone />
+        <Paints />
+        <Insulation />
+        <AirCondition />
+        <Switches />
+        <Bathroom />
         {/* TODO DELETE LOOP */}
-        {temp.map(() => (
+        {/* {temp.map(() => (
           <div className="mb-16">
             <h1 className="text-4xl font-bold text-gray-800 mb-6">الرخام</h1>
             <h2 className="text-4xl font-bold text-gray-500 mb-8">
@@ -45,7 +69,7 @@ const AdminCategoriesPage = () => {
               </CategoryCard>
             </div>
           </div>
-        ))}
+        ))} */}
       </section>
     </main>
   );

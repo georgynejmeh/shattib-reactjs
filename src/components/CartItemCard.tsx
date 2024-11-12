@@ -22,7 +22,7 @@ const CartItemCard = ({
   numbered,
   remove,
   name = "طقم شطاف WG004",
-  deaf = "ضمان 10 سنين",
+  // deaf = "ضمان 10 سنين",
   price = 0,
   quantity = 1,
   productId = 0,
@@ -45,9 +45,9 @@ const CartItemCard = ({
         /> */}
         <div>
           <h1 className="text-xl font-bold max-lg:text-base">{name}</h1>
-          <h2 className="text-xl font-bold text-gray-400 max-lg:text-base">
+          {/* <h2 className="text-xl font-bold text-gray-400 max-lg:text-base">
             {deaf}
-          </h2>
+          </h2> */}
         </div>
         {isQuantity ? (
           <div className="w-32 max-lg:w-full max-lg:max-w-32">

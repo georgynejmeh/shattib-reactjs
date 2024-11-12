@@ -36,6 +36,9 @@ const AdminSidePanel = () => {
         <Link to={"/admin/consultations"}>
           <SidePanelItem icon={minusGrayIcon}>استشارات</SidePanelItem>
         </Link>
+        <Link to={"/admin/samples"}>
+          <SidePanelItem icon={minusGrayIcon}>العينات</SidePanelItem>
+        </Link>
       </div>
       <div>
         <Link to={""}>

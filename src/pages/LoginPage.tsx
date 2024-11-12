@@ -8,6 +8,7 @@ import {
   useApi,
   Navigate,
   useState,
+  ButtonGold,
 } from "..";
 import { Login } from "../models/Login";
 
@@ -69,7 +70,7 @@ const LoginPage = () => {
           <span className="text-yellow-600 text-2xl pb-4">
             أهلاً بك في شطّب!
           </span>
-          <span className="text-2xl">أنشاء حساب</span>
+          <span className="text-2xl">تسجيل دخول</span>
           <form className="py-4" action="">
             <TextInput
               name="email"
@@ -102,6 +103,11 @@ const LoginPage = () => {
                 </button>
               </Link>
             </span>
+          </div>
+          <div className="flex self-start mt-8">
+            <Link to={"/home"}>
+              <ButtonGold>الدخول كضيف</ButtonGold>
+            </Link>
           </div>
         </div>
         <div className="px-8 max-lg:py-4"></div>

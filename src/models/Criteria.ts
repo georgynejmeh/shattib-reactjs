@@ -3,8 +3,8 @@ export interface Cirteria {
   title: string;
   status: string; // Pending , Rejected, Accepted
   phoneNumber: string;
-  userName: string;
-  DateOfCreation: string;
+  displayName: string;
+  dateOfCreation: string;
   criteriaItems: CirteriaItem[];
   comments: [
     {
