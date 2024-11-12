@@ -1,10 +1,10 @@
+import React, { useState } from "react";
 import {
   ButtonGold,
   Link,
   Navigate,
   NewProductHeaderText,
   TextInput,
-  UploadFile,
   usePostForm,
 } from "../..";
 import { MyFormData } from "./AdminNewProductContainer";
@@ -22,84 +22,101 @@ const AdminNewProductSecondPage = ({
   onInputChange,
   setFormData,
 }: Props) => {
-  const { postData, isLoading, error, data } = usePostForm("Products", "POST");
+  const { postData, isLoading, error, data } = usePostForm<Response>(
+    "Products",
+    "POST"
+  );
 
-  // const handleSubmit = async () => {
-  //   const formDataToSend = new FormData();
+  // Local state for dynamic specifications
+  const [specifications, setSpecifications] = useState<
+    { name: string; value: string }[]
+  >([]);
 
-  //   // Append form data to FormData object
-  //   for (const key in formData) {
-  //     if (Object.prototype.hasOwnProperty.call(formData, key)) {
-  //       const value = formData[key as keyof MyFormData];
-  //       if (value instanceof File) {
-  //         // If the value is a file (e.g., Images), append it as FormData
-  //         formDataToSend.append(key, value);
-  //       } else {
-  //         // Otherwise, append it as a regular form field
-  //         formDataToSend.append(key, value as string);
-  //       }
-  //     }
-  //   }
+  // Ensure formData.Images is initialized as an empty array if not present
+  const images = formData.Images || [];
 
-  //   // Use the API hook to send the data
-  //   postData(formDataToSend);
-  // };
+  // Handle image selection (multiple files)
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      const newImages = Array.from(files); // Convert FileList to an array
+      setFormData((prevData) => ({
+        ...prevData,
+        Images: [...(prevData.Images || []), ...newImages], // Ensure Images is always an array
+      }));
+    }
+  };
 
-  // const handleImageChange = (image: File) => {
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     Images: image ? [image] : [], // Store image in an array or pass multiple files if needed
-  //   }));
-  // };
+  // Handle adding a specification
+  const handleAddSpecification = () => {
+    setSpecifications((prevSpecs) => [
+      ...prevSpecs,
+      { name: "", value: "" }, // Add an empty specification to allow user to fill in
+    ]);
+  };
 
+  // Handle specification input change
+  const handleSpecificationChange = (
+    index: number,
+    field: "name" | "value",
+    value: string
+  ) => {
+    const updatedSpecifications = [...specifications];
+    updatedSpecifications[index][field] = value;
+    setSpecifications(updatedSpecifications);
+  };
+
+  // Handle specification deletion
+  const handleRemoveSpecification = (index: number) => {
+    setSpecifications((prevSpecs) => prevSpecs.filter((_, i) => i !== index));
+  };
+
+  // Handle form submission
   const handleSubmit = async () => {
     const formDataToSend = new FormData();
 
-    // Append form data to FormData object
+    // Append standard form fields
     for (const key in formData) {
       if (Object.prototype.hasOwnProperty.call(formData, key)) {
         const value = formData[key as keyof MyFormData];
         if (value instanceof File) {
-          // If the value is a file (e.g., Images), append it as FormData
           formDataToSend.append(key, value);
         } else if (Array.isArray(value)) {
-          // If the value is an array (e.g., Images), iterate over the array and append each file
           value.forEach((file) => formDataToSend.append(key, file));
         } else {
-          // Otherwise, append it as a regular form field
           formDataToSend.append(key, value as string);
         }
       }
     }
 
-    // Use the API hook to send the data
+    // Append the images as an array of files
+    images.forEach((image) => {
+      formDataToSend.append("Images[]", image); // Append each image as a separate FormData entry
+    });
+
+    // Append the specifications array
+    specifications.forEach((spec) => {
+      formDataToSend.append("Specifications[]", JSON.stringify(spec)); // Send each spec as a JSON string
+    });
+
+    // Post data to the API
     postData(formDataToSend);
   };
 
-  const handleImageChange = (image: File) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      Images: [image], // Store image in an array, even if only one image is selected
-    }));
-  };
-
-  // Validation function for the form
   const isFormValid = () => {
-    // Check if the required fields are filled
     const { Deaf, RetrivalAndReplacing, Notes, Images } = formData;
-
-    // Ensure that the required fields are not empty and the image is uploaded
     return (
       Deaf.trim() !== "" &&
       RetrivalAndReplacing.trim() !== "" &&
       Notes.trim() !== "" &&
-      Images
+      (Images?.length ?? 0) > 0 && // Use optional chaining and nullish coalescing to handle undefined Images
+      specifications.length >= 0
     );
   };
 
   return (
     <main>
-      {data ? <Navigate to={"/admin/home"} /> : null}
+      {data && <Navigate to={"/admin/home"} />}
 
       <NewProductHeaderText second />
 
@@ -134,14 +151,6 @@ const AdminNewProductSecondPage = ({
         </div>
 
         <div className="w-full h-40 flex gap-8 mt-8">
-          {/* <div className="w-full">
-            <TextInput
-              big
-              blackTitle
-              title="شهادات هيئة المقاييس والجودة"
-              placeholder="أضف شهادات المنتج إن وجدت"
-            />
-          </div> */}
           <div className="w-full">
             <TextInput
               big
@@ -155,12 +164,83 @@ const AdminNewProductSecondPage = ({
           </div>
         </div>
 
-        <div className="w-1/2 pe-4 h-80 mt-8">
-          <UploadFile
-            title="صورة المنتج"
-            subTitle="ارفع صورة المنتج"
-            onImageChange={handleImageChange}
+        {/* Image Upload Section */}
+        <div className="w-full mt-8">
+          <label className="block text-lg">رفع الصور</label>
+          <input
+            type="file"
+            multiple
+            onChange={handleImageChange}
+            className="mt-2 p-2 border border-gray-300 rounded-md"
           />
+        </div>
+
+        {/* Display uploaded images */}
+        <div className="w-full mt-8">
+          <h3 className="text-xl font-bold">الصور المرفوعة:</h3>
+          <div className="flex gap-4 mt-4">
+            {images.map((image, index) => (
+              <div key={index} className="relative w-32 h-32">
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt={`uploaded-image-${index}`}
+                  className="w-full h-full object-cover rounded-md"
+                />
+                <button
+                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full"
+                  onClick={() => {
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      Images: (prevData.Images || []).filter(
+                        (_, i) => i !== index
+                      ), // Default to empty array if Images is undefined
+                    }));
+                  }}
+                >
+                  X
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Specifications Section */}
+        <div className="w-full mt-8">
+          <h3 className="text-xl font-bold">إضافة المواصفات</h3>
+          {specifications.map((spec, index) => (
+            <div key={index} className="flex gap-4 mt-4">
+              <input
+                type="text"
+                value={spec.name}
+                onChange={(e) =>
+                  handleSpecificationChange(index, "name", e.target.value)
+                }
+                placeholder="اسم الخيار"
+                className="p-2 border border-gray-300 rounded-md"
+              />
+              <input
+                type="text"
+                value={spec.value}
+                onChange={(e) =>
+                  handleSpecificationChange(index, "value", e.target.value)
+                }
+                placeholder="القيمة"
+                className="p-2 border border-gray-300 rounded-md"
+              />
+              <button
+                className="bg-red-500 text-white rounded-md px-4 py-2"
+                onClick={() => handleRemoveSpecification(index)}
+              >
+                حذف
+              </button>
+            </div>
+          ))}
+          <button
+            className="mt-4 bg-green-500 text-white rounded-md px-4 py-2"
+            onClick={handleAddSpecification}
+          >
+            إضافة خيار جديد
+          </button>
         </div>
 
         <div className="flex w-80 gap-4 self-end mt-8">
@@ -169,13 +249,12 @@ const AdminNewProductSecondPage = ({
               السابق
             </button>
           </Link>
-          {/* <Link className="w-full" to={"/admin/product/new"}> */}
+
           <ButtonGold disabled={!isFormValid()} onClick={handleSubmit}>
-            {/* <ButtonGold onClick={() => postData(formData)}> */}
             {isLoading ? "التحميل..." : "أضف المنتج"}
           </ButtonGold>
-          {/* </Link> */}
         </div>
+
         {error ? (
           <span className="py-4 text-red-600 font-bold self-end">
             حدث خطأ! الرجاء إعادة المحاولة

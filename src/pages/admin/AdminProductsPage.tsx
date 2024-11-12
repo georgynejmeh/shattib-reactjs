@@ -59,9 +59,10 @@ const AdminProductsPage = () => {
                     <td>{product.price} ريال</td>
                     <td>
                       <div className="flex items-center justify-center gap-4">
-                        <Link to={"/admin/product/new"}>
-                          <img src={bluePenIcon} alt="" />
+                        <Link to={`/admin/product/edit/${product.id}`}>
+                          <img src={bluePenIcon} alt="Edit" />
                         </Link>
+
                         <button
                           onClick={() => {
                             setId(product.id);

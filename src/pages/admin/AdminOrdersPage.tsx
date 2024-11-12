@@ -1,8 +1,22 @@
-import { DropDownMenuButton, MainPadding, OrdersTableRow, useApi } from "../..";
+import {
+  DropDownMenuButton,
+  MainPadding,
+  OrdersTableRow,
+  useApi,
+  useState,
+} from "../..";
 import { Order } from "../../models/Order";
 
 const AdminOrdersPage = () => {
-  const { isLoading, error, data } = useApi<Order[]>("Orders/All");
+  const [isDropdown, setIsDropdown] = useState(false);
+  const [filter, setFilter] = useState<
+    "Pending" | "Accepted" | "Rejected" | "Shipped" | "All" | string
+  >("All");
+
+  const { isLoading, error, data } = useApi<Order[]>(
+    filter === "All" ? "Orders/All" : `Orders/Status?status=${filter}`
+  );
+  // Pending // Accepted // Rejected // Shipped
   // TODO DELETE
   // const temp: Array<"قيد المعالجة" | "مقبول" | "مرفوض" | "مكتمل"> = [
   //   "قيد المعالجة",
@@ -18,10 +32,44 @@ const AdminOrdersPage = () => {
     <main>
       <MainPadding>
         <h1 className="text-2xl font-bold">الطلبات</h1>
-        <div className="flex flex-col items-end w-full">
-          <div className="w-32 py-4">
-            <DropDownMenuButton>جميع الطلبات</DropDownMenuButton>
+        <div className="relative flex flex-col items-end w-full">
+          <div onClick={() => setIsDropdown(!isDropdown)} className="w-32 py-4">
+            <DropDownMenuButton>
+              {filter === "All"
+                ? "جميع الطلبات"
+                : filter === "Accepted"
+                ? "مقبول"
+                : filter === "Pending"
+                ? "قيد المعالجة"
+                : filter === "Rejected"
+                ? "مرفوض"
+                : filter === "Shipped"
+                ? "مكتمل"
+                : ""}
+            </DropDownMenuButton>
           </div>
+
+          {isDropdown && (
+            <div className="absolute top-12 flex flex-col bg-white shadow-xl">
+              {[
+                { query: "All", arabic: "جميع الطلبات" },
+                { query: "Pending", arabic: "قيد المعالجة" },
+                { query: "Accepted", arabic: "مقبول" },
+                { query: "Rejected", arabic: "مرفوض" },
+                { query: "Shipped", arabic: "مكتمل" },
+              ].map((status) => (
+                <button
+                  onClick={() => {
+                    setIsDropdown(false);
+                    setFilter(status.query);
+                  }}
+                  className="px-4 py-1 hover:bg-gray-100"
+                >
+                  {status.arabic}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         <table className="orders-table">
           <thead>
