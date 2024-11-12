@@ -46,7 +46,7 @@ const App = () => {
     <main dir="rtl">
       <Routes>
         <Route path="/" element={<IntroPage />} />
-        <Route path="/admin" element={<RegisterPage />} />
+        <Route path="/admin" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/contact" element={<ContactPage />} />
