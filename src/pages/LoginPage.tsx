@@ -8,6 +8,7 @@ import {
   useApi,
   Navigate,
   useState,
+  ButtonGold,
 } from "..";
 import { Login } from "../models/Login";
 
@@ -102,6 +103,11 @@ const LoginPage = () => {
                 </button>
               </Link>
             </span>
+          </div>
+          <div className="flex self-start mt-8">
+            <Link to={"/home"}>
+              <ButtonGold>الدخول كضيف</ButtonGold>
+            </Link>
           </div>
         </div>
         <div className="px-8 max-lg:py-4"></div>
