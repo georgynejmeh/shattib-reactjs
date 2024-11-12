@@ -11,7 +11,7 @@ const RegisterCompanyCard = () => {
         image={yellowBuilding}
         title="شركات"
         desc="خدمات الشركات لعرض وشراء مواد التشطيب"
-        footer="دخول كشركة"
+        footer="دخول الشركات"
         color="amber"
       />
     </div>

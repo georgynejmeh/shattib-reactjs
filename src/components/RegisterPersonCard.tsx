@@ -11,7 +11,7 @@ const RegisterPersonCard = () => {
         image={bluePerson}
         title="أفراد"
         desc="خدمات الأفراد لتصفح وشراء مواد التشطيب"
-        footer="دخول كفرد"
+        footer="دخول الأفراد"
         color="sky"
       />
     </div>
