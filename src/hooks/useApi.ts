@@ -125,7 +125,7 @@ export function useApi<T>(
     }
   }
 
-  async function patchForm(body: object, isToken: boolean) {
+  async function patchForm(body: FormData, isToken: boolean) {
     setIsLoading(true);
     const apiUrl = "https://shatib.com/api/";
     try {
@@ -137,7 +137,7 @@ export function useApi<T>(
       }
       const requestOptions = {
         method: "PATCH",
-        body: JSON.stringify(body),
+        body: body,
         headers: headers,
       };
       console.log(requestOptions);
