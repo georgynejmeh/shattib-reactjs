@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import {
   ButtonGold,
-  closeCircleIcon,
   emailIcon,
-  Link,
   phoneIcon,
   shattibLogoCol,
   TextInput,
@@ -47,11 +45,11 @@ const ContactPage: React.FC = () => {
 
   return (
     <main className="h-screen w-screen p-main bg-gray-300 flex justify-center items-center max-lg:h-max">
-      <div className="absolute top-16 right-16">
+      {/* <div className="absolute top-16 right-16">
         <Link to={"/home"}>
           <img src={closeCircleIcon} alt="" />
         </Link>
-      </div>
+      </div> */}
 
       <section className="flex items-center gap-16 max-lg:flex-col">
         <div className="flex flex-col gap-8">
