@@ -38,7 +38,9 @@ const NavBar = () => {
     <>
       <div className="fixed top-0 z-50 w-full bg-white max-lg:hidden">
         <nav className="flex items-center justify-between border-b py-4 px-8">
-          <img src={shattibLogoRow} alt="" />
+          <Link to={"/home"}>
+            <img src={shattibLogoRow} alt="" />
+          </Link>
           <Link to={"/home"}>
             <span>الصفحة الرئيسية</span>
           </Link>
