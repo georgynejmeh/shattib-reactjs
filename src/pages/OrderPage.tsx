@@ -8,11 +8,11 @@ import {
   truckIcon,
   useApi,
   useParams,
-} from "../..";
-import { useConfirmDelete } from "../../hooks/useConfirmDeleteModal";
-import { Order } from "../../models/Order";
+} from "..";
+import { useConfirmDelete } from "../hooks/useConfirmDeleteModal";
+import { Order } from "../models/Order";
 
-const AdminOrderPage = () => {
+const OrderPage = () => {
   const { id } = useParams();
 
   const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
@@ -73,8 +73,8 @@ const AdminOrderPage = () => {
               {data.orderItems.map((order, index) => (
                 <OrderItem
                   key={index}
-                  image={order.productMainImage}
                   index={index}
+                  image={order.productMainImage}
                   name={order.productName}
                   quantity={order.quantitiy}
                   price={order.totalPriceForThisProduct}
@@ -130,4 +130,4 @@ const AdminOrderPage = () => {
   );
 };
 
-export default AdminOrderPage;
+export default OrderPage;

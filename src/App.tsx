@@ -6,7 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MainLayout from "./layouts/MainLayout";
 import ProductPage from "./pages/ProductPage";
-import CartPage from "./pages/CartPage";
+import CartPage from "./pages/CartPageContainer";
 import WishListPage from "./pages/WishListPage";
 import ConditionDocsPage from "./pages/ConditionDocsPage";
 import NewConditionPage from "./pages/NewConditionPage";
@@ -28,6 +28,10 @@ import StatisticsPage from "./pages/admin/StatisticsPage";
 import AdminCriteriasPage from "./pages/admin/AdminCriteriasPage";
 import AdminCriteriaPage from "./pages/admin/AdminCriteriaPage";
 import ContactPage from "./pages/ContactPage";
+import SearchPage from "./pages/SearchPage";
+import OrderPage from "./pages/OrderPage";
+import OrdersPage from "./pages/OrdersPage";
+import AdminSamplesPage from "./pages/admin/AdminSamplesPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -41,6 +45,7 @@ const App = () => {
     <main dir="rtl">
       <Routes>
         <Route path="/" element={<IntroPage />} />
+        <Route path="/admin" element={<RegisterPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/contact" element={<ContactPage />} />
@@ -60,6 +65,9 @@ const App = () => {
           />
           <Route path="/price-request" element={<PriceRequestPage />} />
           <Route path="/price-request-2" element={<PriceRequestSecondPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/order/:id" element={<OrderPage />} />
         </Route>
         <Route element={<AdminLayout />}>
           <Route path="/admin/home" element={<AdminHomePage />} />
@@ -83,6 +91,8 @@ const App = () => {
           <Route path="/admin/statistics" element={<StatisticsPage />} />
           <Route path="/admin/criterias" element={<AdminCriteriasPage />} />
           <Route path="/admin/criterias/:id" element={<AdminCriteriaPage />} />
+          <Route path="/admin/search" element={<SearchPage />} />
+          <Route path="/admin/samples" element={<AdminSamplesPage />} />
         </Route>
         button
       </Routes>

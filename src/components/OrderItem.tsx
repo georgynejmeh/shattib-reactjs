@@ -1,10 +1,11 @@
-import { productImg, TitleNumber } from "..";
+import { TitleNumber } from "..";
 
 interface Props {
   index: number;
   name?: string;
   quantity?: number;
   price?: number;
+  image: string;
 }
 
 const OrderItem = ({
@@ -12,12 +13,13 @@ const OrderItem = ({
   name = "طقم شاطاف WG006",
   quantity = 6,
   price = 15,
+  image,
 }: Props) => {
   return (
     <div className="flex justify-around items-center gap-4 border-b-2">
       <h1 className="text-xl font-bold">{index}</h1>
       <div className="bg-gray-100 h-16 aspect-video py-2 px-6 rounded">
-        <img className="w-full h-full rounded" src={productImg} alt="" />
+        <img className="w-full h-full rounded" src={image} alt="" />
       </div>
       <TitleNumber column subTitle="طقم شطاف">
         {name}

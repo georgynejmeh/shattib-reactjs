@@ -1,4 +1,4 @@
-import { useApi } from "../../hooks/useApi";
+import { AccentText, useApi } from "../..";
 import { Consultation } from "../../models/Consultation";
 
 import "../../App.css";
@@ -8,8 +8,9 @@ const AdminConsultationsPage = () => {
   console.log(data);
   return (
     <main className="p-main">
-      <h1 className="text-2xl font-bold mb-8">الاستشارات</h1>
-      <table className="orders-table">
+      <AccentText>طلبات رفع مساحة</AccentText>
+      {/* <h1 className="text-2xl font-bold mb-8">الاستشارات</h1> */}
+      <table className="mt-8 orders-table">
         <thead>
           <tr>
             <th>الرمز</th>

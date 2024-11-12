@@ -5,7 +5,7 @@ import {
   emailIcon,
   Link,
   phoneIcon,
-  shattibLogoCol,
+  shattibLogoContactUs,
   TextInput,
   useApi,
 } from "..";
@@ -47,16 +47,16 @@ const ContactPage: React.FC = () => {
 
   return (
     <main className="h-screen w-screen p-main bg-gray-300 flex justify-center items-center max-lg:h-max">
-      <div className="absolute top-16 right-16">
+      <div className="absolute top-16 right-16 max-lg:top-4 max-lg:right-4">
         <Link to={"/home"}>
           <img src={closeCircleIcon} alt="" />
         </Link>
       </div>
 
-      <section className="flex items-center gap-16 max-lg:flex-col">
-        <div className="flex flex-col gap-8">
+      <section className="flex items-center gap-16 max-lg:flex-col max-lg:w-full max-lg:mt-16">
+        <div className="flex flex-col gap-8 max-lg:w-full">
           <h1 className="text-2xl font-bold">تواصل معنا</h1>
-          <div className="lg:w-96">
+          <div className="lg:w-96 max-lg:w-full">
             <TextInput
               placeholder="الاسم"
               name="name"
@@ -89,9 +89,9 @@ const ContactPage: React.FC = () => {
 
           {data && <p className="text-green-500">Message sent successfully!</p>}
         </div>
-        <div className="w-1/2 flex flex-col gap-8">
-          <img src={shattibLogoCol} alt="Shattib Logo" />
-          <div className="flex gap-4">
+        <div className="w-1/2 flex flex-col gap-8 items-center">
+          <img className="w-40" src={shattibLogoContactUs} alt="Shattib Logo" />
+          <div className="flex gap-4 text-nowrap">
             <img src={phoneIcon} alt="Phone" />
             <span dir="ltr">+966 50 109 3007</span>
           </div>
