@@ -33,6 +33,7 @@ import OrderPage from "./pages/OrderPage";
 import OrdersPage from "./pages/OrdersPage";
 import AdminSamplesPage from "./pages/admin/AdminSamplesPage";
 import AdminEditProductPage from "./pages/admin/AdminEditProductPage";
+import ConsultationsPage from "./pages/ConsultationsPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -69,6 +70,7 @@ const App = () => {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/order/:id" element={<OrderPage />} />
+          <Route path="/consultations" element={<ConsultationsPage />} />
         </Route>
         <Route element={<AdminLayout />}>
           <Route path="/admin/home" element={<AdminHomePage />} />

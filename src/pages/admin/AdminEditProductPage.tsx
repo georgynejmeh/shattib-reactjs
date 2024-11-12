@@ -46,6 +46,8 @@ const AdminEditProductPage = () => {
     }
   }, [data]);
 
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -59,29 +61,47 @@ const AdminEditProductPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Convert formData to match the API format
-    const formattedData = {
-      ProductId: id, // Assuming you want to send the ProductId explicitly
-      SubCategoryId: formData.subCategoryId,
-      Name: formData.name,
-      Description: formData.description,
-      Features: formData.features,
-      Price: formData.price,
-      MeasurementUnit: formData.measurementUnit,
-      Meaurements: formData.meaurements,
-      ManufacturingCountry: formData.manufacturingCountry,
-      Color: formData.color,
-      Deaf: formData.deaf,
-      RetrivalAndReplacing: formData.retrivalAndReplacing,
-      Notes: formData.notes,
-      //   WareHouseCode: formData.wareHouseCode,
-      //   Specifications: formData.specifications,
-      //   Images: formData.images,
-    };
+    const form = new FormData();
 
-    // Send the formatted data to the API
-    await patchForm(formattedData, false);
-    console.log("Updated Product Data:", formattedData);
+    // Append data, ensuring conversion of numbers to strings and handling undefined values
+    form.append("ProductId", String(parseInt(id || ""))); // Ensure ID is converted to string
+    form.append("SubCategoryId", String(formData.subCategoryId)); // Convert SubCategoryId to string
+    form.append("Name", formData.name || ""); // Default to empty string if undefined
+    form.append("Description", formData.description || ""); // Default to empty string if undefined
+    form.append("Features", formData.features || ""); // Default to empty string if undefined
+    form.append("Price", String(formData.price)); // Convert price to string
+    form.append("MeasurementUnit", formData.measurementUnit || ""); // Default to empty string if undefined
+    form.append("Meaurements", formData.meaurements || ""); // Default to empty string if undefined
+    form.append("ManufacturingCountry", formData.manufacturingCountry || ""); // Default to empty string if undefined
+    form.append("Color", formData.color || ""); // Default to empty string if undefined
+    form.append("Deaf", formData.deaf || ""); // Default to empty string if undefined
+    form.append("RetrivalAndReplacing", formData.retrivalAndReplacing || ""); // Default to empty string if undefined
+    form.append("Notes", formData.notes || ""); // Default to empty string if undefined
+    form.append("WareHouseCode", formData.wareHouseCode || ""); // Default to empty string if undefined
+
+    // Handle array fields like specifications and images (if applicable)
+    // formData.specifications.forEach((spec, index) => {
+    //   form.append(`Specifications[${index}][name]`, spec.name || "");  // Default to empty string if undefined
+    //   form.append(`Specifications[${index}][value]`, spec.value || "");  // Default to empty string if undefined
+    // });
+
+    // formData.images.forEach((image, index) => {
+    //   if (image.imagePath) {
+    //     form.append(`Images[${index}]`, image.imagePath);  // Append image paths as string
+    //   }
+    // });
+
+    // Send the FormData object to the API
+    await patchForm(form, false);
+    console.log("FormData:", form);
+
+    // Show success popup on successful form submission
+    setShowSuccessPopup(true);
+
+    // Hide popup after 3 seconds
+    setTimeout(() => {
+      setShowSuccessPopup(false);
+    }, 3000);
   };
 
   return (
@@ -235,6 +255,17 @@ const AdminEditProductPage = () => {
           </>
         )}
       </div>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="fixed top-32">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-xs">
+            <p className="text-center text-green-600 font-semibold">
+              تم تعديل المنتج بنجاح
+            </p>
+          </div>
+        </div>
+      )}
     </main>
   );
 };
