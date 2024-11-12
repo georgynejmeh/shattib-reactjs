@@ -2,11 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   consultationsIcon,
   downArrowIcon,
-  gearIcon,
   ordersIcon,
   personOutlineIcon,
   redLogoutIcon,
-  shattibIcon,
   useEffect,
   useRef,
   useState,
@@ -79,12 +77,14 @@ const NavBarAccountDropDown = () => {
             </Link>
           </button>
           <button className="hover:bg-gray-100 px-4 py-2">
-            <div className="flex gap-4 items-center">
-              <img className="w-5" src={consultationsIcon} alt="" />
-              <span>الاستشارات</span>
-            </div>
+            <Link to={"/consultations"}>
+              <div className="flex gap-4 items-center">
+                <img className="w-5" src={consultationsIcon} alt="" />
+                <span>الاستشارات</span>
+              </div>
+            </Link>
           </button>
-          <button className="hover:bg-gray-100 px-4 py-2">
+          {/* <button className="hover:bg-gray-100 px-4 py-2">
             <div className="flex gap-4 items-center">
               <img className="w-5" src={gearIcon} alt="" />
               <span>الإعدادات</span>
@@ -95,7 +95,7 @@ const NavBarAccountDropDown = () => {
               <img className="w-5" src={shattibIcon} alt="" />
               <span>الضمانات</span>
             </div>
-          </button>
+          </button> */}
           <hr />
           <button
             className="hover:bg-gray-100 px-4 py-2"
