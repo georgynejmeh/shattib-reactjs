@@ -1,7 +1,6 @@
 import {
   AccentText,
   bluePenIcon,
-  downArrowIcon,
   Link,
   redTrashIcon,
   RoundButton,
@@ -10,19 +9,50 @@ import {
 
 import "../../App.css";
 import { Cirteria } from "../../models/Criteria";
+import { useState } from "react";
 
 const AdminCriteriasPage = () => {
-  // const temp = [1, 2, 3];
-  const { isLoading, error, data } = useApi<Cirteria[]>("Criteria/GetAll");
-  console.log(data);
+  // Initializing state for the selected filter
+  const [statusFilter, setStatusFilter] = useState<string>(""); // Empty means "All"
+
+  // Using the useApi hook to fetch data based on the selected status
+  const { isLoading, error, data } = useApi<Cirteria[]>(
+    `Criteria/GetAll${statusFilter ? `?status=${statusFilter}` : ""}`
+  );
+
+  // Handle click on filter buttons
+  const handleFilterChange = (status: string) => {
+    setStatusFilter(status);
+  };
+
   return (
     <main className="p-main">
       <AccentText>الكراسات</AccentText>
       <div className="w-full flex justify-center py-8">
-        <RoundButton active>الكل</RoundButton>
-        <RoundButton>معلقة</RoundButton>
-        <RoundButton>مقبولة</RoundButton>
-        <RoundButton>مرفوضة</RoundButton>
+        <RoundButton
+          active={statusFilter === ""}
+          onClick={() => handleFilterChange("")}
+        >
+          الكل
+        </RoundButton>
+        <RoundButton
+          active={statusFilter === "Pending"}
+          onClick={() => handleFilterChange("Pending")}
+        >
+          معلقة
+        </RoundButton>
+        <RoundButton
+          active={statusFilter === "Accepted"}
+          onClick={() => handleFilterChange("Accepted")}
+        >
+          مقبولة
+        </RoundButton>
+        <RoundButton
+          active={statusFilter === "Rejected"}
+          onClick={() => handleFilterChange("Rejected")}
+        >
+          مرفوضة
+        </RoundButton>
       </div>
       <table className="orders-table">
         <thead>
@@ -55,17 +85,14 @@ const AdminCriteriasPage = () => {
                   {criteria.status === "Pending" ? (
                     <div className="flex gap-4 w-32 mx-auto justify-center rounded-full bg-yellow-100 py-1">
                       <span>قيد المعالجة</span>
-                      <img className="w-3" src={downArrowIcon} alt="" />
                     </div>
                   ) : criteria.status === "Rejected" ? (
                     <div className="flex gap-4 w-32 mx-auto justify-center rounded-full bg-red-100 py-1">
                       <span>مرفوضة</span>
-                      <img className="w-3" src={downArrowIcon} alt="" />
                     </div>
                   ) : criteria.status === "Accepted" ? (
                     <div className="flex gap-4 w-32 mx-auto justify-center rounded-full bg-green-100 py-1">
                       <span>مقبولة</span>
-                      <img className="w-3" src={downArrowIcon} alt="" />
                     </div>
                   ) : null}
                 </td>

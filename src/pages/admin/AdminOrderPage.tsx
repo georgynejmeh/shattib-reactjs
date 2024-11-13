@@ -1,6 +1,7 @@
 import {
   AccentText,
   databaseIcon,
+  downArrowIcon,
   drawerIcon,
   MainPadding,
   OrderItem,
@@ -11,6 +12,7 @@ import {
 } from "../..";
 import { useConfirmDelete } from "../../hooks/useConfirmDeleteModal";
 import { Order } from "../../models/Order";
+import { useState, useEffect } from "react";
 
 const AdminOrderPage = () => {
   const { id } = useParams();
@@ -21,9 +23,42 @@ const AdminOrderPage = () => {
   setId(parseInt(id || "0"));
 
   const { isLoading, error, data } = useApi<Order>(`Orders/${id}`);
+  const { patchData } = useApi(`Orders/${id}`);
 
-  // TODO DELETE
-  // const temp = [1, 2, 3, 4, 5];
+  // Local state for managing dropdown and the selected status
+  const [selectedStatus, setSelectedStatus] = useState<string>("Pending");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to control dropdown visibility
+
+  // Effect to update the selected status when the data is loaded
+  useEffect(() => {
+    if (data) {
+      setSelectedStatus(data.status); // Set the status from the API response
+    }
+  }, [data]); // This will run when `data` changes
+
+  // Function to handle status change
+  const handleStatusChange = (newStatus: string) => {
+    setSelectedStatus(newStatus);
+    patchData({ orderId: id, newStatus: newStatus }); // Send the status update to the API
+    setIsDropdownOpen(false); // Close the dropdown after selection
+  };
+
+  // Determine the background color for each status
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Accepted":
+        return "bg-yellow-100";
+      case "Rejected":
+        return "bg-red-100";
+      case "Pending":
+        return "bg-orange-100";
+      case "Shipped":
+        return "bg-green-100";
+      default:
+        return "bg-gray-100";
+    }
+  };
+
   return (
     <main>
       <MainPadding>
@@ -35,18 +70,60 @@ const AdminOrderPage = () => {
           <>
             <div className="flex items-center gap-4">
               <h1 className="text-4xl font-bold">الطلب #{data.id}</h1>
-              <div className="py-1 px-3 rounded-full max-w-28 max-h-fit text-center bg-orange-200">
-                قيد المعالجة
+              <div className="relative">
+                {/* Dropdown Button with downArrowIcon */}
+                <button
+                  className={`py-1 px-3 rounded-full max-w-32 max-h-fit text-center ${getStatusColor(
+                    selectedStatus
+                  )} flex gap-2 items-center justify-between`}
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggle dropdown visibility
+                >
+                  <span>
+                    {selectedStatus === "Accepted" && "مقبول"}
+                    {selectedStatus === "Rejected" && "مرفوض"}
+                    {selectedStatus === "Pending" && "قيد المعالجة"}
+                    {selectedStatus === "Shipped" && "مكتمل"}
+                  </span>
+                  <img
+                    src={downArrowIcon}
+                    alt="Dropdown"
+                    className={`w-4 h-4 transition-transform duration-300 ${
+                      isDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Dropdown Menu */}
+                {isDropdownOpen && (
+                  <div className="absolute top-0 right-0 mt-8 w-32 bg-white shadow-md rounded-lg">
+                    <ul className="text-sm">
+                      {["Accepted", "Rejected", "Pending", "Shipped"].map(
+                        (status) => (
+                          <li
+                            key={status}
+                            className="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                            onClick={() => handleStatusChange(status)}
+                          >
+                            {status === "Accepted" && "قبول"}
+                            {status === "Rejected" && "رفض"}
+                            {status === "Pending" && "قيد المعالجة"}
+                            {status === "Shipped" && "مكتمل"}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
 
             <hr className="my-4" />
 
-            <section className="flex items-centers gap-8 border-b-2 w-fit p-4">
+            <section className="flex items-center gap-8 border-b-2 w-fit p-4">
               <div className="flex items-center gap-4">
                 <img src={drawerIcon} alt="" />
                 <span className="text-gray-400 font-bold">تاريخ الإنشاء</span>
-                <span>{data.dateOfOrder}</span>
+                <span>{data.dateOfOrder.substring(0, 10)}</span>
               </div>
               <div className="flex items-center gap-4">
                 <img src={truckIcon} alt="" />
@@ -63,13 +140,12 @@ const AdminOrderPage = () => {
                   setIsShownConfirmDeleteModal(true);
                 }}
               >
-                <img className="ms-16 h-6" src={trashCanIcon} alt="" />
+                <img className="ms-16 h-6" src={trashCanIcon} alt="Delete" />
               </button>
             </section>
 
             <section>
               <h1 className="text-2xl font-bold my-8">المتنجات</h1>
-              {/* TODO DELETE LOOP */}
               {data.orderItems === null
                 ? null
                 : data.orderItems.map((order, index) =>
@@ -87,48 +163,6 @@ const AdminOrderPage = () => {
             </section>
           </>
         ) : null}
-        <></>
-        {/* <div className="flex items-center gap-4">
-          <h1 className="text-4xl font-bold">الطلب #123456</h1>
-          <div className="py-1 px-3 rounded-full max-w-28 max-h-fit text-center bg-orange-200">
-            قيد المعالجة
-          </div>
-        </div>
-
-        <hr className="my-4" />
-
-        <section className="flex items-centers gap-8 border-b-2 w-fit p-4">
-          <div className="flex items-center gap-4">
-            <img src={drawerIcon} alt="" />
-            <span className="text-gray-400 font-bold">تاريخ الإنشاء</span>
-            <span>18/10/2024</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <img src={truckIcon} alt="" />
-            <span className="text-gray-400 font-bold">تاريخ التوصيل</span>
-            <span>لم يحدد بعد</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <img src={databaseIcon} alt="" />
-            <span className="text-gray-400 font-bold">التكلفة الكلية</span>
-            <AccentText>1600 ريال</AccentText>
-          </div>
-          <button
-            onClick={() => {
-              setIsShownConfirmDeleteModal(true);
-            }}
-          >
-            <img className="ms-16 h-6" src={trashCanIcon} alt="" />
-          </button>
-        </section> */}
-
-        <section>
-          {/* <h1 className="text-2xl font-bold my-8">المتنجات</h1> */}
-          {/* TODO DELETE LOOP */}
-          {/* {temp.map((index) => (
-            <OrderItem index={index} />
-          ))} */}
-        </section>
       </MainPadding>
     </main>
   );

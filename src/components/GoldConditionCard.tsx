@@ -1,4 +1,5 @@
-import { categoryImg01, trashCanIcon } from "..";
+import { trashCanIcon } from "..";
+import { categoryImage } from "../assets/json/categoryImage";
 
 interface Props {
   id: number;
@@ -21,7 +22,7 @@ const GoldConditionCard = ({
         <div className="h-40 w-full">
           <img
             className="rounded-b-xl w-full h-full object-cover"
-            src={categoryImg01}
+            src={categoryImage(id)}
             alt={name}
           />
         </div>

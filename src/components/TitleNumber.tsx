@@ -33,7 +33,7 @@ const TitleNumber = ({
       className={
         (size === "md" ? " flex gap-4 py-1 " : " flex gap-4 py-8 ") +
         (justifyBetween ? " justify-between " : " ") +
-        (column ? " flex-col items-center justify-center " : " ")
+        (column ? " flex-col items-center justify-center text-nowrap " : " ")
       }
     >
       <h1 className={`text-xl ${inverse ? "text-gray-400" : "font-bold"}`}>

@@ -5,7 +5,7 @@ export function useApi<T>(
   method?: "POST" | "DELETE" | "GET",
   isToken?: boolean,
   noResponse?: boolean,
-  dependencies?: any[]
+  dependencies?: [] //any[]
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);

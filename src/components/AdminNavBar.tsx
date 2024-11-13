@@ -16,6 +16,7 @@ const AdminNavBar = () => {
       <img src={shattibLogoRow} alt="" />
       <div className="w-1/2">
         <TextInput
+          bordered
           iconLink={`/admin/search?search=${searchValue}`}
           icon={searchIcon}
           placeholder="البحث عن المنتجات"

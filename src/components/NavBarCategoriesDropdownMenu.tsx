@@ -2,37 +2,16 @@ import {
   CatDropdownItem,
   downArrowIcon,
   Link,
-  useEffect,
-  useRef,
   useState,
+  useRef,
+  useEffect,
 } from "..";
 import { categories } from "../assets/json/categories";
+import { subCategories } from "../assets/json/subCategories"; // Assuming you import subCategories here
 
 const NavBarCategoriesDropdownMenu = () => {
-  // const { data } = useApi<{ id: number; name: string }[]>(
-  //   "SeededValues/Categories"
-  // );
-
-  // const categoriesList = [
-  //   "الرخام",
-  //   "البورسلان",
-  //   "السيراميك",
-  //   "الباركيه",
-  //   "النوافذ",
-  //   "الديكورات",
-  //   "الأبواب",
-  //   "الصفائح الحجرية",
-  //   "الجبس",
-  //   "الحجر",
-  //   "الدهانات",
-  //   "العوازل",
-  //   "البوابات الإلكترونية",
-  //   "مفاتيح وأفياش",
-  //   "مواد صحية وخزانات",
-  //   "التكييف",
-  //   "الإنارة",
-  // ];
   const [isCatDropdown, setIsCatDropdown] = useState(false);
+  const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
   const buttonRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -46,7 +25,6 @@ const NavBarCategoriesDropdownMenu = () => {
 
   useEffect(() => {
     window.addEventListener("click", handleClickOutside);
-
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
@@ -57,14 +35,11 @@ const NavBarCategoriesDropdownMenu = () => {
       if (isCatDropdown) setIsCatDropdown(false);
     };
 
-    const isSmallScreen = window.innerWidth <= 1024; // Max screen size for 'lg' in Tailwind (1024px)
-
+    const isSmallScreen = window.innerWidth <= 1024; // Tailwind's lg breakpoint
     if (!isSmallScreen) {
-      // Add the scroll event listener only if the screen size is 'lg' or smaller
       window.addEventListener("scroll", handleScroll);
     }
 
-    // Clean up the event listener on unmount or when screen size changes
     return () => {
       if (isSmallScreen) {
         window.removeEventListener("scroll", handleScroll);
@@ -72,41 +47,67 @@ const NavBarCategoriesDropdownMenu = () => {
     };
   }, [isCatDropdown]);
 
-  // window.addEventListener("scroll", () => {
-  //   if (isCatDropdown) setIsCatDropdown(false);
-  // });
-  // window.addEventListener("click", () => setIsCatDropdown(false));
+  // Get subcategories for the active category
+  const getSubcategoriesByCategoryId = (categoryId: number) => {
+    return subCategories.filter((sub) => sub.categoryId === categoryId);
+  };
 
   return (
     <button>
       <div ref={buttonRef} className="relative flex items-center">
-        {/* <img src={shattibIcon} alt="" /> */}
         <div
           onMouseEnter={() => setIsCatDropdown(true)}
           onClick={() => setIsCatDropdown((prev) => !prev)}
           className="flex items-center"
         >
           <span className="px-2">التصنيفات</span>
-          <img className="w-4" src={downArrowIcon} alt="" />
+          <img className="w-4" src={downArrowIcon} alt="Dropdown" />
         </div>
-        {isCatDropdown ? (
+
+        {isCatDropdown && (
           <div className="fixed z-50 top-16 lg:h-screen max-lg:absolute max-lg:top-6 max-lg:min-h-max">
             <div
               onMouseLeave={() => setIsCatDropdown(false)}
               className="flex flex-col flex-wrap h-1/2 bg-white max-lg:flex-nowrap max-lg:min-h-max max-lg:shadow"
             >
-              {categories.map((item, index) => (
-                <Link
-                  onClick={() => setIsCatDropdown(false)}
-                  to={`/category/${item.id}/1`}
-                  key={index}
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  onMouseEnter={() => setActiveCategoryId(category.id)} // Set active category on hover
+                  onMouseLeave={() => setActiveCategoryId(null)} // Remove active category when not hovered
                 >
-                  <CatDropdownItem>{item.name}</CatDropdownItem>
-                </Link>
+                  <Link
+                    to={`/category/${category.id}/1`}
+                    onClick={() => setIsCatDropdown(false)}
+                  >
+                    <CatDropdownItem>{category.name}</CatDropdownItem>
+                  </Link>
+
+                  {/* Show subcategories when hovering over a category */}
+                  {activeCategoryId === category.id && (
+                    <div className="absolute lg:h-screen">
+                      <div className="h-1/3 bg-gray-100 p-2 flex flex-wrap">
+                        {getSubcategoriesByCategoryId(category.id).map(
+                          (subCategory) => (
+                            <Link
+                              key={subCategory.id}
+                              to={`/category/${category.id}/${subCategory.id}`}
+                              onClick={() => setIsCatDropdown(false)} // Close dropdown after selecting subcategory
+                            >
+                              <CatDropdownItem>
+                                {subCategory.name}
+                              </CatDropdownItem>
+                            </Link>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
-        ) : null}
+        )}
       </div>
     </button>
   );

@@ -11,12 +11,30 @@ import {
   useParams,
 } from "../..";
 import { Cirteria } from "../../models/Criteria";
+import { useState, useEffect } from "react";
 
 const AdminCriteriaPage = () => {
   const { id } = useParams();
+
   const { isLoading, error, data } = useApi<Cirteria>(`Criteria/${id}`);
-  // use params get id
-  // const temp = [1, 2];
+
+  const [status, setStatus] = useState<string>(data?.status || "Pending"); // Set the initial status
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Function to handle status update
+  const { patchData } = useApi(`Criteria/${id}/Status`);
+
+  const updateStatus = (newStatus: string) => {
+    setStatus(newStatus); // Update local status
+    patchData({ id: id, status: newStatus }); // Send patch request to update status
+    setIsDropdownOpen(false); // Close the dropdown after selecting a status
+  };
+
+  useEffect(() => {
+    if (data) {
+      setStatus(data.status); // Initialize status when data is fetched
+    }
+  }, [data]);
 
   return (
     <main className="p-main">
@@ -30,9 +48,52 @@ const AdminCriteriaPage = () => {
             <div>
               <div className="flex gap-4">
                 <h1 className="text-2xl font-bold">كراسة رقم #{data.id}</h1>
-                <div className="flex gap-4 rounded-full bg-green-100 py-1 px-4">
-                  <span>مقبولة</span>
-                  <img className="w-3" src={downArrowIcon} alt="" />
+                <div className="relative">
+                  {/* Dropdown Button */}
+                  <div
+                    className={`flex gap-4 rounded-full py-1 px-4 cursor-pointer ${
+                      status === "Pending"
+                        ? "bg-yellow-100"
+                        : status === "Rejected"
+                        ? "bg-red-100"
+                        : status === "Accepted"
+                        ? "bg-green-100"
+                        : ""
+                    }`}
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  >
+                    <span>
+                      {status === "Pending"
+                        ? "قيد المعالجة"
+                        : status === "Rejected"
+                        ? "مرفوضة"
+                        : "مقبولة"}
+                    </span>
+                    <img className="w-3" src={downArrowIcon} alt="dropdown" />
+                  </div>
+
+                  {/* Dropdown Menu */}
+                  {isDropdownOpen && (
+                    <div className="absolute top-0 right-0 mt-2 w-32 bg-white shadow-md rounded-lg">
+                      <ul className="text-sm">
+                        {["Pending", "Rejected", "Accepted"].map(
+                          (statusOption) => (
+                            <li
+                              key={statusOption}
+                              className="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                              onClick={() => updateStatus(statusOption)}
+                            >
+                              {statusOption === "Pending"
+                                ? "قيد المعالجة"
+                                : statusOption === "Rejected"
+                                ? "مرفوضة"
+                                : "مقبولة"}
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
               <h3 className="text-gray-500">15/10/2024</h3>
@@ -57,7 +118,7 @@ const AdminCriteriaPage = () => {
           <h2 className="text-xl font-bold">محتوى الكراسة:</h2>
           <div className="rounded bg-gray-100">
             {data.criteriaItems.map((criteriaItem) => (
-              <div className="flex p-8">
+              <div className="flex p-8" key={criteriaItem.productName}>
                 <div className="w-2/3 p-8">
                   <TitleNumber inverse subTitle={criteriaItem.categoryName}>
                     التصنيف
@@ -82,7 +143,7 @@ const AdminCriteriaPage = () => {
                       column
                       subTitle={criteriaItem.measurementUnit}
                     >
-                      واحدة القياس
+                      وحدة القياس
                     </TitleNumber>
                   </div>
                   <div>
@@ -97,7 +158,7 @@ const AdminCriteriaPage = () => {
                     <img
                       className="w-full h-full object-cover"
                       src={criteriaItem.image}
-                      alt=""
+                      alt="attachment"
                     />
                   </div>
                 </div>
@@ -105,32 +166,15 @@ const AdminCriteriaPage = () => {
             ))}
           </div>
 
+          {/* Rest of the sections remain the same */}
           <section className="flex justify-between p-8">
             <div>
               <div className="flex gap-2 items-center">
                 <h3>الفاتورة:</h3>
-                {data.status === "Pending" ? (
-                  <div className="flex gap-4 w-32 justify-center rounded-full bg-yellow-100 py-1">
-                    <span>قيد المعالجة</span>
-                    <img className="w-3" src={downArrowIcon} alt="" />
-                  </div>
-                ) : data.status === "Rejected" ? (
-                  <div className="flex gap-4 w-32 justify-center rounded-full bg-red-100 py-1">
-                    <span>مرفوضة</span>
-                    <img className="w-3" src={downArrowIcon} alt="" />
-                  </div>
-                ) : data.status === "Accepted" ? (
-                  <div className="flex gap-4 w-32 justify-center rounded-full bg-green-100 py-1">
-                    <span>مقبولة</span>
-                    <img className="w-3" src={downArrowIcon} alt="" />
-                  </div>
-                ) : null}
-              </div>
-              <div className="w-1/2 py-4">
                 <img
                   className="w-full h-full object-cover"
                   src={billImg}
-                  alt=""
+                  alt="فاتورة"
                 />
               </div>
               <div className="flex gap-4">
@@ -145,7 +189,7 @@ const AdminCriteriaPage = () => {
 
             <div>
               <h3>وصل الدفع من الزبون</h3>
-              <img src={paymentReceiptImg} alt="" />
+              <img src={paymentReceiptImg} alt="وصل الدفع" />
             </div>
           </section>
 
@@ -156,7 +200,7 @@ const AdminCriteriaPage = () => {
             <div>
               <div className="w-2/3 rounded-t-xl border">
                 {data.comments.map((comment) => (
-                  <CommentItem message={comment.message} />
+                  <CommentItem key={comment.id} message={comment.message} />
                 ))}
               </div>
               <div className="flex flex-col w-2/3 rounded-b-xl border p-4 gap-2">

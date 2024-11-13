@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   MainPadding,
   redTrashIcon,
@@ -20,10 +20,17 @@ const AdminConsultationPage = () => {
   const { isLoading, error, data } = useApi<Consultation>(
     `Consultations/${id}`
   );
-  const { patchData } = useApi(`Consultations/${id}`);
+  const { patchData } = useApi(`Consultations/ChangeStatus/${id}`);
 
-  const [status, setStatus] = useState<string>(data?.status || "Pending");
+  const [status, setStatus] = useState<string>("Pending");
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
+
+  // Set status when data is loaded
+  useEffect(() => {
+    if (data) {
+      setStatus(data.status || "Pending"); // Update status once data is fetched
+    }
+  }, [data]); // Runs every time data is fetched
 
   const handleStatusChange = async (newStatus: string) => {
     setIsUpdating(true);
