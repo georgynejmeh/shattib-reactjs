@@ -4,7 +4,6 @@ import {
   ProductCard,
   ProductsFilterViewControls,
   SectionTitles,
-  SubCategoriesUnderCategory,
   TitleNumber,
   useApi,
   useEffect,
@@ -53,11 +52,11 @@ const MainCategoryPage = () => {
           title02Link="/home"
           endTitle={subCategory?.name}
         />
+        <TitleNumber subTitle="">التصنيفات الفرعية</TitleNumber>
         <TitleNumber subTitle="">
           {subCategory?.name || "غير معروف"}
         </TitleNumber>
-        <TitleNumber subTitle="">التصنفات الفرعية</TitleNumber>
-        <SubCategoriesUnderCategory id={parseInt(id || "-1")} />
+        {/* <SubCategoriesUnderCategory id={parseInt(id || "-1")} /> */}
         {/* <CategoryListHorizontal /> */}
         {/* <LeftRightButtonsCircle /> */}
         <section className="flex max-lg:flex-col max-lg:w-full">

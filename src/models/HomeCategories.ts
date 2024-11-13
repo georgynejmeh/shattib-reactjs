@@ -2,17 +2,17 @@ export interface HomeCategorie {
   id: number;
   name: string;
   imagePath: string;
-  subCategories: SubCategory[];
+  subCategories: HomeSubCategory[];
 }
 
-export interface SubCategory {
+export interface HomeSubCategory {
   id: number;
   name: string;
   imagePath: string;
-  products: Product[];
+  products: HomeProduct[];
 }
 
-export interface Product {
+export interface HomeProduct {
   id: number;
   name: string;
   price: number;

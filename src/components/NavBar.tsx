@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   shattibLogoRow,
   searchIcon,
@@ -10,12 +11,21 @@ import {
   menuIcon,
   NavBarAccountDropDown,
 } from "..";
+import { useLoginModal } from "../hooks/useLoginModal";
 
 const NavBar = () => {
   const userType = localStorage.getItem("userType") || "Client";
   const token = localStorage.getItem("accessToken");
   const [searchValue, setSearchValue] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const { setIsShownLoginModal } = useLoginModal();
+  const navigate = useNavigate();
+  const handleAuthorizedNavigationButton = (path: string) => {
+    if (token) {
+      return navigate(path);
+    }
+    setIsShownLoginModal(true);
+  };
   // const [cartItemCount, setCartItemCount] = useState<number>(0);
 
   // // Function to update cart item count from localStorage
@@ -63,21 +73,26 @@ const NavBar = () => {
               placeholder="البحث عن المنتجات"
             />
           </div>
-          <Link to={"/cart"}>
-            <div className="relative flex flex-col items-center">
-              {/* <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
+
+          <div
+            onClick={() => handleAuthorizedNavigationButton("/cart")}
+            className="relative flex flex-col items-center"
+          >
+            {/* <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
             {cartItemCount}
           </div> */}
-              <img src={cartIcon} alt="" />
-              <span>السلة</span>
-            </div>
-          </Link>
-          <Link to={"/wishlist"}>
-            <div className="flex flex-col items-center">
-              <img src={heartIcon} alt="" />
-              <span>المفضلة</span>
-            </div>
-          </Link>
+            <img src={cartIcon} alt="" />
+            <span>السلة</span>
+          </div>
+
+          <div
+            onClick={() => handleAuthorizedNavigationButton("/wishlist")}
+            className="flex flex-col items-center"
+          >
+            <img src={heartIcon} alt="" />
+            <span>المفضلة</span>
+          </div>
+
           {/* <div
         onClick={() => {
           setIsShownEngineerRequestModal(true);
@@ -127,21 +142,25 @@ const NavBar = () => {
               />
             </div>
             <div className="lg:hidden flex items-center justify-between w-full gap-12">
-              <Link to={"/cart"}>
-                <div className="relative flex flex-col items-center">
-                  {/* <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
+              <div
+                onClick={() => handleAuthorizedNavigationButton("/cart")}
+                className="relative flex flex-col items-center"
+              >
+                {/* <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
             {cartItemCount}
             </div> */}
-                  <img src={cartIcon} alt="" />
-                  <span>السلة</span>
-                </div>
-              </Link>
-              <Link to={"/wishlist"}>
-                <div className="flex flex-col items-center">
-                  <img src={heartIcon} alt="" />
-                  <span>المفضلة</span>
-                </div>
-              </Link>
+                <img src={cartIcon} alt="" />
+                <span>السلة</span>
+              </div>
+
+              <div
+                onClick={() => handleAuthorizedNavigationButton("/wishlist")}
+                className="flex flex-col items-center"
+              >
+                <img src={heartIcon} alt="" />
+                <span>المفضلة</span>
+              </div>
+
               {/* <div
         onClick={() => {
           setIsShownEngineerRequestModal(true);

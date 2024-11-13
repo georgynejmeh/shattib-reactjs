@@ -14,7 +14,6 @@ import {
   Rkham,
   Siramik,
   Stone,
-  Switches,
 } from "..";
 
 interface Props {
@@ -51,8 +50,7 @@ const SubCategoriesUnderCategory = ({ id }: Props) => {
     //   return <Edoors />;
     case 14:
       return <AirCondition />;
-    case 15:
-      return <Switches />;
+
     case 16:
       return <Bathroom />;
     // case 17:
