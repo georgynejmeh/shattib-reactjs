@@ -46,14 +46,14 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <main className="h-screen w-screen p-main bg-gray-300 flex justify-center items-center max-lg:h-max">
+    <main className="h-screen w-screen p-main max-lg:p-4 bg-gray-300 flex justify-center items-center max-lg:h-max">
       <div className="absolute top-16 right-16 max-lg:top-4 max-lg:right-4">
         <Link to={"/home"}>
           <img src={closeCircleIcon} alt="" />
         </Link>
       </div>
 
-      <section className="flex items-center gap-16 max-lg:flex-col max-lg:w-full max-lg:mt-16">
+      <section className="flex items-center gap-16 max-lg:flex-col-reverse max-lg:w-full max-lg:mt-16">
         <div className="flex flex-col gap-8 max-lg:w-full">
           <h1 className="text-2xl font-bold">تواصل معنا</h1>
           <div className="lg:w-96 max-lg:w-full">
