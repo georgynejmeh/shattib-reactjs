@@ -187,7 +187,7 @@ export { default as Stone } from "./components/categories/Stone";
 export { default as Paints } from "./components/categories/Paints";
 export { default as Insulation } from "./components/categories/Insulation";
 export { default as AirCondition } from "./components/categories/AirCondition";
-export { default as Switches } from "./components/categories/Switches";
+export { default as HomeCategoriesComponent } from "./components/categories/HomeCategoriesComponent";
 export { default as Bathroom } from "./components/categories/Bathroom";
 
 //

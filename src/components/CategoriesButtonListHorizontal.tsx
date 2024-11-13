@@ -52,7 +52,7 @@ const CategoriesButtonListHorizontal = ({
       >
         <RoundButton
           onClick={() => {
-            setSelectedCategory(localCategory);
+            setSelectedCategory(0);
             setLocalCategory(0);
           }}
           active={localCategory === 0}
