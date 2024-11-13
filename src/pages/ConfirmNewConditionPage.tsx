@@ -13,7 +13,7 @@ import { PostCirteriaItem, PostCriteria } from "../models/Criteria";
 import { usePostCriteria } from "../hooks/usePostCriteria";
 
 const ConfirmNewConditionPage = () => {
-  const { postData, isLoading, error, data } = usePostCriteria("Criteria");
+  const { postData, data } = usePostCriteria("Criteria");
 
   const [popupShown, setPopupShown] = useState(false);
   const [selectedCategoryNames, setSelectedCategoryNames] = useState<string[]>(
@@ -152,14 +152,6 @@ const ConfirmNewConditionPage = () => {
     try {
       await postData(formData);
       formData.forEach((i) => console.log(i));
-      console.log("CONFIRM NEW PAGE CONDITION", data);
-      if (!error) {
-        console.log("CONFIRM NEW PAGE CONDITION", "if state");
-
-        localStorage.removeItem("criteriaTitle");
-        localStorage.removeItem("selectedCategories");
-        localStorage.removeItem("selectedCategoryNames");
-      }
 
       // const response = await fetch("/api/submitCriteria", {
       //   method: "POST",
@@ -211,13 +203,7 @@ const ConfirmNewConditionPage = () => {
           </section>
           <div className="flex flex-col w-full py-4">
             <div className="w-48 self-end max-lg:self-center max-lg:w-full">
-              <ButtonGold onClick={handleSubmit}>
-                {isLoading
-                  ? "جاري الإرسال..."
-                  : error
-                  ? "حدث خطأ!"
-                  : "إرسال الكراسة"}
-              </ButtonGold>
+              <ButtonGold onClick={handleSubmit}>إرسال الكراسة</ButtonGold>
             </div>
           </div>
         </MainPadding>

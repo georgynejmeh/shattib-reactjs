@@ -1,5 +1,4 @@
-import { trashCanIcon } from "..";
-import { categoryImage } from "../assets/json/categoryImage";
+import { categoryImg01, trashCanIcon } from "..";
 
 interface Props {
   id: number;
@@ -22,13 +21,13 @@ const GoldConditionCard = ({
         <div className="h-40 w-full">
           <img
             className="rounded-b-xl w-full h-full object-cover"
-            src={categoryImage(id)}
+            src={categoryImg01}
             alt={name}
           />
         </div>
         <div className="flex justify-between">
           <h1 className="text-2xl p-2">{name}</h1>
-          {/* <h1 className="text-2xl p-2">8</h1> */}
+          <h1 className="text-2xl p-2">8</h1>
         </div>
       </div>
       <div className="flex py-2 gap-4">

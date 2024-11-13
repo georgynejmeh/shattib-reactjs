@@ -1,6 +1,7 @@
 import {
   heartIcon,
   addToCartIcon,
+  testImg,
   useState,
   Link,
   redHeartIcon,
@@ -19,7 +20,7 @@ const ProductCard = ({
   name = "جاري التحميل...",
   price = 0,
   id = 0,
-  image,
+  image = testImg,
 }: Props) => {
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -72,7 +73,7 @@ const ProductCard = ({
       <div className="relative h-1/2">
         <Link to={`/product/${id}`}>
           <img
-            className="rounded-t-xl h-full w-full object-cover bg-gray-400"
+            className="rounded-t-xl h-full w-full object-cover"
             src={image}
             alt=""
           />

@@ -56,7 +56,6 @@ const NavBar = () => {
           </Link>
           <div className="w-96">
             <TextInput
-              bordered
               icon={searchIcon}
               iconLink={`/search?search=${searchValue}`}
               onChange={(e) => setSearchValue(e.target.value)}
@@ -117,7 +116,6 @@ const NavBar = () => {
             </Link>
             <div className="w-96 max-lg:w-full max-lg:max-w-72">
               <TextInput
-                bordered
                 iconLink={`/search?search=${searchValue}`}
                 onChange={(e) => setSearchValue(e.target.value)}
                 icon={searchIcon}
