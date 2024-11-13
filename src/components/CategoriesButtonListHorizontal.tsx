@@ -3,9 +3,9 @@ import { RoundButton, leftArrowIcon } from "..";
 import { Category } from "../models/Category";
 
 interface CategoriesButtonListHorizontalProps {
-  categories: Category[] | null;
-  selectedCategory: number;
-  setSelectedCategory: (val: number) => void;
+  categories?: Category[] | null;
+  selectedCategory?: number;
+  setSelectedCategory?: (val: number) => void;
 }
 
 const CategoriesButtonListHorizontal = ({
@@ -14,7 +14,9 @@ const CategoriesButtonListHorizontal = ({
   selectedCategory,
 }: CategoriesButtonListHorizontalProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [localCategory, setLocalCategory] = useState<number>(selectedCategory);
+  const [localCategory, setLocalCategory] = useState<number>(
+    selectedCategory || 0
+  );
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: 300, behavior: "smooth" });
@@ -52,7 +54,9 @@ const CategoriesButtonListHorizontal = ({
       >
         <RoundButton
           onClick={() => {
-            setSelectedCategory(localCategory);
+            if (setSelectedCategory) {
+              setSelectedCategory(localCategory);
+            }
             setLocalCategory(0);
           }}
           active={localCategory === 0}
@@ -64,7 +68,9 @@ const CategoriesButtonListHorizontal = ({
             return (
               <RoundButton
                 onClick={() => {
-                  setSelectedCategory(cat.id);
+                  if (setSelectedCategory) {
+                    setSelectedCategory(cat.id);
+                  }
                   setLocalCategory(cat.id);
                 }}
                 active={localCategory === cat.id}
