@@ -114,7 +114,7 @@ const CartPage = () => {
               إضافة منتجات
             </button>
           </Link>
-          <ButtonGold onClick={handleOrderSubmit}>
+          <ButtonGold disabled={cart.length === 0} onClick={handleOrderSubmit}>
             {isLoading ? <span>تحميل...</span> : <span>إنشاء طلب</span>}
           </ButtonGold>
         </div>

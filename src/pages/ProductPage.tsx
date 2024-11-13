@@ -6,6 +6,7 @@ import {
   useApi,
   useParams,
 } from "..";
+import { subCategories } from "../assets/json/subCategories";
 import { Product } from "../models/Product";
 import { useState } from "react";
 
@@ -22,9 +23,9 @@ const ProductPage = () => {
     <main>
       <MainPadding>
         <SectionTitles
-          title01="الأدوات الصحية"
-          title02="طقم شطاف"
-          endTitle="طقم شطاف WG006"
+          title01={subCategories[data?.id || 0].name || ""}
+          title02={subCategories[data?.subCategoryId || 0].name || ""}
+          endTitle={data?.name}
         />
         <section className="flex justify-center items-center my-16">
           {isLoading ? (

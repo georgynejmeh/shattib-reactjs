@@ -1,10 +1,4 @@
-import {
-  AccentText,
-  Link,
-  purpleParagraphIcon,
-  redTrashIcon,
-  useApi,
-} from "../..";
+import { AccentText, Link, purpleParagraphIcon, useApi } from "../..";
 import { Consultation } from "../../models/Consultation";
 
 import "../../App.css";
@@ -62,9 +56,9 @@ const AdminConsultationsPage = () => {
                       <Link to={`/admin/consultation/${consultation.id}`}>
                         <img src={purpleParagraphIcon} alt="" />
                       </Link>
-                      <button>
+                      {/* <button>
                         <img src={redTrashIcon} alt="" />
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </td>

@@ -34,6 +34,12 @@ const CriteriaDetailsPopupForm = ({
     };
     handleAddProduct(categoryId, newProduct);
     setIsShown(false); // Close the popup after adding the product
+
+    // reset fields
+    setProductName("");
+    setDescription("");
+    setAmount(0);
+    setMeasurementUnit("");
   };
 
   return (

@@ -1,9 +1,9 @@
 import {
   CategoryCard,
   Link,
-  porsalenImg01,
-  porsalenImg02,
-  porsalenImg03,
+  parkehImg01,
+  parkehImg02,
+  parkehImg03,
 } from "../..";
 import { parkehSubCategories } from "../../assets/json/parkehSubcategories";
 
@@ -19,21 +19,21 @@ const Parkeh = () => {
           <Link
             to={`/category/${parkehSubCategories[0].categoryId}/${parkehSubCategories[0].id}`}
           >
-            <CategoryCard img={porsalenImg01} num="">
+            <CategoryCard img={parkehImg01} num="">
               باركيه الأرضيات الداخلية
             </CategoryCard>
           </Link>
           <Link
             to={`/category/${parkehSubCategories[0].categoryId}/${parkehSubCategories[1].id}`}
           >
-            <CategoryCard img={porsalenImg02} num="">
+            <CategoryCard img={parkehImg02} num="">
               باركيه مقاوم للرطوبة
             </CategoryCard>
           </Link>
           <Link
             to={`/category/${parkehSubCategories[0].categoryId}/${parkehSubCategories[2].id}`}
           >
-            <CategoryCard img={porsalenImg03} num="">
+            <CategoryCard img={parkehImg03} num="">
               باركيه للأماكن التجارية
             </CategoryCard>
           </Link>

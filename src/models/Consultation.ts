@@ -8,4 +8,5 @@ export interface Consultation {
   projectCategory: string;
   status: "Pending" | "Completed";
   userId: string;
+  userName: string;
 }
