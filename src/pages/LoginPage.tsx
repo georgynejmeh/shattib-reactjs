@@ -60,9 +60,11 @@ const LoginPage = () => {
       {data ? (
         data.role === "Client" ? (
           <Navigate to={"/home"} />
-        ) : (
+        ) : data.role === "Business" ? (
           <Navigate to={"/conditions"} />
-        )
+        ) : data.role === "Administrator" ? (
+          <Navigate to={"/admin/home"} />
+        ) : null
       ) : null}
       <div className="flex max-lg:flex-col justify-center items-center min-h-screen max-lg:p-8">
         <div className="w-1/4 flex flex-col justify-center max-lg:w-full">

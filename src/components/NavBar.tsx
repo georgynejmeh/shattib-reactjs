@@ -13,7 +13,7 @@ import {
 
 const NavBar = () => {
   const userType = localStorage.getItem("userType") || "Client";
-
+  const token = localStorage.getItem("accessToken");
   const [searchValue, setSearchValue] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(true);
   // const [cartItemCount, setCartItemCount] = useState<number>(0);
@@ -84,10 +84,12 @@ const NavBar = () => {
       >
         <ButtonGold>طلب عرض سعر</ButtonGold>
       </div> */}
-          <div className="flex items-center justify-center w-12 h-12 rounded-full">
-            {/* <img src={accountIcon} alt="" /> */}
-            <NavBarAccountDropDown />
-          </div>
+          {token && (
+            <div className="flex items-center justify-center w-12 h-12 rounded-full">
+              {/* <img src={accountIcon} alt="" /> */}
+              <NavBarAccountDropDown />
+            </div>
+          )}
           <span>EN</span>
         </nav>
       </div>
@@ -145,10 +147,12 @@ const NavBar = () => {
           >
           <ButtonGold>طلب عرض سعر</ButtonGold>
           </div> */}
-              <div className="flex items-center justify-center w-12 h-12 rounded-full">
-                {/* <img src={accountIcon} alt="" /> */}
-                <NavBarAccountDropDown />
-              </div>
+              {token && (
+                <div className="flex items-center justify-center w-12 h-12 rounded-full">
+                  {/* <img src={accountIcon} alt="" /> */}
+                  <NavBarAccountDropDown />
+                </div>
+              )}
               <span>EN</span>
             </div>
           </div>
