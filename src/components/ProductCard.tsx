@@ -7,6 +7,7 @@ import {
   AccentText,
   ButtonGold,
 } from "..";
+import { useLoginModal } from "../hooks/useLoginModal";
 
 interface Props {
   name?: string;
@@ -21,6 +22,8 @@ const ProductCard = ({
   id = 0,
   image,
 }: Props) => {
+  const token = localStorage.getItem("accessToken");
+  const { setIsShownLoginModal } = useLoginModal();
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -78,9 +81,15 @@ const ProductCard = ({
           />
         </Link>
         <button
-          onClick={() => {
-            setActive(!active);
-            handleAddToFavorites();
+          onClick={(e) => {
+            if (!token) {
+              setIsShownLoginModal(true);
+            } else {
+              console.log("visited favorite");
+              e.preventDefault();
+              setActive(!active);
+              handleAddToFavorites();
+            }
           }}
         >
           <div className="absolute top-0 m-2 flex items-center justify-center h-12 w-12 rounded-full bg-white transition-all duration-700 hover:bg-red-200">
@@ -99,7 +108,17 @@ const ProductCard = ({
             <AccentText>{price} ريال</AccentText>
           </span>
           <div className="mx-2 my-1">
-            <ButtonGold onClick={handleAddToCart}>
+            <ButtonGold
+              onClick={
+                token
+                  ? handleAddToCart
+                  : (e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      return setIsShownLoginModal(true);
+                    }
+              }
+            >
               <div className="flex justify-center">
                 أضف إلى السلة
                 <img className="ps-2" src={addToCartIcon} alt="" />

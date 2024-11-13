@@ -8,6 +8,7 @@ import {
   useState,
   addToBoxBlackIcon,
 } from "..";
+import { useLoginModal } from "../hooks/useLoginModal";
 import { CartItem } from "../models/CartItem";
 import { Product } from "../models/Product";
 
@@ -16,7 +17,10 @@ interface Props {
 }
 
 const ProductDetailsCard = ({ data }: Props) => {
+  const token = localStorage.getItem("accessToken");
+  const { setIsShownLoginModal } = useLoginModal();
   const [quantity, setQuantity] = useState(1); // Track quantity
+  const [active, setActive] = useState(false);
   const handleRequestSample = () => {
     const existingSamples = JSON.parse(
       localStorage.getItem("samplesCart") || "[]"
@@ -75,7 +79,22 @@ const ProductDetailsCard = ({ data }: Props) => {
       alert("تمت إضافة المنتج للسلة");
     }
   };
+  const handleAddToFavorites = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
+    const existingProductIndex = favorites.findIndex(
+      (item: { productId: number }) => item.productId === data?.id
+    );
+
+    if (existingProductIndex === -1) {
+      favorites.push({
+        productId: data?.id,
+        name: data?.name,
+        price: data?.price,
+      });
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+  };
   // TODO DELETE
   // const temp = [1, 2, 3, 4, 5];
 
@@ -191,7 +210,11 @@ const ProductDetailsCard = ({ data }: Props) => {
               <QuantityControls quantity={quantity} onChange={setQuantity} />
             </div>
             <div className="w-80 flex flex-col gap-4">
-              <ButtonGold onClick={handleAddToCart}>
+              <ButtonGold
+                onClick={
+                  token ? handleAddToCart : () => setIsShownLoginModal(true)
+                }
+              >
                 <div className="flex justify-center gap-2">
                   <img src={addToCartIcon} alt="" />
                   <span>أضف إلى السلة</span>
@@ -204,7 +227,9 @@ const ProductDetailsCard = ({ data }: Props) => {
               </div>
             </Button> */}
               <button
-                onClick={handleRequestSample}
+                onClick={
+                  token ? handleRequestSample : () => setIsShownLoginModal(true)
+                }
                 className="rounded border border-black py-1 bg-white"
               >
                 <div className="flex justify-center gap-2 text-black">
@@ -228,7 +253,18 @@ const ProductDetailsCard = ({ data }: Props) => {
                 src={data.images[0].imagePath}
                 alt=""
               />
-              <button>
+              <button
+                onClick={(e) => {
+                  if (!token) {
+                    setIsShownLoginModal(true);
+                  } else {
+                    console.log("visited favorite");
+                    e.preventDefault();
+                    setActive(!active);
+                    handleAddToFavorites();
+                  }
+                }}
+              >
                 <div className="absolute top-0 m-2 flex items-center justify-center h-12 w-12 rounded-full bg-white transition-all duration-700 hover:bg-red-200">
                   <img src={heartIcon} alt="" />
                 </div>
@@ -388,7 +424,11 @@ const ProductDetailsCard = ({ data }: Props) => {
               <QuantityControls quantity={quantity} onChange={setQuantity} />
             </div>
             <div className="w-full max-w-52 flex flex-col gap-4">
-              <ButtonGold onClick={handleAddToCart}>
+              <ButtonGold
+                onClick={
+                  token ? handleAddToCart : () => setIsShownLoginModal(true)
+                }
+              >
                 <div className="flex justify-center gap-2">
                   <img src={addToCartIcon} alt="" />
                   <span>أضف إلى السلة</span>
@@ -401,7 +441,9 @@ const ProductDetailsCard = ({ data }: Props) => {
             </div>
           </Button> */}
               <button
-                onClick={handleRequestSample}
+                onClick={
+                  token ? handleRequestSample : () => setIsShownLoginModal(true)
+                }
                 className="rounded border border-black py-1 bg-white"
               >
                 <div className="flex justify-center gap-2 text-black">
