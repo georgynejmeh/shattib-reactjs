@@ -14,6 +14,7 @@ interface Props {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   value?: string;
+  bordered?: boolean;
 }
 
 const TextInput = ({
@@ -28,6 +29,7 @@ const TextInput = ({
   number = false,
   onChange,
   value,
+  bordered = false,
 }: Props) => {
   const [hidden, setHidden] = useState(password);
   return (
@@ -71,8 +73,12 @@ const TextInput = ({
               type={hidden ? "password" : number ? "number" : "text"}
               className={
                 icon
-                  ? "h-full w-full py-3 pl-10 pr-10 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
-                  : "h-full w-full py-3 pl-10 pr-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
+                  ? `h-full w-full py-3 pl-10 pr-10 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400 ${
+                      bordered ? "border-2 border-black" : ""
+                    }`
+                  : `h-full w-full py-3 pl-10 pr-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400 ${
+                      bordered ? "border-2 border-black" : ""
+                    }`
               }
               placeholder={placeholder}
               name={name}

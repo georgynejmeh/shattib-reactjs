@@ -77,7 +77,7 @@ const ProductDetailsCard = ({ data }: Props) => {
   };
 
   // TODO DELETE
-  const temp = [1, 2, 3, 4, 5];
+  // const temp = [1, 2, 3, 4, 5];
 
   if (data) {
     return (
@@ -236,14 +236,14 @@ const ProductDetailsCard = ({ data }: Props) => {
             </div>
             <div className="flex flex-wrap gap-3">
               {/* TODO DELETE LOOP */}
-              {temp.map((index) => (
+              {data.images.map((image, index) => (
                 <div
                   key={index}
                   className="w-24 h-16 rounded-xl overflow-hidden"
                 >
                   <img
                     className="w-full h-full object-cover"
-                    src={data.images[0].imagePath}
+                    src={image.imagePath}
                     alt=""
                   />
                 </div>
@@ -293,11 +293,14 @@ const ProductDetailsCard = ({ data }: Props) => {
               </div>
               <div className="flex flex-wrap gap-1">
                 {/* TODO DELETE LOOP */}
-                {temp.map(() => (
-                  <div className="w-18 h-10 rounded overflow-hidden">
+                {data.images.map((image, index) => (
+                  <div
+                    key={index}
+                    className="w-18 h-10 rounded overflow-hidden"
+                  >
                     <img
                       className="w-full h-full object-cover"
-                      src={data.images[0].imagePath}
+                      src={image.imagePath}
                       alt=""
                     />
                   </div>

@@ -34,6 +34,7 @@ import OrdersPage from "./pages/OrdersPage";
 import AdminSamplesPage from "./pages/admin/AdminSamplesPage";
 import AdminEditProductPage from "./pages/admin/AdminEditProductPage";
 import ConsultationsPage from "./pages/ConsultationsPage";
+import AdminConsultationPage from "./pages/admin/AdminConsultationPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -90,6 +91,10 @@ const App = () => {
           <Route
             path="/admin/consultations"
             element={<AdminConsultationsPage />}
+          />
+          <Route
+            path="/admin/consultation/:id"
+            element={<AdminConsultationPage />}
           />
           <Route path="/admin/statistics" element={<StatisticsPage />} />
           <Route path="/admin/criterias" element={<AdminCriteriasPage />} />

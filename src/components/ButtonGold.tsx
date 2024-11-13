@@ -12,8 +12,8 @@ const ButtonGold = ({ children, disabled = false, onClick }: Props) => {
       disabled={disabled}
       onClick={onClick}
       className={
-        `w-full px-4 py-1 text-xl font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded hover:bg-opacity-80 ${
-          disabled ? "bg-opacity-50 hover:bg-opacity-50" : ""
+        `w-full px-4 py-1 text-xl font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary rounded ${
+          disabled ? "bg-opacity-50 hover:bg-opacity-50" : "hover:bg-opacity-80"
         }` //hover:bg-secondary
       }
     >

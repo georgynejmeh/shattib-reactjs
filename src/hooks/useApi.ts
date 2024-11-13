@@ -162,5 +162,34 @@ export function useApi<T>(
     }
   }
 
-  return { patchForm, deleteData, postData, isLoading, error, data };
+  async function patchData(body: object) {
+    setIsLoading(true);
+    try {
+      // const apiUrl = `${import.meta.env.VITE_API_URL}`;
+      const apiUrl = "https://shatib.com/api/";
+      console.log(`${apiUrl}${endpoint}`);
+      const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      };
+      await fetch(`${apiUrl}${endpoint}`, requestOptions)
+        .then(async (res) => {
+          setIsLoading(false);
+          setError(false);
+          setData(await res.json());
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          setError(true);
+          console.log("useApi Error: ", err);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      setError(true);
+      console.log("useApi Exception: ", error);
+    }
+  }
+
+  return { patchData, patchForm, deleteData, postData, isLoading, error, data };
 }

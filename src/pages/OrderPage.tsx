@@ -46,12 +46,12 @@ const OrderPage = () => {
               <div className="flex items-center gap-4">
                 <img src={drawerIcon} alt="" />
                 <span className="text-gray-400 font-bold">تاريخ الإنشاء</span>
-                <span>{data.dateOfOrder}</span>
+                <span>{data.dateOfOrder.substring(0, 10)}</span>
               </div>
               <div className="flex items-center gap-4">
                 <img src={truckIcon} alt="" />
                 <span className="text-gray-400 font-bold">تاريخ التوصيل</span>
-                <span>{data.dateOfArrival || "غير محدد"}</span>
+                <span>{data.dateOfArrival.substring(0, 10) || "غير محدد"}</span>
               </div>
               <div className="flex items-center gap-4">
                 <img src={databaseIcon} alt="" />
@@ -70,16 +70,18 @@ const OrderPage = () => {
             <section>
               <h1 className="text-2xl font-bold my-8">المتنجات</h1>
               {/* TODO DELETE LOOP */}
-              {data.orderItems.map((order, index) => (
-                <OrderItem
-                  key={index}
-                  index={index}
-                  image={order.productMainImage}
-                  name={order.productName}
-                  quantity={order.quantitiy}
-                  price={order.totalPriceForThisProduct}
-                />
-              ))}
+              {data.orderItems.map((order, index) =>
+                order ? (
+                  <OrderItem
+                    key={index}
+                    index={index}
+                    image={order.productMainImage}
+                    name={order.productName}
+                    quantity={order.quantitiy}
+                    price={order.totalPriceForThisProduct}
+                  />
+                ) : null
+              )}
             </section>
           </>
         ) : null}
