@@ -1,11 +1,11 @@
 import {
   CategoriesButtonListHorizontal,
-  HomeCategoriesComponent,
+  // HomeCategoriesComponent,
   useApi,
   useState,
 } from "../..";
 import { Category } from "../../models/Category";
-import { HomeCategorie } from "../../models/HomeCategories";
+// import { HomeCategorie } from "../../models/HomeCategories";
 
 const AdminCategoriesPage = () => {
   const { data: categories } = useApi<Category[]>(
@@ -13,15 +13,15 @@ const AdminCategoriesPage = () => {
     "GET"
   );
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
-  const { data: homeCategories } = useApi<HomeCategorie[]>(
-    selectedCategory != 0
-      ? `Products/CatsSubCatsProducts?categoryId=${selectedCategory}`
-      : "Products/CatsSubCatsProducts",
-    "GET",
-    undefined,
-    undefined,
-    [selectedCategory]
-  );
+  // const { data: homeCategories } = useApi<HomeCategorie[]>(
+  //   selectedCategory != 0
+  //     ? `Products/CatsSubCatsProducts?categoryId=${selectedCategory}`
+  //     : "Products/CatsSubCatsProducts",
+  //   "GET",
+  //   undefined,
+  //   undefined,
+  //   // [selectedCategory]
+  // );
   // TODO DELETE
   // const temp = [1, 2];
   return (
@@ -38,7 +38,7 @@ const AdminCategoriesPage = () => {
       <hr />
 
       <section className="p-main">
-        {homeCategories &&
+        {/* {homeCategories &&
           homeCategories?.map((c) => {
             return (
               <HomeCategoriesComponent
@@ -47,7 +47,7 @@ const AdminCategoriesPage = () => {
                 subCategories={c.subCategories}
               />
             );
-          })}
+          })} */}
         {/* TODO DELETE LOOP */}
         {/* {temp.map(() => (
           <div className="mb-16">

@@ -1,18 +1,18 @@
 import { useRef } from "react";
-import { CategoryCard, leftArrowIcon, Link } from "../..";
-import { HomeSubCategory } from "../../models/HomeCategories";
+// import { CategoryCard, leftArrowIcon, Link } from "../..";
+// import { HomeSubCategory } from "../../models/HomeCategories";
 
 interface HomeCategoriesComponentProps {
-  subCategories: HomeSubCategory[];
+  // subCategories: HomeSubCategory[];
   categoryName: string;
   categoryId: number;
 }
 
 const HomeCategoriesComponent = ({
-  subCategories,
+  // subCategories,
   categoryName,
-  categoryId,
-}: HomeCategoriesComponentProps) => {
+}: // categoryId,
+HomeCategoriesComponentProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
@@ -43,17 +43,17 @@ const HomeCategoriesComponent = ({
             onClick={scrollLeft}
             className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-4xl"
           >
-            <img
+            {/* <img
               className="-scale-x-100"
               src={leftArrowIcon}
               alt="Scroll Left"
-            />
+            /> */}
           </button>
           <button
             onClick={scrollRight}
             className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl"
           >
-            <img src={leftArrowIcon} alt="Scroll Right" />
+            {/* <img src={leftArrowIcon} alt="Scroll Right" /> */}
           </button>
         </div>
 
@@ -62,7 +62,7 @@ const HomeCategoriesComponent = ({
           ref={scrollContainerRef}
           className="flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar"
         >
-          {subCategories.map((sc) => {
+          {/* {subCategories.map((sc) => {
             return (
               <Link key={sc.id} to={`/category/${categoryId}/${sc.id}`}>
                 <CategoryCard img={sc.imagePath} num="">
@@ -70,7 +70,7 @@ const HomeCategoriesComponent = ({
                 </CategoryCard>
               </Link>
             );
-          })}
+          })} */}
         </div>
       </div>
     </section>
