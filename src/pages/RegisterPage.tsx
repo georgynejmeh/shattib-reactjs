@@ -21,7 +21,7 @@ const RegisterPage = () => {
   );
 
   const [formData, setFormData] = useState({
-    username: "",
+    displayName: "",
     email: "",
     phoneNumber: "",
     password: "",
@@ -42,8 +42,8 @@ const RegisterPage = () => {
 
   // Form validation to check if all fields are filled and passwords match
   const isFormValid = () => {
-    const { username, email, phoneNumber, password } = formData;
-    return username && email && phoneNumber && password;
+    const { displayName, email, phoneNumber, password } = formData;
+    return displayName && email && phoneNumber && password;
   };
 
   return (
@@ -57,7 +57,7 @@ const RegisterPage = () => {
           <span className="text-2xl">إنشاء حساب</span>
           <form className="py-4" action="">
             <TextInput
-              name="username"
+              name="displayName"
               title="الاسم"
               icon={personIcon}
               onChange={handleInputChange}
