@@ -4,7 +4,7 @@ import {
   CompaniesBanner,
   ProductListHorizontal,
   TitleNumber,
-  CategoriesButtonListHorizontal,
+  // CategoriesButtonListHorizontal,
   MainSlideShow,
   BannerButton,
   Rkham,
@@ -23,25 +23,25 @@ import {
   AirCondition,
   Switches,
   Bathroom,
-  useApi,
-  useState,
+  // useApi,
+  // useState,
 } from "..";
-import { Category } from "../models/Category";
-import { HomeCategorie } from "../models/HomeCategories";
+// import { Category } from "../models/Category";
+// import { HomeCategorie } from "../models/HomeCategories";
 
 const HomePage = () => {
-  const { data: categories } = useApi<Category[]>(
-    "SeededValues/Categories",
-    "GET"
-  );
-  const [selectedCategory, setSelectedCategory] = useState<number>(0);
-  const { data: homeCategories } = useApi<HomeCategorie[]>(
-    `CatsSubCatsProducts?categoryId=${selectedCategory}`,
-    "GET",
-    undefined,
-    undefined,
-    [selectedCategory]
-  );
+  // const { data: categories } = useApi<Category[]>(
+  //   "SeededValues/Categories",
+  //   "GET"
+  // );
+  // const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  // const { data: homeCategories } = useApi<HomeCategorie[]>(
+  //   `CatsSubCatsProducts?categoryId=${selectedCategory}`,
+  //   "GET",
+  //   undefined,
+  //   undefined,
+  //   [selectedCategory]
+  // );
   return (
     <>
       <Link to={"/contact"}>
@@ -107,11 +107,11 @@ const HomePage = () => {
             </TitleNumber>
           </div>
 
-          <CategoriesButtonListHorizontal
+          {/* <CategoriesButtonListHorizontal
             categories={categories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
-          />
+          /> */}
 
           {/* CATEGORIES HORIZONTAL LIST */}
           <Rkham />

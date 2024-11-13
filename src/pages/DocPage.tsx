@@ -122,7 +122,7 @@ const DocPage = () => {
               </div>
             </div>
             <h2 className="text-xl font-bold">المرفقات</h2>
-            <div className="flex gap-4 w-full">
+            <div className="flex flex-wrap gap-4 w-full">
               {data?.criteriaItems.map((item, index) => (
                 <div key={index} className="rounded-xl w-1/3 overflow-hidden">
                   <img

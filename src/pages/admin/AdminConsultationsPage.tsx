@@ -44,7 +44,7 @@ const AdminConsultationsPage = () => {
                       معلّق
                     </div>
                   ) : consultation.status === "Completed" ? (
-                    <div className="bg-yellow-100 w-32 py-1 rounded-full mx-auto">
+                    <div className="bg-green-100 w-32 py-1 rounded-full mx-auto">
                       معالج
                     </div>
                   ) : null}

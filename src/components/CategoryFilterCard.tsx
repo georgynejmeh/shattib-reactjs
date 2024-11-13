@@ -8,9 +8,7 @@ const CategoryFilterCard = () => {
   const navigate = useNavigate();
 
   const handleApply = () => {
-    navigate(
-      `/category?minPrice=${minPrice || 0}&maxPrice=${maxPrice || 10000}`
-    );
+    navigate(`?minPrice=${minPrice || 0}&maxPrice=${maxPrice || 10000}`);
   };
 
   return (
@@ -45,7 +43,7 @@ const CategoryFilterCard = () => {
         />
       </div>
       <div className="flex self-center gap-4">
-        <a href={"/category"}>
+        <a href={"?minPrice=0&maxPrice=100000"}>
           <div className="w-36">
             <Button size="md">إعادة تعيين</Button>
           </div>
