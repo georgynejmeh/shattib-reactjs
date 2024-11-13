@@ -32,7 +32,17 @@ const AdminSamplesPage = () => {
                 dateOfArrival={order.dateOfArrival}
                 dateOfOrder={order.dateOfOrder}
                 orderItems={order.orderItems}
-                status={order.status}
+                status={
+                  order.status === "Pending"
+                    ? "قيد المعالجة"
+                    : order.status === "Accepted"
+                    ? "مقبول"
+                    : order.status === "Rejected"
+                    ? "مرفوض"
+                    : order.status === "Shipped"
+                    ? "مكتمل"
+                    : ""
+                }
                 totalPrice={order.totalPrice}
               />
             ))

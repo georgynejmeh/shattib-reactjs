@@ -1,4 +1,4 @@
-import { AccentText, useApi } from "../..";
+import { AccentText, redTrashIcon, useApi } from "../..";
 import { Consultation } from "../../models/Consultation";
 
 import "../../App.css";
@@ -21,6 +21,7 @@ const AdminConsultationsPage = () => {
             <th>فئة</th>
             <th>الحالة</th>
             <th>تاريخ الطلب</th>
+            <th>العمليات</th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +50,13 @@ const AdminConsultationsPage = () => {
                   ) : null}
                 </td>
                 <td>{consultation.dateOfRequest.substring(0, 10)}</td>
+                <td>
+                  <div className="flex mx-auto">
+                    <button className="mx-auto">
+                      <img src={redTrashIcon} alt="" />
+                    </button>
+                  </div>
+                </td>
                 {/* <td>{consultation.userId}</td> */}
               </tr>
             ))

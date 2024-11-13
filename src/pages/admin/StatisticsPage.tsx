@@ -13,12 +13,19 @@ import { StatisticsNumber } from "../../models/StatisticsNumber";
 
 const StatisticsPage = () => {
   const [expanded, setExpanded] = useState(false);
+  const [expandedYear, setExpandedYear] = useState(false);
+
   const [selectedMonth, setSelectedMonth] = useState<string>("نوفمبر");
-  const [year] = useState<number>(2024);
+  const [year, setYear] = useState<number>(2024);
 
   const handleMonthChange = (month: string) => {
     setSelectedMonth(month);
     setExpanded(false);
+  };
+
+  const handleYearChange = (year: number) => {
+    setYear(year);
+    setExpandedYear(false);
   };
 
   const months = [
@@ -122,6 +129,15 @@ const StatisticsPage = () => {
                 <img className="w-4" src={downArrowIcon} alt="" />
               </div>
             </button>
+            <button
+              onClick={() => setExpandedYear(!expandedYear)}
+              className="bg-gray-100 rounded"
+            >
+              <div className="flex w-24 gap-2 justify-center">
+                <span>{year}</span>
+                <img className="w-4" src={downArrowIcon} alt="" />
+              </div>
+            </button>
             <AccentText>{profitsData?.total || 0} ريال</AccentText>
           </div>
           <img src="/src/assets/imgs/temp/chart.png" alt="" />
@@ -135,6 +151,18 @@ const StatisticsPage = () => {
                 className="hover:bg-gray-100 px-4 py-2"
               >
                 <span>{month}</span>
+              </button>
+            ))}
+          </div>
+        )}
+        {expandedYear && (
+          <div className="absolute ms-32 mt-20 flex flex-col bg-white rounded shadow-xl">
+            {[2024, 2025, 2026, 2027, 2028].map((year) => (
+              <button
+                onClick={() => handleYearChange(year)}
+                className="hover:bg-gray-100 px-4 py-2"
+              >
+                <span>{year}</span>
               </button>
             ))}
           </div>
