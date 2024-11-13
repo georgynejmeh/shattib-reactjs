@@ -15,7 +15,7 @@ export const LoginModalContext = createContext<
   LoginModalContextProps | undefined
 >(undefined);
 
-export const ConfirmDeleteProvider: React.FC<LoginModalProviderProps> = ({
+export const LoginModalProvider: React.FC<LoginModalProviderProps> = ({
   children,
 }) => {
   // States to store modal visibility, item ID, and the endpoint
