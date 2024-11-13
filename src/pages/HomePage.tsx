@@ -23,25 +23,9 @@ import {
   AirCondition,
   Switches,
   Bathroom,
-  useApi,
-  useState,
 } from "..";
-import { Category } from "../models/Category";
-import { HomeCategorie } from "../models/HomeCategories";
 
 const HomePage = () => {
-  const { data: categories } = useApi<Category[]>(
-    "SeededValues/Categories",
-    "GET"
-  );
-  const [selectedCategory, setSelectedCategory] = useState<number>(0);
-  const { data: homeCategories } = useApi<HomeCategorie[]>(
-    `CatsSubCatsProducts?categoryId=${selectedCategory}`,
-    "GET",
-    undefined,
-    undefined,
-    [selectedCategory]
-  );
   return (
     <>
       <Link to={"/contact"}>
@@ -102,14 +86,12 @@ const HomePage = () => {
           <div className="flex items-center mb-4">
             <img className="me-2" src={shattibGoldIcon} alt="" />
             {/* <div className="me-2 h-16 w-2 bg-yellow-200" /> */}
-            <TitleNumber subTitle="">التصنيفات</TitleNumber>
+            <TitleNumber version={2} subTitle="">
+              التصنيفات
+            </TitleNumber>
           </div>
 
-          <CategoriesButtonListHorizontal
-            categories={categories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
+          <CategoriesButtonListHorizontal />
 
           {/* CATEGORIES HORIZONTAL LIST */}
           <Rkham />

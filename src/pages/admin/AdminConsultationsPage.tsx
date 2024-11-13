@@ -1,4 +1,4 @@
-import { AccentText, redTrashIcon, useApi } from "../..";
+import { AccentText, Link, purpleParagraphIcon, useApi } from "../..";
 import { Consultation } from "../../models/Consultation";
 
 import "../../App.css";
@@ -51,9 +51,11 @@ const AdminConsultationsPage = () => {
                 </td>
                 <td>{consultation.dateOfRequest.substring(0, 10)}</td>
                 <td>
-                  <div className="flex mx-auto">
+                  <div className="flex">
                     <button className="mx-auto">
-                      <img src={redTrashIcon} alt="" />
+                      <Link to={`/admin/consulation/${consultation.id}`}>
+                        <img src={purpleParagraphIcon} alt="" />
+                      </Link>
                     </button>
                   </div>
                 </td>
