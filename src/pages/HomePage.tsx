@@ -86,7 +86,9 @@ const HomePage = () => {
           <div className="flex items-center mb-4">
             <img className="me-2" src={shattibGoldIcon} alt="" />
             {/* <div className="me-2 h-16 w-2 bg-yellow-200" /> */}
-            <TitleNumber subTitle="">التصنيفات</TitleNumber>
+            <TitleNumber version={2} subTitle="">
+              التصنيفات
+            </TitleNumber>
           </div>
 
           <CategoriesButtonListHorizontal />

@@ -70,16 +70,20 @@ const AdminOrderPage = () => {
             <section>
               <h1 className="text-2xl font-bold my-8">المتنجات</h1>
               {/* TODO DELETE LOOP */}
-              {data.orderItems.map((order, index) => (
-                <OrderItem
-                  key={index}
-                  image={order.productMainImage}
-                  index={index}
-                  name={order.productName}
-                  quantity={order.quantitiy}
-                  price={order.totalPriceForThisProduct}
-                />
-              ))}
+              {data.orderItems === null
+                ? null
+                : data.orderItems.map((order, index) =>
+                    order ? (
+                      <OrderItem
+                        key={index}
+                        image={order.productMainImage}
+                        index={index}
+                        name={order.productName}
+                        quantity={order.quantitiy}
+                        price={order.totalPriceForThisProduct}
+                      />
+                    ) : null
+                  )}
             </section>
           </>
         ) : null}

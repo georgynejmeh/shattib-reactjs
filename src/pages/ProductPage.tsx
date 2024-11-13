@@ -23,7 +23,7 @@ const ProductPage = () => {
     <main>
       <MainPadding>
         <SectionTitles
-          title01="الأدوات الصحية"
+          title01={subCategories[data?.id || 0].name || ""}
           title02={subCategories[data?.subCategoryId || 0].name || ""}
           endTitle={data?.name}
         />
