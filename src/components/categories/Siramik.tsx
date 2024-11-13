@@ -6,6 +6,7 @@ import {
   siramikImg03,
   siramikImg04,
 } from "../..";
+import { siramikSubcategories } from "../../assets/json/siramikSubcategories";
 
 const Siramik = () => {
   return (
@@ -15,23 +16,31 @@ const Siramik = () => {
         <h2 className="text-4xl font-bold text-gray-500 mb-8">
           التصنيفات الفرعية
         </h2>
-        <div className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
-          <Link to={"/category"}>
+        <div className="flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar">
+          <Link
+            to={`/category/${siramikSubcategories[0].categoryId}/${siramikSubcategories[0].id}`}
+          >
             <CategoryCard img={siramikImg01} num="">
               سيراميك الأرضيات الداخلية
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${siramikSubcategories[0].categoryId}/${siramikSubcategories[1].id}`}
+          >
             <CategoryCard img={siramikImg02} num="">
               سيراميك الجدران
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${siramikSubcategories[0].categoryId}/${siramikSubcategories[2].id}`}
+          >
             <CategoryCard img={siramikImg03} num="">
               سيراميك الحمامات والمطابخ
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${siramikSubcategories[0].categoryId}/${siramikSubcategories[3].id}`}
+          >
             <CategoryCard img={siramikImg04} num="">
               سيراميك الأرضيات خارجي
             </CategoryCard>

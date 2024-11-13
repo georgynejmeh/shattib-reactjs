@@ -5,6 +5,7 @@ import {
   porsalenImg02,
   porsalenImg03,
 } from "../..";
+import { parkehSubCategories } from "../../assets/json/parkehSubcategories";
 
 const Parkeh = () => {
   return (
@@ -14,18 +15,24 @@ const Parkeh = () => {
         <h2 className="text-4xl font-bold text-gray-500 mb-8">
           التصنيفات الفرعية
         </h2>
-        <div className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
-          <Link to={"/category"}>
+        <div className="flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar">
+          <Link
+            to={`/category/${parkehSubCategories[0].categoryId}/${parkehSubCategories[0].id}`}
+          >
             <CategoryCard img={porsalenImg01} num="">
               باركيه الأرضيات الداخلية
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${parkehSubCategories[0].categoryId}/${parkehSubCategories[1].id}`}
+          >
             <CategoryCard img={porsalenImg02} num="">
               باركيه مقاوم للرطوبة
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${parkehSubCategories[0].categoryId}/${parkehSubCategories[2].id}`}
+          >
             <CategoryCard img={porsalenImg03} num="">
               باركيه للأماكن التجارية
             </CategoryCard>

@@ -50,11 +50,11 @@ const SubCategoriesUnderCategory = ({ id }: Props) => {
     // case 13:
     //   return <Edoors />;
     case 14:
-      return <Switches />;
-    case 15:
-      return <Bathroom />;
-    case 16:
       return <AirCondition />;
+    case 15:
+      return <Switches />;
+    case 16:
+      return <Bathroom />;
     // case 17:
     //   return <Gypsum />;
     default:

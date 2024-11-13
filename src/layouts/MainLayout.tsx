@@ -13,7 +13,7 @@ const MainLayout = () => {
         <NavBar />
         <EngineerRequestCardModal />
         <ConfirmDeleteModal />
-        <div className="mt-20 py-2">
+        <div className="mt-20 py-2 max-lg:mt-0">
           <Outlet />
         </div>
         <Footer />

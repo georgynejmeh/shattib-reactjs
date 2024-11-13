@@ -17,7 +17,7 @@ const Rkham = () => {
         <h2 className="text-4xl font-bold text-gray-500 mb-8">
           التصنيفات الفرعية
         </h2>
-        <div className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
+        <div className="flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar">
           <Link
             to={`/category/${rkhamSubCategory[0].categoryId}/${rkhamSubCategory[0].id}`}
           >

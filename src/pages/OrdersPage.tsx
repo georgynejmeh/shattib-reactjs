@@ -27,62 +27,68 @@ const OrdersPage = () => {
             <DropDownMenuButton>جميع الطلبات</DropDownMenuButton>
           </div>
         </div>
-        <table className="orders-table">
-          <thead>
-            <tr>
-              <th>رقم الطلب</th>
-              <th>تاريخ الإنشاء</th>
-              {/* <th>المنتجات</th> */}
-              {/* <th>الكمية</th> */}
-              <th>التكلفة الكلية</th>
-              <th>حالة الطلب</th>
-              <th>تاريخ التنفيذ</th>
-              <th>العمليات</th>
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading ? (
+        <div className="overflow-x-scroll">
+          <table className="orders-table min-w-max">
+            <thead>
               <tr>
-                <td>
-                  <span>جاري التحميل...</span>
-                </td>
+                {[
+                  "رقم الطلب",
+                  "تاريخ الإنشاء",
+                  // "المنتجات",
+                  // "الكمية",
+                  "التكلفة الكلية",
+                  "حالة الطلب",
+                  "تاريخ التنفيذ",
+                  "العمليات",
+                ].map((item) => (
+                  <th className="max-lg:px-4">{item}</th>
+                ))}
               </tr>
-            ) : error ? (
-              <tr>
-                <td>
-                  <span>حدث خطأ!</span>
-                </td>
-              </tr>
-            ) : data ? (
-              data.map((order) => (
-                <OrdersTableRow
-                  user
-                  key={order.id}
-                  id={order.id}
-                  totalPrice={order.totalPrice}
-                  orderItems={order.orderItems}
-                  dateOfArrival={order.dateOfArrival}
-                  dateOfOrder={order.dateOfOrder}
-                  status={
-                    order.status === "Pending"
-                      ? "قيد المعالجة"
-                      : order.status === "Accepted"
-                      ? "مقبول"
-                      : order.status === "Rejected"
-                      ? "مرفوض"
-                      : order.status === "Shipped"
-                      ? "مكتمل"
-                      : ""
-                  }
-                />
-              ))
-            ) : null}
-            {/* TODO DELETE LOOP */}
-            {/* {temp.map((item) => (
+            </thead>
+            <tbody>
+              {isLoading ? (
+                <tr>
+                  <td>
+                    <span>جاري التحميل...</span>
+                  </td>
+                </tr>
+              ) : error ? (
+                <tr>
+                  <td>
+                    <span>حدث خطأ!</span>
+                  </td>
+                </tr>
+              ) : data ? (
+                data.map((order) => (
+                  <OrdersTableRow
+                    user
+                    key={order.id}
+                    id={order.id}
+                    totalPrice={order.totalPrice}
+                    orderItems={order.orderItems}
+                    dateOfArrival={order.dateOfArrival}
+                    dateOfOrder={order.dateOfOrder}
+                    status={
+                      order.status === "Pending"
+                        ? "قيد المعالجة"
+                        : order.status === "Accepted"
+                        ? "مقبول"
+                        : order.status === "Rejected"
+                        ? "مرفوض"
+                        : order.status === "Shipped"
+                        ? "مكتمل"
+                        : ""
+                    }
+                  />
+                ))
+              ) : null}
+              {/* TODO DELETE LOOP */}
+              {/* {temp.map((item) => (
               <OrdersTableRow status={item} />
             ))} */}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </MainPadding>
     </main>
   );

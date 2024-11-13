@@ -5,6 +5,7 @@ import {
   insulationImg03,
   Link,
 } from "../..";
+import { insulationSubCategories } from "../../assets/json/insulationSubCategories";
 
 const Insulation = () => {
   return (
@@ -14,18 +15,24 @@ const Insulation = () => {
         <h2 className="text-4xl font-bold text-gray-500 mb-8">
           التصنيفات الفرعية
         </h2>
-        <div className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
-          <Link to={"/category"}>
+        <div className="flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar">
+          <Link
+            to={`/category/${insulationSubCategories[0].categoryId}/${insulationSubCategories[0].id}`}
+          >
             <CategoryCard img={insulationImg01} num="">
               بوابات فتح أفقي
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${insulationSubCategories[0].categoryId}/${insulationSubCategories[1].id}`}
+          >
             <CategoryCard img={insulationImg02} num="">
               عوازل صوتية
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${insulationSubCategories[0].categoryId}/${insulationSubCategories[2].id}`}
+          >
             <CategoryCard img={insulationImg03} num="">
               عوازل مائية
             </CategoryCard>

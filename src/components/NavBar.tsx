@@ -115,7 +115,12 @@ const NavBar = () => {
               <span>كراسات الشروط</span>
             </Link>
             <div className="w-96 max-lg:w-full max-lg:max-w-72">
-              <TextInput icon={searchIcon} placeholder="البحث عن المنتجات" />
+              <TextInput
+                iconLink={`/search?search=${searchValue}`}
+                onChange={(e) => setSearchValue(e.target.value)}
+                icon={searchIcon}
+                placeholder="البحث عن المنتجات"
+              />
             </div>
             <div className="lg:hidden flex items-center justify-between w-full gap-12">
               <Link to={"/cart"}>

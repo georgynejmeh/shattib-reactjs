@@ -6,6 +6,7 @@ import {
   paintsImg03,
   paintsImg04,
 } from "../..";
+import { paintsSubCategories } from "../../assets/json/paintsSubCategories";
 
 const Paints = () => {
   return (
@@ -15,23 +16,31 @@ const Paints = () => {
         <h2 className="text-4xl font-bold text-gray-500 mb-8">
           التصنيفات الفرعية
         </h2>
-        <div className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
-          <Link to={"/category"}>
+        <div className="flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar">
+          <Link
+            to={`/category/${paintsSubCategories[0].categoryId}/${paintsSubCategories[0].id}`}
+          >
             <CategoryCard img={paintsImg01} num="">
               دهانات الجدران الداخلية
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${paintsSubCategories[0].categoryId}/${paintsSubCategories[1].id}`}
+          >
             <CategoryCard img={paintsImg02} num="">
               دهانات الجدران الخارجية
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${paintsSubCategories[0].categoryId}/${paintsSubCategories[2].id}`}
+          >
             <CategoryCard img={paintsImg03} num="">
               الأساسات والمعاجين والمخففات
             </CategoryCard>
           </Link>
-          <Link to={"/category"}>
+          <Link
+            to={`/category/${paintsSubCategories[0].categoryId}/${paintsSubCategories[3].id}`}
+          >
             <CategoryCard img={paintsImg04} num="">
               دهانات الأرضيات
             </CategoryCard>

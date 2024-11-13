@@ -1,4 +1,5 @@
 import { CategoryCard, decorsImg01, Link } from "../..";
+import { decorsSubCategories } from "../../assets/json/decorsSubCategories";
 
 const Decors = () => {
   return (
@@ -8,8 +9,10 @@ const Decors = () => {
         <h2 className="text-4xl font-bold text-gray-500 mb-8">
           التصنيفات الفرعية
         </h2>
-        <div className="flex gap-8 overflow-x-auto whitespace-nowrap no-scrollbar">
-          <Link to={"/category"}>
+        <div className="flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar">
+          <Link
+            to={`/category/${decorsSubCategories[0].categoryId}/${decorsSubCategories[0].id}`}
+          >
             <CategoryCard img={decorsImg01} num="">
               القفاري
             </CategoryCard>
