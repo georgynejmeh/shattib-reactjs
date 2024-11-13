@@ -4,50 +4,54 @@ export function useApi<T>(
   endpoint: string,
   method?: "POST" | "DELETE" | "GET",
   isToken?: boolean,
-  noResponse?: boolean
+  noResponse?: boolean,
+  dependencies?: any[]
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [data, setData] = useState<T | null>(null);
 
-  useEffect(() => {
-    if (method != "POST" && method != "DELETE") {
-      getData();
-    }
-
-    async function getData() {
-      setIsLoading(true);
-      try {
-        // const apiUrl = `${import.meta.env.VITE_API_URL}`;
-        const apiUrl = "https://shatib.com/api/";
-        console.log(`${apiUrl}${endpoint}`);
-
-        let token;
-        let requestOptions;
-        if (isToken) {
-          token = localStorage.getItem("accessToken");
-          requestOptions = {
-            headers: { Authorization: `Bearer ${token}` },
-          };
-        }
-        await fetch(`${apiUrl}${endpoint}`, requestOptions)
-          .then(async (res) => {
-            setIsLoading(false);
-            setError(false);
-            setData(await res.json());
-          })
-          .catch((err) => {
-            setIsLoading(false);
-            setError(true);
-            console.log("useApi Error: ", err);
-          });
-      } catch (error) {
-        setIsLoading(false);
-        setError(true);
-        console.log("useApi Exception: ", error);
+  useEffect(
+    () => {
+      if (method != "POST" && method != "DELETE") {
+        getData();
       }
-    }
-  }, [endpoint, method]);
+
+      async function getData() {
+        setIsLoading(true);
+        try {
+          // const apiUrl = `${import.meta.env.VITE_API_URL}`;
+          const apiUrl = "https://shatib.com/api/";
+          console.log(`${apiUrl}${endpoint}`);
+
+          let token;
+          let requestOptions;
+          if (isToken) {
+            token = localStorage.getItem("accessToken");
+            requestOptions = {
+              headers: { Authorization: `Bearer ${token}` },
+            };
+          }
+          await fetch(`${apiUrl}${endpoint}`, requestOptions)
+            .then(async (res) => {
+              setIsLoading(false);
+              setError(false);
+              setData(await res.json());
+            })
+            .catch((err) => {
+              setIsLoading(false);
+              setError(true);
+              console.log("useApi Error: ", err);
+            });
+        } catch (error) {
+          setIsLoading(false);
+          setError(true);
+          console.log("useApi Exception: ", error);
+        }
+      }
+    },
+    dependencies ? [endpoint, method, ...dependencies] : [endpoint, method]
+  );
 
   async function postData(body: object) {
     let token;
