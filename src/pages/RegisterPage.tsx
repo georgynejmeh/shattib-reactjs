@@ -60,18 +60,18 @@ const RegisterPage = () => {
     <>
       {data ? <Navigate to={"/login"} /> : null}
       <div className="flex max-lg:flex-col justify-center items-center min-h-screen max-lg:p-8">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            return postData(formData);
-          }}
-        >
-          <div className="w-1/4 flex flex-col justify-center max-lg:w-full">
-            <span className="text-yellow-600 text-2xl pb-4">
-              أهلاً بك في شطّب!
-            </span>
-            <span className="text-2xl">إنشاء حساب</span>
+        <div className="w-1/4 flex flex-col justify-center max-lg:w-full">
+          <span className="text-yellow-600 text-2xl pb-4">
+            أهلاً بك في شطّب!
+          </span>
+          <span className="text-2xl">إنشاء حساب</span>
 
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              return postData(formData);
+            }}
+          >
             <TextInput
               name="displayName"
               title="الاسم"
@@ -134,37 +134,37 @@ const RegisterPage = () => {
               onChange={(e) => setPasswordCheck(e.target.value)}
               // onChange={handleInputChange}
             />
-
-            <div className="flex flex-col items-center">
-              <div className="w-full">
-                {/* <Link to={"/admin/product/new"}> */}
-                <Button type="submit" disabeld={!isFormValid()}>
-                  {isLoading ? "جاري التسجيل..." : "إنشاء حساب"}
-                </Button>
-                {/* </Link> */}
-              </div>
-              {error ? (
-                <span className="pt-4 text-red-600 font-bold">
-                  حدث خطأ! الرجاء إعادة المحاولة
-                </span>
-              ) : null}
-              <span className="pt-4">
-                لديك حساب؟{" "}
-                <Link to={"/login"}>
-                  <button>
-                    <span className="text-yellow-600 underline">
-                      تسجيل الدخول
-                    </span>
-                  </button>
-                </Link>
-              </span>
+            <div className="w-full mt-5">
+              {/* <Link to={"/admin/product/new"}> */}
+              <Button type="submit" disabeld={!isFormValid()}>
+                {isLoading ? "جاري التسجيل..." : "إنشاء حساب"}
+              </Button>
+              {/* </Link> */}
             </div>
+          </form>
+
+          <div className="flex flex-col items-center">
+            {error ? (
+              <span className="pt-4 text-red-600 font-bold">
+                حدث خطأ! الرجاء إعادة المحاولة
+              </span>
+            ) : null}
+            <span className="pt-4">
+              لديك حساب؟{" "}
+              <Link to={"/login"}>
+                <button>
+                  <span className="text-yellow-600 underline">
+                    تسجيل الدخول
+                  </span>
+                </button>
+              </Link>
+            </span>
           </div>
-          <div className="px-8 max-lg:py-4"></div>
-          <div>
-            <img src={registerBanner} alt="" />
-          </div>
-        </form>
+        </div>
+        <div className="px-8 max-lg:py-4"></div>
+        <div>
+          <img src={registerBanner} alt="" />
+        </div>
       </div>
     </>
   );

@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import { HomeSubCategory } from "../../models/HomeCategories";
 import { CategoryCard, leftArrowIcon, Link } from "../..";
-// import { CategoryCard, leftArrowIcon, Link } from "../..";
-// import { HomeSubCategory } from "../../models/HomeCategories";
 
 interface HomeCategoriesComponentProps {
   subCategories: HomeSubCategory[];
@@ -39,11 +37,11 @@ const HomeCategoriesComponent = ({
           التصنيفات الفرعية
         </h2>
 
-        {/* Left and Right Arrows */}
+        {/* Left and Right Arrows - Hidden on Mobile */}
         <div className="absolute z-10 -right-4 top-[65%] flex justify-between w-full">
           <button
             onClick={scrollLeft}
-            className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-4xl"
+            className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-4xl hidden md:flex"
           >
             <img
               className="-scale-x-100"
@@ -53,7 +51,7 @@ const HomeCategoriesComponent = ({
           </button>
           <button
             onClick={scrollRight}
-            className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl"
+            className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl hidden md:flex"
           >
             <img src={leftArrowIcon} alt="Scroll Right" />
           </button>
