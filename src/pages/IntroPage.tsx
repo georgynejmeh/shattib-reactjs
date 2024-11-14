@@ -31,7 +31,7 @@ const IntroPage = () => {
           <Link to={"/home"}>
             <RegisterPersonCard />
           </Link>
-          <Link to={"/register"}>
+          <Link to={"/conditions"}>
             <RegisterCompanyCard />
           </Link>
         </div>
