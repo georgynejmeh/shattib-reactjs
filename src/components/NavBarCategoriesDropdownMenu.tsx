@@ -94,7 +94,7 @@ const NavBarCategoriesDropdownMenu = () => {
                               to={`/category/${category.id}/${subCategory.id}`}
                               onClick={() => setIsCatDropdown(false)} // Close dropdown after selecting subcategory
                             >
-                              <CatDropdownItem>
+                              <CatDropdownItem showLeftIcon={false}>
                                 {subCategory.name}
                               </CatDropdownItem>
                             </Link>
