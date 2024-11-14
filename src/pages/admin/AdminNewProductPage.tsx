@@ -77,6 +77,9 @@ const AdminNewProductPage: React.FC<Props> = ({
               />
             </div>
             <div className="w-full">
+              <label className={"flex self-start my-2 text-sm"}>
+                الصنف الفرعي
+              </label>
               <select
                 name="SubCategoryId"
                 id="SubCategoryId"

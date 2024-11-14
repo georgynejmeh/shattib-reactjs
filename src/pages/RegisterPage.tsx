@@ -135,6 +135,7 @@ const RegisterPage = () => {
             <div className="w-full">
               {/* <Link to={"/admin/product/new"}> */}
               <Button
+                type="submit"
                 disabeld={!isFormValid()}
                 onClick={() => postData(formData)}
               >

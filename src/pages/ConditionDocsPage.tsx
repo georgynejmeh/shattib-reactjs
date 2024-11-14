@@ -24,7 +24,9 @@ const ConditionDocsPage = () => {
   // Use the API hook to fetch data with the status filter
   // TODO:: GETMINE
   const { isLoading, error, data } = useApi<Cirteria[]>(
-    statusFilter ? `Criteria/mine?status=${statusFilter}` : "Criteria/mine"
+    statusFilter ? `Criteria/mine?status=${statusFilter}` : "Criteria/mine",
+    "GET",
+    true
   );
 
   if (!token) {
@@ -48,7 +50,7 @@ const ConditionDocsPage = () => {
         <section className="flex items-center max-lg:flex-col max-lg:w-full">
           <h1 className="text-nowrap text-2xl font-bold pb-4">كراسات الشروط</h1>
           <div className="grid w-full">
-            <div className="felx justify-self-center max-lg:mb-4">
+            <div className="flex gap-2 justify-center max-lg:justify-start max-lg:overflow-x-auto max-lg:whitespace-nowrap max-lg:mb-4">
               {/* Buttons for filtering by status */}
               <RoundButton
                 active={statusFilter === null}
@@ -76,6 +78,7 @@ const ConditionDocsPage = () => {
               </RoundButton>
             </div>
           </div>
+
           <Link to={"new"}>
             <ButtonGold>
               <div className="text-nowrap flex gap-2 w-max p-2">
@@ -96,6 +99,10 @@ const ConditionDocsPage = () => {
             <span>جاري التحميل...</span>
           ) : error ? (
             <span>حدث خطأ!</span>
+          ) : data?.length === 0 ? (
+            <span className="h-[30vh] w-full text-2xl text-center flex items-center justify-center font-bold">
+              لا يوجد كراسات بعد
+            </span>
           ) : data ? (
             data.map((criteria) => (
               <ConditionCard

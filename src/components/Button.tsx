@@ -5,11 +5,19 @@ interface Props {
   size?: "sm" | "md" | "lg";
   disabeld?: boolean;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
-const Button = ({ children, size, disabeld, onClick }: Props) => {
+const Button = ({
+  children,
+  size,
+  disabeld,
+  onClick,
+  type = undefined,
+}: Props) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabeld}
       className={

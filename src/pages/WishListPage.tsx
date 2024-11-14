@@ -17,7 +17,7 @@ const WishListPage = () => {
         </section>
         <section className="px-16">
           <div className="flex flex-row-reverse w-full">
-            <Link to={"/home"}>
+            <Link to={`/category/0/0`}>
               <div className="w-44">
                 <Button size="md">
                   <div className="flex justify-center gap-4">

@@ -30,7 +30,9 @@ const MainCategoryPage = () => {
   const [maxPrice, setMaxPrice] = useState(10000);
   const [minPrice, setMinPrice] = useState(0);
   const { isLoading, error, data } = useApi<ProductHomePage[]>(
-    `Products?categoryId=${id}&subcategoryId=${subId}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+    subId != null
+      ? `Products?categoryId=${id}&subcategoryId=${subId}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+      : `Products?categoryId=${id}&minPrice=${minPrice}&maxPrice=${maxPrice}`
   );
 
   const location = useLocation();

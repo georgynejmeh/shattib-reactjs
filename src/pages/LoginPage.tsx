@@ -23,7 +23,8 @@ const LoginPage = () => {
   });
 
   // Function to handle login
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     await postData(formData);
 
     if (data?.accessToken) {
@@ -61,21 +62,21 @@ const LoginPage = () => {
       ) : null}
       {data ? (
         data.role === "Client" ? (
-          <Navigate to={"/home"} />
+          <Navigate to={"/home"} replace />
         ) : data.role === "Business" ? (
-          <Navigate to={"/conditions"} />
+          <Navigate to={"/conditions"} replace />
         ) : data.role === "Administrator" ? (
-          <Navigate to={"/admin/home"} />
+          <Navigate to={"/admin/home"} replace />
         ) : null
       ) : null}
-      <div className="flex max-lg:flex-col justify-center items-center min-h-screen max-lg:p-8">
-        <div className="w-1/4 flex flex-col justify-center max-lg:w-full">
-          {" "}
-          <span className="text-yellow-600 text-2xl pb-4">
-            أهلاً بك في شطّب!
-          </span>
-          <span className="text-2xl">تسجيل دخول</span>
-          <form className="py-4" action="">
+      <form className="py-4" onSubmit={handleLogin}>
+        <div className="flex max-lg:flex-col justify-center items-center min-h-screen max-lg:p-8">
+          <div className="w-1/4 flex flex-col justify-center max-lg:w-full">
+            {" "}
+            <span className="text-yellow-600 text-2xl pb-4">
+              أهلاً بك في شطّب!
+            </span>
+            <span className="text-2xl">تسجيل دخول</span>
             <TextInput
               name="email"
               title="البريد الالكتروني"
@@ -89,36 +90,36 @@ const LoginPage = () => {
               icon={lockIcon}
               onChange={handleInputChange}
             />
-          </form>
-          <div className="flex flex-col items-center">
-            <Button onClick={handleLogin} disabeld={!isFormValid}>
-              {isLoading ? "جاري التسجيل..." : "تسجيل الدخول"}
-            </Button>
-            {error ? (
-              <span className="pt-4 text-red-600 font-bold">
-                حدث خطأ! الرجاء إعادة المحاولة
+            <div className="flex flex-col items-center">
+              <Button disabeld={!isFormValid} type="submit">
+                {isLoading ? "جاري التسجيل..." : "تسجيل الدخول"}
+              </Button>
+              {error ? (
+                <span className="pt-4 text-red-600 font-bold">
+                  حدث خطأ! الرجاء إعادة المحاولة
+                </span>
+              ) : null}
+              <span className="pt-4">
+                ليس لديك حساب؟{" "}
+                <Link to={"/register"}>
+                  <button>
+                    <span className="text-yellow-600 underline">أنشئ حساب</span>
+                  </button>
+                </Link>
               </span>
-            ) : null}
-            <span className="pt-4">
-              ليس لديك حساب؟{" "}
-              <Link to={"/register"}>
-                <button>
-                  <span className="text-yellow-600 underline">أنشئ حساب</span>
-                </button>
+            </div>
+            <div className="flex self-start mt-8">
+              <Link to={"/home"}>
+                <ButtonGold>الدخول كضيف</ButtonGold>
               </Link>
-            </span>
+            </div>
           </div>
-          <div className="flex self-start mt-8">
-            <Link to={"/home"}>
-              <ButtonGold>الدخول كضيف</ButtonGold>
-            </Link>
+          <div className="px-8 max-lg:py-4"></div>
+          <div>
+            <img src={registerBanner} alt="" />
           </div>
         </div>
-        <div className="px-8 max-lg:py-4"></div>
-        <div>
-          <img src={registerBanner} alt="" />
-        </div>
-      </div>
+      </form>
     </>
   );
 };
