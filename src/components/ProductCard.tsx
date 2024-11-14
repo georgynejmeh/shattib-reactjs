@@ -42,6 +42,7 @@ const ProductCard = ({
         quantity: 1,
         name: name,
         price: price,
+        image: image,
       });
     }
 
@@ -64,6 +65,7 @@ const ProductCard = ({
         productId: id,
         name: name,
         price: price,
+        image: image,
       });
       localStorage.setItem("favorites", JSON.stringify(favorites));
     }

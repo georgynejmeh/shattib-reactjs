@@ -7,6 +7,7 @@ import {
   heartIcon,
   useState,
   addToBoxBlackIcon,
+  useEffect,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
 import { CartItem } from "../models/CartItem";
@@ -20,6 +21,17 @@ const ProductDetailsCard = ({ data }: Props) => {
   const token = localStorage.getItem("accessToken");
   const { setIsShownLoginModal } = useLoginModal();
   const [quantity, setQuantity] = useState(1); // Track quantity
+
+  const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const productInCart = storedCart.find(
+    (item: CartItem) => item.productId === data?.id
+  );
+  useEffect(() => {
+    if (productInCart) {
+      setQuantity(productInCart.quantity);
+    }
+  }, [productInCart, storedCart]);
+
   const [active, setActive] = useState(false);
   const handleRequestSample = () => {
     const existingSamples = JSON.parse(
@@ -33,8 +45,8 @@ const ProductDetailsCard = ({ data }: Props) => {
       );
 
       if (productInSamplesCart) {
-        // If the product already exists, update its quantity
-        productInSamplesCart.quantity += quantity;
+        // If the product already exists, replace its quantity with the new one
+        productInSamplesCart.quantity = quantity;
       } else {
         // If the product is not in the samples cart, add it with only necessary data
         existingSamples.push({
@@ -42,6 +54,7 @@ const ProductDetailsCard = ({ data }: Props) => {
           name: data.name,
           price: data.price,
           quantity: quantity,
+          image: data.images[0].imagePath,
         });
       }
 
@@ -62,14 +75,15 @@ const ProductDetailsCard = ({ data }: Props) => {
       );
 
       if (productInCart) {
-        // If the product already exists, update its quantity
-        productInCart.quantity += quantity;
+        // If the product already exists, replace its quantity with the new one
+        productInCart.quantity = quantity;
       } else {
         // If the product is not in the cart, add it with only necessary data
         existingCart.push({
           productId: data.id,
           name: data.name,
           price: data.price,
+          image: data.images[0].imagePath,
           quantity: quantity,
         });
       }
@@ -91,6 +105,7 @@ const ProductDetailsCard = ({ data }: Props) => {
         productId: data?.id,
         name: data?.name,
         price: data?.price,
+        image: data?.images[0].imagePath,
       });
       localStorage.setItem("favorites", JSON.stringify(favorites));
     }

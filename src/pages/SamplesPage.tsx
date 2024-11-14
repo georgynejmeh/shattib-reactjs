@@ -70,7 +70,7 @@ const SamplesPage = () => {
       <div className="w-full">
         <div className="w-full">
           <div className="flex justify-center">
-            <div className="flex justify-around ms-32 w-3/5 border-b-2 border-b-gray-400 py-1 max-lg:hidden">
+            <div className="flex justify-around ms-12 w-3/5 border-b-2 border-b-gray-400 py-1 max-lg:hidden">
               <span className="text-lg text-gray-400">اسم المنتج</span>
               <span className="text-lg text-gray-400">الكمية</span>
               <span className="text-lg text-gray-400">السعر</span>
@@ -86,6 +86,7 @@ const SamplesPage = () => {
                 key={index}
                 productId={item.productId}
                 name={item.name}
+                image={item.image}
                 price={item.price}
                 quantity={item.quantity}
                 remove
