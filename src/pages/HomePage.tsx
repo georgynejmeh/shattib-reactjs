@@ -82,6 +82,7 @@ const HomePage = () => {
             homeCategories?.map((c) => {
               return (
                 <HomeCategoriesComponent
+                  key={c.id}
                   categoryId={c.id}
                   categoryName={c.name}
                   subCategories={c.subCategories}
