@@ -69,7 +69,7 @@ const LoginPage = () => {
           <Navigate to={"/admin/home"} replace />
         ) : null
       ) : null}
-      <form className="py-4" onSubmit={handleLogin}>
+      <form onSubmit={handleLogin}>
         <div className="flex max-lg:flex-col justify-center items-center min-h-screen max-lg:p-8">
           <div className="w-1/4 flex flex-col justify-center max-lg:w-full">
             {" "}
@@ -90,7 +90,7 @@ const LoginPage = () => {
               icon={lockIcon}
               onChange={handleInputChange}
             />
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center py-4">
               <Button disabeld={!isFormValid} type="submit">
                 {isLoading ? "جاري التسجيل..." : "تسجيل الدخول"}
               </Button>

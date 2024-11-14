@@ -12,74 +12,148 @@ const ConsultationsPage = () => {
     <main>
       <MainPadding>
         <AccentText>طلبات رفع مساحة</AccentText>
-        {/* <h1 className="text-2xl font-bold mb-8">الاستشارات</h1> */}
-        <div className="overflow-x-scroll overflow-y-hidden">
-          <table className="mt-8 min-w-max orders-table">
+        <div className="overflow-x-auto max-w-full">
+          {/* Desktop Table */}
+          <table className="hidden lg:table mt-8 min-w-max w-full text-sm border-separate space-y-4">
             <thead>
-              <tr>
+              <tr className="bg-gray-200 text-gray-700">
                 {[
                   "الرمز",
                   "الموضوع",
                   "هاتف",
-                  // "اختصاص المهندس",
                   "تفاصيل",
                   "فئة",
                   "الحالة",
                   "تاريخ الطلب",
                 ].map((item) => (
-                  <th className="max-lg:px-4">{item}</th>
+                  <th
+                    className="p-3 text-center text-xs font-semibold whitespace-nowrap"
+                    key={item}
+                  >
+                    {item}
+                  </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {isLoading ? (
-                <span>جاري التحميل...</span>
+                <tr>
+                  <td colSpan={7} className="text-center p-4">
+                    <span className="text-gray-500">جاري التحميل...</span>
+                  </td>
+                </tr>
               ) : error ? (
-                <span>حدث خطأ!</span>
+                <tr>
+                  <td colSpan={7} className="text-center p-4 text-red-500">
+                    حدث خطأ!
+                  </td>
+                </tr>
               ) : (
                 data?.map((consultation) => (
-                  <tr key={consultation.id}>
-                    <td>{consultation.id}</td>
-                    <td>{consultation.consultationTopic}</td>
-                    <td>{consultation.phoneNumber}</td>
-                    {/* <td>{consultation.engineerSpecification}</td> */}
-                    <td>{consultation.details}</td>
-                    <td>{consultation.projectCategory}</td>
-                    <td>
+                  <tr
+                    key={consultation.id}
+                    className="even:bg-gray-50 hover:bg-gray-100 transition-colors"
+                  >
+                    <td className="p-2 text-center">{consultation.id}</td>
+                    <td className="p-2 text-center">
+                      {consultation.consultationTopic}
+                    </td>
+                    <td className="p-2 text-center">
+                      {consultation.phoneNumber}
+                    </td>
+                    <td className="p-2 text-center">{consultation.details}</td>
+                    <td className="p-2 text-center">
+                      {consultation.projectCategory}
+                    </td>
+                    <td className="p-2 text-center">
                       {consultation.status === "Pending" ? (
-                        <div className="bg-yellow-100 w-32 py-1 rounded-full mx-auto">
+                        <div className="bg-yellow-200 text-yellow-700 w-24 lg:w-32 py-1 rounded-full mx-auto text-xs">
                           معلّق
                         </div>
                       ) : consultation.status === "Completed" ? (
-                        <div className="bg-green-100 w-32 py-1 rounded-full mx-auto">
+                        <div className="bg-green-200 text-green-700 w-24 lg:w-32 py-1 rounded-full mx-auto text-xs">
                           معالج
                         </div>
                       ) : null}
                     </td>
-                    <td>{consultation.dateOfRequest.substring(0, 10)}</td>
-                    {/* <td>{consultation.userId}</td> */}
+                    <td className="p-2 text-center">
+                      {consultation.dateOfRequest.substring(0, 10)}
+                    </td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
-        </div>
 
-        {/* <ul>
-    {data?.map((consultation) => (
-      <div className="flex gap-2">
-        <div>{consultation.id}</div>
-        <div>{consultation.consultationTopic}</div>
-        <div>{consultation.status}</div>
-        <div>{consultation.engineerSpecification}</div>
-        <div>{consultation.projectCategory}</div>
-        <div>{consultation.phoneNumber}</div>
-        <div>{consultation.dateOfRequest}</div>
-        <div>{consultation.details}</div>
-        <div>{consultation.userId}</div>
-      </div>
-    ))}
-  </ul> */}
+          {/* Mobile Layout */}
+          <div className="lg:hidden mt-8 space-y-4">
+            {isLoading ? (
+              <span>جاري التحميل...</span>
+            ) : error ? (
+              <span>حدث خطأ!</span>
+            ) : (
+              data?.map((consultation) => (
+                <div
+                  key={consultation.id}
+                  className="p-4 border rounded-lg shadow-lg bg-white space-y-2 transition-all hover:shadow-xl"
+                >
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-gray-700">الرمز:</span>
+                    <span className="text-gray-600">{consultation.id}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-gray-700">
+                      الموضوع:
+                    </span>
+                    <span className="text-gray-600">
+                      {consultation.consultationTopic}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-gray-700">هاتف:</span>
+                    <span className="text-gray-600">
+                      {consultation.phoneNumber}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-gray-700">تفاصيل:</span>
+                    <span className="text-gray-600">
+                      {consultation.details}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-gray-700">فئة:</span>
+                    <span className="text-gray-600">
+                      {consultation.projectCategory}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-gray-700">الحالة:</span>
+                    <span>
+                      {consultation.status === "Pending" ? (
+                        <span className="bg-yellow-200 text-yellow-700 py-1 px-3 rounded-full text-xs">
+                          معلّق
+                        </span>
+                      ) : consultation.status === "Completed" ? (
+                        <span className="bg-green-200 text-green-700 py-1 px-3 rounded-full text-xs">
+                          معالج
+                        </span>
+                      ) : null}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-gray-700">
+                      تاريخ الطلب:
+                    </span>
+                    <span className="text-gray-600">
+                      {consultation.dateOfRequest.substring(0, 10)}
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
       </MainPadding>
     </main>
   );
