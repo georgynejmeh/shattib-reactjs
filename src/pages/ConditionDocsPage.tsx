@@ -8,12 +8,14 @@ import {
   useApi,
   useState,
 } from "..";
+import { useLoginModal } from "../hooks/useLoginModal";
 import { Cirteria } from "../models/Criteria";
 
 const ConditionDocsPage = () => {
   // Track the selected filter (status)
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
-
+  const token = localStorage.getItem("accessToken");
+  const { setIsShownLoginModal } = useLoginModal();
   // Function to handle button click
   const handleStatusChange = (status: string | null) => {
     setStatusFilter(status);
@@ -22,9 +24,23 @@ const ConditionDocsPage = () => {
   // Use the API hook to fetch data with the status filter
   // TODO:: GETMINE
   const { isLoading, error, data } = useApi<Cirteria[]>(
-    statusFilter ? `Criteria/GetAll?status=${statusFilter}` : "Criteria/GetAll"
+    statusFilter ? `Criteria/mine?status=${statusFilter}` : "Criteria/mine"
   );
 
+  if (!token) {
+    return (
+      <div className="w-full h-[60vh] flex justify-center items-center">
+        <center className="">
+          <ButtonGold onClick={() => setIsShownLoginModal(true)}>
+            <div className="text-nowrap flex gap-2 w-max p-2">
+              <img src={plusCircleOutlineWhiteIcon} alt="" />
+              <span>أضف كراسة</span>
+            </div>
+          </ButtonGold>
+        </center>
+      </div>
+    );
+  }
   // const { isLoading, error, data } = useApi<Cirteria[]>("Criteria/GetAll");
   return (
     <main>
