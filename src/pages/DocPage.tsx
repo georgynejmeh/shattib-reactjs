@@ -1,6 +1,5 @@
 import {
   attachmentIcon,
-  billImg,
   ButtonGold,
   MainPadding,
   SectionTitles,
