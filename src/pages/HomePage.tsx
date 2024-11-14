@@ -2,6 +2,7 @@ import {
   BannerButton,
   CategoriesButtonListHorizontal,
   CompaniesBanner,
+  HomeCategoriesComponent,
   // HomeCategoriesComponent,
   Link,
   MainSlideShow,
@@ -12,6 +13,7 @@ import {
   useState,
 } from "..";
 import { Category } from "../models/Category";
+import { HomeCategorie } from "../models/HomeCategories";
 // import { HomeCategorie } from "../models/HomeCategories";
 
 const HomePage = () => {
@@ -20,15 +22,15 @@ const HomePage = () => {
     "GET"
   );
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
-  // const { data: homeCategories } = useApi<HomeCategorie[]>(
-  //   selectedCategory != 0
-  //     ? `Products/CatsSubCatsProducts?categoryId=${selectedCategory}`
-  //     : "Products/CatsSubCatsProducts",
-  //   "GET",
-  //   undefined,
-  //   undefined,
-  //   // [selectedCategory]
-  // );
+  const { data: homeCategories } = useApi<HomeCategorie[]>(
+    selectedCategory != 0
+      ? `Products/CatsSubCatsProducts?categoryId=${selectedCategory}`
+      : "Products/CatsSubCatsProducts",
+    "GET",
+    undefined,
+    undefined
+    // [selectedCategory]
+  );
   return (
     <>
       <Link to={"/contact"}>
@@ -76,16 +78,17 @@ const HomePage = () => {
           </div>
           <ProductListHorizontal /> */}
 
-          {/* {homeCategories &&
+          {homeCategories &&
             homeCategories?.map((c) => {
               return (
                 <HomeCategoriesComponent
+                  key={c.id}
                   categoryId={c.id}
                   categoryName={c.name}
                   subCategories={c.subCategories}
                 />
               );
-            })} */}
+            })}
         </section>
 
         <CompaniesBanner />

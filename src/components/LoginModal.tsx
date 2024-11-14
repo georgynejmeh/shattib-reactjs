@@ -1,4 +1,4 @@
-import { ButtonGold } from "..";
+import { ButtonGold, Link } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
 
 const LoginModal = () => {
@@ -17,9 +17,11 @@ const LoginModal = () => {
           يرجى تسجيل الدخول للوصول لهذه الصفحة
         </h1>
         <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-          <div className="w-full md:w-40">
-            <ButtonGold>تسجيل دخول</ButtonGold>
-          </div>
+          <Link to={"/login"}>
+            <div className="w-full md:w-40">
+              <ButtonGold>تسجيل دخول</ButtonGold>
+            </div>
+          </Link>
           <button
             className="rounded bg-gray-200 w-full md:w-20 py-1 px-3"
             onClick={() => setIsShownLoginModal(false)}

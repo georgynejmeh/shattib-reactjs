@@ -28,7 +28,7 @@ const IntroPage = () => {
         <span className="pt-2">منصة شاملة لطلب مواد التشطيب بسهولة وسرعة</span>
         <span className="pt-8 pe-16 font-bold">اختر نوع الحساب</span>
         <div className="flex place-self-center justify-evenly w-2/3 pt-8 max-lg:flex-col max-lg:h-svh max-lg:items-center max-lg:gap-16 max-lg:mt-12">
-          <Link to={"/register"}>
+          <Link to={"/home"}>
             <RegisterPersonCard />
           </Link>
           <Link to={"/register"}>
