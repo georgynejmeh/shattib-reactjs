@@ -5,7 +5,8 @@ export function useApi<T>(
   method?: "POST" | "DELETE" | "GET",
   isToken?: boolean,
   noResponse?: boolean,
-  dependencies?: [] //any[]
+  dependencies?: [],
+  contentType: string = "application/json"
 ) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -68,7 +69,7 @@ export function useApi<T>(
       let headers = {};
       if (token) {
         headers = {
-          "Content-Type": "application/json",
+          "Content-Type": contentType,
           Authorization: `Bearer ${token}`,
         };
       } else {

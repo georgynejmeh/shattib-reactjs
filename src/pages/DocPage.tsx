@@ -143,42 +143,41 @@ const DocPage = () => {
           </section>
           <section className="flex flex-col items-center gap-8 w-1/2">
             <h2 className="text-xl font-bold">الفاتورة</h2>
-            <div className="flex gap-4">
-              <div className="w-full">
-                <img
-                  className="w-full h-full object-cover"
-                  src={billImg}
-                  alt=""
-                />
+            {data && data!.invoices.length > 0 ? (
+              <div className="flex gap-4">
+                <div className="w-full">
+                  <img
+                    className="w-full h-full object-cover"
+                    src={data?.invoices[0].image}
+                    alt=""
+                  />
+                </div>
+                <div className="flex gap-2 self-end">
+                  <button
+                    onClick={() => {
+                      setIsCommentsShown(true);
+                      setIsUploadReceiptShown(false);
+                    }}
+                    className="w-20 py-1 rounded bg-gray-200"
+                  >
+                    رفض
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsCommentsShown(false);
+                      setIsUploadReceiptShown(true);
+                    }}
+                    className="w-20 py-1 rounded bg-green-600 text-white"
+                  >
+                    قبول
+                  </button>
+                </div>
               </div>
-              <div className="w-full">
-                <img
-                  className="w-full h-full object-cover"
-                  src={billImg}
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="flex gap-2 self-end">
-              <button
-                onClick={() => {
-                  setIsCommentsShown(true);
-                  setIsUploadReceiptShown(false);
-                }}
-                className="w-20 py-1 rounded bg-gray-200"
-              >
-                رفض
-              </button>
-              <button
-                onClick={() => {
-                  setIsCommentsShown(false);
-                  setIsUploadReceiptShown(true);
-                }}
-                className="w-20 py-1 rounded bg-green-600 text-white"
-              >
-                قبول
-              </button>
-            </div>
+            ) : (
+              <center className="w-full">
+                <span className="font-bold text-2xl">لا توجد فاتورة بعد</span>
+              </center>
+            )}
           </section>
         </section>
 

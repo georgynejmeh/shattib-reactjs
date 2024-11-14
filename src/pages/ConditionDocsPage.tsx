@@ -22,7 +22,7 @@ const ConditionDocsPage = () => {
   // Use the API hook to fetch data with the status filter
   // TODO:: GETMINE
   const { isLoading, error, data } = useApi<Cirteria[]>(
-    statusFilter ? `Criteria/mine?status=${statusFilter}` : "Criteria/mine"
+    statusFilter ? `Criteria/GetAll?status=${statusFilter}` : "Criteria/GetAll"
   );
 
   // const { isLoading, error, data } = useApi<Cirteria[]>("Criteria/GetAll");

@@ -63,6 +63,7 @@ const CategoriesButtonListHorizontal = ({
           categories.map((cat) => {
             return (
               <RoundButton
+                key={cat.id}
                 onClick={() => {
                   setSelectedCategory(cat.id);
                   setLocalCategory(cat.id);

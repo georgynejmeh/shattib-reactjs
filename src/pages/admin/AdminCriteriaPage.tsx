@@ -1,12 +1,12 @@
 import {
   attachmentIcon,
-  billImg,
   ButtonGold,
   CommentItem,
   downArrowIcon,
   paymentReceiptImg,
   TextInput,
   TitleNumber,
+  UploadFile,
   useApi,
   useParams,
 } from "../..";
@@ -20,16 +20,20 @@ const AdminCriteriaPage = () => {
 
   const [status, setStatus] = useState<string>(data?.status || "Pending"); // Set the initial status
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const [invoiceImage, setInvoiceImage] = useState<File | null>(null);
   // Function to handle status update
   const { patchData } = useApi(`Criteria/${id}/Status`);
-
+  const { postData } = useApi("CriteriaBills", "POST", true, true, []);
   const updateStatus = (newStatus: string) => {
     setStatus(newStatus); // Update local status
     patchData({ id: id, status: newStatus }); // Send patch request to update status
     setIsDropdownOpen(false); // Close the dropdown after selecting a status
   };
-
+  const handleImageChange = (imageFile: File) => {
+    console.log("Iwashere");
+    setInvoiceImage(imageFile); // Add image to the list
+    console.log(invoiceImage);
+  };
   useEffect(() => {
     if (data) {
       setStatus(data.status); // Initialize status when data is fetched
@@ -171,18 +175,30 @@ const AdminCriteriaPage = () => {
             <div>
               <div className="flex gap-2 items-center">
                 <h3>الفاتورة:</h3>
-                <img
-                  className="w-full h-full object-cover"
-                  src={billImg}
-                  alt="فاتورة"
-                />
-              </div>
-              <div className="flex gap-4">
-                <button className="bg-gray-200 py-1 px-3 rounded">
-                  الفواتير السابقة
-                </button>
-                <div className="w-44">
-                  <ButtonGold>فاتورة جديدة</ButtonGold>
+                <div className="w-[450px] h-[250px] px-16">
+                  <UploadFile
+                    containImg
+                    title="صورة الفاتورة"
+                    subTitle="أضف صورة الفاتورة للزبون"
+                    onImageChange={handleImageChange}
+                  />
+
+                  <div className="w-44 mt-10 w-full">
+                    <ButtonGold
+                      onClick={() => {
+                        const formData = new FormData();
+                        formData.append("CriteriaId", data.id.toString());
+                        if (invoiceImage != null) {
+                          formData.append("Image", invoiceImage);
+                          postData(formData).then(() => {
+                            setInvoiceImage(null);
+                          });
+                        }
+                      }}
+                    >
+                      رفع الفاتورة
+                    </ButtonGold>
+                  </div>
                 </div>
               </div>
             </div>
