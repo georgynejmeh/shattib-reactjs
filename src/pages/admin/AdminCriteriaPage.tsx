@@ -183,7 +183,7 @@ const AdminCriteriaPage = () => {
                     onImageChange={handleImageChange}
                   />
 
-                  <div className="w-44 mt-10 w-full">
+                  <div className="w-44 mt-10 max-lg:w-full">
                     <ButtonGold
                       onClick={() => {
                         const formData = new FormData();
