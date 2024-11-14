@@ -85,8 +85,8 @@ const NavBarCategoriesDropdownMenu = () => {
 
                   {/* Show subcategories when hovering over a category */}
                   {activeCategoryId === category.id && (
-                    <div className="fixed lg:max-w-1/3 lg:h-screen">
-                      <div className="lg:max-h-1/3 min-h-max lg:max-w-96 bg-gray-100 p-2 flex flex-wrap">
+                    <div className="fixed lg:max-w-1/3 ">
+                      <div className="lg:max-h-max min-h-max lg:max-w-96 bg-gray-100 p-2 flex flex-wrap">
                         {getSubcategoriesByCategoryId(category.id).map(
                           (subCategory) => (
                             <Link
