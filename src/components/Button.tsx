@@ -14,8 +14,12 @@ const Button = ({ children, size, disabeld, onClick }: Props) => {
       disabled={disabeld}
       className={
         size === "md"
-          ? "w-full px-8 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-slate-900 rounded-lg hover:bg-primary hover:text-black"
-          : "w-full px-24 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-slate-900 rounded-lg hover:bg-primary hover:text-black"
+          ? `w-full px-8 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-slate-900 rounded-lg ${
+              disabeld ? "bg-opacity-70" : "hover:bg-primary hover:text-black"
+            }`
+          : `w-full px-24 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-slate-900 rounded-lg ${
+              disabeld ? "bg-opacity-70" : "hover:bg-primary hover:text-black"
+            }`
       }
     >
       {children}

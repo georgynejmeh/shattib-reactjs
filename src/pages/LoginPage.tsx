@@ -49,6 +49,8 @@ const LoginPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const isFormValid = formData.email !== "" && formData.password.length >= 8;
+
   return (
     <>
       {data ? (
@@ -89,7 +91,7 @@ const LoginPage = () => {
             />
           </form>
           <div className="flex flex-col items-center">
-            <Button onClick={handleLogin}>
+            <Button onClick={handleLogin} disabeld={!isFormValid}>
               {isLoading ? "جاري التسجيل..." : "تسجيل الدخول"}
             </Button>
             {error ? (
