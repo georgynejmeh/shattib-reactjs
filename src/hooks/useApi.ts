@@ -1,5 +1,43 @@
 import { useEffect, useState } from "react";
 
+export async function refreshToken() {
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  if (!refreshToken) {
+    console.error("No refresh token available.");
+    return null;
+  }
+
+  try {
+    const apiUrl = "https://shatib.com/api/";
+    const response = await fetch(`${apiUrl}Accounts/RefreshToken`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refreshToken: refreshToken }),
+    });
+
+    if (!response.ok) {
+      console.error("Failed to refresh token.");
+      return null;
+    }
+
+    const data = await response.json();
+    if (data?.accessToken && data?.refreshToken) {
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      return data.accessToken;
+    } else {
+      console.error("Failed to retrieve new access token.");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error refreshing token:", error);
+    return null;
+  }
+}
+
 export function useApi<T>(
   endpoint: string,
   method?: "POST" | "DELETE" | "GET",
@@ -35,6 +73,9 @@ export function useApi<T>(
           }
           await fetch(`${apiUrl}${endpoint}`, requestOptions)
             .then(async (res) => {
+              if (res.status === 401) {
+                await refreshToken();
+              }
               setIsLoading(false);
               setError(false);
               setData(await res.json());
@@ -83,6 +124,9 @@ export function useApi<T>(
       };
       await fetch(`${apiUrl}${endpoint}`, requestOptions)
         .then(async (res) => {
+          if (res.status === 401) {
+            await refreshToken();
+          }
           setIsLoading(false);
           setError(false);
           if (!noResponse) {
@@ -114,6 +158,9 @@ export function useApi<T>(
       };
       await fetch(`${apiUrl}${endpoint}/${id}`, requestOptions)
         .then(async (res) => {
+          if (res.status === 401) {
+            await refreshToken();
+          }
           setIsLoading(false);
           setError(false);
           setData(await res.json());
@@ -147,7 +194,10 @@ export function useApi<T>(
       };
       console.log(requestOptions);
       await fetch(`${apiUrl}${endpoint}`, requestOptions)
-        .then(async () => {
+        .then(async (res) => {
+          if (res.status === 401) {
+            await refreshToken();
+          }
           setIsLoading(false);
           setError(false);
         })
@@ -176,6 +226,9 @@ export function useApi<T>(
       };
       await fetch(`${apiUrl}${endpoint}`, requestOptions)
         .then(async (res) => {
+          if (res.status === 401) {
+            await refreshToken();
+          }
           setIsLoading(false);
           setError(false);
           setData(await res.json());

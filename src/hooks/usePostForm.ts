@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { refreshToken } from "./useApi";
 
 export function usePostForm<T>(
   endpoint: string,
@@ -23,6 +24,9 @@ export function usePostForm<T>(
         const response = await fetch(`${apiUrl}${endpoint}`);
 
         if (!response.ok) {
+          if (response.status === 401) {
+            await refreshToken();
+          }
           const errorData = await response.json();
           const errorMessage = errorData?.message || "Something went wrong";
           setError(errorMessage);
@@ -56,6 +60,9 @@ export function usePostForm<T>(
       const response = await fetch(`${apiUrl}${endpoint}`, requestOptions);
 
       if (!response.ok) {
+        if (response.status === 401) {
+          await refreshToken();
+        }
         const errorData = await response.json().catch(() => ({}));
         const errorMessage = errorData?.message || "Something went wrong";
         setError(errorMessage);

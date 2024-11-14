@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { refreshToken } from "./useApi";
 
 export function usePostCriteria<T>(endpoint: string) {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,9 @@ export function usePostCriteria<T>(endpoint: string) {
       const response = await fetch(`${apiUrl}${endpoint}`, requestOptions);
 
       if (!response.ok) {
+        if (response.status === 401) {
+          await refreshToken();
+        }
         const errorData = await response.json().catch(() => ({}));
         const errorMessage = errorData?.message || "Something went wrong";
         setError(errorMessage);

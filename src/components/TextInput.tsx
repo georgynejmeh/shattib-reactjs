@@ -32,6 +32,23 @@ const TextInput = ({
   bordered = false,
 }: Props) => {
   const [hidden, setHidden] = useState(password);
+
+  const handleOnChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (number) {
+      // Prevent negative numbers
+      const value = e.target.value;
+      if (!/^\d*\.?\d*$/.test(value)) return; // Ensure only valid number input
+      if (parseFloat(value) < 0) return; // Prevent negative numbers
+    }
+
+    // Call the original onChange handler if it's provided
+    if (onChange) {
+      onChange(e);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col h-full">
@@ -65,7 +82,7 @@ const TextInput = ({
               className="resize-none h-full w-full py-3 ps-3 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400"
               placeholder={placeholder}
               name={name}
-              onChange={onChange}
+              onChange={handleOnChange}
               value={value}
             />
           ) : (
@@ -82,7 +99,7 @@ const TextInput = ({
               }
               placeholder={placeholder}
               name={name}
-              onChange={onChange}
+              onChange={handleOnChange}
               value={value}
             />
           )}
