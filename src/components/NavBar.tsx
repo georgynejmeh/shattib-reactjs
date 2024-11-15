@@ -10,10 +10,20 @@ import {
   useState,
   menuIcon,
   NavBarAccountDropDown,
+  useEffect,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
 
 const NavBar = () => {
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const [sampleCartItemCount, setSampleCartItemCount] = useState(0);
+  const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const samplesCart = JSON.parse(localStorage.getItem("samplesCart") || "[]");
+  useEffect(() => {
+    setCartItemCount(currentCart.length);
+    setSampleCartItemCount(samplesCart.length);
+  }, [currentCart, samplesCart]);
+
   const userType = localStorage.getItem("userType") || "Client";
   const token = localStorage.getItem("accessToken");
   const [searchValue, setSearchValue] = useState("");
@@ -78,9 +88,9 @@ const NavBar = () => {
             onClick={() => handleAuthorizedNavigationButton("/cart")}
             className="relative flex flex-col items-center"
           >
-            {/* <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
-            {cartItemCount}
-          </div> */}
+            <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
+              {cartItemCount + sampleCartItemCount}
+            </div>
             <img src={cartIcon} alt="" />
             <span>السلة</span>
           </div>

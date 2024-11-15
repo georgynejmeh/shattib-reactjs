@@ -35,6 +35,7 @@ import AdminSamplesPage from "./pages/admin/AdminSamplesPage";
 import AdminEditProductPage from "./pages/admin/AdminEditProductPage";
 import ConsultationsPage from "./pages/ConsultationsPage";
 import AdminConsultationPage from "./pages/admin/AdminConsultationPage";
+import OtpPage from "./pages/OtpPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/otp" element={<OtpPage />} />
         <Route element={<MainLayout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />

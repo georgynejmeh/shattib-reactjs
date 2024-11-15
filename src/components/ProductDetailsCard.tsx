@@ -23,14 +23,14 @@ const ProductDetailsCard = ({ data }: Props) => {
   const [quantity, setQuantity] = useState(1); // Track quantity
 
   const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-  const productInCart = storedCart.find(
-    (item: CartItem) => item.productId === data?.id
-  );
   useEffect(() => {
+    const productInCart = storedCart.find(
+      (item: CartItem) => item.productId === data?.id
+    );
     if (productInCart) {
       setQuantity(productInCart.quantity);
     }
-  }, [productInCart, storedCart]);
+  }, [storedCart, data]);
 
   const [active, setActive] = useState(false);
   const handleRequestSample = () => {
