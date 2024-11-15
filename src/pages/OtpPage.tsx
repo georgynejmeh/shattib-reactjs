@@ -2,7 +2,11 @@ import { ButtonGold, Navigate, registerBanner, useApi } from "..";
 import { useRef } from "react";
 
 const OtpPage = () => {
-  const { postData, isLoading, error, data } = useApi("Account/Verification");
+  const {
+    postData,
+    //  isLoading, error,
+    data,
+  } = useApi("Account/Verification");
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
