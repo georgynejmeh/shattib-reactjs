@@ -55,9 +55,7 @@ const MainCategoryPage = () => {
           endTitle={subCategory?.name}
         />
         <TitleNumber subTitle="">التصنيفات الفرعية</TitleNumber>
-        <TitleNumber subTitle="">
-          {subCategory?.name || "غير معروف"}
-        </TitleNumber>
+        <TitleNumber subTitle="">{subCategory?.name || "غير محدد"}</TitleNumber>
         {/* <SubCategoriesUnderCategory id={parseInt(id || "-1")} /> */}
         {/* <CategoryListHorizontal /> */}
         {/* <LeftRightButtonsCircle /> */}

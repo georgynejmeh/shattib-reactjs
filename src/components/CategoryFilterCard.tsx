@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Button, priceSlider, useState } from ".."; // assuming Link is from react-router-dom
+import { Button, useState } from ".."; // assuming Link is from react-router-dom
 
 const CategoryFilterCard = () => {
   const [minPrice, setMinPrice] = useState<number>();
@@ -22,7 +22,7 @@ const CategoryFilterCard = () => {
         <h2 className="text-gray-500">○ سيليكون ولواصق</h2>
       </div>
       <h1 className="text-2xl">السعر</h1>
-      <img className="w-full px-8" src={priceSlider} alt="Price Slider" />
+      {/* <img className="w-full px-8" src={priceSlider} alt="Price Slider" /> */}
       <div className="flex items-center gap-4">
         <input
           dir="ltr"

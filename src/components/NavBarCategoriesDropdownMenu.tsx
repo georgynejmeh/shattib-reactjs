@@ -77,7 +77,7 @@ const NavBarCategoriesDropdownMenu = () => {
                   onMouseLeave={() => setActiveCategoryId(null)} // Remove active category when not hovered
                 >
                   <Link
-                    to={`/category/${category.id}/1`}
+                    to={`/category/${category.id}/0`}
                     onClick={() => setIsCatDropdown(false)}
                   >
                     <CatDropdownItem>{category.name}</CatDropdownItem>

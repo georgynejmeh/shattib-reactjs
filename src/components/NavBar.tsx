@@ -113,7 +113,9 @@ const NavBar = () => {
       <div className="lg:hidden">
         <nav className="flex flex-col justify-between border-b items-start p-8 gap-8">
           <div className="flex justify-between w-full">
-            <img src={shattibLogoRow} alt="" />
+            <Link to={"/home"}>
+              <img src={shattibLogoRow} alt="" />
+            </Link>
             <button onClick={() => setIsCollapsed(!isCollapsed)}>
               <img src={menuIcon} alt="" />
             </button>

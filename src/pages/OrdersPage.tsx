@@ -13,7 +13,7 @@ const OrdersPage = () => {
     "Pending" | "Accepted" | "Rejected" | "Shipped" | "All" | string
   >("All");
   const { isLoading, error, data } = useApi<Order[]>(
-    filter === "All" ? "Orders/User" : `Orders/UserKind?kind=${filter}`,
+    filter === "All" ? "Orders/User" : `Orders/UserStatus?status=${filter}`,
     "GET",
     true
   );
@@ -62,9 +62,9 @@ const OrdersPage = () => {
           )}
         </div>
 
-        <div className="overflow-x-auto mt-6">
+        <div className="overflow-x-auto mt-6 w-full">
           {/* Desktop Table (Hidden on mobile) */}
-          <table className="orders-table min-w-full bg-white rounded-lg shadow-lg hidden lg:block">
+          <table className="orders-table min-w-full bg-white rounded-lg shadow-lg hidden lg:table">
             <thead className="bg-gray-100">
               <tr>
                 {[
@@ -181,7 +181,9 @@ const OrdersPage = () => {
                     <span className="font-semibold text-gray-700">
                       تاريخ التنفيذ:
                     </span>
-                    <span className="text-gray-600">{order.dateOfArrival}</span>
+                    <span className="text-gray-600">
+                      {order.dateOfArrival || "غير محدد"}
+                    </span>
                   </div>
                 </div>
               ))
