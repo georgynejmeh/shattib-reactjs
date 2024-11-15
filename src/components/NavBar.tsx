@@ -78,9 +78,6 @@ const NavBar = () => {
             onClick={() => handleAuthorizedNavigationButton("/cart")}
             className="relative flex flex-col items-center"
           >
-            {/* <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
-            {cartItemCount}
-          </div> */}
             <img src={cartIcon} alt="" />
             <span>السلة</span>
           </div>

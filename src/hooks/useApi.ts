@@ -71,7 +71,7 @@ export function useApi<T>(
               headers: { Authorization: `Bearer ${token}` },
             };
           }
-          await fetch(`${apiUrl}${endpoint}`, requestOptions)
+          fetch(`${apiUrl}${endpoint}`, requestOptions)
             .then(async (res) => {
               if (res.status === 401) {
                 await refreshToken();
@@ -100,7 +100,6 @@ export function useApi<T>(
     if (isToken) {
       token = localStorage.getItem("accessToken");
     }
-    console.log(body);
 
     setIsLoading(true);
     try {
@@ -122,7 +121,7 @@ export function useApi<T>(
         headers: headers,
         body: JSON.stringify(body),
       };
-      await fetch(`${apiUrl}${endpoint}`, requestOptions)
+      fetch(`${apiUrl}${endpoint}`, requestOptions)
         .then(async (res) => {
           if (res.status === 401) {
             await refreshToken();
@@ -156,7 +155,7 @@ export function useApi<T>(
       const requestOptions = {
         method: "DELETE",
       };
-      await fetch(`${apiUrl}${endpoint}/${id}`, requestOptions)
+      fetch(`${apiUrl}${endpoint}/${id}`, requestOptions)
         .then(async (res) => {
           if (res.status === 401) {
             await refreshToken();
@@ -193,7 +192,7 @@ export function useApi<T>(
         headers: headers,
       };
       console.log(requestOptions);
-      await fetch(`${apiUrl}${endpoint}`, requestOptions)
+      fetch(`${apiUrl}${endpoint}`, requestOptions)
         .then(async (res) => {
           if (res.status === 401) {
             await refreshToken();
@@ -224,7 +223,7 @@ export function useApi<T>(
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       };
-      await fetch(`${apiUrl}${endpoint}`, requestOptions)
+      fetch(`${apiUrl}${endpoint}`, requestOptions)
         .then(async (res) => {
           if (res.status === 401) {
             await refreshToken();

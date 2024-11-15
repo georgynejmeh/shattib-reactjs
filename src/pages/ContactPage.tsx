@@ -9,7 +9,6 @@ import {
   TextInput,
   useApi,
 } from "..";
-// Adjust the path to where useApi is defined
 
 interface ContactFormData {
   name: string;
@@ -80,8 +79,8 @@ const ContactPage: React.FC = () => {
             big
             placeholder="الرسالة"
             name="message"
-            value={formData.message}
             onChange={handleInputChange}
+            value={formData.message}
           />
           <ButtonGold onClick={handleSubmit}>
             {isLoading ? "إرسال..." : "إرسال"}
@@ -91,13 +90,29 @@ const ContactPage: React.FC = () => {
         </div>
         <div className="w-1/2 flex flex-col gap-8 items-center">
           <img className="w-40" src={shattibLogoContactUs} alt="Shattib Logo" />
-          <div className="flex gap-4 text-nowrap">
+          <div className="flex gap-4 text-nowrap items-center">
             <img src={phoneIcon} alt="Phone" />
-            <span dir="ltr">+966 50 109 3007</span>
+            <a
+              href="https://wa.me/966501093007"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-800 hover:text-primary transition-colors duration-200 font-semibold"
+              style={{ textDecoration: "none" }}
+              dir="ltr"
+            >
+              +966 50 109 3007
+            </a>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             <img src={emailIcon} alt="Email" />
-            <span dir="ltr">support@shatib.com</span>
+            <a
+              href="mailto:support@shatib.com"
+              className="text-gray-800 hover:text-primary transition-colors duration-200 font-semibold"
+              style={{ textDecoration: "none" }}
+              dir="ltr"
+            >
+              support@shatib.com
+            </a>
           </div>
         </div>
       </section>
