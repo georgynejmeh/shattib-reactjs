@@ -171,7 +171,11 @@ const RegisterPage = () => {
                 icon={lockIcon}
                 onChange={handleInputChange}
               />
-              <div className="w-full h-2 mt-2 bg-gray-300 rounded">
+              <div
+                className={`w-full h-2 mt-2 bg-gray-300 rounded ${
+                  formData.password ? "block" : "hidden"
+                }`}
+              >
                 <div
                   style={{ width: `${passwordStrength}%` }}
                   className={`h-full rounded ${
@@ -183,7 +187,11 @@ const RegisterPage = () => {
                   }`}
                 ></div>
               </div>
-              <div className="text-sm mt-2">
+              <div
+                className={`text-sm mt-2 ${
+                  formData.password ? "block" : "hidden"
+                }`}
+              >
                 <span className="font-semibold">قوة كلمة المرور: </span>
                 <span>
                   {passwordStrength < 40
