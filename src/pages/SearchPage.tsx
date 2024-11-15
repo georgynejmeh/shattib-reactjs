@@ -1,4 +1,4 @@
-import { MainPadding, searchIcon, useApi, useLocation } from "..";
+import { Link, MainPadding, useApi, useLocation } from "..";
 import { ProductHomePage } from "../models/Product";
 
 const SearchPage = () => {
@@ -13,10 +13,6 @@ const SearchPage = () => {
     <main>
       <MainPadding>
         <section className="flex flex-col items-center gap-4 w-3/4 mx-auto">
-          <div className="flex gap-4 border rounded-xl py-2 px-12 w-full">
-            <img src={searchIcon} alt="" />
-            <span>{searchQuery}</span>
-          </div>
           <div className="shadow-xl bg-white w-full p-4">
             {isLoading ? (
               <span>جاري التحميل...</span>
@@ -25,17 +21,21 @@ const SearchPage = () => {
             ) : data ? (
               data.map((product) => (
                 <>
-                  <div className="flex p-4 gap-4">
-                    <div className="w-24 h-24">
-                      <img src={product.mainImagePath} alt="" />
+                  <Link to={`/product/${product.id}`}>
+                    <div className="flex p-4 gap-4">
+                      <div className="w-24 h-24">
+                        <img src={product.mainImagePath} alt="" />
+                      </div>
+                      <div className="flex flex-col justify-center gap-2">
+                        <span className="text-lg">
+                          اسم المنتج {product.name}
+                        </span>
+                        <span className="text-lg font-bold">
+                          {product.price} ريال
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex flex-col justify-center gap-2">
-                      <span className="text-lg">اسم المنتج {product.name}</span>
-                      <span className="text-lg font-bold">
-                        {product.price} ريال
-                      </span>
-                    </div>
-                  </div>
+                  </Link>
 
                   <hr />
                 </>

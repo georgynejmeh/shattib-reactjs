@@ -15,6 +15,7 @@ interface Props {
   ) => void;
   value?: string;
   bordered?: boolean;
+  inputType?: string;
 }
 
 const TextInput = ({
@@ -30,6 +31,7 @@ const TextInput = ({
   onChange,
   value,
   bordered = false,
+  inputType,
 }: Props) => {
   const [hidden, setHidden] = useState(password);
 
@@ -87,7 +89,15 @@ const TextInput = ({
             />
           ) : (
             <input
-              type={hidden ? "password" : number ? "number" : "text"}
+              type={
+                inputType
+                  ? inputType
+                  : hidden
+                  ? "password"
+                  : number
+                  ? "number"
+                  : "text"
+              }
               className={
                 icon
                   ? `h-full w-full py-3 pl-10 pr-10 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-amber-400 ${
