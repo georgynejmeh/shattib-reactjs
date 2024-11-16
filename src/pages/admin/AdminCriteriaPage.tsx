@@ -21,6 +21,10 @@ const AdminCriteriaPage = () => {
   const [status, setStatus] = useState<string>(data?.status || "Pending"); // Set the initial status
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [invoiceImage, setInvoiceImage] = useState<File | null>(null);
+  function handleInvoiceImg(image: File) {
+    setInvoiceImage(image);
+  }
+
   // Function to handle status update
   const { patchData } = useApi(`Criteria/${id}/Status`);
   const { postData: postCriteriaBill } = useApi(
@@ -182,7 +186,7 @@ const AdminCriteriaPage = () => {
                     containImg
                     title="صورة الفاتورة"
                     subTitle="أضف صورة الفاتورة للزبون"
-                    onImageChange={setInvoiceImage}
+                    onImageChange={handleInvoiceImg}
                   />
 
                   <div className="w-44 mt-10 max-lg:w-full">

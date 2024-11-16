@@ -90,7 +90,7 @@ const RegisterPage = () => {
     try {
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept-Language": "" },
         body: JSON.stringify(formData),
       };
 
@@ -159,6 +159,7 @@ const RegisterPage = () => {
             <TextInput
               name="phoneNumber"
               title="رقم الهاتف"
+              placeholder="+966123456789"
               icon={phoneIcon}
               onChange={handleInputChange}
             />
