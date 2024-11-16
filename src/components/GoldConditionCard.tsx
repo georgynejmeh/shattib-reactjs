@@ -28,7 +28,6 @@ const GoldConditionCard = ({
         </div>
         <div className="flex justify-between">
           <h1 className="text-2xl p-2">{name}</h1>
-          <h1 className="text-2xl p-2">8</h1>
         </div>
       </div>
       <div className="flex py-2 gap-4">

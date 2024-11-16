@@ -23,17 +23,19 @@ const AdminCriteriaPage = () => {
   const [invoiceImage, setInvoiceImage] = useState<File | null>(null);
   // Function to handle status update
   const { patchData } = useApi(`Criteria/${id}/Status`);
-  const { postData } = useApi("CriteriaBills", "POST", true, true, []);
+  const { postData: postCriteriaBill } = useApi(
+    "CriteriaBills",
+    "POST",
+    true,
+    true,
+    []
+  );
   const updateStatus = (newStatus: string) => {
     setStatus(newStatus); // Update local status
     patchData({ id: id, status: newStatus }); // Send patch request to update status
     setIsDropdownOpen(false); // Close the dropdown after selecting a status
   };
-  const handleImageChange = (imageFile: File) => {
-    console.log("Iwashere");
-    setInvoiceImage(imageFile); // Add image to the list
-    console.log(invoiceImage);
-  };
+
   useEffect(() => {
     if (data) {
       setStatus(data.status); // Initialize status when data is fetched
@@ -180,19 +182,22 @@ const AdminCriteriaPage = () => {
                     containImg
                     title="صورة الفاتورة"
                     subTitle="أضف صورة الفاتورة للزبون"
-                    onImageChange={handleImageChange}
+                    onImageChange={setInvoiceImage}
                   />
 
                   <div className="w-44 mt-10 max-lg:w-full">
                     <ButtonGold
-                      onClick={() => {
+                      onClick={async () => {
                         const formData = new FormData();
                         formData.append("CriteriaId", data.id.toString());
                         if (invoiceImage != null) {
                           formData.append("Image", invoiceImage);
-                          postData(formData).then(() => {
-                            setInvoiceImage(null);
-                          });
+                          console.log(
+                            "FormData entries:",
+                            Array.from(formData.entries())
+                          );
+                          await postCriteriaBill(formData);
+                          setInvoiceImage(null);
                         }
                       }}
                     >
