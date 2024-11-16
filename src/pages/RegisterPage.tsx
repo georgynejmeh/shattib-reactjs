@@ -30,7 +30,7 @@ const RegisterPage = () => {
     email: "",
     phoneNumber: "",
     password: "",
-    role: "Client", // assuming 'Client' as default role
+    role: localStorage.getItem("userType") || "Client", // assuming 'Client' as default role
   });
 
   const handleInputChange = (
