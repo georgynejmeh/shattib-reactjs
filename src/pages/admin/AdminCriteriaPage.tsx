@@ -191,7 +191,10 @@ const AdminCriteriaPage = () => {
                         const formData = new FormData();
                         formData.append("CriteriaId", data.id.toString());
                         if (invoiceImage != null) {
-                          formData.append("Image", invoiceImage);
+                          formData.append(
+                            "Image",
+                            (await invoiceImage.bytes()).toString()
+                          );
                           console.log(
                             "FormData entries:",
                             Array.from(formData.entries())
