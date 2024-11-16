@@ -6,7 +6,23 @@ const OtpPage = () => {
     postData,
     //  isLoading, error,
     data,
-  } = useApi("Account/Verification");
+  } = useApi("Account/VerifyAccount", "POST");
+
+  const handleSendSms = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const phoneNumber = localStorage.getItem("phoneNumber");
+    try {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept-Language": "" },
+        body: JSON.stringify({ destinationPhoneNumber: phoneNumber }),
+      };
+
+      await fetch("https://shatib.com/api/Accounts/OTP/sms", requestOptions);
+    } catch (error) {
+      console.log("OTP Error:", error);
+    }
+  };
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -15,7 +31,7 @@ const OtpPage = () => {
     // Join all OTP digits into one string
     const otp = inputRefs.current.map((input) => input?.value).join("");
 
-    postData({ body: otp });
+    postData({ otpCode: otp });
   };
 
   const handleInputChange = (
@@ -62,12 +78,12 @@ const OtpPage = () => {
             </div>
 
             <div className="w-64 self-center">
-              <ButtonGold>تأكيد</ButtonGold>
+              <ButtonGold onClick={() => {}}>تأكيد</ButtonGold>
             </div>
 
             <span className="mt-6">
               لم يصلك رمز التحقق؟{" "}
-              <button>
+              <button onClick={handleSendSms}>
                 <span className="text-yellow-600 underline">إعادة إرسال</span>
               </button>
             </span>
