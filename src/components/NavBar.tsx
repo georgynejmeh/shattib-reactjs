@@ -13,6 +13,8 @@ import {
   useEffect,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const NavBar = () => {
   const [cartItemCount, setCartItemCount] = useState(0);
@@ -54,6 +56,7 @@ const NavBar = () => {
   // }, []);
 
   // const { setIsShownEngineerRequestModal } = useEngineerRequest();
+  const { t } = useTranslation();
   return (
     <>
       <div className="fixed top-0 z-50 w-full bg-white max-lg:hidden">
@@ -62,7 +65,7 @@ const NavBar = () => {
             <img src={shattibLogoRow} alt="" />
           </Link>
           <Link to={"/home"}>
-            <span>الصفحة الرئيسية</span>
+            <span>{t("homePageTxt")}</span>
           </Link>
           <NavBarCategoriesDropdownMenu />
           {/* <Link to={"/home"}>
@@ -72,7 +75,7 @@ const NavBar = () => {
             className={userType === "Client" ? "hidden" : ""}
             to={"/conditions"}
           >
-            <span>كراسات الشروط</span>
+            <span>{t("criteriaTxt")}</span>
           </Link>
           <div className="w-96">
             <TextInput
@@ -80,7 +83,7 @@ const NavBar = () => {
               icon={searchIcon}
               iconLink={`/search?search=${searchValue}`}
               onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="البحث عن المنتجات"
+              placeholder={t("searchInProductsTxt")}
             />
           </div>
 
@@ -92,7 +95,7 @@ const NavBar = () => {
               {cartItemCount + sampleCartItemCount}
             </div>
             <img src={cartIcon} alt="" />
-            <span>السلة</span>
+            <span>{t("cartTxt")}</span>
           </div>
 
           <div
@@ -100,7 +103,7 @@ const NavBar = () => {
             className="flex flex-col items-center"
           >
             <img src={heartIcon} alt="" />
-            <span>المفضلة</span>
+            <span>{t("favoriteTxt")}</span>
           </div>
 
           {/* <div
@@ -116,7 +119,7 @@ const NavBar = () => {
               <NavBarAccountDropDown />
             </div>
           )}
-          <span>EN</span>
+          <LanguageSwitcher />
         </nav>
       </div>
 
@@ -132,7 +135,7 @@ const NavBar = () => {
           </div>
           <div className={`flex flex-col gap-6 ${isCollapsed ? "hidden" : ""}`}>
             <Link to={"/home"}>
-              <span>الصفحة الرئيسية</span>
+              <span>{t("homePageTxt")}</span>
             </Link>
             <NavBarCategoriesDropdownMenu />
             {/* <Link to={"/home"}>
@@ -142,7 +145,7 @@ const NavBar = () => {
               className={userType === "Client" ? "hidden" : ""}
               to={"/conditions"}
             >
-              <span>كراسات الشروط</span>
+              <span>{t("criteriaTxt")}</span>
             </Link>
             <div className="w-96 max-lg:w-full max-lg:max-w-72">
               <TextInput
@@ -150,7 +153,7 @@ const NavBar = () => {
                 iconLink={`/search?search=${searchValue}`}
                 onChange={(e) => setSearchValue(e.target.value)}
                 icon={searchIcon}
-                placeholder="البحث عن المنتجات"
+                placeholder={t("searchInProductsTxt")}
               />
             </div>
             <div className="lg:hidden flex items-center justify-between w-full gap-12">
@@ -162,7 +165,7 @@ const NavBar = () => {
             {cartItemCount}
             </div> */}
                 <img src={cartIcon} alt="" />
-                <span>السلة</span>
+                <span>{t("cartTxt")}</span>
               </div>
 
               <div
@@ -170,7 +173,7 @@ const NavBar = () => {
                 className="flex flex-col items-center"
               >
                 <img src={heartIcon} alt="" />
-                <span>المفضلة</span>
+                <span>{t("favoriteTxt")}</span>
               </div>
 
               {/* <div
@@ -186,7 +189,7 @@ const NavBar = () => {
                   <NavBarAccountDropDown />
                 </div>
               )}
-              <span>EN</span>
+              <LanguageSwitcher />
             </div>
           </div>
         </nav>

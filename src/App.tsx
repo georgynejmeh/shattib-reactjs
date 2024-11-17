@@ -36,7 +36,8 @@ import AdminEditProductPage from "./pages/admin/AdminEditProductPage";
 import ConsultationsPage from "./pages/ConsultationsPage";
 import AdminConsultationPage from "./pages/admin/AdminConsultationPage";
 import OtpPage from "./pages/OtpPage";
-
+import RkhamCustomMeasurePopup from "./components/RkhamCustomMeasurePopup";
+import "./config/translation/i18n.ts";
 const App = () => {
   // return to the top of the page on navigation
   // FIX for: keep the same scroll distance on navigation
@@ -46,7 +47,7 @@ const App = () => {
   }, [pathname]);
 
   return (
-    <main dir="rtl">
+    <main>
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/admin" element={<LoginPage />} />
@@ -56,6 +57,7 @@ const App = () => {
         <Route path="/otp" element={<OtpPage />} />
         <Route element={<MainLayout />}>
           <Route path="/home" element={<HomePage />} />
+          <Route path="/test" element={<RkhamCustomMeasurePopup />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/category/:id/:subId" element={<MainCategoryPage />} />
           <Route path="/cart" element={<CartPage />} />

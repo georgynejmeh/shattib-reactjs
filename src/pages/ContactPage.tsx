@@ -25,10 +25,10 @@ const ContactPage: React.FC = () => {
     message: "",
   });
 
-  // Using the useApi hook for POST requests
+  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
+
   const { postData, isLoading, data } = useApi<Response>("ContactUs", "POST");
 
-  // Handle form input changes
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -37,11 +37,30 @@ const ContactPage: React.FC = () => {
       ...prevData,
       [name]: value,
     }));
+
+    // Clear error for the field being edited
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: undefined,
+    }));
   };
 
-  // Handle form submission
+  const validateForm = (): boolean => {
+    const newErrors: Partial<ContactFormData> = {};
+
+    if (!formData.name.trim()) newErrors.name = "الاسم مطلوب";
+    if (!formData.email.trim()) newErrors.email = "الايميل مطلوب";
+    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "الرقم مطلوب";
+    if (!formData.message.trim()) newErrors.message = "الرسالة مطلوبة";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async () => {
-    await postData(formData);
+    if (validateForm()) {
+      await postData(formData);
+    }
   };
 
   return (
@@ -62,6 +81,7 @@ const ContactPage: React.FC = () => {
               value={formData.name}
               onChange={handleInputChange}
             />
+            {errors.name && <p className="text-red-500">{errors.name}</p>}
           </div>
           <TextInput
             placeholder="الرقم"
@@ -69,12 +89,16 @@ const ContactPage: React.FC = () => {
             value={formData.phoneNumber}
             onChange={handleInputChange}
           />
+          {errors.phoneNumber && (
+            <p className="text-red-500">{errors.phoneNumber}</p>
+          )}
           <TextInput
             placeholder="الايميل"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
           />
+          {errors.email && <p className="text-red-500">{errors.email}</p>}
           <TextInput
             big
             placeholder="الرسالة"
@@ -82,6 +106,7 @@ const ContactPage: React.FC = () => {
             onChange={handleInputChange}
             value={formData.message}
           />
+          {errors.message && <p className="text-red-500">{errors.message}</p>}
           <ButtonGold onClick={handleSubmit}>
             {isLoading ? "إرسال..." : "إرسال"}
           </ButtonGold>

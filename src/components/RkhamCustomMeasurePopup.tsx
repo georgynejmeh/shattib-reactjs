@@ -41,13 +41,18 @@ const RkhamCustomMeasurePopup = () => {
     console.log(form.values);
 
     await postData(form);
+    setIsShownRkahmCustomMeasureModal(false);
   }
-
+  if (isShownRkahmCustomMeasureModal) {
+    document.body.classList.add("overflow-hidden");
+  } else {
+    document.body.classList.remove("overflow-hidden");
+  }
   return (
     <>
-      {data ? setIsShownRkahmCustomMeasureModal(false) : null}
+      {data && setIsShownRkahmCustomMeasureModal(false)}
       {isShownRkahmCustomMeasureModal ? (
-        <main className="absolute z-50 flex justify-center items-center top-0 w-full h-full bg-black bg-opacity-50">
+        <main className="fixed z-50 flex justify-center items-center top-0 w-full h-full bg-black bg-opacity-50">
           <div className="flex flex-col border bg-white w-4/5 h-5/6 rounded-xl p-8">
             <div className="flex w-full justify-between">
               <h1 className="text-2xl font-bold">طلب قياس مخصص من الرخام</h1>

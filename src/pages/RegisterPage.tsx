@@ -76,11 +76,11 @@ const RegisterPage = () => {
     return (
       displayName &&
       email &&
-      phoneNumber &&
+      phoneNumber.length === 9 && // Ensure exactly 9 digits
       password &&
       password.length >= 8 &&
       password === passwordCheck &&
-      emailValid // Check email validity
+      emailValid
     );
   };
 
@@ -88,6 +88,11 @@ const RegisterPage = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
+      // Prefix the phone number with +966
+      setFormData((prev) => ({
+        ...prev,
+        phoneNumber: `+966${prev.phoneNumber}`,
+      }));
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept-Language": "" },
@@ -159,10 +164,16 @@ const RegisterPage = () => {
             <TextInput
               name="phoneNumber"
               title="رقم الهاتف"
-              placeholder="+966123456789"
+              isPhoneNumber
               icon={phoneIcon}
               onChange={handleInputChange}
+              value={`${formData.phoneNumber}`} // Prefix +966 added dynamically
             />
+            {formData.phoneNumber && formData.phoneNumber.length !== 9 && (
+              <span className="text-red-600 text-sm mt-1">
+                يجب أن يحتوي رقم الهاتف على 9 أرقام
+              </span>
+            )}
 
             <div className="relative">
               <TextInput

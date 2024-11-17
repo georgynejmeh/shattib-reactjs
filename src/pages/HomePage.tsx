@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import {
   BannerButton,
   CategoriesButtonListHorizontal,
@@ -31,11 +32,12 @@ const HomePage = () => {
     undefined
     // [selectedCategory]
   );
+  const { t } = useTranslation();
   return (
     <>
       <Link to={"/contact"}>
         <div className="fixed z-50 bottom-4 left-4 w-20 h-20 bg-indigo-950 rounded-full text-white flex items-center justify-center hover:bg-indigo-700">
-          تواصل معنا
+          {t("contactUsTxt")}
         </div>
       </Link>
       <div>
@@ -46,7 +48,7 @@ const HomePage = () => {
             <div className="absolute top-0 pt-16 ps-32 flex flex-col gap-8 z-20 max-lg:pt-8 max-lg:ps-8">
               <img className="w-64 max-lg:w-48" src={shattibText} />
               <span className="text-2xl text-white font-bold max-lg:text-lg">
-                منصة شاملة لمعاينة وطلب كافة مواد التشطيب النهائي
+                {t("homePageMainSlideShowDescriptionTxt")}
               </span>
             </div>
           </div>
@@ -61,7 +63,7 @@ const HomePage = () => {
             <img className="me-2 w-16" src={shattibGoldIcon} alt="" />
             {/* <div className="me-2 h-16 w-2 bg-yellow-200" /> */}
             <TitleNumber version={2} subTitle="">
-              التصنيفات
+              {t("categoriesTxt")}
             </TitleNumber>
           </div>
 

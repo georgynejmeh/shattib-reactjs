@@ -14,6 +14,7 @@ export async function refreshToken() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept-Language": localStorage.getItem("lang") || " ",
       },
       body: JSON.stringify({ refreshToken: refreshToken }),
     });
@@ -68,9 +69,17 @@ export function useApi<T>(
           if (isToken) {
             token = localStorage.getItem("accessToken");
             requestOptions = {
-              headers: { Authorization: `Bearer ${token}` },
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Accept-Language": localStorage.getItem("lang") || " ",
+              },
             };
           }
+          requestOptions = {
+            headers: {
+              "Accept-Language": localStorage.getItem("lang") || " ",
+            },
+          };
           fetch(`${apiUrl}${endpoint}`, requestOptions)
             .then(async (res) => {
               if (res.status === 401) {
@@ -111,9 +120,13 @@ export function useApi<T>(
         headers = {
           "Content-Type": contentType,
           Authorization: `Bearer ${token}`,
+          "Accept-Language": localStorage.getItem("lang") || " ",
         };
       } else {
-        headers = { "Content-Type": "application/json" };
+        headers = {
+          "Content-Type": "application/json",
+          "Accept-Language": localStorage.getItem("lang") || " ",
+        };
       }
       console.log(headers);
       const requestOptions = {
@@ -184,7 +197,12 @@ export function useApi<T>(
       let headers = {};
       if (isToken) {
         const token = localStorage.getItem("accessToken");
-        headers = { Authorization: `Bearer ${token}` };
+        headers = {
+          Authorization: `Bearer ${token}`,
+          "Accept-Language": localStorage.getItem("lang") || " ",
+        };
+      } else {
+        headers = { "Accept-Language": localStorage.getItem("lang") || " " };
       }
       const requestOptions = {
         method: "PATCH",
@@ -220,7 +238,7 @@ export function useApi<T>(
       console.log(`${apiUrl}${endpoint}`);
       const requestOptions = {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept-Language": " " },
         body: JSON.stringify(body),
       };
       fetch(`${apiUrl}${endpoint}`, requestOptions)

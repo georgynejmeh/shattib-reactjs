@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { RoundButton, leftArrowIcon } from "..";
 import { Category } from "../models/Category";
+import { useTranslation } from "react-i18next";
 
 interface CategoriesButtonListHorizontalProps {
   categories: Category[] | null;
@@ -27,6 +28,7 @@ const CategoriesButtonListHorizontal = ({
       scrollContainerRef.current.scrollBy({ left: -300, behavior: "smooth" });
     }
   };
+  const { t } = useTranslation();
 
   return (
     <div className="relative">
@@ -56,7 +58,7 @@ const CategoriesButtonListHorizontal = ({
           }}
           active={localCategory === 0}
         >
-          كل التصنيفات
+          {t("allCategoriesTxt")}
         </RoundButton>
         {categories &&
           categories.map((cat) => (

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import {
   CatDropdownItem,
   downArrowIcon,
@@ -51,7 +52,7 @@ const NavBarCategoriesDropdownMenu = () => {
   const getSubcategoriesByCategoryId = (categoryId: number) => {
     return subCategories.filter((sub) => sub.categoryId === categoryId);
   };
-
+  const { t } = useTranslation();
   return (
     <button>
       <div ref={buttonRef} className="relative flex items-center">
@@ -60,7 +61,7 @@ const NavBarCategoriesDropdownMenu = () => {
           onClick={() => setIsCatDropdown((prev) => !prev)}
           className="flex items-center"
         >
-          <span className="px-2">التصنيفات</span>
+          <span className="px-2">{t("categoriesTxt")}</span>
           <img className="w-4" src={downArrowIcon} alt="Dropdown" />
         </div>
 

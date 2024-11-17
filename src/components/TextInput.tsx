@@ -10,6 +10,7 @@ interface Props {
   big?: boolean;
   name?: string;
   number?: boolean;
+  isPhoneNumber?: boolean;
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -32,6 +33,7 @@ const TextInput = ({
   value,
   bordered = false,
   inputType,
+  isPhoneNumber = false,
 }: Props) => {
   const [hidden, setHidden] = useState(password);
 
@@ -77,6 +79,11 @@ const TextInput = ({
           ) : (
             <span className="absolute inset-y-0 right-0 flex items-center pr-3">
               <img src={icon} />
+            </span>
+          )}
+          {isPhoneNumber && (
+            <span className="absolute inset-y-0 left-0 flex items-center px-3 text-primary border border-primary">
+              +966
             </span>
           )}
           {big ? (
