@@ -110,7 +110,7 @@ const SamplesPage = () => {
       {/* Buttons */}
       <div className="flex justify-end w-full max-lg:justify-center">
         <div className="flex gap-4 w-1/3 max-lg:flex-col max-lg:w-full">
-          <Link to={"/home"}>
+          <Link to={"/category/0/0"}>
             <button className="border border-black rounded py-1 px-3 min-w-44">
               إضافة عينات
             </button>
