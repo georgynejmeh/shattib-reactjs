@@ -36,6 +36,7 @@ const NavBar = () => {
     if (token) {
       return navigate(path);
     }
+    setIsCollapsed(true);
     setIsShownLoginModal(true);
   };
   // const [cartItemCount, setCartItemCount] = useState<number>(0);
@@ -113,12 +114,21 @@ const NavBar = () => {
       >
         <ButtonGold>طلب عرض سعر</ButtonGold>
       </div> */}
-          {token && (
-            <div className="flex items-center justify-center w-12 h-12 rounded-full">
-              {/* <img src={accountIcon} alt="" /> */}
-              <NavBarAccountDropDown />
-            </div>
-          )}
+          {/* {token && ( */}
+          <div
+            onClick={(e) => {
+              if (token) {
+                return;
+              }
+              e.stopPropagation();
+              setIsShownLoginModal(true);
+            }}
+            className="flex items-center justify-center w-12 h-12 rounded-full"
+          >
+            {/* <img src={accountIcon} alt="" /> */}
+            <NavBarAccountDropDown />
+          </div>
+          {/* )} */}
           <LanguageSwitcher />
         </nav>
       </div>
@@ -183,12 +193,22 @@ const NavBar = () => {
           >
           <ButtonGold>طلب عرض سعر</ButtonGold>
           </div> */}
-              {token && (
-                <div className="flex items-center justify-center w-12 h-12 rounded-full">
-                  {/* <img src={accountIcon} alt="" /> */}
-                  <NavBarAccountDropDown />
-                </div>
-              )}
+              {/* {token && ( */}
+              <div
+                onClick={(e) => {
+                  if (token) {
+                    return;
+                  }
+                  e.stopPropagation();
+                  setIsShownLoginModal(true);
+                  setIsCollapsed(true);
+                }}
+                className="flex items-center justify-center w-12 h-12 rounded-full"
+              >
+                {/* <img src={accountIcon} alt="" /> */}
+                <NavBarAccountDropDown />
+              </div>
+              {/* )} */}
               <LanguageSwitcher />
             </div>
           </div>

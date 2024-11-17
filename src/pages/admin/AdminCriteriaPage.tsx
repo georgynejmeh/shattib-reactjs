@@ -22,7 +22,7 @@ const AdminCriteriaPage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [invoiceImage, setInvoiceImage] = useState<File | null>(null);
   function handleInvoiceImg(image: File) {
-    setInvoiceImage(image);
+    setInvoiceImage(() => image);
   }
   // Function to handle status update
   const { patchData } = useApi(`Criteria/${id}/Status`);
@@ -44,6 +44,30 @@ const AdminCriteriaPage = () => {
       setStatus(data.status); // Initialize status when data is fetched
     }
   }, [data]);
+
+  const uploadInvoice = async () => {
+    if (!invoiceImage || !data) return;
+
+    const formData = new FormData();
+    formData.append("CriteriaId", data.id.toString());
+    formData.append("Image", invoiceImage);
+
+    try {
+      const response = await fetch(`https://shatib.com/api/CriteriaBills`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload invoice");
+      }
+
+      console.log("Invoice uploaded successfully!");
+      setInvoiceImage(null);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <main className="p-main">
@@ -189,21 +213,7 @@ const AdminCriteriaPage = () => {
                   />
 
                   <div className="w-44 mt-10 max-lg:w-full">
-                    <ButtonGold
-                      onClick={async () => {
-                        const formData = new FormData();
-                        formData.append("CriteriaId", data.id.toString());
-                        if (invoiceImage != null) {
-                          formData.append("Image", invoiceImage);
-                          console.log(
-                            "FormData entries:",
-                            Array.from(formData.entries())
-                          );
-                          await postCriteriaBill(formData);
-                          setInvoiceImage(null);
-                        }
-                      }}
-                    >
+                    <ButtonGold onClick={uploadInvoice}>
                       رفع الفاتورة
                     </ButtonGold>
                   </div>
@@ -252,3 +262,17 @@ const AdminCriteriaPage = () => {
 };
 
 export default AdminCriteriaPage;
+
+// async () => {
+//   const formData = new FormData();
+//   formData.append("CriteriaId", data.id.toString());
+//   if (invoiceImage != null) {
+//     formData.append("Image", invoiceImage);
+//     console.log(
+//       "FormData entries:",
+//       Array.from(formData.entries())
+//     );
+//     await postCriteriaBill(formData);
+//     setInvoiceImage(null);
+//   }
+// }

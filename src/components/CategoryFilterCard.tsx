@@ -15,12 +15,12 @@ const CategoryFilterCard = () => {
     <div className="m-4 mx-8 p-8 gap-4 flex flex-col rounded-xl border-4 w-fit h-fit">
       <h1 className="text-2xl">الفلترة</h1>
       <hr />
-      <h1 className="text-2xl">التصنيف</h1>
-      <div>
+      {/* <h1 className="text-2xl">التصنيف</h1> */}
+      {/* <div>
         <h2 className="text-gray-500">○ ألواح خشبية</h2>
         <h2 className="text-gray-500">○ غراء وترويبة</h2>
         <h2 className="text-gray-500">○ سيليكون ولواصق</h2>
-      </div>
+      </div> */}
       <h1 className="text-2xl">السعر</h1>
       {/* <img className="w-full px-8" src={priceSlider} alt="Price Slider" /> */}
       <div className="flex items-center gap-4">
