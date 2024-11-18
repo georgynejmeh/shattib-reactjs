@@ -231,7 +231,7 @@ const ConfirmNewConditionPage = () => {
                             <strong>وحدة القياس:</strong>{" "}
                             {product.measurementUnit}
                           </p>
-                          {images[index] && (
+                          {/* {images[index] && (
                             <div>
                               <strong>صورة المنتج:</strong>
                               <img
@@ -240,7 +240,7 @@ const ConfirmNewConditionPage = () => {
                                 className="mt-2 w-48 h-48 object-cover"
                               />
                             </div>
-                          )}
+                          )} */}
                         </div>
                       ))}
                   </div>

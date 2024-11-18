@@ -73,7 +73,6 @@ const OrdersPage = () => {
                   "التكلفة الكلية",
                   "حالة الطلب",
                   "تاريخ التنفيذ",
-                  "العمليات",
                 ].map((item) => (
                   <th className="p-4 text-center text-sm font-semibold text-gray-600">
                     {item}

@@ -1,5 +1,5 @@
-import { Link, purpleParagraphIcon, redTrashIcon } from "..";
-import { useConfirmDelete } from "../hooks/useConfirmDeleteModal";
+// import { Link, purpleParagraphIcon, redTrashIcon } from "..";
+// import { useConfirmDelete } from "../hooks/useConfirmDeleteModal";
 import { OrderItem } from "../models/Order";
 import AccentText from "./AccentText";
 
@@ -20,11 +20,11 @@ const OrdersTableRow = ({
   // orderItems,
   dateOfArrival,
   dateOfOrder,
-  user = false,
-}: Props) => {
-  const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
-    useConfirmDelete();
-  setEndpoint("Orders");
+}: // user = false,
+Props) => {
+  // const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
+  //   useConfirmDelete();
+  // setEndpoint("Orders");
 
   // let totalQty = 0;
   // orderItems.map((order) => {
@@ -65,7 +65,7 @@ const OrdersTableRow = ({
         </div>
       </td>
       <td>{dateOfArrival || "غير محدد"}</td>
-      <td>
+      {/* <td>
         <div className="mx-auto flex justify-center gap-4">
           <Link
             to={user ? `/order/${id}` : `/admin/order/${id}`}
@@ -82,7 +82,7 @@ const OrdersTableRow = ({
             <img src={redTrashIcon} alt="" />
           </button>
         </div>
-      </td>
+      </td> */}
     </tr>
   );
 };
