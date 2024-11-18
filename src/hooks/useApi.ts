@@ -68,6 +68,7 @@ export function useApi<T>(
           let requestOptions;
           if (isToken) {
             token = localStorage.getItem("accessToken");
+            console.log(token);
             requestOptions = {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -75,13 +76,15 @@ export function useApi<T>(
                   localStorage.getItem("lang") === "en" ? "en" : " ",
               },
             };
+          } else {
+            requestOptions = {
+              headers: {
+                "Accept-Language":
+                  localStorage.getItem("lang") === "en" ? "en" : " ",
+              },
+            };
           }
-          requestOptions = {
-            headers: {
-              "Accept-Language":
-                localStorage.getItem("lang") === "en" ? "en" : " ",
-            },
-          };
+
           fetch(`${apiUrl}${endpoint}`, requestOptions)
             .then(async (res) => {
               if (res.status === 401) {
