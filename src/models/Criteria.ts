@@ -19,6 +19,7 @@ export interface Cirteria {
       id: number;
       image: string;
       accepted: boolean;
+      receipt?: string;
     }
   ];
 }

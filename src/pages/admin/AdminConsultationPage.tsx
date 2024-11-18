@@ -18,9 +18,16 @@ const AdminConsultationPage = () => {
   setId(parseInt(id || ""));
 
   const { isLoading, error, data } = useApi<Consultation>(
-    `Consultations/${id}`
+    `Consultations/${id}`,
+    "GET",
+    true
   );
-  const { patchData } = useApi(`Consultations/ChangeStatus/${id}`);
+  const { patchData } = useApi(
+    `Consultations/ChangeStatus/${id}`,
+    "PATCH",
+    true,
+    true
+  );
 
   const [status, setStatus] = useState<string>("Pending");
   const [isUpdating, setIsUpdating] = useState<boolean>(false);

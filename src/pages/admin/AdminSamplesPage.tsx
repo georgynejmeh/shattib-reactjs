@@ -4,7 +4,12 @@ import "../../App.css";
 import { Order } from "../../models/Order";
 
 const AdminSamplesPage = () => {
-  const { isLoading, error, data } = useApi<Order[]>("Orders/Kind?kind=Sample");
+  const { isLoading, error, data } = useApi<Order[]>(
+    "Orders/Kind?kind=Sample",
+    "GET",
+    true,
+    false
+  );
 
   return (
     <main className="p-main">

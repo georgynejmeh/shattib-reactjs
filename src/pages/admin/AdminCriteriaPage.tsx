@@ -210,8 +210,14 @@ const AdminCriteriaPage = () => {
           <section className="flex justify-between p-8">
             {data.invoices.length > 0 ? (
               <div>
-                <h3>فاتورة الكراسة</h3>
-                <img src={data.invoices[0].image} alt="وصل الدفع" />
+                <h3 className="text-3xl font-bold text-center mb-5">
+                  فاتورة الكراسة
+                </h3>
+                <img
+                  src={data.invoices[0].image}
+                  alt="وصل الدفع"
+                  className="w-[400px] h-[400px] bg-primary object-cover"
+                />
               </div>
             ) : (
               <div>
@@ -233,10 +239,19 @@ const AdminCriteriaPage = () => {
                 </div>
               </div>
             )}
-
             <div>
-              <h3>وصل الدفع من الزبون</h3>
-              <img src={paymentReceiptImg} alt="وصل الدفع" />
+              <h1 className="text-3xl font-bold">وصل الدفع من الزبون</h1>
+              {data.invoices[0].receipt ? (
+                <img
+                  className="w-[350px] h-[350px]"
+                  src={paymentReceiptImg}
+                  alt="وصل الدفع"
+                />
+              ) : (
+                <div className="h-full flex justify-center items-center">
+                  <h2 className="text-2xl text-center">لم يتم الدفع بعد</h2>
+                </div>
+              )}
             </div>
           </section>
 
@@ -251,7 +266,12 @@ const AdminCriteriaPage = () => {
                 ))}
               </div>
               <div className="flex flex-col w-2/3 rounded-b-xl border p-4 gap-2">
-                <form>
+                <form
+                  onSubmit={(e) => {
+                    // TODO: IMPLEMENT ME
+                    e.preventDefault();
+                  }}
+                >
                   <div className="flex gap-2">
                     <div className="w-full">
                       <TextInput big placeholder="أضف تعليق" />

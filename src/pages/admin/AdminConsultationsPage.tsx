@@ -4,7 +4,11 @@ import { Consultation } from "../../models/Consultation";
 import "../../App.css";
 
 const AdminConsultationsPage = () => {
-  const { isLoading, error, data } = useApi<Consultation[]>("Consultations");
+  const { isLoading, error, data } = useApi<Consultation[]>(
+    "Consultations",
+    "GET",
+    true
+  );
   console.log(data);
   return (
     <main className="p-main">

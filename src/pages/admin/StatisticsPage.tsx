@@ -47,22 +47,22 @@ const StatisticsPage = () => {
     // isLoading: clientsLoading,
     // error: clientsError,
     data: clientsData,
-  } = useApi<StatisticsNumber>("Statistics/GetClients");
+  } = useApi<StatisticsNumber>("Statistics/GetClients", "GET", true);
   const {
     // isLoading: businessesLoading,
     // error: businessesError,
     data: businessesData,
-  } = useApi<StatisticsNumber>("Statistics/GetBusinesses");
+  } = useApi<StatisticsNumber>("Statistics/GetBusinesses", "GET", true);
   const {
     // isLoading: ordersLoading,
     // error: ordersError,
     data: ordersData,
-  } = useApi<StatisticsNumber>("Statistics/GetOrders");
+  } = useApi<StatisticsNumber>("Statistics/GetOrders", "GET", true);
   const {
     // isLoading: productsLoading,
     // error: productsError,
     data: productsData,
-  } = useApi<StatisticsNumber>("Statistics/GetProducts");
+  } = useApi<StatisticsNumber>("Statistics/GetProducts", "GET", true);
   const {
     // isLoading: profitsLoading,
     // error: profitsError,
@@ -77,7 +77,9 @@ const StatisticsPage = () => {
   }>(
     `Statistics/GetProfits?Month=${
       months.indexOf(selectedMonth) + 1
-    }&Year=${year}`
+    }&Year=${year}`,
+    "GET",
+    true
   );
 
   // TODO DELETE
