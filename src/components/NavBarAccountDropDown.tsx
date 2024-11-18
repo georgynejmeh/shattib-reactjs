@@ -53,8 +53,16 @@ const NavBarAccountDropDown = () => {
     <>
       <div
         ref={buttonRef}
-        onMouseEnter={() => setIsDropdown(true)}
-        onClick={() => setIsDropdown((prev) => !prev)}
+        onMouseEnter={() => {
+          if (localStorage.getItem("token")) {
+            return setIsDropdown(true);
+          }
+        }}
+        onClick={() => {
+          if (localStorage.getItem("token")) {
+            return setIsDropdown((prev) => !prev);
+          }
+        }}
         className="flex gap-2 cursor-pointer"
       >
         <div className="flex flex-col items-center">

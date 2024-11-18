@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { HomeSubCategory } from "../../models/HomeCategories";
 import { ButtonGold, CategoryCard, leftArrowIcon, Link } from "../..";
 import { useRkhamCustomMeasure } from "../../hooks/useRkhamCustomMeasure";
+import { useTranslation } from "react-i18next";
 
 interface HomeCategoriesComponentProps {
   subCategories: HomeSubCategory[];
@@ -28,7 +29,7 @@ const HomeCategoriesComponent = ({
       scrollContainerRef.current.scrollBy({ left: -300, behavior: "smooth" });
     }
   };
-
+  const { t } = useTranslation();
   return (
     <section className="pt-16 relative">
       <div className="mb-16">
@@ -36,33 +37,26 @@ const HomeCategoriesComponent = ({
           {categoryName}
         </h1>
         <h2 className="text-4xl font-bold text-gray-500 mb-8">
-          التصنيفات الفرعية
+          {t("subCategoriesTxt")}
         </h2>
 
         {/* Left and Right Arrows - Hidden on Mobile */}
-        <div className="absolute z-10 -right-4 top-[65%] flex justify-between w-full">
-          <button
-            onClick={scrollLeft}
-            className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-4xl hidden md:flex"
-          >
-            <img
-              className="-scale-x-100"
-              src={leftArrowIcon}
-              alt="Scroll Left"
-            />
-          </button>
-          <button
-            onClick={scrollRight}
-            className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl hidden md:flex"
-          >
-            <img src={leftArrowIcon} alt="Scroll Right" />
-          </button>
-        </div>
-
+        <button
+          onClick={scrollLeft}
+          className="absolute  right-0 top-[65%] z-10 flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-4xl hidden md:flex"
+        >
+          <img className="-scale-x-100" src={leftArrowIcon} alt="Scroll Left" />
+        </button>
+        <button
+          onClick={scrollRight}
+          className="absolute  left-0 top-[65%] z-10 flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl hidden md:flex"
+        >
+          <img src={leftArrowIcon} alt="Scroll Right" />
+        </button>
         {/* Scrollable Container */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar"
+          className="relative flex gap-8 overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar"
         >
           {subCategories.map((sc) => {
             return (

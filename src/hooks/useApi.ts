@@ -71,13 +71,15 @@ export function useApi<T>(
             requestOptions = {
               headers: {
                 Authorization: `Bearer ${token}`,
-                "Accept-Language": localStorage.getItem("lang") || " ",
+                "Accept-Language":
+                  localStorage.getItem("lang") === "en" ? "en" : " ",
               },
             };
           }
           requestOptions = {
             headers: {
-              "Accept-Language": localStorage.getItem("lang") || " ",
+              "Accept-Language":
+                localStorage.getItem("lang") === "en" ? "en" : " ",
             },
           };
           fetch(`${apiUrl}${endpoint}`, requestOptions)
@@ -120,12 +122,12 @@ export function useApi<T>(
         headers = {
           "Content-Type": contentType,
           Authorization: `Bearer ${token}`,
-          "Accept-Language": localStorage.getItem("lang") || " ",
+          "Accept-Language": " ",
         };
       } else {
         headers = {
           "Content-Type": "application/json",
-          "Accept-Language": localStorage.getItem("lang") || " ",
+          "Accept-Language": " ",
         };
       }
       console.log(headers);
@@ -199,10 +201,10 @@ export function useApi<T>(
         const token = localStorage.getItem("accessToken");
         headers = {
           Authorization: `Bearer ${token}`,
-          "Accept-Language": localStorage.getItem("lang") || " ",
+          "Accept-Language": " ",
         };
       } else {
-        headers = { "Accept-Language": localStorage.getItem("lang") || " " };
+        headers = { "Accept-Language": " " };
       }
       const requestOptions = {
         method: "PATCH",

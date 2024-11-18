@@ -60,6 +60,12 @@ const ContactPage: React.FC = () => {
   const handleSubmit = async () => {
     if (validateForm()) {
       await postData(formData);
+      setFormData({
+        name: "",
+        email: "",
+        phoneNumber: "",
+        message: "",
+      });
     }
   };
 

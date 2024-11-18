@@ -13,7 +13,7 @@ import {
   useEffect,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
-import LanguageSwitcher from "./LanguageSwitcher";
+// import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 
 const NavBar = () => {
@@ -90,7 +90,7 @@ const NavBar = () => {
 
           <div
             onClick={() => handleAuthorizedNavigationButton("/cart")}
-            className="relative flex flex-col items-center"
+            className="relative flex flex-col items-center cursor-pointer"
           >
             <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
               {cartItemCount + sampleCartItemCount}
@@ -101,7 +101,7 @@ const NavBar = () => {
 
           <div
             onClick={() => handleAuthorizedNavigationButton("/wishlist")}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center cursor-pointer"
           >
             <img src={heartIcon} alt="" />
             <span>{t("favoriteTxt")}</span>
@@ -129,7 +129,7 @@ const NavBar = () => {
             <NavBarAccountDropDown />
           </div>
           {/* )} */}
-          <LanguageSwitcher />
+          {/* <LanguageSwitcher /> */}
         </nav>
       </div>
 
@@ -209,7 +209,7 @@ const NavBar = () => {
                 <NavBarAccountDropDown />
               </div>
               {/* )} */}
-              <LanguageSwitcher />
+              {/* <LanguageSwitcher /> */}
             </div>
           </div>
         </nav>

@@ -31,6 +31,7 @@ const LoginPage = () => {
       // Save tokens in localStorage
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
+      localStorage.setItem("userType", data.role);
 
       // Navigate to the home page
       // if (data.role === "Client") {

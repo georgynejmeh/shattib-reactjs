@@ -225,6 +225,17 @@ const ProductDetailsCard = ({ data }: Props) => {
               <QuantityControls quantity={quantity} onChange={setQuantity} />
             </div>
             <div className="w-80 flex flex-col gap-4">
+              {/* {data.categoryId === 1 && (
+            <div
+              onClick={() => {
+                setIsShownRkahmCustomMeasureModal(true);
+                console.log(isShownRkahmCustomMeasureModal);
+              }}
+              className="w-15 h-15 flex items-center justify-center cursor-pointer"
+            >
+              <ButtonGold>طلب قياس مخصص</ButtonGold>
+            </div>
+          )} */}
               <ButtonGold
                 onClick={
                   token ? handleAddToCart : () => setIsShownLoginModal(true)

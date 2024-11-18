@@ -26,13 +26,13 @@ const AdminCriteriaPage = () => {
   }
   // Function to handle status update
   const { patchData } = useApi(`Criteria/${id}/Status`);
-  const { postData: postCriteriaBill } = useApi(
-    "CriteriaBills",
-    "POST",
-    true,
-    true,
-    []
-  );
+  // const { postData: postCriteriaBill } = useApi(
+  //   "CriteriaBills",
+  //   "POST",
+  //   true,
+  //   true,
+  //   []
+  // );
   const updateStatus = (newStatus: string) => {
     setStatus(newStatus); // Update local status
     patchData({ id: id, status: newStatus }); // Send patch request to update status

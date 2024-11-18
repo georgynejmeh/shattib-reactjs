@@ -20,7 +20,7 @@ const CategoryCard = ({
   return (
     <div
       onClick={onClick}
-      className={`h-48 w-56 rounded-xl ${
+      className={`h-48 w-56 rounded-xl cursor-pointer ${
         selected ? "bg-primary text-white" : "hover:bg-amber-100"
       }`}
     >
