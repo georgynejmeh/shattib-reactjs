@@ -3,8 +3,12 @@ import { Product } from "../../models/Product";
 
 const AdminEditProductPage = () => {
   const { id } = useParams(); // Get the product ID from the URL
-  const { data, error, isLoading } = useApi<Product>(`Products/${id}`);
-  const { patchForm } = useApi(`Products/${id}`);
+  const { data, error, isLoading } = useApi<Product>(
+    `Products/${id}`,
+    "GET",
+    true
+  );
+  const { patchForm } = useApi(`Products/${id}`, "PATCH", true, true);
 
   const [formData, setFormData] = useState({
     subCategoryId: 1,
@@ -92,7 +96,7 @@ const AdminEditProductPage = () => {
     // });
 
     // Send the FormData object to the API
-    await patchForm(form, false);
+    await patchForm(form);
     console.log("FormData:", form);
 
     // Show success popup on successful form submission

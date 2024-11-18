@@ -53,7 +53,7 @@ export function useApi<T>(
 
   useEffect(
     () => {
-      if (method != "POST" && method != "DELETE") {
+      if (method != "POST" && method != "DELETE" && method != "PATCH") {
         getData();
       }
 
@@ -85,7 +85,7 @@ export function useApi<T>(
 
           fetch(`${apiUrl}${endpoint}`, requestOptions)
             .then(async (res) => {
-              if (res.status === 401) {
+              if (res.status === 403) {
                 await refreshToken();
               }
               setIsLoading(false);
@@ -139,7 +139,7 @@ export function useApi<T>(
       };
       fetch(`${apiUrl}${endpoint}`, requestOptions)
         .then(async (res) => {
-          if (res.status === 401) {
+          if (res.status === 403) {
             await refreshToken();
           }
           setIsLoading(false);
@@ -170,10 +170,13 @@ export function useApi<T>(
       console.log(`${apiUrl}${endpoint}/${id}`);
       const requestOptions = {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       };
       fetch(`${apiUrl}${endpoint}/${id}`, requestOptions)
         .then(async (res) => {
-          if (res.status === 401) {
+          if (res.status === 403) {
             await refreshToken();
           }
           setIsLoading(false);
@@ -192,7 +195,7 @@ export function useApi<T>(
     }
   }
 
-  async function patchForm(body: FormData, isToken: boolean) {
+  async function patchForm(body: FormData) {
     setIsLoading(true);
     const apiUrl = "https://shatib.com/api/";
     try {
@@ -204,8 +207,10 @@ export function useApi<T>(
           Authorization: `Bearer ${token}`,
           "Accept-Language": " ",
         };
+        console.log(headers);
       } else {
         headers = { "Accept-Language": " " };
+        console.log("headersSssssssssssssSS:", headers);
       }
       const requestOptions = {
         method: "PATCH",
@@ -215,7 +220,7 @@ export function useApi<T>(
       console.log(requestOptions);
       fetch(`${apiUrl}${endpoint}`, requestOptions)
         .then(async (res) => {
-          if (res.status === 401) {
+          if (res.status === 403) {
             await refreshToken();
           }
           setIsLoading(false);
@@ -239,14 +244,29 @@ export function useApi<T>(
       // const apiUrl = `${import.meta.env.VITE_API_URL}`;
       const apiUrl = "https://shatib.com/api/";
       console.log(`${apiUrl}${endpoint}`);
+      let headers = {};
+
+      if (isToken) {
+        const token = localStorage.getItem("accessToken");
+        headers = {
+          "Content-Type": "application/json",
+          "Accept-Language": " ",
+          Authorization: `Bearer ${token}`,
+        };
+      } else {
+        headers = {
+          "Content-Type": "application/json",
+          "Accept-Language": " ",
+        };
+      }
       const requestOptions = {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "Accept-Language": " " },
+        headers: headers,
         body: JSON.stringify(body),
       };
       fetch(`${apiUrl}${endpoint}`, requestOptions)
         .then(async (res) => {
-          if (res.status === 401) {
+          if (res.status === 403) {
             await refreshToken();
           }
           setIsLoading(false);

@@ -20,10 +20,14 @@ const DocPage = () => {
 
   const { id } = useParams();
 
-  const { isLoading, error, data } = useApi<CirteriaGet>(`Criteria/${id}`);
+  const { isLoading, error, data } = useApi<CirteriaGet>(
+    `Criteria/${id}`,
+    "GET",
+    true
+  );
 
   const receiptForm = new FormData();
-  const { patchForm } = useApi(`CriteriaBills/${id}/Receipt`);
+  const { patchForm } = useApi(`CriteriaBills/${id}/Receipt`, "PATCH");
   const [receiptImage, setReceiptImage] = useState<File | null>(null);
   const handleReceiptImageChange = (file: File) => {
     setReceiptImage(file);

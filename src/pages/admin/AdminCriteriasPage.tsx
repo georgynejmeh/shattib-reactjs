@@ -15,9 +15,10 @@ const AdminCriteriasPage = () => {
   // Initializing state for the selected filter
   const [statusFilter, setStatusFilter] = useState<string>(""); // Empty means "All"
 
-  // Using the useApi hook to fetch data based on the selected status
   const { isLoading, error, data } = useApi<Cirteria[]>(
-    `Criteria/GetAll${statusFilter ? `?status=${statusFilter}` : ""}`
+    `Criteria/GetAll${statusFilter ? `?status=${statusFilter}` : ""}`,
+    "GET",
+    true
   );
 
   // Handle click on filter buttons

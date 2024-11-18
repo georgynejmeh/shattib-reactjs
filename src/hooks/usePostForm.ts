@@ -55,12 +55,15 @@ export function usePostForm<T>(
       const requestOptions = {
         method: "POST",
         body,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       };
 
       const response = await fetch(`${apiUrl}${endpoint}`, requestOptions);
 
       if (!response.ok) {
-        if (response.status === 401) {
+        if (response.status === 403) {
           await refreshToken();
         }
         const errorData = await response.json().catch(() => ({}));

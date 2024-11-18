@@ -22,8 +22,8 @@ const AdminOrderPage = () => {
   setEndpoint("Orders");
   setId(parseInt(id || "0"));
 
-  const { isLoading, error, data } = useApi<Order>(`Orders/${id}`);
-  const { patchData } = useApi(`Orders/${id}`);
+  const { isLoading, error, data } = useApi<Order>(`Orders/${id}`, "GET", true);
+  const { patchData } = useApi(`Orders/${id}`, "PATCH", true);
 
   // Local state for managing dropdown and the selected status
   const [selectedStatus, setSelectedStatus] = useState<string>("Pending");

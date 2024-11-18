@@ -31,7 +31,7 @@ const AdminNewProductPage: React.FC<Props> = ({
       formData.Description !== "" &&
       formData.Features !== "" &&
       formData.MeasurementUnit !== "" &&
-      formData.Meaurements !== "" &&
+      formData.Measurements !== "" &&
       formData.ManufacturingCountry !== "" &&
       formData.Color !== ""
     );
@@ -146,8 +146,8 @@ const AdminNewProductPage: React.FC<Props> = ({
                 blackTitle
                 title="القياس"
                 placeholder="أدخل قياس المنتج"
-                name="Meaurements"
-                value={formData.Meaurements}
+                name="Measurements"
+                value={formData.Measurements}
                 onChange={onInputChange}
               />
             </div>

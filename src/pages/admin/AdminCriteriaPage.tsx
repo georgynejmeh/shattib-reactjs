@@ -31,7 +31,7 @@ const AdminCriteriaPage = () => {
     setInvoiceImage(() => image);
   }
   // Function to handle status update
-  const { patchData } = useApi(`Criteria/${id}/Status`, "PATCH");
+  const { patchData } = useApi(`Criteria/${id}/Status`, "PATCH", true);
   // const { postData: postCriteriaBill } = useApi(
   //   "CriteriaBills",
   //   "POST",

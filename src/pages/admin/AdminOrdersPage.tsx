@@ -14,7 +14,9 @@ const AdminOrdersPage = () => {
   >("All");
 
   const { isLoading, error, data } = useApi<Order[]>(
-    filter === "All" ? "Orders/All" : `Orders/Status?status=${filter}`
+    filter === "All" ? "Orders/All" : `Orders/Status?status=${filter}`,
+    "GET",
+    true
   );
   // Pending // Accepted // Rejected // Shipped
   // TODO DELETE

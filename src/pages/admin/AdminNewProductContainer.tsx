@@ -10,7 +10,7 @@ export interface MyFormData {
   Features: string;
   Price: number;
   MeasurementUnit: string;
-  Meaurements: string;
+  Measurements: string;
   ManufacturingCountry: string;
   Color: string;
   Deaf: string;
@@ -32,7 +32,7 @@ const AdminNewProductContainer: React.FC = () => {
     Features: "",
     Price: 0.0,
     MeasurementUnit: "",
-    Meaurements: "",
+    Measurements: "",
     ManufacturingCountry: "",
     Color: "",
     Deaf: "",

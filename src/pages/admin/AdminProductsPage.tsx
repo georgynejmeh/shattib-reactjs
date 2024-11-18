@@ -11,7 +11,11 @@ import { useConfirmDelete } from "../../hooks/useConfirmDeleteModal";
 import { ProductHomePage } from "../../models/Product";
 
 const AdminProductsPage = () => {
-  const { isLoading, error, data } = useApi<ProductHomePage[]>("Products");
+  const { isLoading, error, data } = useApi<ProductHomePage[]>(
+    "Products",
+    "GET",
+    true
+  );
   const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
     useConfirmDelete();
   setEndpoint("Products");

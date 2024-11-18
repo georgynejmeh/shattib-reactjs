@@ -8,7 +8,7 @@ const ConfirmDeleteModal = () => {
     id,
     endpoint,
   } = useConfirmDelete();
-  const { deleteData, isLoading } = useApi(endpoint, "DELETE");
+  const { deleteData, isLoading } = useApi(endpoint, "DELETE", true);
 
   if (isShownConfirmDeleteModal) {
     document.body.classList.add("overflow-hidden");
