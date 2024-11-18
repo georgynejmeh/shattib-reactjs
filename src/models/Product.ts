@@ -1,6 +1,7 @@
 export interface Product {
   id: number;
   subCategoryId: SubCategory["id"];
+  categoryId: number;
   name: string;
   description: string;
   features: string;
@@ -23,6 +24,7 @@ export interface ProductHomePage {
   price: number;
   mainImagePath: string;
   warehouseCode: string;
+  categoryId?: number;
 }
 
 interface Image {

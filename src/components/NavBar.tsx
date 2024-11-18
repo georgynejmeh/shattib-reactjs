@@ -78,7 +78,13 @@ const NavBar = () => {
           >
             <span>{t("criteriaTxt")}</span>
           </Link>
-          <div className="w-96">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              navigate(`/search?search=${searchValue}`);
+            }}
+            className="w-96"
+          >
             <TextInput
               bordered
               icon={searchIcon}
@@ -86,7 +92,7 @@ const NavBar = () => {
               onChange={(e) => setSearchValue(e.target.value)}
               placeholder={t("searchInProductsTxt")}
             />
-          </div>
+          </form>
 
           <div
             onClick={() => handleAuthorizedNavigationButton("/cart")}
@@ -157,7 +163,13 @@ const NavBar = () => {
             >
               <span>{t("criteriaTxt")}</span>
             </Link>
-            <div className="w-96 max-lg:w-full max-lg:max-w-72">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                navigate(`/search?search=${searchValue}`);
+              }}
+              className="w-96 max-lg:w-full max-lg:max-w-72"
+            >
               <TextInput
                 bordered
                 iconLink={`/search?search=${searchValue}`}
@@ -165,7 +177,7 @@ const NavBar = () => {
                 icon={searchIcon}
                 placeholder={t("searchInProductsTxt")}
               />
-            </div>
+            </form>
             <div className="lg:hidden flex items-center justify-between w-full gap-12">
               <div
                 onClick={() => handleAuthorizedNavigationButton("/cart")}

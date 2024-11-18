@@ -76,6 +76,7 @@ const MainCategoryPage = () => {
                     name={product.name}
                     image={product.mainImagePath}
                     price={product.price}
+                    categoryId={product.categoryId!}
                   />
                 ))
               ) : null}

@@ -38,6 +38,7 @@ import AdminConsultationPage from "./pages/admin/AdminConsultationPage";
 import OtpPage from "./pages/OtpPage";
 import RkhamCustomMeasurePopup from "./components/RkhamCustomMeasurePopup";
 import "./config/translation/i18n.ts";
+import { ToastContainer } from "react-toastify";
 const App = () => {
   // return to the top of the page on navigation
   // FIX for: keep the same scroll distance on navigation
@@ -48,6 +49,7 @@ const App = () => {
 
   return (
     <main>
+      <ToastContainer rtl={true} />
       <Routes>
         <Route path="/" element={<IntroPage />} />
         <Route path="/admin" element={<LoginPage />} />

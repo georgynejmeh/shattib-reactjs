@@ -54,13 +54,13 @@ const NavBarAccountDropDown = () => {
       <div
         ref={buttonRef}
         onMouseEnter={() => {
-          if (localStorage.getItem("token")) {
-            return setIsDropdown(true);
+          if (localStorage.getItem("accessToken")) {
+            setIsDropdown(true);
           }
         }}
         onClick={() => {
-          if (localStorage.getItem("token")) {
-            return setIsDropdown((prev) => !prev);
+          if (localStorage.getItem("accessToken")) {
+            setIsDropdown((prev) => !prev);
           }
         }}
         className="flex gap-2 cursor-pointer"

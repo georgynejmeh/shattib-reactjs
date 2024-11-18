@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import {
   heartIcon,
   addToCartIcon,
@@ -8,12 +9,14 @@ import {
   ButtonGold,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
+import { useRkhamCustomMeasure } from "../hooks/useRkhamCustomMeasure";
 
 interface Props {
   name?: string;
   price?: number;
   id?: number;
   image?: string;
+  categoryId?: number;
 }
 
 const ProductCard = ({
@@ -21,9 +24,11 @@ const ProductCard = ({
   price = 0,
   id = 0,
   image,
+  categoryId,
 }: Props) => {
   const token = localStorage.getItem("accessToken");
   const { setIsShownLoginModal } = useLoginModal();
+  const { setIsShownRkahmCustomMeasureModal } = useRkhamCustomMeasure();
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -48,8 +53,9 @@ const ProductCard = ({
 
     localStorage.setItem("cart", JSON.stringify(currentCart));
 
-    alert("تمت إضافة المنتج للسلة");
-
+    toast.success("تمت الإضافة إلى السلة بنجاح", {
+      theme: "colored",
+    });
     window.dispatchEvent(new Event("storage"));
   };
 
@@ -69,6 +75,9 @@ const ProductCard = ({
       });
       localStorage.setItem("favorites", JSON.stringify(favorites));
     }
+    toast.success("تمت الإضافة إلى المفضلة بنجاح", {
+      theme: "colored",
+    });
   };
 
   const [active, setActive] = useState(false);
@@ -110,22 +119,38 @@ const ProductCard = ({
             <AccentText>{price} ريال</AccentText>
           </span>
           <div className="mx-2 my-1">
-            <ButtonGold
-              onClick={
-                token
-                  ? handleAddToCart
-                  : (e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      return setIsShownLoginModal(true);
-                    }
-              }
-            >
-              <div className="flex justify-center">
-                أضف إلى السلة
-                <img className="ps-2" src={addToCartIcon} alt="" />
+            {categoryId !== 1 && (
+              <ButtonGold
+                onClick={
+                  token
+                    ? handleAddToCart
+                    : (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return setIsShownLoginModal(true);
+                      }
+                }
+              >
+                <div className="flex justify-center">
+                  أضف إلى السلة
+                  <img className="ps-2" src={addToCartIcon} alt="" />
+                </div>
+              </ButtonGold>
+            )}
+            {categoryId === 1 && (
+              <div
+                onClick={() => {
+                  if (!token) {
+                    setIsShownLoginModal(true);
+                    return;
+                  }
+                  setIsShownRkahmCustomMeasureModal(true);
+                }}
+                className="w-15 h-15 flex items-center justify-center cursor-pointer"
+              >
+                <ButtonGold>طلب قياس مخصص</ButtonGold>
               </div>
-            </ButtonGold>
+            )}
           </div>
         </div>
       </Link>

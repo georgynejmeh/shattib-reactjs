@@ -1,8 +1,7 @@
 import { useRef } from "react";
-import { HomeSubCategory } from "../../models/HomeCategories";
-import { ButtonGold, CategoryCard, leftArrowIcon, Link } from "../..";
-import { useRkhamCustomMeasure } from "../../hooks/useRkhamCustomMeasure";
 import { useTranslation } from "react-i18next";
+import { CategoryCard, leftArrowIcon, Link } from "../..";
+import { HomeSubCategory } from "../../models/HomeCategories";
 
 interface HomeCategoriesComponentProps {
   subCategories: HomeSubCategory[];
@@ -16,8 +15,7 @@ const HomeCategoriesComponent = ({
   categoryId,
 }: HomeCategoriesComponentProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const { setIsShownRkahmCustomMeasureModal, isShownRkahmCustomMeasureModal } =
-    useRkhamCustomMeasure();
+
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: 300, behavior: "smooth" });
@@ -67,7 +65,7 @@ const HomeCategoriesComponent = ({
               </Link>
             );
           })}
-          {categoryId === 1 && (
+          {/* {categoryId === 1 && (
             <div
               onClick={() => {
                 setIsShownRkahmCustomMeasureModal(true);
@@ -77,7 +75,7 @@ const HomeCategoriesComponent = ({
             >
               <ButtonGold>طلب قياس مخصص</ButtonGold>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </section>

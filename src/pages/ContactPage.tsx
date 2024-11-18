@@ -9,6 +9,7 @@ import {
   TextInput,
   useApi,
 } from "..";
+import { toast } from "react-toastify";
 
 interface ContactFormData {
   name: string;
@@ -65,6 +66,9 @@ const ContactPage: React.FC = () => {
         email: "",
         phoneNumber: "",
         message: "",
+      });
+      toast.success("لقد تم استلام رسالتك", {
+        theme: "colored",
       });
     }
   };

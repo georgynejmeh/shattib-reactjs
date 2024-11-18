@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify"; // Import Toastify components
-import "react-toastify/dist/ReactToastify.css"; // Import CSS for Toastify
+import { toast } from "react-toastify"; // Import Toastify components
+// Import CSS for Toastify
 import {
   Button,
   emailIcon,
@@ -285,7 +285,6 @@ const RegisterPage = () => {
       </div>
 
       {/* React Toastify Container for Toasts */}
-      <ToastContainer rtl={true} />
     </>
   );
 };

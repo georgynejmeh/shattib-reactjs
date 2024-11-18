@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import {
   addToCartIcon,
   TitleNumber,
@@ -10,6 +11,7 @@ import {
   useEffect,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
+import { useRkhamCustomMeasure } from "../hooks/useRkhamCustomMeasure";
 import { CartItem } from "../models/CartItem";
 import { Product } from "../models/Product";
 
@@ -21,6 +23,7 @@ const ProductDetailsCard = ({ data }: Props) => {
   const token = localStorage.getItem("accessToken");
   const { setIsShownLoginModal } = useLoginModal();
   const [quantity, setQuantity] = useState(1); // Track quantity
+  const { setIsShownRkahmCustomMeasureModal } = useRkhamCustomMeasure();
 
   const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
   useEffect(() => {
@@ -60,7 +63,9 @@ const ProductDetailsCard = ({ data }: Props) => {
 
       // Save the updated samples cart to localStorage
       localStorage.setItem("samplesCart", JSON.stringify(existingSamples));
-      alert("تمت إضافة طلب العينة");
+      toast.success("تمت الإضافة إلى العينات بنجاح", {
+        theme: "colored",
+      });
     }
   };
 
@@ -90,7 +95,9 @@ const ProductDetailsCard = ({ data }: Props) => {
 
       // Save the updated cart to localStorage
       localStorage.setItem("cart", JSON.stringify(existingCart));
-      alert("تمت إضافة المنتج للسلة");
+      toast.success("تمت الإضافة إلى السلة بنجاح", {
+        theme: "colored",
+      });
     }
   };
   const handleAddToFavorites = () => {
@@ -225,27 +232,32 @@ const ProductDetailsCard = ({ data }: Props) => {
               <QuantityControls quantity={quantity} onChange={setQuantity} />
             </div>
             <div className="w-80 flex flex-col gap-4">
-              {/* {data.categoryId === 1 && (
-            <div
-              onClick={() => {
-                setIsShownRkahmCustomMeasureModal(true);
-                console.log(isShownRkahmCustomMeasureModal);
-              }}
-              className="w-15 h-15 flex items-center justify-center cursor-pointer"
-            >
-              <ButtonGold>طلب قياس مخصص</ButtonGold>
-            </div>
-          )} */}
-              <ButtonGold
-                onClick={
-                  token ? handleAddToCart : () => setIsShownLoginModal(true)
-                }
-              >
-                <div className="flex justify-center gap-2">
-                  <img src={addToCartIcon} alt="" />
-                  <span>أضف إلى السلة</span>
+              {data.categoryId === 1 && (
+                <div
+                  onClick={() => {
+                    if (!token) {
+                      setIsShownLoginModal(true);
+                      return;
+                    }
+                    setIsShownRkahmCustomMeasureModal(true);
+                  }}
+                  className="w-15 h-15 flex items-center justify-center cursor-pointer"
+                >
+                  <ButtonGold>طلب قياس مخصص</ButtonGold>
                 </div>
-              </ButtonGold>
+              )}
+              {data.categoryId !== 1 && (
+                <ButtonGold
+                  onClick={
+                    token ? handleAddToCart : () => setIsShownLoginModal(true)
+                  }
+                >
+                  <div className="flex justify-center gap-2">
+                    <img src={addToCartIcon} alt="" />
+                    <span>أضف إلى السلة</span>
+                  </div>
+                </ButtonGold>
+              )}
               {/* <Button>
               <div className="flex justify-center gap-2">
                 <span>أضف إلى السلة</span>
@@ -435,12 +447,6 @@ const ProductDetailsCard = ({ data }: Props) => {
                   الضمان
                 </TitleNumber>
               </div>
-              {/* <TitleNumber size="md" subTitle="حجم موحد">
-            الحجم
-          </TitleNumber>
-          <TitleNumber size="md" subTitle="50 سم">
-            الطول
-          </TitleNumber> */}
             </div>
 
             <hr className="w-full" />
@@ -450,22 +456,33 @@ const ProductDetailsCard = ({ data }: Props) => {
               <QuantityControls quantity={quantity} onChange={setQuantity} />
             </div>
             <div className="w-full max-w-52 flex flex-col gap-4">
-              <ButtonGold
-                onClick={
-                  token ? handleAddToCart : () => setIsShownLoginModal(true)
-                }
-              >
-                <div className="flex justify-center gap-2">
-                  <img src={addToCartIcon} alt="" />
-                  <span>أضف إلى السلة</span>
+              {data.categoryId === 1 && (
+                <div
+                  onClick={() => {
+                    if (!token) {
+                      setIsShownLoginModal(true);
+                      return;
+                    }
+                    setIsShownRkahmCustomMeasureModal(true);
+                  }}
+                  className="w-15 h-15 flex items-center justify-center cursor-pointer"
+                >
+                  <ButtonGold>طلب قياس مخصص</ButtonGold>
                 </div>
-              </ButtonGold>
-              {/* <Button>
-            <div className="flex justify-center gap-2">
-              <span>أضف إلى السلة</span>
-              <img src={addToCartIcon} alt="" />
-            </div>
-          </Button> */}
+              )}
+              {data.categoryId !== 1 && (
+                <ButtonGold
+                  onClick={
+                    token ? handleAddToCart : () => setIsShownLoginModal(true)
+                  }
+                >
+                  <div className="flex justify-center gap-2">
+                    <img src={addToCartIcon} alt="" />
+                    <span>أضف إلى السلة</span>
+                  </div>
+                </ButtonGold>
+              )}
+
               <button
                 onClick={
                   token ? handleRequestSample : () => setIsShownLoginModal(true)

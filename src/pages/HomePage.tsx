@@ -47,14 +47,14 @@ const HomePage = () => {
 
             <div className="absolute top-0 pt-16 ps-32 flex flex-col gap-8 z-20 max-lg:pt-8 max-lg:ps-8">
               <img className="w-64 max-lg:w-48" src={shattibText} />
-              <span className="text-2xl text-white font-bold max-lg:text-lg">
+              <span className="text-3xl text-white font-bold max-lg:text-lg">
                 {t("homePageMainSlideShowDescriptionTxt")}
               </span>
             </div>
           </div>
         </section>
         <section className="flex items-center justify-center h-screen">
-          <div className="absolute -z-10 h-48 w-full" />
+          <div className="absolute -z-10 h-48 w-full bg-[#D8C05F]" />
           <BannerButton />
         </section>
 

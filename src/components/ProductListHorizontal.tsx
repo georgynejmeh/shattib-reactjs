@@ -54,6 +54,7 @@ const ProductListHorizontal = () => {
                 name={product.name}
                 price={product.price}
                 image={`${product.mainImagePath}`}
+                categoryId={product.categoryId!}
               />
             </div>
           ))

@@ -24,7 +24,7 @@ const BannerButton = () => {
         </div>
       </div>
       <div className="absolute right-0 z-10 flex flex-col items-center justify-center rounded-3xl h-full w-full bg-opacity-35 bg-black">
-        <div className="w-5/6 text-white text-4xl font-bold transition-all duration-700 max-lg:text-lg">
+        <div className="w-5/6 text-white text-2xl font-bold transition-all duration-700 max-lg:text-lg">
           <h1>{t("engineerRequestTxt")}</h1>
           {/* <h1>
             "احصل على استشارة احترافية من مهندسين ذوي خبرة لرفع مساحة مشاريعك .

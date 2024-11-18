@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import {
-  goldEngineerIcon,
   Button,
   closeCircleIcon,
+  goldEngineerIcon,
   TextInput,
-  useEngineerRequest,
   useApi,
+  useEngineerRequest,
 } from "..";
 
 const EngineerRequestCardModal = () => {
@@ -37,18 +38,33 @@ const EngineerRequestCardModal = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      await postData(formData);
+      postData(formData).then(() => {
+        toast.success("تم إرسال طلبك بنجاح", {
+          theme: "colored",
+        });
+
+        setIsShownEngineerRequestModal(false);
+      });
       if (error) {
         alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
-      } else {
-        setIsShownEngineerRequestModal(false);
-        alert("طلبك تم إرساله بنجاح!");
+        return;
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("حدث خطأ في الاتصال. الرجاء المحاولة لاحقاً.");
+      toast.error("حدث خطأ في الاتصال. الرجاء المحاولة لاحقاً.", {
+        theme: "colored",
+      });
+    } finally {
+      setFormData({
+        phoneNumber: "",
+        consultationTopic: "",
+        engineerSpecification: "",
+        projectCategory: "",
+        details: "",
+      });
     }
   };
 
@@ -71,68 +87,60 @@ const EngineerRequestCardModal = () => {
           <h1 className="text-lg md:text-xl font-semibold">طلب رفع مساحة</h1>
           <img className="mt-2" src={goldEngineerIcon} alt="Engineer Icon" />
         </div>
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="w-full md:w-full px-2">
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="w-full md:w-full px-2">
+                <TextInput
+                  blackTitle
+                  title="رقم الهاتف"
+                  placeholder="رقم الهاتف"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
+                />
+              </div>
+              {/* <div className="w-full md:w-1/2 px-2">
+                <TextInput
+                  blackTitle
+                  title="اختصاص المهندس"
+                  placeholder="اختصاص المهندس"
+                  name="engineerSpecification"
+                  value={formData.engineerSpecification}
+                  onChange={handleInputChange}
+                />
+              </div> */}
+            </div>
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="w-full px-2">
+                <TextInput
+                  blackTitle
+                  title="نوع المشروع"
+                  placeholder="نوع المشروع"
+                  name="projectCategory"
+                  value={formData.projectCategory}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+            <div className="w-full px-2 mt-4">
               <TextInput
+                big
                 blackTitle
-                title="رقم الهاتف"
-                placeholder="رقم الهاتف"
-                name="phoneNumber"
-                value={formData.phoneNumber}
+                title="تفاصيل الطلب"
+                placeholder="تفاصيل ومعلومات إضافية"
+                name="details"
+                value={formData.details}
                 onChange={handleInputChange}
               />
             </div>
-            {/* <div className="w-full md:w-1/2 px-2">
-              <TextInput
-                blackTitle
-                title="اختصاص المهندس"
-                placeholder="اختصاص المهندس"
-                name="engineerSpecification"
-                value={formData.engineerSpecification}
-                onChange={handleInputChange}
-              />
-            </div> */}
-          </div>
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="w-full md:w-1/2 px-2">
-              <TextInput
-                blackTitle
-                title="موضوع الطلب"
-                placeholder="موضوع الطلب"
-                name="consultationTopic"
-                value={formData.consultationTopic}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="w-full md:w-1/2 px-2">
-              <TextInput
-                blackTitle
-                title="نوع المشروع"
-                placeholder="نوع المشروع"
-                name="projectCategory"
-                value={formData.projectCategory}
-                onChange={handleInputChange}
-              />
+            <div className="w-full flex justify-center pt-6">
+              <Button size="md" type="submit">
+                {isLoading ? "جاري الإرسال..." : "إرسال الطلب"}
+              </Button>
             </div>
           </div>
-          <div className="w-full px-2 mt-4">
-            <TextInput
-              big
-              blackTitle
-              title="تفاصيل الطلب"
-              placeholder="تفاصيل ومعلومات إضافية"
-              name="details"
-              value={formData.details}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="w-full flex justify-center pt-6">
-            <Button size="md" onClick={handleSubmit}>
-              {isLoading ? "جاري الإرسال..." : "إرسال الطلب"}
-            </Button>
-          </div>
-        </div>
+        </form>
       </div>
     </main>
   ) : null;
