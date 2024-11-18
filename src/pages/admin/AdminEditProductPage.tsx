@@ -11,7 +11,7 @@ const AdminEditProductPage = () => {
   const { patchForm } = useApi(`Products/${id}`, "PATCH", true, true);
 
   const [formData, setFormData] = useState({
-    subCategoryId: 1,
+    subCategoryId: data?.subCategoryId,
     name: "",
     description: "",
     features: "",
@@ -25,7 +25,7 @@ const AdminEditProductPage = () => {
     notes: "",
     wareHouseCode: "",
     specifications: [{ name: "", value: "" }],
-    images: [{ imagePath: "" }],
+    // images: [{ imagePath: "" }],
   });
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const AdminEditProductPage = () => {
         notes: data.notes,
         wareHouseCode: data.warehouseCode,
         specifications: data.productSpecifications,
-        images: data.images, // If there are images
+        // images: data.images, // If there are images
       });
     }
   }, [data]);
@@ -235,7 +235,7 @@ const AdminEditProductPage = () => {
               </button>
             </form>
 
-            <div className="mt-8">
+            {/* <div className="mt-8">
               {formData.images.length > 0 && (
                 <div className="space-y-4">
                   <p className="text-gray-700">صورة المنتج:</p>
@@ -255,7 +255,7 @@ const AdminEditProductPage = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
           </>
         )}
       </div>

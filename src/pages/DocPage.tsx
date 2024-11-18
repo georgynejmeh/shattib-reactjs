@@ -39,7 +39,7 @@ const DocPage = () => {
     if (id) {
       receiptForm.append("id", id);
     }
-    await patchForm(receiptForm, true);
+    await patchForm(receiptForm);
   };
 
   const { postData: postComment } = usePostComment(`Criterias/${id}/Comments`); // custom hook to handle API request

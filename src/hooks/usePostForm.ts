@@ -52,12 +52,13 @@ export function usePostForm<T>(
     try {
       // const apiUrl = `${import.meta.env.VITE_API_URL}`;
       const apiUrl = "https://shatib.com/api/";
+      console.log(localStorage.getItem("accessToken"));
       const requestOptions = {
         method: "POST",
-        body,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
+        body,
       };
 
       const response = await fetch(`${apiUrl}${endpoint}`, requestOptions);
@@ -66,7 +67,7 @@ export function usePostForm<T>(
         if (response.status === 403) {
           await refreshToken();
         }
-        const errorData = await response.json().catch(() => ({}));
+        const errorData = await response.json();
         const errorMessage = errorData?.message || "Something went wrong";
         setError(errorMessage);
         console.error("usePostForm Error:", errorMessage);

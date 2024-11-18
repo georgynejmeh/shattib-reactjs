@@ -12,11 +12,13 @@ const AdminOrdersPage = () => {
   const [filter, setFilter] = useState<
     "Pending" | "Accepted" | "Rejected" | "Shipped" | "All" | string
   >("All");
-
+  const [refetchOrders] = useState<number>(0);
   const { isLoading, error, data } = useApi<Order[]>(
     filter === "All" ? "Orders/All" : `Orders/Status?status=${filter}`,
     "GET",
-    true
+    true,
+    false,
+    [refetchOrders]
   );
   // Pending // Accepted // Rejected // Shipped
   // TODO DELETE
