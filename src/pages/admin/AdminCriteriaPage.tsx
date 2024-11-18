@@ -15,8 +15,14 @@ import { useState, useEffect } from "react";
 
 const AdminCriteriaPage = () => {
   const { id } = useParams();
-
-  const { isLoading, error, data } = useApi<Cirteria>(`Criteria/${id}`);
+  const [refetchData, setRefetchData] = useState<number>(0);
+  const { isLoading, error, data } = useApi<Cirteria>(
+    `Criteria/${id}`,
+    "GET",
+    true,
+    false,
+    [refetchData]
+  );
 
   const [status, setStatus] = useState<string>(data?.status || "Pending"); // Set the initial status
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -25,7 +31,7 @@ const AdminCriteriaPage = () => {
     setInvoiceImage(() => image);
   }
   // Function to handle status update
-  const { patchData } = useApi(`Criteria/${id}/Status`);
+  const { patchData } = useApi(`Criteria/${id}/Status`, "PATCH");
   // const { postData: postCriteriaBill } = useApi(
   //   "CriteriaBills",
   //   "POST",
@@ -63,6 +69,7 @@ const AdminCriteriaPage = () => {
       }
 
       console.log("Invoice uploaded successfully!");
+      setRefetchData((prev) => (prev += 1));
       setInvoiceImage(null);
     } catch (err) {
       console.error(err);
@@ -201,25 +208,31 @@ const AdminCriteriaPage = () => {
 
           {/* Rest of the sections remain the same */}
           <section className="flex justify-between p-8">
-            <div>
-              <div className="flex gap-2 items-center">
-                <h3>الفاتورة:</h3>
-                <div className="w-[450px] h-[250px] px-16">
-                  <UploadFile
-                    containImg
-                    title="صورة الفاتورة"
-                    subTitle="أضف صورة الفاتورة للزبون"
-                    onImageChange={handleInvoiceImg}
-                  />
+            {data.invoices.length > 0 ? (
+              <div>
+                <h3>فاتورة الكراسة</h3>
+                <img src={data.invoices[0].image} alt="وصل الدفع" />
+              </div>
+            ) : (
+              <div>
+                <div className="flex gap-2 items-center">
+                  <div className="w-[450px] h-[250px] px-16">
+                    <UploadFile
+                      containImg
+                      title="صورة الفاتورة"
+                      subTitle="أضف صورة الفاتورة للزبون"
+                      onImageChange={handleInvoiceImg}
+                    />
 
-                  <div className="w-44 mt-10 max-lg:w-full">
-                    <ButtonGold onClick={uploadInvoice}>
-                      رفع الفاتورة
-                    </ButtonGold>
+                    <div className="w-44 mt-10 max-lg:w-full">
+                      <ButtonGold onClick={uploadInvoice}>
+                        رفع الفاتورة
+                      </ButtonGold>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div>
               <h3>وصل الدفع من الزبون</h3>

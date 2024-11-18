@@ -5,22 +5,25 @@ import { ConfirmDeleteProvider } from "../context/ConfirmDeleteContext";
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
 import { LoginModalProvider } from "../context/LoginModalContext";
 import LoginModal from "../components/LoginModal";
+import { RkahmCustomMeasureProvider } from "../context/RkhamCustomMeasure";
 
 const AdminLayout = () => {
   return (
-    <LoginModalProvider>
-      <ConfirmDeleteProvider>
-        <ConfirmDeleteModal />
-        <AdminNavBar />
-        <LoginModal />
-        <div className="flex">
-          <AdminSidePanel />
-          <div className="w-full ps-sidepanel pt-16">
-            <Outlet />
+    <RkahmCustomMeasureProvider>
+      <LoginModalProvider>
+        <ConfirmDeleteProvider>
+          <ConfirmDeleteModal />
+          <AdminNavBar />
+          <LoginModal />
+          <div className="flex">
+            <AdminSidePanel />
+            <div className="w-full ps-sidepanel pt-16">
+              <Outlet />
+            </div>
           </div>
-        </div>
-      </ConfirmDeleteProvider>
-    </LoginModalProvider>
+        </ConfirmDeleteProvider>
+      </LoginModalProvider>
+    </RkahmCustomMeasureProvider>
   );
 };
 

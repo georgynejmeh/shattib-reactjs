@@ -41,10 +41,10 @@ export async function refreshToken() {
 
 export function useApi<T>(
   endpoint: string,
-  method?: "POST" | "DELETE" | "GET",
+  method?: "POST" | "DELETE" | "GET" | "PATCH",
   isToken?: boolean,
   noResponse?: boolean,
-  dependencies?: [],
+  dependencies?: any[],
   contentType: string = "application/json"
 ) {
   const [isLoading, setIsLoading] = useState(false);

@@ -4,6 +4,7 @@ import {
   linkedinIcon,
   shattibLogoCol,
   whatsappIcon,
+  xIcon,
 } from "..";
 
 const Footer = () => {
@@ -14,7 +15,7 @@ const Footer = () => {
         <div className="flex items-center gap-1">
           <img src={facebookIcon} alt="" />
           <img src={instagramIcon} alt="" />
-          {/* <img src={youtubeIcon} alt="" /> */}
+          <img src={xIcon} alt="" />
           <img src={linkedinIcon} alt="" />
           {/* <img src={telegramIcon} alt="" /> */}
           <img src={whatsappIcon} alt="" />

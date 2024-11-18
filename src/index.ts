@@ -51,6 +51,7 @@ export { default as personOutlineIcon } from "./assets/svg/icon-person-outline.s
 // -- social media --
 export { default as facebookIcon } from "./assets/svg/icon-facebook.svg";
 export { default as instagramIcon } from "./assets/svg/icon-instagram.svg";
+export { default as xIcon } from "./assets/svg/x-icon.png";
 export { default as youtubeIcon } from "./assets/svg/icon-youtube.svg";
 export { default as linkedinIcon } from "./assets/svg/icon-linkedin.svg";
 export { default as telegramIcon } from "./assets/svg/icon-telegram.svg";
