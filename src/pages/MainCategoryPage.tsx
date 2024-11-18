@@ -1,8 +1,6 @@
 import {
-  CategoryFilterCard,
   MainPadding,
   ProductCard,
-  ProductsFilterViewControls,
   SectionTitles,
   TitleNumber,
   useApi,
@@ -61,10 +59,10 @@ const MainCategoryPage = () => {
         {/* <LeftRightButtonsCircle /> */}
         <section className="flex max-lg:flex-col max-lg:w-full">
           <div className="max-lg:w-full max-lg:flex max-lg:flex-col max-lg:items-center">
-            <CategoryFilterCard />
+            {/* <CategoryFilterCard /> */}
           </div>
           <div className="max-lg:w-full max-lg:flex max-lg:flex-col max-lg:items-center">
-            <ProductsFilterViewControls />
+            {/* <ProductsFilterViewControls /> */}
             <section className="flex flex-wrap gap-8 max-lg:justify-center">
               {isLoading ? (
                 <ProductCard />

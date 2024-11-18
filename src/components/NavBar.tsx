@@ -61,7 +61,7 @@ const NavBar = () => {
   return (
     <>
       <div className="fixed top-0 z-50 w-full bg-white max-lg:hidden">
-        <nav className="flex items-center justify-between border-b py-4 px-8">
+        <nav className="flex items-center justify-around border-b py-4 px-8">
           <Link to={"/home"}>
             <img src={shattibLogoRow} alt="" />
           </Link>
