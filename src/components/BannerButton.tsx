@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ButtonGold, expandCoverImg03, useEngineerRequest } from "..";
+import { ButtonGold, useEngineerRequest } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
 
 const BannerButton = () => {
@@ -15,6 +15,8 @@ const BannerButton = () => {
     setIsShownLoginModal(true);
   };
   const { t } = useTranslation();
+  const coverImage =
+    "https://shattibsadev.blob.core.windows.net/static-images/homePageImages/8d0f8db99c4dd7e36a64210234efce24.jpg";
   return (
     <div className="relative grid rounded-3xl overflow-hidden w-2/3 h-2/3 max-lg:h-5/6 max-lg:w-11/12">
       {/* <div className="absolute right-4 w-32 h-28 bg-black bg-opacity-25 rounded-bl rounded-br z-20 ">
@@ -42,7 +44,7 @@ const BannerButton = () => {
       </div>
       <img
         className="w-full h-full object-cover absolute opacity-100 blur-sm"
-        src={expandCoverImg03}
+        src={coverImage}
         alt=""
       />
     </div>

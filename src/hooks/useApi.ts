@@ -68,7 +68,7 @@ export function useApi<T>(
           let requestOptions;
           if (isToken) {
             token = localStorage.getItem("accessToken");
-            console.log(token);
+
             requestOptions = {
               headers: {
                 Authorization: `Bearer ${token}`,

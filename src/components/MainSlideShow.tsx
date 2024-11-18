@@ -1,10 +1,4 @@
-import {
-  mainCoverImg01,
-  mainCoverImg02,
-  mainCoverImg03,
-  useState,
-  useEffect,
-} from "..";
+import { useState, useEffect } from "..";
 
 const MainSlideShow = () => {
   const [index, setIndex] = useState(0);
@@ -16,6 +10,11 @@ const MainSlideShow = () => {
 
     return () => clearInterval(interval);
   }, [index]);
+  const imagesList: string[] = [
+    "https://shattibsadev.blob.core.windows.net/static-images/homePageImages/a0a9cb4b4c69c91a762cbf2ba0361a29.jpg",
+    "https://shattibsadev.blob.core.windows.net/static-images/homePageImages/b97115c4f6b6aa207413091ee7d6f245.jpg",
+    "https://shattibsadev.blob.core.windows.net/static-images/homePageImages/eaea4ab7981d2fd41696c3ed9db60e84.jpg",
+  ];
 
   return (
     <div className="h-full w-full relative grid overflow-hidden">
@@ -27,7 +26,7 @@ const MainSlideShow = () => {
             ? "w-full h-full object-cover absolute opacity-100 transition-opacity duration-1000"
             : "w-full h-full object-cover absolute opacity-0 transition-opacity duration-1000"
         }
-        src={mainCoverImg01}
+        src={imagesList[0]}
         alt=""
       />
       <img
@@ -36,7 +35,7 @@ const MainSlideShow = () => {
             ? "w-full h-full object-cover absolute opacity-100 transition-opacity duration-1000"
             : "w-full h-full object-cover absolute opacity-0 transition-opacity duration-1000"
         }
-        src={mainCoverImg02}
+        src={imagesList[1]}
         alt=""
       />
       <img
@@ -45,7 +44,7 @@ const MainSlideShow = () => {
             ? "w-full h-full object-cover absolute opacity-100 transition-opacity duration-1000"
             : "w-full h-full object-cover absolute opacity-0 transition-opacity duration-1000"
         }
-        src={mainCoverImg03}
+        src={imagesList[2]}
         alt=""
       />
 
