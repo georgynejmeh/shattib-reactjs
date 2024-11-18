@@ -196,14 +196,52 @@ const ConfirmNewConditionPage = () => {
             </div>
             <div className="flex gap-4 py-8 max-lg:flex-col max-lg:items-center max-lg:gap-16">
               {selectedCategoryNames.map((name, index) => (
-                <GoldConditionCard
+                <div
+                  className="p-4 pb-16 border rounded"
                   key={selectedCategories[index]}
-                  id={selectedCategories[index]}
-                  popupShown={popupShown}
-                  setPopupShown={setPopupShown}
-                  name={name}
-                  removeCategory={removeCategory}
-                />
+                >
+                  <GoldConditionCard
+                    id={selectedCategories[index]}
+                    popupShown={popupShown}
+                    setPopupShown={setPopupShown}
+                    name={name}
+                    removeCategory={removeCategory}
+                  />
+                  <div className="mt-16">
+                    {categoryProducts
+                      .get(selectedCategories[index])
+                      ?.map((product, prodIndex) => (
+                        <div
+                          key={prodIndex}
+                          className="p-4 border rounded bg-gray-100"
+                        >
+                          <h3 className="font-semibold">
+                            {product.productName}
+                          </h3>
+                          <p>
+                            <strong>وصف المنتج:</strong> {product.description}
+                          </p>
+                          <p>
+                            <strong>الكمية:</strong> {product.amount}
+                          </p>
+                          <p>
+                            <strong>وحدة القياس:</strong>{" "}
+                            {product.measurementUnit}
+                          </p>
+                          {images[prodIndex] && (
+                            <div>
+                              <strong>صورة المنتج:</strong>
+                              <img
+                                src={URL.createObjectURL(images[prodIndex])}
+                                alt={product.productName}
+                                className="mt-2 w-48 h-48 object-cover"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                  </div>
+                </div>
               ))}
             </div>
           </section>
