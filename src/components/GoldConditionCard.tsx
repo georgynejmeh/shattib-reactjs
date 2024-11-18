@@ -7,6 +7,7 @@ interface Props {
   popupShown: boolean;
   setPopupShown: (popupShown: boolean) => void;
   removeCategory: (id: number) => void;
+  setPopupCategory: (id: number) => void;
 }
 
 const GoldConditionCard = ({
@@ -15,6 +16,7 @@ const GoldConditionCard = ({
   name,
   id,
   removeCategory,
+  setPopupCategory,
 }: Props) => {
   return (
     <div className="w-60 h-52">
@@ -32,7 +34,10 @@ const GoldConditionCard = ({
       </div>
       <div className="flex py-2 gap-4">
         <button
-          onClick={() => setPopupShown(!popupShown)}
+          onClick={() => {
+            setPopupCategory(id);
+            setPopupShown(!popupShown);
+          }}
           className="rounded py-1 px-2 bg-gray-600 text-white"
         >
           أضف معلومات

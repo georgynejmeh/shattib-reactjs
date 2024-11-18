@@ -15,6 +15,8 @@ import { usePostCriteria } from "../hooks/usePostCriteria";
 const ConfirmNewConditionPage = () => {
   const { postData, isLoading, error, data } = usePostCriteria("Criteria");
 
+  const [popupCategory, setPopupCategory] = useState<number>();
+
   const [popupShown, setPopupShown] = useState(false);
   const [selectedCategoryNames, setSelectedCategoryNames] = useState<string[]>(
     []
@@ -176,7 +178,7 @@ const ConfirmNewConditionPage = () => {
       <CriteriaDetailsPopupForm
         isShown={popupShown}
         setIsShown={setPopupShown}
-        categoryId={selectedCategories[0]} // Assuming only one category is selected at a time
+        categoryId={popupCategory!} // Assuming only one category is selected at a time
         handleAddProduct={handleAddProduct}
         handleImageChange={handleImageChange} // Pass handleImageChange to the form
       />
@@ -206,6 +208,7 @@ const ConfirmNewConditionPage = () => {
                     setPopupShown={setPopupShown}
                     name={name}
                     removeCategory={removeCategory}
+                    setPopupCategory={setPopupCategory}
                   />
                   <div className="mt-16">
                     {categoryProducts
@@ -216,7 +219,7 @@ const ConfirmNewConditionPage = () => {
                           className="p-4 border rounded bg-gray-100"
                         >
                           <h3 className="font-semibold">
-                            {product.productName}
+                            {product.productName} {index}
                           </h3>
                           <p>
                             <strong>وصف المنتج:</strong> {product.description}
@@ -228,11 +231,11 @@ const ConfirmNewConditionPage = () => {
                             <strong>وحدة القياس:</strong>{" "}
                             {product.measurementUnit}
                           </p>
-                          {images[prodIndex] && (
+                          {images[index] && (
                             <div>
                               <strong>صورة المنتج:</strong>
                               <img
-                                src={URL.createObjectURL(images[prodIndex])}
+                                src={URL.createObjectURL(images[index])}
                                 alt={product.productName}
                                 className="mt-2 w-48 h-48 object-cover"
                               />

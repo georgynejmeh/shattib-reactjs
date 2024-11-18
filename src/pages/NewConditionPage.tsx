@@ -145,13 +145,7 @@ const NewConditionPage = () => {
             {isLoading ? (
               <span>جاري التحميل...</span>
             ) : error ? (
-              <CategoryCard
-                id={0}
-                onClick={() => handleCategorySelect(0, "TEST")}
-                selected={selectedCategories.includes(0)}
-              >
-                TEST
-              </CategoryCard>
+              <span>حدث خطأ!</span>
             ) : data ? (
               data.map((category, index) => (
                 <CategoryCard
