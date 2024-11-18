@@ -51,7 +51,6 @@ export { default as personOutlineIcon } from "./assets/svg/icon-person-outline.s
 // -- social media --
 export { default as facebookIcon } from "./assets/svg/icon-facebook.svg";
 export { default as instagramIcon } from "./assets/svg/icon-instagram.svg";
-export { default as xIcon } from "./assets/svg/x-icon.png";
 export { default as youtubeIcon } from "./assets/svg/icon-youtube.svg";
 export { default as linkedinIcon } from "./assets/svg/icon-linkedin.svg";
 export { default as telegramIcon } from "./assets/svg/icon-telegram.svg";
@@ -211,11 +210,11 @@ export { default as billImg } from "/assets/imgs/bill/61e7906b8649987df57ebf4559
 export { default as paymentReceiptImg } from "/assets/imgs/payment_receipt/6570f27a7f2f4b5cbd791b0b8531caa4.png";
 export { default as shattibLogoContactUs } from "/assets/imgs/shattib/contact_us/shattib.png";
 // -- Main Slide Show --
-export { default as mainCoverImg01 } from "./assets/imgs/cover/main/a0a9cb4b4c69c91a762cbf2ba0361a29.jpg";
-export { default as mainCoverImg02 } from "./assets/imgs/cover/main/b97115c4f6b6aa207413091ee7d6f245.jpg";
-export { default as mainCoverImg03 } from "./assets/imgs/cover/main/eaea4ab7981d2fd41696c3ed9db60e84.jpg";
+export { default as mainCoverImg01 } from "/assets/imgs/cover/main/a0a9cb4b4c69c91a762cbf2ba0361a29.jpg";
+export { default as mainCoverImg02 } from "/assets/imgs/cover/main/b97115c4f6b6aa207413091ee7d6f245.jpg";
+export { default as mainCoverImg03 } from "/assets/imgs/cover/main/eaea4ab7981d2fd41696c3ed9db60e84.jpg";
 // -- Banner Button --
-export { default as expandCoverImg03 } from "./assets/imgs/cover/expand/8d0f8db99c4dd7e36a64210234efce24.jpg";
+export { default as expandCoverImg03 } from "/assets/imgs/cover/expand/8d0f8db99c4dd7e36a64210234efce24.jpg";
 // -- Sales Slide Show --
 export { default as saleImg01 } from "./assets/imgs/0954885f3fc520a40ea876a0f638f1e1.jpg";
 export { default as saleImg02 } from "./assets/imgs/b97115c4f6b6aa207413091ee7d6f245.jpg";

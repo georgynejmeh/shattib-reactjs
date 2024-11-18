@@ -62,8 +62,6 @@ export function useApi<T>(
         try {
           // const apiUrl = `${import.meta.env.VITE_API_URL}`;
           const apiUrl = "https://shatib.com/api/";
-          console.log(`${apiUrl}${endpoint}`);
-
           let token;
           let requestOptions;
           if (isToken) {

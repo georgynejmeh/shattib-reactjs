@@ -4,7 +4,6 @@ import {
   linkedinIcon,
   shattibLogoCol,
   whatsappIcon,
-  xIcon,
 } from "..";
 
 const Footer = () => {
@@ -13,7 +12,7 @@ const Footer = () => {
       <div className="w-1/3 flex flex-col items-center gap-4">
         <img className="w-64" src={shattibLogoCol} alt="" />
         <div className="flex items-center gap-1">
-          <img className="text-center h-[21px] w-[21px]" src={xIcon} alt="" />
+          {/* <img className="text-center h-[21px] w-[21px]" src={xIcon} alt="" /> */}
           <img src={facebookIcon} alt="" />
           <img src={instagramIcon} alt="" />
           <img src={linkedinIcon} alt="" />
