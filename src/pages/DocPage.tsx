@@ -196,7 +196,7 @@ const DocPage = () => {
                   <div className="flex gap-2 self-end">
                     <button
                       onClick={() => {
-                        acceptBill({ accepted: "false" }).then(() => {
+                        acceptBill({ accepted: false }).then(() => {
                           setRefetchData((prev) => (prev += 1));
                         });
                       }}
@@ -206,9 +206,7 @@ const DocPage = () => {
                     </button>
                     <button
                       onClick={() => {
-                        // setIsCommentsShown(false);
-                        // setIsUploadReceiptShown(true);
-                        acceptBill({ accepted: "true" }).then(() => {
+                        acceptBill({ accepted: true }).then(() => {
                           setRefetchData((prev) => (prev += 1));
                         });
                       }}
