@@ -39,6 +39,7 @@ import OtpPage from "./pages/OtpPage";
 import RkhamCustomMeasurePopup from "./components/RkhamCustomMeasurePopup";
 import "./config/translation/i18n.ts";
 import { ToastContainer } from "react-toastify";
+import AdminCustomMeasuresPage from "./pages/admin/AdminCustomMeasuresPage.tsx";
 const App = () => {
   // return to the top of the page on navigation
   // FIX for: keep the same scroll distance on navigation
@@ -110,6 +111,10 @@ const App = () => {
           <Route
             path="/admin/product/edit/:id"
             element={<AdminEditProductPage />}
+          />
+          <Route
+            path="/admin/custom-measures"
+            element={<AdminCustomMeasuresPage />}
           />
         </Route>
         button

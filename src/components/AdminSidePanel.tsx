@@ -39,6 +39,9 @@ const AdminSidePanel = () => {
         <Link to={"/admin/samples"}>
           <SidePanelItem icon={minusGrayIcon}>العينات</SidePanelItem>
         </Link>
+        <Link to={"/admin/custom-measures"}>
+          <SidePanelItem icon={minusGrayIcon}>قياس مخصص</SidePanelItem>
+        </Link>
       </div>
       <div>
         <Link to={""}>
