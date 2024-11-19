@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { CatDropdownItem, downArrowIcon, Link, useState, useRef } from "..";
+import { CatDropdownItem, downArrowIcon, Link, useState } from "..";
 import { categories } from "../assets/json/categories";
 import { subCategories } from "../assets/json/subCategories";
 
