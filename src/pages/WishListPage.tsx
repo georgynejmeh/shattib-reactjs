@@ -1,8 +1,10 @@
 import { addToBoxIcon, Button, CartItemCard, Link, MainPadding } from "..";
 
 const WishListPage = () => {
-  const favoriteItems: [{ name: string; price: number; image: string }] =
-    JSON.parse(localStorage.getItem("favorites") || "[]");
+  const favoriteItems: [
+    { name: string; price: number; image: string; productId: number }
+  ] = JSON.parse(localStorage.getItem("favorites") || "[]");
+  console.log(favoriteItems);
 
   // const temp = [1, 2, 3];
   return (
@@ -34,7 +36,7 @@ const WishListPage = () => {
                 name={item.name}
                 price={item.price}
                 image={item.image}
-                productId={0}
+                productId={item.productId}
                 onQuantityChange={() => {}}
                 quantity={1}
                 onRemove={() => {}}

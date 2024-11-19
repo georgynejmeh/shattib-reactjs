@@ -14,9 +14,9 @@ const ConsultationsPage = () => {
         <AccentText>طلبات رفع مساحة</AccentText>
         <div className="overflow-x-auto max-w-full">
           {/* Desktop Table */}
-          <table className="hidden lg:table mt-8 min-w-max w-full text-sm border-separate space-y-4">
-            <thead>
-              <tr className="bg-gray-200 text-gray-700">
+          <table className="orders-table min-w-full bg-white rounded-lg shadow-lg hidden lg:table">
+            <thead className="bg-gray-100">
+              <tr>
                 {[
                   "الرمز",
                   "الموضوع",
@@ -27,7 +27,7 @@ const ConsultationsPage = () => {
                   "تاريخ الطلب",
                 ].map((item) => (
                   <th
-                    className="p-3 text-center text-xs font-semibold whitespace-nowrap"
+                    className="p-4 text-center text-sm font-semibold text-gray-600"
                     key={item}
                   >
                     {item}

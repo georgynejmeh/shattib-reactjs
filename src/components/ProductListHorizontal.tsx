@@ -20,16 +20,16 @@ const ProductListHorizontal = () => {
 
   return (
     <div className="relative">
-      <div className="absolute z-10 -right-4 top-36 flex justify-between w-full">
+      <div className="hidden lg:flex absolute z-10 -right-4 top-36  justify-between w-full">
         <button
           onClick={scrollLeft}
-          className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl"
+          className="hidden lg:flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl"
         >
           <img className="-scale-x-100" src={leftArrowIcon} alt="Scroll Left" />
         </button>
         <button
           onClick={scrollRight}
-          className="flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl"
+          className="hidden lg:flex items-center justify-center rounded-full w-12 h-12 bg-white shadow-xl"
         >
           <img src={leftArrowIcon} alt="Scroll Right" />
         </button>
@@ -44,7 +44,6 @@ const ProductListHorizontal = () => {
         ) : error ? (
           <>
             <ProductCard />
-            {console.log("Error: ", error)}
           </>
         ) : data ? (
           data.map((product) => (

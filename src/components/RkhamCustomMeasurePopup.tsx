@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import {
   ButtonGold,
   closeCircleIcon,
+  shattibIcon,
   TextInput,
   UploadFile,
   usePostForm,
@@ -41,6 +42,8 @@ const RkhamCustomMeasurePopup = () => {
     setIsShownRkahmCustomMeasureModal(false);
     toast.success("تم إرسال طلبك بنجاح", {
       theme: "colored",
+      style: { backgroundColor: "#c18a33" },
+      icon: () => <img src={shattibIcon} />,
     });
   }
 
@@ -54,7 +57,7 @@ const RkhamCustomMeasurePopup = () => {
     <>
       {data && setIsShownRkahmCustomMeasureModal(false)}
       {isShownRkahmCustomMeasureModal ? (
-        <main className="fixed z-50 flex justify-center items-center top-0 w-full h-full bg-black bg-opacity-50">
+        <main className="fixed z-50  flex justify-center items-center top-0 w-full h-full bg-black bg-opacity-50">
           <div className="flex flex-col border bg-white w-11/12 md:w-4/5 lg:w-2/3 xl:w-1/2 h-5/6 rounded-xl p-6 md:p-8">
             {/* Header */}
             <div className="flex w-full justify-between">
@@ -113,8 +116,8 @@ const RkhamCustomMeasurePopup = () => {
                   <div className="w-full">
                     <TextInput
                       blackTitle
-                      title="الواحدة"
-                      placeholder="أدخل الواحدة"
+                      title="الوحدة"
+                      placeholder="أدخل الوحدة"
                       onChange={(e) => setMeasurementUnit(e.target.value)}
                     />
                   </div>

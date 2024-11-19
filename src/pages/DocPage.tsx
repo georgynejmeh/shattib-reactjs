@@ -17,17 +17,40 @@ import { CirteriaGet } from "../models/Criteria";
 const DocPage = () => {
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [isUploadReceiptShown, setIsUploadReceiptShown] = useState(false);
-
+  const [refetchData, setRefetchData] = useState<number>(0);
   const { id } = useParams();
 
   const { isLoading, error, data } = useApi<CirteriaGet>(
     `Criteria/${id}`,
     "GET",
+    true,
+    true,
+    [refetchData]
+  );
+  const { patchData: acceptBill } = useApi(
+    data && data?.invoices.length > 0
+      ? `CriteriaBills/${data?.invoices[0].id}/Accepted`
+      : `CriteriaBills/0/Accepted`,
+    "PATCH",
+    true,
     true
   );
+  // const { patchData: rejecttBill } = useApi(
+  //   data && data?.invoices.length > 0
+  //     ? `CriteriaBills/${data?.invoices[0].id}/Rejected`
+  //     : `CriteriaBills/0/Rejected`,
+  //   "PATCH",
+  //   true,
+  //   true
+  // );
 
   const receiptForm = new FormData();
-  const { patchForm } = useApi(`CriteriaBills/${id}/Receipt`, "PATCH");
+  const { patchForm: uploadReceipt } = useApi(
+    `CriteriaBills/${id}/Receipt`,
+    "PATCH",
+    true,
+    true
+  );
   const [receiptImage, setReceiptImage] = useState<File | null>(null);
   const handleReceiptImageChange = (file: File) => {
     setReceiptImage(file);
@@ -39,7 +62,7 @@ const DocPage = () => {
     if (id) {
       receiptForm.append("id", id);
     }
-    await patchForm(receiptForm);
+    await uploadReceipt(receiptForm);
   };
 
   const { postData: postComment } = usePostComment(`Criterias/${id}/Comments`); // custom hook to handle API request
@@ -127,7 +150,10 @@ const DocPage = () => {
             <h2 className="text-xl font-bold">المرفقات</h2>
             <div className="flex flex-wrap gap-4 w-full">
               {data?.criteriaItems.map((item, index) => (
-                <div key={index} className="rounded-xl w-1/3 overflow-hidden">
+                <div
+                  key={index}
+                  className="rounded-xl w-1/6 overflow-hidden border border-primary p-5"
+                >
                   <img
                     className="w-full h-full object-cover"
                     src={`${item.image}`}
@@ -155,26 +181,31 @@ const DocPage = () => {
                     alt=""
                   />
                 </div>
-                <div className="flex gap-2 self-end">
-                  <button
-                    onClick={() => {
-                      setIsCommentsShown(true);
-                      setIsUploadReceiptShown(false);
-                    }}
-                    className="w-20 py-1 rounded bg-gray-200"
-                  >
-                    رفض
-                  </button>
-                  <button
-                    onClick={() => {
-                      setIsCommentsShown(false);
-                      setIsUploadReceiptShown(true);
-                    }}
-                    className="w-20 py-1 rounded bg-green-600 text-white"
-                  >
-                    قبول
-                  </button>
-                </div>
+                {
+                  <div className="flex gap-2 self-end">
+                    <button
+                      onClick={() => {
+                        setIsCommentsShown(true);
+                        setIsUploadReceiptShown(false);
+                      }}
+                      className="w-20 py-1 rounded bg-gray-200"
+                    >
+                      رفض
+                    </button>
+                    <button
+                      onClick={() => {
+                        // setIsCommentsShown(false);
+                        // setIsUploadReceiptShown(true);
+                        acceptBill({}).then(() => {
+                          setRefetchData((prev) => (prev += 1));
+                        });
+                      }}
+                      className="w-20 py-1 rounded bg-green-600 text-white"
+                    >
+                      قبول
+                    </button>
+                  </div>
+                }
               </div>
             ) : (
               <center className="w-full">

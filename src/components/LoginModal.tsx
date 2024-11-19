@@ -11,7 +11,7 @@ const LoginModal = () => {
   }
 
   return isShownLoginModal ? (
-    <div className="fixed z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-75">
+    <div className="fixed z-50 top-0 flex items-center justify-center w-full h-full bg-black bg-opacity-75">
       <div className="bg-white rounded-xl flex flex-col items-center justify-center gap-6 text-center w-full max-w-lg mx-4 md:w-1/2 lg:w-1/3 p-6">
         <h1 className="text-lg md:text-2xl">
           يرجى تسجيل الدخول للوصول لهذه الصفحة

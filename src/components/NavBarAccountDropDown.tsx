@@ -14,7 +14,7 @@ const NavBarAccountDropDown = () => {
   const [isDropdown, setIsDropdown] = useState(false);
   const buttonRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-
+  const userType = localStorage.getItem("userType");
   const handleClickOutside = (event: MouseEvent) => {
     if (
       buttonRef.current &&
@@ -74,24 +74,30 @@ const NavBarAccountDropDown = () => {
       {isDropdown ? (
         <div
           onMouseLeave={() => setIsDropdown(false)}
-          className="absolute top-16 z-50 bg-white rounded shadow flex flex-col overflow-hidden max-lg:top-80"
+          className="absolute top-[85%] z-50 bg-white rounded shadow flex flex-col overflow-hidden max-lg:top-80"
         >
-          <button className="hover:bg-gray-100 px-4 py-2">
-            <Link to={"/orders"}>
-              <div className="flex gap-4 items-center">
-                <img className="w-5" src={ordersIcon} alt="" />
-                <span>الطلبات</span>
-              </div>
-            </Link>
-          </button>
-          <button className="hover:bg-gray-100 px-4 py-2">
-            <Link to={"/consultations"}>
-              <div className="flex gap-4 items-center">
-                <img className="w-5" src={consultationsIcon} alt="" />
-                <span>الاستشارات</span>
-              </div>
-            </Link>
-          </button>
+          {userType === "Client" && (
+            <>
+              <button className="hover:bg-gray-100 px-4 py-2">
+                <Link to={"/orders"}>
+                  <div className="flex gap-4 items-center">
+                    <img className="w-5" src={ordersIcon} alt="" />
+                    <span>الطلبات</span>
+                  </div>
+                </Link>
+              </button>
+
+              <button className="hover:bg-gray-100 px-4 py-2">
+                <Link to={"/consultations"}>
+                  <div className="flex gap-4 items-center">
+                    <img className="w-5" src={consultationsIcon} alt="" />
+                    <span>الاستشارات</span>
+                  </div>
+                </Link>
+              </button>
+            </>
+          )}
+
           {/* <button className="hover:bg-gray-100 px-4 py-2">
             <div className="flex gap-4 items-center">
               <img className="w-5" src={gearIcon} alt="" />

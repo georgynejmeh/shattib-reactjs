@@ -241,7 +241,7 @@ const AdminCriteriaPage = () => {
             )}
             <div>
               <h1 className="text-3xl font-bold">وصل الدفع من الزبون</h1>
-              {data.invoices[0].receipt ? (
+              {data.invoices.length > 0 && data.invoices[0].receipt ? (
                 <img
                   className="w-[350px] h-[350px]"
                   src={paymentReceiptImg}

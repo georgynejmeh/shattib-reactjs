@@ -15,6 +15,7 @@ const AdminLayout = () => {
           <ConfirmDeleteModal />
           <AdminNavBar />
           <LoginModal />
+
           <div className="flex">
             <AdminSidePanel />
             <div className="w-full ps-sidepanel pt-16">

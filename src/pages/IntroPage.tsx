@@ -1,6 +1,5 @@
 import {
   firstPageBanner,
-  earthIcon,
   shattibTextDecoration,
   RegisterCompanyCard,
   RegisterPersonCard,
@@ -15,13 +14,13 @@ const IntroPage = () => {
         <div>
           <img className="w-screen" src={firstPageBanner} alt="" />
         </div>
-        <div className="absolute w-full flex flex-row justify-between items-start p-8">
-          {/* <img src={shattibLogoRow} alt="" /> */}
+        {/* <div className="absolute w-full flex flex-row justify-between items-start p-8">
+          // <img src={shattibLogoRow} alt="" /> 
           <div className="flex items-center">
             <span>EN</span>
             <img className="ps-2" src={earthIcon} alt="" />
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-col items-start px-24 max-lg:px-8 max-lg:mt-12">
         <img className="pt-2" src={shattibTextDecoration} alt="" />

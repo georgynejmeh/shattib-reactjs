@@ -1,16 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import {
   ButtonGold,
   CartItemCard,
   Link,
-  Navigate,
   useApi,
   useEffect,
   useState,
+  shattibIcon,
 } from "..";
 import { CartItem } from "../models/CartItem";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
-  const { isLoading, postData } = useApi("Orders", "POST", true);
+  const { isLoading, postData } = useApi("Orders", "POST", true, true);
   const [cart, setCart] = useState<CartItem[]>([]);
 
   // Load cart from localStorage when the component mounts
@@ -18,7 +20,7 @@ const CartPage = () => {
     const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCart(storedCart);
   }, []);
-
+  const navigate = useNavigate();
   // Function to remove a product from the cart
   const handleRemoveFromCart = (productId: number) => {
     const updatedCart = cart.filter((item) => item.productId !== productId);
@@ -55,10 +57,14 @@ const CartPage = () => {
 
     try {
       await postData(orderData);
-
+      toast.success("تم إنشاء الطلب بنجاح", {
+        theme: "colored",
+        style: { backgroundColor: "#c18a33" },
+        icon: () => <img src={shattibIcon} />,
+      });
       localStorage.removeItem("cart");
 
-      <Navigate to={"home"} />;
+      navigate("/orders");
     } catch (error) {
       console.error("Error submitting order:", error);
     }

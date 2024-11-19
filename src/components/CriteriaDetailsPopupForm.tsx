@@ -43,7 +43,7 @@ const CriteriaDetailsPopupForm = ({
   };
 
   return (
-    <div className="absolute z-50 w-full h-full bg-black bg-opacity-25">
+    <div className="absolute z-50 top-0 w-full h-full bg-black bg-opacity-25">
       <div className="rounded-xl flex flex-col justify-between w-5/6 h-5/6 bg-white mx-auto mt-4 p-8">
         <div className="w-full flex items-start justify-between">
           <h1 className="text-4xl font-bold">إضافة المنتج</h1>
@@ -78,7 +78,7 @@ const CriteriaDetailsPopupForm = ({
               title="واحدة القياس"
               value={measurementUnit}
               onChange={(e) => setMeasurementUnit(e.target.value)}
-              placeholder="أدخل الواحدة"
+              placeholder="أدخل الوحدة"
             />
           </div>
         </div>

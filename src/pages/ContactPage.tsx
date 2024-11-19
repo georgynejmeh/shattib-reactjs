@@ -5,6 +5,7 @@ import {
   emailIcon,
   Link,
   phoneIcon,
+  shattibIcon,
   shattibLogoContactUs,
   TextInput,
   useApi,
@@ -69,6 +70,8 @@ const ContactPage: React.FC = () => {
       });
       toast.success("لقد تم استلام رسالتك", {
         theme: "colored",
+        style: { backgroundColor: "#c18a33" },
+        icon: () => <img src={shattibIcon} />,
       });
     }
   };

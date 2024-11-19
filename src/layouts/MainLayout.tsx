@@ -9,26 +9,31 @@ import { ConfirmDeleteProvider } from "../context/ConfirmDeleteContext";
 import { EngineerRequestProvider } from "../context/EngineerRequestContext";
 import { LoginModalProvider } from "../context/LoginModalContext";
 import { RkahmCustomMeasureProvider } from "../context/RkhamCustomMeasure";
+import { AddCategoryToCriteriaProvider } from "../context/AddCategoryToCriteriaContext";
+import AddCategoryToCriteriaModal from "../components/AddCategoryToCriteriaModal";
 
 const MainLayout = () => {
   return (
-    <RkahmCustomMeasureProvider>
-      <LoginModalProvider>
-        <ConfirmDeleteProvider>
-          <EngineerRequestProvider>
-            <NavBar />
-            <EngineerRequestCardModal />
-            <ConfirmDeleteModal />
-            <RkhamCustomMeasurePopup />
-            <LoginModal />
-            <div className="mt-20 py-2 max-lg:mt-0">
-              <Outlet />
-            </div>
-            <Footer />
-          </EngineerRequestProvider>
-        </ConfirmDeleteProvider>
-      </LoginModalProvider>
-    </RkahmCustomMeasureProvider>
+    <AddCategoryToCriteriaProvider>
+      <RkahmCustomMeasureProvider>
+        <LoginModalProvider>
+          <ConfirmDeleteProvider>
+            <EngineerRequestProvider>
+              <NavBar />
+              <EngineerRequestCardModal />
+              <ConfirmDeleteModal />
+              <RkhamCustomMeasurePopup />
+              <LoginModal />
+              <AddCategoryToCriteriaModal />
+              <div className="mt-20 py-2 max-lg:mt-0">
+                <Outlet />
+              </div>
+              <Footer />
+            </EngineerRequestProvider>
+          </ConfirmDeleteProvider>
+        </LoginModalProvider>
+      </RkahmCustomMeasureProvider>
+    </AddCategoryToCriteriaProvider>
   );
 };
 

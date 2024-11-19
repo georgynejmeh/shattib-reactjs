@@ -4,6 +4,7 @@ import {
   Button,
   closeCircleIcon,
   goldEngineerIcon,
+  shattibIcon,
   TextInput,
   useApi,
   useEngineerRequest,
@@ -44,12 +45,14 @@ const EngineerRequestCardModal = () => {
       postData(formData).then(() => {
         toast.success("تم إرسال طلبك بنجاح", {
           theme: "colored",
+          style: { backgroundColor: "#c18a33" },
+          icon: () => <img src={shattibIcon} />,
         });
 
         setIsShownEngineerRequestModal(false);
       });
       if (error) {
-        alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
+        toast.error("حدث خطأ، يرجى المحاولة مرة أخرى.", { theme: "colored" });
         return;
       }
     } catch (error) {

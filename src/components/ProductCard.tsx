@@ -7,6 +7,7 @@ import {
   redHeartIcon,
   AccentText,
   ButtonGold,
+  shattibIcon,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
 import { useRkhamCustomMeasure } from "../hooks/useRkhamCustomMeasure";
@@ -55,6 +56,8 @@ const ProductCard = ({
 
     toast.success("تمت الإضافة إلى السلة بنجاح", {
       theme: "colored",
+      style: { backgroundColor: "#c18a33" },
+      icon: () => <img src={shattibIcon} />,
     });
     window.dispatchEvent(new Event("storage"));
   };
@@ -77,6 +80,8 @@ const ProductCard = ({
     }
     toast.success("تمت الإضافة إلى المفضلة بنجاح", {
       theme: "colored",
+      style: { backgroundColor: "#c18a33" },
+      icon: () => <img src={shattibIcon} />,
     });
   };
 

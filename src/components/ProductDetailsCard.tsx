@@ -9,6 +9,7 @@ import {
   useState,
   addToBoxBlackIcon,
   useEffect,
+  shattibIcon,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
 import { useRkhamCustomMeasure } from "../hooks/useRkhamCustomMeasure";
@@ -65,6 +66,8 @@ const ProductDetailsCard = ({ data }: Props) => {
       localStorage.setItem("samplesCart", JSON.stringify(existingSamples));
       toast.success("تمت الإضافة إلى العينات بنجاح", {
         theme: "colored",
+        style: { backgroundColor: "#c18a33" },
+        icon: () => <img src={shattibIcon} />,
       });
     }
   };
@@ -97,6 +100,8 @@ const ProductDetailsCard = ({ data }: Props) => {
       localStorage.setItem("cart", JSON.stringify(existingCart));
       toast.success("تمت الإضافة إلى السلة بنجاح", {
         theme: "colored",
+        style: { backgroundColor: "#c18a33" },
+        icon: () => <img src={shattibIcon} />,
       });
     }
   };

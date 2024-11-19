@@ -6,15 +6,16 @@ import {
   GoldConditionCard,
   plusCircleGoldIcon,
   CriteriaDetailsPopupForm,
-  Link,
   Navigate,
 } from "..";
 import { PostCirteriaItem, PostCriteria } from "../models/Criteria";
 import { usePostCriteria } from "../hooks/usePostCriteria";
+import { useAddCategoryToCriteriaModal } from "../hooks/useAddCategoryToCriteriaModal";
 
 const ConfirmNewConditionPage = () => {
   const { postData, isLoading, error, data } = usePostCriteria("Criteria");
-
+  const { setIsShownCategoryCriteriaModal, isShownCategoryCriteriaModal } =
+    useAddCategoryToCriteriaModal();
   const [popupCategory, setPopupCategory] = useState<number>();
 
   const [popupShown, setPopupShown] = useState(false);
@@ -39,7 +40,7 @@ const ConfirmNewConditionPage = () => {
     if (selectedCategories) {
       setSelectedCategories(JSON.parse(selectedCategories));
     }
-  }, []);
+  }, [isShownCategoryCriteriaModal]);
 
   // Remove category from state and localStorage
   const removeCategory = (categoryId: number) => {
@@ -189,12 +190,15 @@ const ConfirmNewConditionPage = () => {
           <section className="py-8">
             <div className="flex gap-8 max-lg:flex-col max-lg:items-center">
               <h2>التصنيفات المختارة</h2>
-              <Link to="/conditions/new">
-                <div className="flex gap-2">
-                  <img src={plusCircleGoldIcon} alt="" />
-                  <span className="text-yellow-600">إضافة المزيد</span>
-                </div>
-              </Link>
+              {/* <Link to="/conditions/new"> */}
+              <div
+                className="flex gap-2 cursor-pointer"
+                onClick={() => setIsShownCategoryCriteriaModal(true)}
+              >
+                <img src={plusCircleGoldIcon} alt="" />
+                <span className="text-yellow-600">إضافة المزيد</span>
+              </div>
+              {/* </Link> */}
             </div>
             <div className="flex gap-4 py-8 max-lg:flex-col max-lg:items-center max-lg:gap-16">
               {selectedCategoryNames.map((name, index) => (

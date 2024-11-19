@@ -26,22 +26,6 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await postData(formData);
-
-    if (data?.accessToken) {
-      // Save tokens in localStorage
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      localStorage.setItem("userType", data.role);
-
-      // Navigate to the home page
-      // if (data.role === "Client") {
-      //   return <Navigate to="/home" />;
-      // } else {
-      //   return <Navigate to="/conditions" />;
-      // }
-    } else {
-      console.error("Login failed", data);
-    }
   };
 
   const handleInputChange = (
@@ -58,6 +42,8 @@ const LoginPage = () => {
       {data ? (
         <>
           {localStorage.setItem("accessToken", data.accessToken)}
+          {localStorage.setItem("refreshToken", data.refreshToken)}
+          {localStorage.setItem("userType", data.role)}
           <>{console.log(data, "from body of login first line")}</>
         </>
       ) : null}

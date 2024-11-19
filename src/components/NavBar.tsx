@@ -11,6 +11,7 @@ import {
   menuIcon,
   NavBarAccountDropDown,
   useEffect,
+  closeCircleIcon,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
 // import LanguageSwitcher from "./LanguageSwitcher";
@@ -58,9 +59,24 @@ const NavBar = () => {
 
   // const { setIsShownEngineerRequestModal } = useEngineerRequest();
   const { t } = useTranslation();
+  const [isDiscountShown, setIsDiscountShown] = useState(true);
   return (
     <>
-      <div className="fixed top-0 z-50 w-full bg-white max-lg:hidden">
+      <div className="fixed top-0 z-50 w-full bg-white max-lg:hidden ">
+        {isDiscountShown && (
+          <div className="w-full h-[45px] bg-primary text-center text-white flex flex-row justify-between items-center px-7">
+            <img
+              className="justify-self-end cursor-pointer invert"
+              src={closeCircleIcon}
+              alt=""
+              onClick={() => setIsDiscountShown(false)}
+            />
+            <h4 className="text-xl">
+              خصم بقيمة 100% على تكلفة التوصيل في جميع الطلبات
+            </h4>
+            <div></div>
+          </div>
+        )}
         <nav className="flex items-center justify-around border-b py-4 px-8">
           <Link to={"/home"}>
             <img src={shattibLogoRow} alt="" />
@@ -94,24 +110,28 @@ const NavBar = () => {
             />
           </form>
 
-          <div
-            onClick={() => handleAuthorizedNavigationButton("/cart")}
-            className="relative flex flex-col items-center cursor-pointer"
-          >
-            <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
-              {cartItemCount + sampleCartItemCount}
+          {userType === "Client" && (
+            <div
+              onClick={() => handleAuthorizedNavigationButton("/cart")}
+              className="relative flex flex-col items-center cursor-pointer"
+            >
+              <div className="absolute -top-2 -right-3 px-2 bg-primary text-white rounded-full">
+                {cartItemCount + sampleCartItemCount}
+              </div>
+              <img src={cartIcon} alt="" />
+              <span>{t("cartTxt")}</span>
             </div>
-            <img src={cartIcon} alt="" />
-            <span>{t("cartTxt")}</span>
-          </div>
+          )}
 
-          <div
-            onClick={() => handleAuthorizedNavigationButton("/wishlist")}
-            className="flex flex-col items-center cursor-pointer"
-          >
-            <img src={heartIcon} alt="" />
-            <span>{t("favoriteTxt")}</span>
-          </div>
+          {userType === "Client" && (
+            <div
+              onClick={() => handleAuthorizedNavigationButton("/wishlist")}
+              className="flex flex-col items-center cursor-pointer"
+            >
+              <img src={heartIcon} alt="" />
+              <span>{t("favoriteTxt")}</span>
+            </div>
+          )}
 
           {/* <div
         onClick={() => {
