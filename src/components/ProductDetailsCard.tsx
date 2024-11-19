@@ -22,6 +22,7 @@ interface Props {
 
 const ProductDetailsCard = ({ data }: Props) => {
   const token = localStorage.getItem("accessToken");
+  const userType = localStorage.getItem("userType");
   const { setIsShownLoginModal } = useLoginModal();
   const [quantity, setQuantity] = useState(1); // Track quantity
   const { setIsShownRkahmCustomMeasureModal } = useRkhamCustomMeasure();
@@ -237,7 +238,7 @@ const ProductDetailsCard = ({ data }: Props) => {
               <QuantityControls quantity={quantity} onChange={setQuantity} />
             </div>
             <div className="w-80 flex flex-col gap-4">
-              {data.categoryId === 1 && (
+              {userType === "Business" ? null : data.categoryId === 1 ? (
                 <div
                   onClick={() => {
                     if (!token) {
@@ -250,8 +251,7 @@ const ProductDetailsCard = ({ data }: Props) => {
                 >
                   <ButtonGold>طلب قياس مخصص</ButtonGold>
                 </div>
-              )}
-              {data.categoryId !== 1 && (
+              ) : (
                 <ButtonGold
                   onClick={
                     token ? handleAddToCart : () => setIsShownLoginModal(true)
@@ -263,23 +263,28 @@ const ProductDetailsCard = ({ data }: Props) => {
                   </div>
                 </ButtonGold>
               )}
+
               {/* <Button>
               <div className="flex justify-center gap-2">
                 <span>أضف إلى السلة</span>
                 <img src={addToCartIcon} alt="" />
               </div>
             </Button> */}
-              <button
-                onClick={
-                  token ? handleRequestSample : () => setIsShownLoginModal(true)
-                }
-                className="rounded border border-black py-1 bg-white"
-              >
-                <div className="flex justify-center gap-2 text-black">
-                  <img src={addToBoxBlackIcon} alt="" />
-                  <span>طلب عينة</span>
-                </div>
-              </button>
+              {userType === "Business" ? null : (
+                <button
+                  onClick={
+                    token
+                      ? handleRequestSample
+                      : () => setIsShownLoginModal(true)
+                  }
+                  className="rounded border border-black py-1 bg-white"
+                >
+                  <div className="flex justify-center gap-2 text-black">
+                    <img src={addToBoxBlackIcon} alt="" />
+                    <span>طلب عينة</span>
+                  </div>
+                </button>
+              )}
             </div>
 
             <div className="mt-8">

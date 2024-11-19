@@ -28,6 +28,7 @@ const ProductCard = ({
   categoryId,
 }: Props) => {
   const token = localStorage.getItem("accessToken");
+  const userType = localStorage.getItem("userType");
   const { setIsShownLoginModal } = useLoginModal();
   const { setIsShownRkahmCustomMeasureModal } = useRkhamCustomMeasure();
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -124,7 +125,20 @@ const ProductCard = ({
             <AccentText>{price} ريال</AccentText>
           </span>
           <div className="mx-2 my-1">
-            {categoryId !== 1 && (
+            {userType === "Business" ? null : categoryId === 1 ? (
+              <div
+                onClick={() => {
+                  if (!token) {
+                    setIsShownLoginModal(true);
+                    return;
+                  }
+                  setIsShownRkahmCustomMeasureModal(true);
+                }}
+                className="w-15 h-15 flex items-center justify-center cursor-pointer"
+              >
+                <ButtonGold>طلب قياس مخصص</ButtonGold>
+              </div>
+            ) : (
               <ButtonGold
                 onClick={
                   token
@@ -141,20 +155,6 @@ const ProductCard = ({
                   <img className="ps-2" src={addToCartIcon} alt="" />
                 </div>
               </ButtonGold>
-            )}
-            {categoryId === 1 && (
-              <div
-                onClick={() => {
-                  if (!token) {
-                    setIsShownLoginModal(true);
-                    return;
-                  }
-                  setIsShownRkahmCustomMeasureModal(true);
-                }}
-                className="w-15 h-15 flex items-center justify-center cursor-pointer"
-              >
-                <ButtonGold>طلب قياس مخصص</ButtonGold>
-              </div>
             )}
           </div>
         </div>

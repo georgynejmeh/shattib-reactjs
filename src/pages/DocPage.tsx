@@ -35,14 +35,6 @@ const DocPage = () => {
     true,
     true
   );
-  // const { patchData: rejecttBill } = useApi(
-  //   data && data?.invoices.length > 0
-  //     ? `CriteriaBills/${data?.invoices[0].id}/Rejected`
-  //     : `CriteriaBills/0/Rejected`,
-  //   "PATCH",
-  //   true,
-  //   true
-  // );
 
   const receiptForm = new FormData();
   const { patchForm: uploadReceipt } = useApi(
@@ -196,7 +188,7 @@ const DocPage = () => {
                       onClick={() => {
                         // setIsCommentsShown(false);
                         // setIsUploadReceiptShown(true);
-                        acceptBill({}).then(() => {
+                        acceptBill({ accepted: "true" }).then(() => {
                           setRefetchData((prev) => (prev += 1));
                         });
                       }}
