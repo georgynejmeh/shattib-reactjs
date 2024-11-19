@@ -141,9 +141,6 @@ const AdminCriteriaPage = () => {
               </div>
               <h3 className="text-gray-500">15/10/2024</h3>
             </div>
-            <div className="w-64">
-              <ButtonGold>إرسال فاتورة</ButtonGold>
-            </div>
           </div>
           <hr />
           <TitleNumber inverse subTitle={data.title}>
@@ -219,7 +216,7 @@ const AdminCriteriaPage = () => {
                 <img
                   src={data.invoices[0].image}
                   alt="وصل الدفع"
-                  className="w-[400px] h-[400px] bg-primary object-cover"
+                  className="w-[400px] h-[400px] object-cover"
                 />
               </div>
             ) : (

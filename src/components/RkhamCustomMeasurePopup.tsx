@@ -17,7 +17,7 @@ const RkhamCustomMeasurePopup = () => {
   const [details, setDetails] = useState("");
   const [step, setStep] = useState(1); // Step state for navigation
   const { postData, isLoading, error, data } = usePostForm(
-    "CustomRhkam",
+    "SpecifiedMeasurements",
     "POST"
   );
   const { isShownRkahmCustomMeasureModal, setIsShownRkahmCustomMeasureModal } =
