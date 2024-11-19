@@ -1,117 +1,98 @@
 import { useTranslation } from "react-i18next";
-import {
-  CatDropdownItem,
-  downArrowIcon,
-  Link,
-  useState,
-  useRef,
-  useEffect,
-} from "..";
+import { CatDropdownItem, downArrowIcon, Link, useState, useRef } from "..";
 import { categories } from "../assets/json/categories";
-import { subCategories } from "../assets/json/subCategories"; // Assuming you import subCategories here
+import { subCategories } from "../assets/json/subCategories";
 
-const NavBarCategoriesDropdownMenu = () => {
-  const [isCatDropdown, setIsCatDropdown] = useState(false);
+const NavBarCategoriesSidebarMenu = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
-  const buttonRef = useRef<HTMLDivElement | null>(null);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      buttonRef.current &&
-      !buttonRef.current.contains(event.target as Node)
-    ) {
-      setIsCatDropdown(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("click", handleClickOutside);
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isCatDropdown) setIsCatDropdown(false);
-    };
-
-    const isSmallScreen = window.innerWidth <= 1024; // Tailwind's lg breakpoint
-    if (!isSmallScreen) {
-      window.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (isSmallScreen) {
-        window.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, [isCatDropdown]);
-
-  // Get subcategories for the active category
-  const getSubcategoriesByCategoryId = (categoryId: number) => {
-    return subCategories.filter((sub) => sub.categoryId === categoryId);
-  };
   const { t } = useTranslation();
-  return (
-    <button>
-      <div ref={buttonRef} className="relative flex items-center">
-        <div
-          onMouseEnter={() => setIsCatDropdown(true)}
-          onClick={() => setIsCatDropdown((prev) => !prev)}
-          className="flex items-center"
-        >
-          <span className="px-2">{t("categoriesTxt")}</span>
-          <img className="w-4" src={downArrowIcon} alt="Dropdown" />
-        </div>
 
-        {isCatDropdown && (
-          <div className="fixed z-50 top-16 lg:h-screen max-lg:absolute max-lg:top-6 max-lg:min-h-max">
-            <div
-              onMouseLeave={() => setIsCatDropdown(false)}
-              className="flex flex-col flex-wrap h-1/2 bg-white max-lg:flex-nowrap max-lg:min-h-max max-lg:shadow"
-            >
-              {categories.map((category) => (
-                <div
-                  key={category.id}
-                  onMouseEnter={() => setActiveCategoryId(category.id)} // Set active category on hover
-                  onMouseLeave={() => setActiveCategoryId(null)} // Remove active category when not hovered
-                >
-                  <Link
-                    to={`/category/${category.id}/0`}
-                    onClick={() => setIsCatDropdown(false)}
+  // Filter subcategories for the active category
+  const getSubcategoriesByCategoryId = (categoryId: number) =>
+    subCategories.filter((sub) => sub.categoryId === categoryId);
+
+  return (
+    <>
+      {/* Trigger Button */}
+      <div
+        onClick={() => setSidebarOpen(true)}
+        className="flex items-center cursor-pointer"
+      >
+        <span className="px-2">{t("categoriesTxt")}</span>
+        <img className="w-4" src={downArrowIcon} alt="Open Sidebar" />
+      </div>
+
+      {/* Sidebar */}
+      {isSidebarOpen && (
+        <div className="fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-50">
+          <div className="relative w-4/5 max-w-sm h-full bg-white shadow-lg">
+            {/* Sidebar Header */}
+            <div className="flex justify-between items-center p-4 border-b">
+              <h2 className="text-lg font-bold">{t("categoriesTxt")}</h2>
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="text-gray-500 hover:text-black"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Categories and Subcategories */}
+            <div className="flex flex-col h-full overflow-y-auto">
+              {/* Categories List */}
+              <div className="p-4 border-b">
+                {categories.map((category) => (
+                  <div
+                    key={category.id}
+                    onClick={() =>
+                      setActiveCategoryId((prev) =>
+                        prev === category.id ? null : category.id
+                      )
+                    }
+                    className={`p-2 cursor-pointer ${
+                      activeCategoryId === category.id
+                        ? "bg-gray-200 font-bold"
+                        : ""
+                    }`}
                   >
                     <CatDropdownItem>{category.name}</CatDropdownItem>
-                  </Link>
+                  </div>
+                ))}
+              </div>
 
-                  {/* Show subcategories when hovering over a category */}
-                  {activeCategoryId === category.id && (
-                    <div className="fixed lg:max-w-1/3 ">
-                      <div className="lg:max-h-max min-h-max lg:max-w-96 bg-gray-100 p-2 flex flex-wrap">
-                        {getSubcategoriesByCategoryId(category.id).map(
-                          (subCategory) => (
-                            <Link
-                              key={subCategory.id}
-                              to={`/category/${category.id}/${subCategory.id}`}
-                              onClick={() => setIsCatDropdown(false)} // Close dropdown after selecting subcategory
-                            >
-                              <CatDropdownItem showLeftIcon={false}>
-                                {subCategory.name}
-                              </CatDropdownItem>
-                            </Link>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
+              {/* Subcategories List */}
+              <div className="flex-1 p-4">
+                {activeCategoryId ? (
+                  getSubcategoriesByCategoryId(activeCategoryId).length > 0 ? (
+                    getSubcategoriesByCategoryId(activeCategoryId).map(
+                      (subCategory) => (
+                        <Link
+                          key={subCategory.id}
+                          to={`/category/${activeCategoryId}/${subCategory.id}`}
+                          onClick={() => setSidebarOpen(false)} // Close sidebar after selecting
+                        >
+                          <CatDropdownItem showLeftIcon={false}>
+                            {subCategory.name}
+                          </CatDropdownItem>
+                        </Link>
+                      )
+                    )
+                  ) : (
+                    <div className="text-gray-500">{t("noSubcategories")}</div>
+                  )
+                ) : (
+                  <div className="text-gray-500">
+                    {t("selectCategoryPrompt")}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        )}
-      </div>
-    </button>
+        </div>
+      )}
+    </>
   );
 };
 
-export default NavBarCategoriesDropdownMenu;
+export default NavBarCategoriesSidebarMenu;

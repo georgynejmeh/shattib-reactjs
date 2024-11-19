@@ -58,7 +58,7 @@ const RkhamCustomMeasurePopup = () => {
       {data && setIsShownRkahmCustomMeasureModal(false)}
       {isShownRkahmCustomMeasureModal ? (
         <main className="fixed z-50  flex justify-center items-center top-0 w-full h-full bg-black bg-opacity-50">
-          <div className="flex flex-col border bg-white w-11/12 md:w-4/5 lg:w-2/3 xl:w-1/2 h-5/6 rounded-xl p-6 md:p-8">
+          <div className="flex flex-col border bg-white w-11/12 md:w-4/5 lg:w-2/3 xl:w-1/2 h-5/6 rounded-xl p-6 md:p-8 overflow-scroll no-scrollbar">
             {/* Header */}
             <div className="flex w-full justify-between">
               <h1 className="text-xl md:text-2xl font-bold">
@@ -77,7 +77,7 @@ const RkhamCustomMeasurePopup = () => {
             {/* Step Content */}
             {step === 1 && (
               <>
-                <h2 className="font-bold text-lg md:text-xl">
+                <h2 className="font-bold text-lg md:text-xl ">
                   المعلومات الأساسية
                 </h2>
                 <div className="flex flex-wrap gap-4">
@@ -147,7 +147,7 @@ const RkhamCustomMeasurePopup = () => {
                     السابق
                   </button>
                   <div className="w-full md:w-40">
-                    <ButtonGold onClick={handleFormSend}>
+                    <ButtonGold onClick={handleFormSend} disabled={isLoading}>
                       {isLoading
                         ? "جاري الإرسال..."
                         : error
