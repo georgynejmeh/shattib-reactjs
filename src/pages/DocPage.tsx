@@ -16,8 +16,10 @@ import { CirteriaGet } from "../models/Criteria";
 
 const DocPage = () => {
   const [commentsRefetch, setCommentsRefetch] = useState(0);
-  const [lastCommentId, setLastCommentId] = useState(0);
-  const [isUploadReceiptShown, setIsUploadReceiptShown] = useState(false);
+  const [lastCommentId] = useState(0);
+  // const [lastCommentId, setLastCommentId] = useState(0);
+  const [isUploadReceiptShown] = useState(false);
+  // const [isUploadReceiptShown, setIsUploadReceiptShown] = useState(false);
   const [refetchData, setRefetchData] = useState<number>(0);
   const { id } = useParams();
 
