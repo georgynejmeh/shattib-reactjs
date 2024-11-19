@@ -19,7 +19,7 @@ const ConsultationsPage = () => {
               <tr>
                 {[
                   "الرمز",
-                  "الموضوع",
+
                   "هاتف",
                   "تفاصيل",
                   "فئة",
@@ -55,9 +55,9 @@ const ConsultationsPage = () => {
                     className="even:bg-gray-50 hover:bg-gray-100 transition-colors"
                   >
                     <td className="p-2 text-center">{consultation.id}</td>
-                    <td className="p-2 text-center">
+                    {/* <td className="p-2 text-center">
                       {consultation.consultationTopic}
-                    </td>
+                    </td> */}
                     <td className="p-2 text-center">
                       {consultation.phoneNumber}
                     </td>
@@ -101,14 +101,14 @@ const ConsultationsPage = () => {
                     <span className="font-semibold text-gray-700">الرمز:</span>
                     <span className="text-gray-600">{consultation.id}</span>
                   </div>
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="font-semibold text-gray-700">
                       الموضوع:
                     </span>
                     <span className="text-gray-600">
                       {consultation.consultationTopic}
                     </span>
-                  </div>
+                  </div> */}
                   <div className="flex justify-between">
                     <span className="font-semibold text-gray-700">هاتف:</span>
                     <span className="text-gray-600">

@@ -16,8 +16,7 @@ const EngineerRequestCardModal = () => {
 
   const [formData, setFormData] = useState({
     phoneNumber: "",
-    consultationTopic: "",
-    engineerSpecification: "",
+
     projectCategory: "",
     details: "",
   });
@@ -63,8 +62,7 @@ const EngineerRequestCardModal = () => {
     } finally {
       setFormData({
         phoneNumber: "",
-        consultationTopic: "",
-        engineerSpecification: "",
+
         projectCategory: "",
         details: "",
       });

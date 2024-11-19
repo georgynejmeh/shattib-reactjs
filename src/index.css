@@ -26,3 +26,9 @@
 .sidebar.open {
   transform: translateX(0);
 }
+
+/* Sidebar container with scroll enabled */
+.relative.w-4/5 {
+  height: 100%; /* Full height for scrolling */
+  overflow-y: auto; /* Enable scrolling inside the sidebar */
+}
