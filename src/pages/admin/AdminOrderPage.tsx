@@ -145,7 +145,7 @@ const AdminOrderPage = () => {
             </section>
 
             <section>
-              <h1 className="text-2xl font-bold my-8">المتنجات</h1>
+              <h1 className="text-2xl font-bold my-8">المنتجات</h1>
               {data.orderItems === null
                 ? null
                 : data.orderItems.map((order, index) =>

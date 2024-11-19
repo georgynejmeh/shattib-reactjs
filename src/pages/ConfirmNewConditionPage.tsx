@@ -94,7 +94,7 @@ const ConfirmNewConditionPage = () => {
         });
       }
     });
-
+    console.log(localStorage.getItem("criteriaTitle"));
     const postCriteria: PostCriteria = {
       Title: localStorage.getItem("criteriaTitle") || "", // No longer unused
       CriteriaItems: criteriaItems,

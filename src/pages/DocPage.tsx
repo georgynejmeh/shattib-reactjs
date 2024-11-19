@@ -15,7 +15,8 @@ import { usePostComment } from "../hooks/usePostComment";
 import { CirteriaGet } from "../models/Criteria";
 
 const DocPage = () => {
-  const [isCommentsShown, setIsCommentsShown] = useState(false);
+  const [commentsRefetch, setCommentsRefetch] = useState(0);
+  const [lastCommentId, setLastCommentId] = useState(0);
   const [isUploadReceiptShown, setIsUploadReceiptShown] = useState(false);
   const [refetchData, setRefetchData] = useState<number>(0);
   const { id } = useParams();
@@ -42,6 +43,20 @@ const DocPage = () => {
     "PATCH",
     true,
     true
+  );
+  const { data: comments } = useApi<
+    {
+      id: number;
+      userId: string;
+      message: string;
+      attachment: string;
+    }[]
+  >(
+    `Criterias/${data?.id}/Comments?lastCommentId=${lastCommentId}`,
+    "GET",
+    true,
+    false,
+    [commentsRefetch]
   );
   const [receiptImage, setReceiptImage] = useState<File | null>(null);
   const handleReceiptImageChange = (file: File) => {
@@ -91,6 +106,8 @@ const DocPage = () => {
       setFile(null); // Clear the file input
     } catch (error) {
       console.error("Error posting comment:", error);
+    } finally {
+      setCommentsRefetch((prev) => (prev += 1));
     }
   };
 
@@ -173,12 +190,13 @@ const DocPage = () => {
                     alt=""
                   />
                 </div>
-                {
+                {data.invoices[0].accepted === null && (
                   <div className="flex gap-2 self-end">
                     <button
                       onClick={() => {
-                        setIsCommentsShown(true);
-                        setIsUploadReceiptShown(false);
+                        acceptBill({ accepted: "false" }).then(() => {
+                          setRefetchData((prev) => (prev += 1));
+                        });
                       }}
                       className="w-20 py-1 rounded bg-gray-200"
                     >
@@ -197,7 +215,7 @@ const DocPage = () => {
                       قبول
                     </button>
                   </div>
-                }
+                )}
               </div>
             ) : (
               <center className="w-full">
@@ -210,80 +228,67 @@ const DocPage = () => {
         <hr className="my-12" />
 
         <section className="flex">
-          {isCommentsShown && (
-            <section className="flex flex-col gap-8 w-full">
-              <h2 className="text-xl from-black">التعليقات</h2>
-              <div>
-                <div className="w-2/3 rounded-t-xl border">
-                  {isLoading ? (
-                    <span>جاري التحميل...</span>
-                  ) : error ? (
-                    <span>حدث خطأ!</span>
-                  ) : data ? (
-                    <></>
-                  ) : // data.map((comment) => (
-                  //   /* Comment */
-                  //   <div className="flex flex-col gap-4 p-8">
-                  //     {/* Profile Pic - Name - Date */}
-                  //     <div className="flex items-center gap-4">
-                  //       <div className="w-16 h-16 rounded-full bg-gray-200" />
-                  //       <div className="flex flex-col">
-                  //         <span className="text-lg">اسم المستخدم</span>
-                  //         <span className="text-s text-gray-400">
-                  //           قبل 10 دقائق
-                  //         </span>
-                  //       </div>
-                  //     </div>
-                  //     <p>{comment.message}</p>
-                  //   </div>
-                  // ))
-                  null}
-                  {data?.comments.map((comment) => (
-                    /* Comment */
-                    <div className="flex flex-col gap-4 p-8">
-                      {/* Profile Pic - Name - Date */}
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 rounded-full bg-gray-200" />
-                        <div className="flex flex-col">
-                          <span className="text-lg">مدير الموقع</span>
-                          {/* <span className="text-s text-gray-400">
+          {data &&
+            data.invoices.length > 0 &&
+            data?.invoices[0].accepted === false && (
+              <section className="flex flex-col gap-8 w-full">
+                <h2 className="text-xl from-black">التعليقات</h2>
+                <div>
+                  <div className="w-2/3 rounded-t-xl border max-h-[350px] overflow-scroll no-scrollbar">
+                    {isLoading ? (
+                      <span>جاري التحميل...</span>
+                    ) : error ? (
+                      <span>حدث خطأ!</span>
+                    ) : data ? (
+                      <></>
+                    ) : null}
+                    {comments &&
+                      comments.map((comment) => (
+                        /* Comment */
+                        <div className="flex flex-col gap-4 p-8 ">
+                          {/* Profile Pic - Name - Date */}
+                          <div className="flex items-center gap-4">
+                            <div className="w-16 h-16 rounded-full bg-gray-200" />
+                            <div className="flex flex-col">
+                              <span className="text-lg">مدير الموقع</span>
+                              {/* <span className="text-s text-gray-400">
                           قبل 10 دقائق
                         </span> */}
+                            </div>
+                          </div>
+                          <p>{comment.message}</p>
                         </div>
+                      ))}
+                  </div>
+                  <div className="flex flex-col w-2/3 rounded-b-xl border p-4 gap-2">
+                    <form onSubmit={handleSubmit}>
+                      <div className="flex gap-2">
+                        <div className="w-full">
+                          <TextInput
+                            value={message}
+                            onChange={handleMessageChange}
+                            big
+                            placeholder="أضف تعليق"
+                          />
+                        </div>
+                        <label htmlFor="attachment" className="cursor-pointer">
+                          <img src={attachmentIcon} alt="attachment" />
+                          <input
+                            id="attachment"
+                            type="file"
+                            className="hidden"
+                            onChange={handleFileChange}
+                          />
+                        </label>
                       </div>
-                      <p>{comment.message}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-col w-2/3 rounded-b-xl border p-4 gap-2">
-                  <form onSubmit={handleSubmit}>
-                    <div className="flex gap-2">
-                      <div className="w-full">
-                        <TextInput
-                          value={message}
-                          onChange={handleMessageChange}
-                          big
-                          placeholder="أضف تعليق"
-                        />
+                      <div className="w-20 self-end mt-4">
+                        <ButtonGold onClick={handleSubmit}>إرسال</ButtonGold>
                       </div>
-                      <label htmlFor="attachment" className="cursor-pointer">
-                        <img src={attachmentIcon} alt="attachment" />
-                        <input
-                          id="attachment"
-                          type="file"
-                          className="hidden"
-                          onChange={handleFileChange}
-                        />
-                      </label>
-                    </div>
-                    <div className="w-20 self-end mt-4">
-                      <ButtonGold onClick={handleSubmit}>إرسال</ButtonGold>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
-              </div>
-            </section>
-          )}
+              </section>
+            )}
           {isUploadReceiptShown && (
             <section className="flex flex-col items-center gap-8 w-1/2 h-96">
               <UploadFile

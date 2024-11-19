@@ -13,6 +13,7 @@ export async function refreshToken() {
     const response = await fetch(`${apiUrl}Accounts/RefreshToken`, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         "Content-Type": "application/json",
         "Accept-Language": localStorage.getItem("lang") || " ",
       },

@@ -62,6 +62,9 @@ const AdminCriteriaPage = () => {
       const response = await fetch(`https://shatib.com/api/CriteriaBills`, {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
       });
 
       if (!response.ok) {

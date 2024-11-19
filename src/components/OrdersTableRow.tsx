@@ -1,5 +1,7 @@
 // import { Link, purpleParagraphIcon, redTrashIcon } from "..";
 // import { useConfirmDelete } from "../hooks/useConfirmDeleteModal";
+import { Link, purpleParagraphIcon, redTrashIcon } from "..";
+import { useConfirmDelete } from "../hooks/useConfirmDeleteModal";
 import { OrderItem } from "../models/Order";
 import AccentText from "./AccentText";
 
@@ -22,10 +24,10 @@ const OrdersTableRow = ({
   dateOfOrder,
 }: // user = false,
 Props) => {
-  // const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
-  //   useConfirmDelete();
-  // setEndpoint("Orders");
-
+  const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
+    useConfirmDelete();
+  setEndpoint("Orders");
+  const userType = localStorage.getItem("userType");
   // let totalQty = 0;
   // orderItems.map((order) => {
   //   totalQty += order.quantitiy;
@@ -65,24 +67,26 @@ Props) => {
         </div>
       </td>
       <td>{dateOfArrival || "غير محدد"}</td>
-      {/* <td>
-        <div className="mx-auto flex justify-center gap-4">
-          <Link
-            to={user ? `/order/${id}` : `/admin/order/${id}`}
-            className="flex items-center justify-center"
-          >
-            <img src={purpleParagraphIcon} alt="" />
-          </Link>
-          <button
-            onClick={() => {
-              setId(id);
-              setIsShownConfirmDeleteModal(true);
-            }}
-          >
-            <img src={redTrashIcon} alt="" />
-          </button>
-        </div>
-      </td> */}
+      {userType === "Administrator" && (
+        <td>
+          <div className="mx-auto flex justify-center gap-4">
+            <Link
+              to={`/admin/order/${id}`}
+              className="flex items-center justify-center"
+            >
+              <img src={purpleParagraphIcon} alt="" />
+            </Link>
+            <button
+              onClick={() => {
+                setId(id);
+                setIsShownConfirmDeleteModal(true);
+              }}
+            >
+              <img src={redTrashIcon} alt="" />
+            </button>
+          </div>
+        </td>
+      )}
     </tr>
   );
 };
