@@ -65,6 +65,7 @@ export interface CirteriaGet {
       id: number;
       image: string;
       accepted: boolean;
+      receipt?: string;
     }
   ];
 }
