@@ -10,7 +10,7 @@ export interface Product {
   measurements: string;
   manufacturingCountry: string;
   color: string;
-  installationTeam: string;
+  installationTeam: number;
   deaf: string;
   retrivalAndReplacing: string;
   notes: string;

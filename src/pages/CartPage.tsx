@@ -51,6 +51,7 @@ const CartPage = () => {
       items: cart.map((item) => ({
         productId: item.productId,
         quantity: item.quantity,
+        withInstallation: item.withInstallation,
       })),
       kind: "Order",
     };

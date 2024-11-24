@@ -1,6 +1,8 @@
+import { toast } from "react-toastify";
 import {
   AccentText,
   plusCircleIcon,
+  shattibIcon,
   useApi,
   useEffect,
   useParams,
@@ -8,6 +10,7 @@ import {
 } from "../..";
 import { Product } from "../../models/Product";
 import { Subcateogry } from "../../models/Subcategory";
+import { useNavigate } from "react-router-dom";
 
 const AdminEditProductPage = () => {
   const { data: dataSubCategories } = useApi<Subcateogry[]>(
@@ -145,7 +148,7 @@ const AdminEditProductPage = () => {
       specifications: updatedSpecifications,
     });
   };
-
+  const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -202,10 +205,12 @@ const AdminEditProductPage = () => {
     // });
 
     await patchForm(form);
-    console.log("FormData:", form);
-
-    setShowSuccessPopup(true);
-
+    toast.success("تم تعديل المنتج بنجاح", {
+      theme: "colored",
+      style: { backgroundColor: "#c18a33" },
+      icon: () => <img src={shattibIcon} />,
+    });
+    navigate("/admin/products");
     setTimeout(() => {
       setShowSuccessPopup(false);
     }, 3000);
@@ -330,7 +335,7 @@ const AdminEditProductPage = () => {
                 />
               </div>
 
-              <div>
+              {/* <div>
                 <label
                   htmlFor="features"
                   className="block text-sm font-medium text-gray-700"
@@ -346,7 +351,7 @@ const AdminEditProductPage = () => {
                   rows={4}
                   className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
-              </div>
+              </div> */}
 
               {/* Product Specifications */}
               <div>
