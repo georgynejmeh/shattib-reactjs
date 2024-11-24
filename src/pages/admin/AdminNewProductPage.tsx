@@ -30,7 +30,7 @@ const AdminNewProductPage: React.FC<Props> = ({
       formData.Price !== 0 &&
       formData.SubCategoryId !== undefined &&
       formData.Description !== "" &&
-      formData.Features !== "" &&
+      formData.Brand !== "" &&
       formData.MeasurementUnit !== "" &&
       formData.Measurements !== "" &&
       formData.ManufacturingCountry !== "" &&
@@ -142,10 +142,10 @@ const AdminNewProductPage: React.FC<Props> = ({
               <TextInput
                 big
                 blackTitle
-                title="مميزات المنتج"
-                placeholder="مميزات المنتج"
-                name="Features"
-                value={formData.Features}
+                title="الشركة المصنعة"
+                placeholder="اسم الشركة المصنعة"
+                name="Brand"
+                value={formData.Brand}
                 onChange={onInputChange}
               />
             </div>

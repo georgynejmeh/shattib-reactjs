@@ -275,7 +275,9 @@ const DocPage = () => {
         </section>
 
         <hr className="my-12" />
-
+        <h1 className="text-center w-[32%] text-2xl font-bold mb-5">
+          وصل الدفع
+        </h1>
         <section className="flex">
           {data &&
             data.invoices.length > 0 &&
@@ -293,13 +295,37 @@ const DocPage = () => {
                 </div>
               </section>
             )}
+
           {data && data.invoices.length > 0 && data.invoices[0].receipt && (
-            <div className="rounded-xl w-1/3 overflow-hidden border border-primary p-5">
-              <img
-                className="w-[320px] h-[320px] object-contain"
-                src={`${data.invoices[0].receipt}`}
-                alt=""
-              />
+            <div className="rounded-xl w-1/3">
+              {data.invoices[0].receipt.toLowerCase().endsWith(".pdf") ? (
+                <>
+                  {" "}
+                  <iframe
+                    src={data.invoices[0].receipt}
+                    title="PDF Viewer"
+                    className="w-full h-full"
+                  />
+                  <ButtonGold
+                    className="mt-3"
+                    onClick={() => {
+                      window.open(
+                        data.invoices[0].receipt,
+                        "_blank",
+                        "noopener,noreferrer"
+                      );
+                    }}
+                  >
+                    فتح الملف
+                  </ButtonGold>
+                </>
+              ) : (
+                <img
+                  className="w-[320px] h-[320px] object-contain"
+                  src={`${data.invoices[0].receipt}`}
+                  alt=""
+                />
+              )}
             </div>
           )}
         </section>

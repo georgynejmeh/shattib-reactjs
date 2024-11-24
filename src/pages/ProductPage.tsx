@@ -14,9 +14,13 @@ const ProductPage = () => {
   const { id } = useParams();
   const { isLoading, error, data } = useApi<Product>(`Products/${id}`);
   const [isDescriptionOpen, setDescriptionOpen] = useState(false);
+  const [isVerificationOpen, setVerificationOpen] = useState(false);
 
   const toggleDescription = () => {
     setDescriptionOpen(!isDescriptionOpen);
+  };
+  const toggleVerification = () => {
+    setVerificationOpen(!isDescriptionOpen);
   };
 
   return (
@@ -38,6 +42,17 @@ const ProductPage = () => {
         </section>
 
         <section className="flex flex-col gap-8 py-8">
+          <h1
+            onClick={toggleVerification}
+            className="text-2xl font-bold max-lg:text-xl cursor-pointer"
+          >
+            سياسة الاسترجاع و الاستبدال {isVerificationOpen ? "▲" : "▼"}
+          </h1>
+          {isVerificationOpen && (
+            <p className="text-2xl max-lg:text-lg">
+              {data?.retrivalAndReplacing}
+            </p>
+          )}
           <h1
             onClick={toggleDescription}
             className="text-2xl font-bold max-lg:text-xl cursor-pointer"

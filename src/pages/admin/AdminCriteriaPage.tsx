@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   ButtonGold,
   downArrowIcon,
-  paymentReceiptImg,
   TitleNumber,
   UploadFile,
   useApi,
@@ -282,13 +281,40 @@ const AdminCriteriaPage = () => {
               </div>
             )}
             <div>
-              <h1 className="text-3xl font-bold">وصل الدفع من الزبون</h1>
-              {data.invoices.length > 0 && data.invoices[0].receipt ? (
-                <img
-                  className="w-[350px] h-[350px]"
-                  src={paymentReceiptImg}
-                  alt="وصل الدفع"
-                />
+              <h1 className="text-3xl font-bold text-center mb-5">
+                وصل الدفع من الزبون
+              </h1>
+              {data && data.invoices.length > 0 && data.invoices[0].receipt ? (
+                data.invoices[0].receipt
+                  .toLocaleLowerCase()
+                  .endsWith(".pdf") ? (
+                  <>
+                    {" "}
+                    <iframe
+                      src={data.invoices[0].receipt}
+                      title="PDF Viewer"
+                      className="w-[100%] h-full"
+                    />
+                    <ButtonGold
+                      className="mt-3"
+                      onClick={() => {
+                        window.open(
+                          data.invoices[0].receipt,
+                          "_blank",
+                          "noopener,noreferrer"
+                        );
+                      }}
+                    >
+                      فتح الملف
+                    </ButtonGold>
+                  </>
+                ) : (
+                  <img
+                    className="w-[350px] h-[350px] object-contain border border-primary rounded-2xl p-5"
+                    src={data.invoices[0].receipt}
+                    alt="وصل الدفع"
+                  />
+                )
               ) : (
                 <div className="h-full flex justify-center items-center">
                   <h2 className="text-2xl text-center">لم يتم الدفع بعد</h2>

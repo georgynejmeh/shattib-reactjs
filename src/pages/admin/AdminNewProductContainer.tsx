@@ -7,7 +7,6 @@ export interface MyFormData {
   SubCategoryId: number;
   Name: string;
   Description: string;
-  Features: string;
   Price: number;
   MeasurementUnit: string;
   Measurements: string;
@@ -17,6 +16,9 @@ export interface MyFormData {
   RetrivalAndReplacing: string;
   Notes: string;
   WareHouseCode: string;
+  Brand: string;
+  Keywords: string;
+  InstallationTeam: number;
   Specifications: {
     name: string;
     value: string;
@@ -29,7 +31,7 @@ const AdminNewProductContainer: React.FC = () => {
     SubCategoryId: 1,
     Name: "",
     Description: "",
-    Features: "",
+    Keywords: "",
     Price: 0.0,
     MeasurementUnit: "",
     Measurements: "",
@@ -39,6 +41,8 @@ const AdminNewProductContainer: React.FC = () => {
     RetrivalAndReplacing: "",
     Notes: "",
     WareHouseCode: "",
+    Brand: "",
+    InstallationTeam: 0.0,
     Specifications: { name: "", value: "" },
   });
 

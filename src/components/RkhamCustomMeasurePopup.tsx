@@ -15,6 +15,7 @@ const RkhamCustomMeasurePopup = () => {
   const [height, setHeight] = useState("");
   const [measurementUnit, setMeasurementUnit] = useState("");
   const [details, setDetails] = useState("");
+  const [quantity, setQuantity] = useState<number>(0);
   const [step, setStep] = useState(1); // Step state for navigation
   const { postData, isLoading, error, data } = usePostForm(
     "SpecifiedMeasurements",
@@ -37,6 +38,7 @@ const RkhamCustomMeasurePopup = () => {
     form.append("measurementUnit", measurementUnit);
     form.append("details", details);
     form.append("image", image!);
+    form.append("Quantity", quantity.toString());
 
     await postData(form);
     setIsShownRkahmCustomMeasureModal(false);
@@ -84,6 +86,7 @@ const RkhamCustomMeasurePopup = () => {
                   <div className="w-full md:w-1/2">
                     <TextInput
                       blackTitle
+                      number
                       title="الطول"
                       placeholder="أدخل الطول"
                       onChange={(e) => setHeight(e.target.value)}
@@ -92,9 +95,19 @@ const RkhamCustomMeasurePopup = () => {
                   <div className="w-full md:w-1/2">
                     <TextInput
                       blackTitle
+                      number
                       title="العرض"
                       placeholder="أدخل العرض"
                       onChange={(e) => setWidth(e.target.value)}
+                    />
+                  </div>
+                  <div className="w-full md:w-1/2">
+                    <TextInput
+                      blackTitle
+                      title="الكمية"
+                      placeholder="أدخل الكمية"
+                      number
+                      onChange={(e) => setQuantity(Number(e.target.value))}
                     />
                   </div>
                 </div>

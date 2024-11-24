@@ -1,15 +1,14 @@
 import { toast } from "react-toastify";
 import {
-  addToCartIcon,
-  TitleNumber,
-  QuantityControls,
   AccentText,
-  ButtonGold,
-  heartIcon,
-  useState,
   addToBoxBlackIcon,
-  useEffect,
+  addToCartIcon,
+  ButtonGold,
+  QuantityControls,
   shattibIcon,
+  TitleNumber,
+  useEffect,
+  useState,
 } from "..";
 import { useLoginModal } from "../hooks/useLoginModal";
 import { useRkhamCustomMeasure } from "../hooks/useRkhamCustomMeasure";
@@ -37,7 +36,7 @@ const ProductDetailsCard = ({ data }: Props) => {
     }
   }, [storedCart, data]);
 
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
   const handleRequestSample = () => {
     const existingSamples = JSON.parse(
       localStorage.getItem("samplesCart") || "[]"
@@ -106,23 +105,27 @@ const ProductDetailsCard = ({ data }: Props) => {
       });
     }
   };
-  const handleAddToFavorites = () => {
-    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+  // const handleAddToFavorites = () => {
+  //   const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
-    const existingProductIndex = favorites.findIndex(
-      (item: { productId: number }) => item.productId === data?.id
-    );
+  //   const existingProductIndex = favorites.findIndex(
+  //     (item: { productId: number }) => item.productId === data?.id
+  //   );
 
-    if (existingProductIndex === -1) {
-      favorites.push({
-        productId: data?.id,
-        name: data?.name,
-        price: data?.price,
-        image: data?.images[0].imagePath,
-      });
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-    }
-  };
+  //   if (existingProductIndex === -1) {
+  //     favorites.push({
+  //       productId: data?.id,
+  //       name: data?.name,
+  //       price: data?.price,
+  //       image: data?.images[0].imagePath,
+  //     });
+  //     localStorage.setItem("favorites", JSON.stringify(favorites));
+  //   }
+  // };
+
+  const [activeImage, setActiveImage] = useState<string | undefined>(
+    data!.images[0].imagePath
+  );
   // TODO DELETE
   // const temp = [1, 2, 3, 4, 5];
 
@@ -135,7 +138,7 @@ const ProductDetailsCard = ({ data }: Props) => {
           <section className="flex flex-col justify-between items-start gap-4 rounded-xl w-3/4 m-8">
             <div className="flex flex-col gap-4">
               <h1 className="text-xl font-bold">{data.name}</h1>
-              <h2 className="text-gray-500">{data.deaf}</h2>
+              <h2 className="text-gray-500">{data.brand}</h2>
             </div>
             <div className="flex items-center gap-4">
               <AccentText>{data.price} ريال</AccentText>
@@ -203,21 +206,23 @@ const ProductDetailsCard = ({ data }: Props) => {
                 </button>
               </div> */}
 
-              <div className="flex justify-around">
-                <div className="w-full">
-                  <TitleNumber
-                    column
-                    subTitle={`${data.measurements} ${data.measurementUnit}`}
-                  >
+              <div className="flex justify-between items-stretch">
+                <div className="w-full ml-8">
+                  <TitleNumber column subTitle={`${data.measurements}`}>
                     القياس
                   </TitleNumber>
                 </div>
-                <div className="w-full">
+                <div className="w-full ml-8">
+                  <TitleNumber column subTitle={data.measurementUnit}>
+                    وحدة القياس
+                  </TitleNumber>
+                </div>
+                <div className="w-full ml-8">
                   <TitleNumber column subTitle={data.manufacturingCountry}>
                     بلد التصنيع
                   </TitleNumber>
                 </div>
-                <div className="w-full">
+                <div className="w-full ml-8">
                   <TitleNumber column subTitle={data.retrivalAndReplacing}>
                     الضمان
                   </TitleNumber>
@@ -233,10 +238,27 @@ const ProductDetailsCard = ({ data }: Props) => {
 
             <hr className="w-full" />
 
-            <div className="flex gap-4 w-52">
-              <span className="text-lg">الكمية</span>
-              <QuantityControls quantity={quantity} onChange={setQuantity} />
-            </div>
+            {userType === "Client" && (
+              <div>
+                <div className="flex gap-4 w-52">
+                  <span className="text-lg">الكمية</span>
+                  <QuantityControls
+                    quantity={quantity}
+                    onChange={setQuantity}
+                  />
+                </div>
+                <div className="mt-7 font-bold">
+                  <input
+                    type="checkbox"
+                    id="installationCheckbox"
+                    name="installationTeam"
+                  />
+                  <label htmlFor="installationCheckbox" className="mr-2">
+                    طلب أعمال التركيب (+{data.installationTeam} ر.س)
+                  </label>
+                </div>
+              </div>
+            )}
             <div className="w-80 flex flex-col gap-4">
               {userType === "Business" ? null : data.categoryId === 1 ? (
                 <div
@@ -287,21 +309,21 @@ const ProductDetailsCard = ({ data }: Props) => {
               )}
             </div>
 
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <h3 className="font-bold">ملاحظات</h3>
               <h3 className="text-gray-500">{data.description}</h3>
-            </div>
+            </div> */}
           </section>
 
           {/* Left section */}
           <section className="flex flex-col gap-4 rounded-xl w-full m-8">
             <div className="relative w-full h-2/3 rounded-xl overflow-hidden">
               <img
-                className="w-full h-full object-cover"
-                src={data.images[0].imagePath}
+                className="w-full h-full object-contain shadow-2xl"
+                src={activeImage}
                 alt=""
               />
-              <button
+              {/* <button
                 onClick={(e) => {
                   if (!token) {
                     setIsShownLoginModal(true);
@@ -316,17 +338,22 @@ const ProductDetailsCard = ({ data }: Props) => {
                 <div className="absolute top-0 m-2 flex items-center justify-center h-12 w-12 rounded-full bg-white transition-all duration-700 hover:bg-red-200">
                   <img src={heartIcon} alt="" />
                 </div>
-              </button>
+              </button> */}
             </div>
             <div className="flex flex-wrap gap-3">
               {/* TODO DELETE LOOP */}
               {data.images.map((image, index) => (
                 <div
                   key={index}
-                  className="w-24 h-16 rounded-xl overflow-hidden"
+                  className={`w-24 h-16 rounded-xl overflow-hidden shadow-2xl ${
+                    activeImage === image.imagePath && "border border-primary"
+                  }`}
+                  onClick={() => {
+                    setActiveImage(image.imagePath);
+                  }}
                 >
                   <img
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                     src={image.imagePath}
                     alt=""
                   />
@@ -365,15 +392,15 @@ const ProductDetailsCard = ({ data }: Props) => {
             <section className="flex flex-col gap-4 rounded-xl w-full h-full">
               <div className="relative w-full h-64 rounded-xl overflow-hidden">
                 <img
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   src={data.images[0].imagePath}
                   alt=""
                 />
-                <button>
+                {/* <button>
                   <div className="absolute top-0 m-2 flex items-center justify-center h-12 w-12 rounded-full bg-white transition-all duration-700 hover:bg-red-200">
                     <img src={heartIcon} alt="" />
                   </div>
-                </button>
+                </button> */}
               </div>
               <div className="flex flex-wrap gap-1">
                 {/* TODO DELETE LOOP */}
@@ -383,7 +410,7 @@ const ProductDetailsCard = ({ data }: Props) => {
                     className="w-18 h-10 rounded overflow-hidden"
                   >
                     <img
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       src={image.imagePath}
                       alt=""
                     />
@@ -453,18 +480,31 @@ const ProductDetailsCard = ({ data }: Props) => {
                 <TitleNumber column subTitle={data.manufacturingCountry}>
                   بلد التصنيع
                 </TitleNumber>
-                <TitleNumber column subTitle={data.retrivalAndReplacing}>
-                  الضمان
-                </TitleNumber>
               </div>
             </div>
 
             <hr className="w-full" />
-
-            <div className="flex flex-col items-center gap-4 w-full max-w-36">
-              <span className="text-lg">الكمية</span>
-              <QuantityControls quantity={quantity} onChange={setQuantity} />
-            </div>
+            {userType === "Client" && (
+              <div>
+                <div className="flex flex-col items-center gap-4 w-full max-w-36">
+                  <span className="text-lg">الكمية</span>
+                  <QuantityControls
+                    quantity={quantity}
+                    onChange={setQuantity}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="installationCheckbox"
+                    name="installationTeam"
+                  />
+                  <label htmlFor="installationCheckbox">
+                    طلب أعمال التركيب (+{data.installationTeam} ر.س)
+                  </label>
+                </div>
+              </div>
+            )}
             <div className="w-full max-w-52 flex flex-col gap-4">
               {data.categoryId === 1 && (
                 <div
@@ -506,10 +546,10 @@ const ProductDetailsCard = ({ data }: Props) => {
               </button>
             </div>
 
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <h3 className="font-bold">ملاحظات</h3>
               <h3 className="text-gray-500">ملاحظات مرتبطة بالمنتج</h3>
-            </div>
+            </div> */}
           </section>
         </div>
       </>

@@ -21,7 +21,6 @@ const AdminCustomMeasuresPage = () => {
             <th>العرض</th>
             <th>تفاصيل</th>
             <th>رقم الهاتف</th>
-            <th>القياسات</th>
           </tr>
         </thead>
         <tbody>
@@ -46,9 +45,6 @@ const AdminCustomMeasuresPage = () => {
                 <td>{customMeasure.width}</td>
                 <td>{customMeasure.details}</td>
                 <td>{customMeasure.phoneNumber}</td>
-
-                <td>{customMeasure.measurement}</td>
-
                 {/* <td>{customMeasure.userId}</td> */}
               </tr>
             ))

@@ -25,6 +25,12 @@ const NavBarCategoriesSidebarMenu = () => {
   const getSubcategoriesByCategoryId = (categoryId: number) =>
     subCategories.filter((sub) => sub.categoryId === categoryId);
 
+  if (isSidebarOpen) {
+    document.body.classList.add("overflow-hidden");
+  } else {
+    document.body.classList.remove("overflow-hidden");
+  }
+
   return (
     <>
       {/* Trigger Button */}

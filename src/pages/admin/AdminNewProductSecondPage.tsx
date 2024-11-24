@@ -115,7 +115,7 @@ const AdminNewProductSecondPage = ({
   };
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       {data && <Navigate to={"/admin/home"} />}
 
       <NewProductHeaderText second />
@@ -133,8 +133,20 @@ const AdminNewProductSecondPage = ({
             />
             <TextInput
               blackTitle
+              title="سعر التركيب"
+              placeholder="أدخل سعر التركيب"
+              name="InstallationTeam"
+              number
+              value={formData.InstallationTeam.toString()}
+              onChange={onInputChange}
+            />
+            <TextInput
+              blackTitle
               title="الكلمات الدلالية"
               placeholder="كلمات دلالية حول المنتج"
+              name="Keywords"
+              value={formData.Keywords}
+              onChange={onInputChange}
             />
           </div>
           <div className="w-full">

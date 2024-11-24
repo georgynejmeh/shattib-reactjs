@@ -10,10 +10,12 @@ export interface Product {
   measurements: string;
   manufacturingCountry: string;
   color: string;
+  installationTeam: string;
   deaf: string;
   retrivalAndReplacing: string;
   notes: string;
   warehouseCode: string;
+  brand: string;
   images: Image[];
   productSpecifications: ProductSpecifications[];
 }
