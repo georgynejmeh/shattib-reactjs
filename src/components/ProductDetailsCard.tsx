@@ -24,6 +24,7 @@ const ProductDetailsCard = ({ data }: Props) => {
   const userType = localStorage.getItem("userType");
   const { setIsShownLoginModal } = useLoginModal();
   const [quantity, setQuantity] = useState(1); // Track quantity
+  const [includeInstallation, setIncludeInstallation] = useState(false);
   const { setIsShownRkahmCustomMeasureModal } = useRkhamCustomMeasure();
 
   const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -85,6 +86,7 @@ const ProductDetailsCard = ({ data }: Props) => {
       if (productInCart) {
         // If the product already exists, replace its quantity with the new one
         productInCart.quantity = quantity;
+        setIncludeInstallation(productInCart.withInstallation || false);
       } else {
         // If the product is not in the cart, add it with only necessary data
         existingCart.push({
@@ -93,6 +95,7 @@ const ProductDetailsCard = ({ data }: Props) => {
           price: data.price,
           image: data.images[0].imagePath,
           quantity: quantity,
+          withInstallation: includeInstallation,
         });
       }
 
@@ -126,6 +129,7 @@ const ProductDetailsCard = ({ data }: Props) => {
   const [activeImage, setActiveImage] = useState<string | undefined>(
     data!.images[0].imagePath
   );
+  const [price, setPrice] = useState<number>(data!.price);
   // TODO DELETE
   // const temp = [1, 2, 3, 4, 5];
 
@@ -133,7 +137,7 @@ const ProductDetailsCard = ({ data }: Props) => {
     return (
       <>
         {/* MAX-LG */}
-        <div className="max-lg:hidden flex rounded-xl w-5/6 h-auto bg-gray-100">
+        <div className="max-lg:hidden flex justify-between  rounded-xl w-5/6  bg-gray-100">
           {/* Right section */}
           <section className="flex flex-col justify-between items-start gap-4 rounded-xl w-3/4 m-8">
             <div className="flex flex-col gap-4">
@@ -141,7 +145,7 @@ const ProductDetailsCard = ({ data }: Props) => {
               <h2 className="text-gray-500">{data.brand}</h2>
             </div>
             <div className="flex items-center gap-4">
-              <AccentText>{data.price} ريال</AccentText>
+              <AccentText>{price} ريال</AccentText>
             </div>
             <hr className="w-full" />
             <div>
@@ -166,11 +170,6 @@ const ProductDetailsCard = ({ data }: Props) => {
                     بلد التصنيع
                   </TitleNumber>
                 </div>
-                {/* <div className="w-full">
-                  <TitleNumber column subTitle={data.retrivalAndReplacing}>
-                    الضمان
-                  </TitleNumber>
-                </div> */}
               </div>
             </div>
 
@@ -185,13 +184,21 @@ const ProductDetailsCard = ({ data }: Props) => {
                     onChange={setQuantity}
                   />
                 </div>
-                <div className=" font-bold">
-                  <input
-                    type="checkbox"
-                    id="installationCheckbox"
-                    name="installationTeam"
-                  />
-                  <label htmlFor="installationCheckbox" className="mr-2">
+                <div className="mt-6">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={includeInstallation}
+                      onChange={(e) => {
+                        console.log("checked", e.target.checked);
+                        setIncludeInstallation(e.target.checked);
+                        if (e.target.checked) {
+                          setPrice(data.price + data.installationTeam);
+                        } else {
+                          setPrice((prev) => prev - data.installationTeam);
+                        }
+                      }}
+                    />
                     طلب أعمال التركيب (+{data.installationTeam} ر.س)
                   </label>
                 </div>
@@ -386,23 +393,14 @@ const ProductDetailsCard = ({ data }: Props) => {
             <hr className="w-full" />
             {userType === "Client" && (
               <div>
-                <div className="flex flex-col items-center gap-4 w-full max-w-36">
-                  <span className="text-lg">الكمية</span>
-                  <QuantityControls
-                    quantity={quantity}
-                    onChange={setQuantity}
-                  />
-                </div>
-                <div>
+                <label>
                   <input
                     type="checkbox"
-                    id="installationCheckbox"
-                    name="installationTeam"
+                    checked={includeInstallation}
+                    onChange={(e) => setIncludeInstallation(e.target.checked)}
                   />
-                  <label htmlFor="installationCheckbox">
-                    طلب أعمال التركيب ( + {data.installationTeam} ر.س)
-                  </label>
-                </div>
+                  طلب أعمال التركيب (+{data.installationTeam} ر.س)
+                </label>
               </div>
             )}
             <div className="w-full max-w-52 flex flex-col gap-4">

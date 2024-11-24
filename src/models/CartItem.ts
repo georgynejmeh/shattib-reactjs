@@ -4,4 +4,5 @@ export interface CartItem {
   productId: number;
   quantity: number;
   image: string;
+  withInstallation: boolean;
 }
