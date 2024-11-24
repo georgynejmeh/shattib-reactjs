@@ -1,7 +1,39 @@
 import { AccentText, useApi, useEffect, useParams, useState } from "../..";
 import { Product } from "../../models/Product";
+import { Subcateogry } from "../../models/Subcategory";
 
 const AdminEditProductPage = () => {
+  const { data: dataSubCategories } = useApi<Subcateogry[]>(
+    "SeededValues/SubCategories"
+  );
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredData = dataSubCategories
+    ? dataSubCategories.filter((subCategory) =>
+        subCategory.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
+  const handleSelectChange = (value: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      subCategoryId: value,
+    }));
+  };
+
+  const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      // Convert the FileList to an array of files
+      setSelectedImages((prev) => [...prev, ...Array.from(files)]);
+    }
+  };
+
+  const handleAddSpecification = () => {
+    setFormData({
+      ...formData,
+      specifications: [...formData.specifications, { name: "", value: "" }],
+    });
+  };
+
   const { id } = useParams(); // Get the product ID from the URL
   const { data, error, isLoading } = useApi<Product>(
     `Products/${id}`,
@@ -9,6 +41,16 @@ const AdminEditProductPage = () => {
     true
   );
   const { patchForm } = useApi(`Products/${id}`, "PATCH", true, true);
+
+  // Store images selected in the file input
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const handleDeleteImage = (index: number) => {
+    setSelectedImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  // Store the image paths from API to display them
+  // const [images, setImages] = useState([{ imagePath: "" }]);
+  const [imagePaths, setImagePaths] = useState<string[]>([]);
 
   const [formData, setFormData] = useState({
     subCategoryId: data?.subCategoryId,
@@ -45,8 +87,10 @@ const AdminEditProductPage = () => {
         notes: data.notes,
         wareHouseCode: data.warehouseCode,
         specifications: data.productSpecifications,
-        // images: data.images, // If there are images
+        // images: data.images || [], // If there are images
       });
+      // setImages(data.images || []);
+      setImagePaths(data.images?.map((image) => image.imagePath) || []);
     }
   }, [data]);
 
@@ -62,26 +106,74 @@ const AdminEditProductPage = () => {
     }));
   };
 
+  const handleSpecificationChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    const updatedSpecifications = [...formData.specifications];
+    updatedSpecifications[index] = {
+      ...updatedSpecifications[index],
+      [name]: value,
+    };
+    setFormData({
+      ...formData,
+      specifications: updatedSpecifications,
+    });
+  };
+
+  const handleDeleteSpecification = (index: number) => {
+    const updatedSpecifications = formData.specifications.filter(
+      (_, i) => i !== index
+    );
+    setFormData({
+      ...formData,
+      specifications: updatedSpecifications,
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const form = new FormData();
 
-    // Append data, ensuring conversion of numbers to strings and handling undefined values
-    form.append("ProductId", String(parseInt(id || ""))); // Ensure ID is converted to string
-    form.append("SubCategoryId", String(formData.subCategoryId)); // Convert SubCategoryId to string
-    form.append("Name", formData.name || ""); // Default to empty string if undefined
-    form.append("Description", formData.description || ""); // Default to empty string if undefined
-    form.append("Features", formData.features || ""); // Default to empty string if undefined
-    form.append("Price", String(formData.price)); // Convert price to string
-    form.append("MeasurementUnit", formData.measurementUnit || ""); // Default to empty string if undefined
-    form.append("Meaurements", formData.meaurements || ""); // Default to empty string if undefined
-    form.append("ManufacturingCountry", formData.manufacturingCountry || ""); // Default to empty string if undefined
-    form.append("Color", formData.color || ""); // Default to empty string if undefined
-    form.append("Deaf", formData.deaf || ""); // Default to empty string if undefined
-    form.append("RetrivalAndReplacing", formData.retrivalAndReplacing || ""); // Default to empty string if undefined
-    form.append("Notes", formData.notes || ""); // Default to empty string if undefined
-    form.append("WareHouseCode", formData.wareHouseCode || ""); // Default to empty string if undefined
+    form.append("ProductId", String(parseInt(id || "")));
+    form.append("SubCategoryId", String(formData.subCategoryId));
+    form.append("Name", formData.name || "");
+    form.append("Description", formData.description || "");
+    form.append("Features", formData.features || "");
+    form.append("Price", String(formData.price));
+    form.append("MeasurementUnit", formData.measurementUnit || "");
+    form.append("Meaurements", formData.meaurements || "");
+    form.append("ManufacturingCountry", formData.manufacturingCountry || "");
+    form.append("Color", formData.color || "");
+    form.append("Deaf", formData.deaf || "");
+    form.append("RetrivalAndReplacing", formData.retrivalAndReplacing || "");
+    form.append("Notes", formData.notes || "");
+    form.append("WareHouseCode", formData.wareHouseCode || "");
+
+    // Handle specifications
+    formData.specifications.forEach((spec, index) => {
+      form.append(`Specifications[${index}][name]`, spec.name || "");
+      form.append(`Specifications[${index}][value]`, spec.value || "");
+    });
+
+    // Handle images (only add if there are selected images)
+    if (selectedImages.length > 0) {
+      selectedImages.forEach((file, index) => {
+        form.append(`Images[${index}]`, file);
+      });
+    } else {
+      // If no images are selected, send an empty array for images
+      form.append("Images", "[]");
+    }
+
+    // // Handle images
+    // formData.images.forEach((image, index) => {
+    //   if (image.imagePath) {
+    //     form.append(`Images[${index}]`, image.imagePath);
+    //   }
+    // });
 
     // Handle array fields like specifications and images (if applicable)
     // formData.specifications.forEach((spec, index) => {
@@ -95,14 +187,11 @@ const AdminEditProductPage = () => {
     //   }
     // });
 
-    // Send the FormData object to the API
     await patchForm(form);
     console.log("FormData:", form);
 
-    // Show success popup on successful form submission
     setShowSuccessPopup(true);
 
-    // Hide popup after 3 seconds
     setTimeout(() => {
       setShowSuccessPopup(false);
     }, 3000);
@@ -178,6 +267,24 @@ const AdminEditProductPage = () => {
                   htmlFor="measurementUnit"
                   className="block text-sm font-medium text-gray-700"
                 >
+                  القياسات
+                </label>
+                <input
+                  type="text"
+                  name="meaurements"
+                  id="meaurements"
+                  value={formData.meaurements}
+                  onChange={handleInputChange}
+                  placeholder="القياسات"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="measurementUnit"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   وحدة القياس
                 </label>
                 <input
@@ -227,6 +334,152 @@ const AdminEditProductPage = () => {
                 />
               </div>
 
+              {/* Product Specifications */}
+              <div>
+                <h3 className="font-medium text-gray-700">المواصفات:</h3>
+                {formData.specifications.map((spec, index) => (
+                  <div key={index} className="flex gap-4 mt-2">
+                    <input
+                      type="text"
+                      name="name"
+                      value={spec.name}
+                      onChange={(e) => handleSpecificationChange(index, e)}
+                      placeholder="اسم المواصفة"
+                      className="w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <input
+                      type="text"
+                      name="value"
+                      value={spec.value}
+                      onChange={(e) => handleSpecificationChange(index, e)}
+                      placeholder="قيمة المواصفة"
+                      className="w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteSpecification(index)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      حذف
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={handleAddSpecification}
+                  className="mt-4 text-blue-500 hover:text-blue-700"
+                >
+                  إضافة مواصفة
+                </button>
+              </div>
+
+              {/* Images */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  صور المنتج
+                </label>
+                <div className="flex gap-4 mt-2">
+                  {imagePaths.map((imagePath, index) => (
+                    <div
+                      key={index}
+                      className="w-32 h-32 overflow-hidden rounded-lg border border-gray-200"
+                    >
+                      <img
+                        src={imagePath}
+                        alt={`Product Image ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+                {/* <button
+                  type="button"
+                  onClick={handleAddImage}
+                  className="text-blue-500 hover:text-blue-700"
+                >
+                  إضافة صورة
+                </button> */}
+              </div>
+
+              {/* Images */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  تغيير الصور
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleAddImage}
+                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                {selectedImages.length > 0 && (
+                  <div className="mt-4">
+                    <h3 className="font-medium text-gray-700">
+                      الصور المحددة:
+                    </h3>
+                    <div className="flex gap-4">
+                      {selectedImages.map((image, index) => (
+                        <div key={index} className="relative">
+                          <img
+                            src={URL.createObjectURL(image)}
+                            alt={`Selected ${index}`}
+                            className="w-20 h-20 object-cover rounded-md"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteImage(index)}
+                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="w-full">
+                <label className={"flex self-start my-2 text-sm"}>
+                  الصنف الفرعي
+                </label>
+                <div className="relative">
+                  {/* Search Input */}
+                  <input
+                    type="text"
+                    placeholder="ابحث عن صنف..."
+                    className="mb-2 px-3 py-2 w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+
+                  {/* Select Dropdown */}
+                  <select
+                    name="SubCategoryId"
+                    id="SubCategoryId"
+                    className="px-3 py-2 w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    onChange={(e) => {
+                      handleSelectChange(parseInt(e.target.value));
+                    }}
+                    value={formData.subCategoryId}
+                  >
+                    <option value="">اختر الصنف الفرعي</option>
+                    {filteredData.length > 0 ? (
+                      filteredData.map((subCategory) => (
+                        <option key={subCategory.id} value={subCategory.id}>
+                          {subCategory.name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="" disabled>
+                        لا توجد نتائج
+                      </option>
+                    )}
+                  </select>
+                </div>
+              </div>
+
               <button
                 type="submit"
                 className="w-full py-3 bg-primary text-white font-semibold rounded-md hover:bg-opacity-90 focus:outline-none focus:ring-black"
@@ -237,9 +490,9 @@ const AdminEditProductPage = () => {
 
             {/* <div className="mt-8">
               {formData.images.length > 0 && (
-                <div className="space-y-4">
-                  <p className="text-gray-700">صورة المنتج:</p>
-                  <div className="flex space-x-4">
+                <div className="flex flex-col gap-4">
+                  <p className="text-gray-700">صور المنتج:</p>
+                  <div className="flex gap-4">
                     {formData.images.map((image, index) => (
                       <div
                         key={index}
