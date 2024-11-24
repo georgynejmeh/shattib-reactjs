@@ -133,7 +133,7 @@ const ProductDetailsCard = ({ data }: Props) => {
     return (
       <>
         {/* MAX-LG */}
-        <div className="max-lg:hidden flex rounded-xl w-5/6 bg-gray-100">
+        <div className="max-lg:hidden flex rounded-xl w-5/6 h-auto bg-gray-100">
           {/* Right section */}
           <section className="flex flex-col justify-between items-start gap-4 rounded-xl w-3/4 m-8">
             <div className="flex flex-col gap-4">
@@ -142,98 +142,36 @@ const ProductDetailsCard = ({ data }: Props) => {
             </div>
             <div className="flex items-center gap-4">
               <AccentText>{data.price} ريال</AccentText>
-              {/* <img src={priceTagIcon} alt="" />
-            <AccentText>50 - 70 ريال</AccentText> */}
-
-              {/* <Link to={"/price-request"}>
-              <button>
-                <div className="flex items-center gap-2">
-                  <span className="underline">طلب عرض سعر</span>
-                  <img className="h-4" src={linkIcon} alt="" />
-                </div>
-              </button>
-            </Link> */}
             </div>
-
             <hr className="w-full" />
-
             <div>
-              <TitleNumber size="md" subTitle={data.color}>
-                اللون
-              </TitleNumber>
-
-              {/* <div className="flex gap-4 py-4">
-                <button>
-                  <div className="h-20 w-16 rounded overflow-hidden">
-                    <img
-                      className="h-full w-full object-cover"
-                      src={data.images[0].imagePath}
-                      alt=""
-                    />
-                  </div>
-                </button>
-                <button>
-                  <div className="relative h-20 w-16 rounded overflow-hidden">
-                    <div className="absolute h-full w-full bg-red-900 bg-opacity-50" />
-                    <img
-                      className="h-full w-full object-cover"
-                      src={data.images[0].imagePath}
-                      alt=""
-                    />
-                  </div>
-                </button>
-                <button>
-                  <div className="relative h-20 w-16 rounded overflow-hidden">
-                    <div className="absolute h-full w-full bg-green-900 bg-opacity-50" />
-
-                    <img
-                      className="h-full w-full object-cover"
-                      src={data.images[0].imagePath}
-                      alt=""
-                    />
-                  </div>
-                </button>
-                <button>
-                  <div className="relative h-20 w-16 rounded overflow-hidden">
-                    <div className="absolute h-full w-full bg-yellow-900 bg-opacity-50" />
-
-                    <img
-                      className="h-full w-full object-cover"
-                      src={data.images[0].imagePath}
-                      alt=""
-                    />
-                  </div>
-                </button>
-              </div> */}
-
-              <div className="flex justify-between items-stretch">
-                <div className="w-full ml-8">
+              <div className="flex justify-between items-stretch gap-8">
+                <div className="w-full">
+                  <TitleNumber column subTitle={data.color}>
+                    اللون
+                  </TitleNumber>
+                </div>
+                <div className="w-full">
                   <TitleNumber column subTitle={`${data.measurements}`}>
                     القياس
                   </TitleNumber>
                 </div>
-                <div className="w-full ml-8">
+                <div className="w-full">
                   <TitleNumber column subTitle={data.measurementUnit}>
                     وحدة القياس
                   </TitleNumber>
                 </div>
-                <div className="w-full ml-8">
+                <div className="w-full">
                   <TitleNumber column subTitle={data.manufacturingCountry}>
                     بلد التصنيع
                   </TitleNumber>
                 </div>
-                <div className="w-full ml-8">
+                {/* <div className="w-full">
                   <TitleNumber column subTitle={data.retrivalAndReplacing}>
                     الضمان
                   </TitleNumber>
-                </div>
+                </div> */}
               </div>
-              {/* <TitleNumber size="md" subTitle="حجم موحد">
-              الحجم
-            </TitleNumber>
-            <TitleNumber size="md" subTitle="50 سم">
-              الطول
-            </TitleNumber> */}
             </div>
 
             <hr className="w-full" />
@@ -247,7 +185,7 @@ const ProductDetailsCard = ({ data }: Props) => {
                     onChange={setQuantity}
                   />
                 </div>
-                <div className="mt-7 font-bold">
+                <div className=" font-bold">
                   <input
                     type="checkbox"
                     id="installationCheckbox"
@@ -286,12 +224,6 @@ const ProductDetailsCard = ({ data }: Props) => {
                 </ButtonGold>
               )}
 
-              {/* <Button>
-              <div className="flex justify-center gap-2">
-                <span>أضف إلى السلة</span>
-                <img src={addToCartIcon} alt="" />
-              </div>
-            </Button> */}
               {userType === "Business" ? null : (
                 <button
                   onClick={
@@ -308,44 +240,23 @@ const ProductDetailsCard = ({ data }: Props) => {
                 </button>
               )}
             </div>
-
-            {/* <div className="mt-8">
-              <h3 className="font-bold">ملاحظات</h3>
-              <h3 className="text-gray-500">{data.description}</h3>
-            </div> */}
           </section>
 
           {/* Left section */}
           <section className="flex flex-col gap-4 rounded-xl w-full m-8">
-            <div className="relative w-full h-2/3 rounded-xl overflow-hidden">
+            <div className=" w-full h-2/4 rounded-xl overflow-hidden">
               <img
                 className="w-full h-full object-contain shadow-2xl"
                 src={activeImage}
                 alt=""
               />
-              {/* <button
-                onClick={(e) => {
-                  if (!token) {
-                    setIsShownLoginModal(true);
-                  } else {
-                    console.log("visited favorite");
-                    e.preventDefault();
-                    setActive(!active);
-                    handleAddToFavorites();
-                  }
-                }}
-              >
-                <div className="absolute top-0 m-2 flex items-center justify-center h-12 w-12 rounded-full bg-white transition-all duration-700 hover:bg-red-200">
-                  <img src={heartIcon} alt="" />
-                </div>
-              </button> */}
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mt-7 mr-[20%]">
               {/* TODO DELETE LOOP */}
               {data.images.map((image, index) => (
                 <div
                   key={index}
-                  className={`w-24 h-16 rounded-xl overflow-hidden shadow-2xl ${
+                  className={`w-24 h-24 rounded-xl overflow-hidden shadow-2xl bg-gray-300 ${
                     activeImage === image.imagePath && "border border-primary"
                   }`}
                   onClick={() => {
@@ -374,17 +285,6 @@ const ProductDetailsCard = ({ data }: Props) => {
 
             <div className="flex items-center gap-4">
               <AccentText>{data.price} ريال</AccentText>
-              {/* <img src={priceTagIcon} alt="" />
-          <AccentText>50 - 70 ريال</AccentText> */}
-
-              {/* <Link to={"/price-request"}>
-            <button>
-              <div className="flex items-center gap-2">
-                <span className="underline">طلب عرض سعر</span>
-                <img className="h-4" src={linkIcon} alt="" />
-              </div>
-            </button>
-          </Link> */}
             </div>
 
             <hr className="w-full" />
@@ -500,7 +400,7 @@ const ProductDetailsCard = ({ data }: Props) => {
                     name="installationTeam"
                   />
                   <label htmlFor="installationCheckbox">
-                    طلب أعمال التركيب (+{data.installationTeam} ر.س)
+                    طلب أعمال التركيب ( + {data.installationTeam} ر.س)
                   </label>
                 </div>
               </div>
