@@ -1,17 +1,14 @@
+import { useEffect, useState } from "react";
 import {
-  attachmentIcon,
   ButtonGold,
-  CommentItem,
   downArrowIcon,
   paymentReceiptImg,
-  TextInput,
   TitleNumber,
   UploadFile,
   useApi,
   useParams,
 } from "../..";
 import { Cirteria } from "../../models/Criteria";
-import { useState, useEffect } from "react";
 
 const AdminCriteriaPage = () => {
   const { id } = useParams();
@@ -80,7 +77,7 @@ const AdminCriteriaPage = () => {
   };
 
   return (
-    <main className="p-main">
+    <main className="p-main mb-5">
       {isLoading ? (
         <span>جاري التحميل...</span>
       ) : error ? (
@@ -195,11 +192,34 @@ const AdminCriteriaPage = () => {
                 <div className="w-1/3 p-8">
                   <h3>المرفقات</h3>
                   <div className="w-64 aspect-video">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={criteriaItem.image}
-                      alt="attachment"
-                    />
+                    {criteriaItem.image.toLowerCase().endsWith(".pdf") ? (
+                      <>
+                        {" "}
+                        <iframe
+                          src={criteriaItem.image}
+                          title="PDF Viewer"
+                          className="w-[100%] h-full"
+                        />
+                        <ButtonGold
+                          className="mt-3"
+                          onClick={() => {
+                            window.open(
+                              criteriaItem.image,
+                              "_blank",
+                              "noopener,noreferrer"
+                            );
+                          }}
+                        >
+                          فتح الملف
+                        </ButtonGold>
+                      </>
+                    ) : (
+                      <img
+                        className="w-full h-full object-cover"
+                        src={criteriaItem.image}
+                        alt="attachment"
+                      />
+                    )}
                   </div>
                 </div>
               </div>
@@ -213,11 +233,33 @@ const AdminCriteriaPage = () => {
                 <h3 className="text-3xl font-bold text-center mb-5">
                   فاتورة الكراسة
                 </h3>
-                <img
-                  src={data.invoices[0].image}
-                  alt="وصل الدفع"
-                  className="w-[400px] h-[400px] object-cover"
-                />
+                {data.invoices[0].image.endsWith(".pdf") ? (
+                  <>
+                    <iframe
+                      src={data.invoices[0].image}
+                      title="PDF Viewer"
+                      className="w-[100%] h-full"
+                    />
+                    <ButtonGold
+                      className="mt-3"
+                      onClick={() => {
+                        window.open(
+                          data.invoices[0].image,
+                          "_blank",
+                          "noopener,noreferrer"
+                        );
+                      }}
+                    >
+                      فتح الملف
+                    </ButtonGold>
+                  </>
+                ) : (
+                  <img
+                    src={data.invoices[0].image}
+                    alt="وصل الدفع"
+                    className="w-[400px] h-[400px] object-cover"
+                  />
+                )}
               </div>
             ) : (
               <div>
@@ -257,7 +299,7 @@ const AdminCriteriaPage = () => {
 
           <hr />
 
-          <section className="flex flex-col gap-8 w-full py-4">
+          {/* <section className="flex flex-col gap-8 w-full py-4">
             <h2 className="text-xl from-black">التعليقات</h2>
             <div>
               <div className="w-2/3 rounded-t-xl border">
@@ -287,7 +329,7 @@ const AdminCriteriaPage = () => {
                 </form>
               </div>
             </div>
-          </section>
+          </section> */}
         </section>
       ) : null}
     </main>

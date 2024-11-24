@@ -25,6 +25,7 @@ export interface ProductHomePage {
   mainImagePath: string;
   warehouseCode: string;
   categoryId?: number;
+  subCategoryName: string;
 }
 
 interface Image {

@@ -1,11 +1,4 @@
-import {
-  AccentText,
-  bluePenIcon,
-  Link,
-  redTrashIcon,
-  RoundButton,
-  useApi,
-} from "../..";
+import { AccentText, bluePenIcon, Link, RoundButton, useApi } from "../..";
 
 import "../../App.css";
 import { Cirteria } from "../../models/Criteria";
@@ -102,9 +95,9 @@ const AdminCriteriasPage = () => {
                     <Link to={`${criteria.id}`}>
                       <img src={bluePenIcon} alt="" />
                     </Link>
-                    <button>
+                    {/* <button>
                       <img src={redTrashIcon} alt="" />
-                    </button>
+                    </button> */}
                   </div>
                 </td>
               </tr>

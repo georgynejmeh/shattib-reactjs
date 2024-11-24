@@ -7,6 +7,7 @@ const ConfirmDeleteModal = () => {
     setIsShownConfirmDeleteModal,
     id,
     endpoint,
+    onConfirm, // Get onConfirm from context
   } = useConfirmDelete();
   const { deleteData, isLoading } = useApi(endpoint, "DELETE", true);
 
@@ -19,7 +20,10 @@ const ConfirmDeleteModal = () => {
   const handleDelete = async () => {
     if (id !== null) {
       await deleteData(id);
-      setIsShownConfirmDeleteModal(false);
+      setTimeout(() => {
+        if (onConfirm) onConfirm();
+        setIsShownConfirmDeleteModal(false);
+      }, 1500);
     }
   };
 
@@ -38,6 +42,7 @@ const ConfirmDeleteModal = () => {
           <button
             className="rounded bg-gray-200 w-20 py-1 px-3"
             onClick={() => setIsShownConfirmDeleteModal(false)}
+            disabled={isLoading}
           >
             إلغاء
           </button>

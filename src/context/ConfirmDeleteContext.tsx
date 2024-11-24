@@ -6,8 +6,10 @@ interface ConfirmDeleteContextProps {
   setIsShownConfirmDeleteModal: (isShown: boolean) => void;
   id: number | null;
   setId: (id: number | null) => void;
-  endpoint: string; // Add the endpoint to store dynamic endpoints
-  setEndpoint: (endpoint: string) => void; // Add a function to set the endpoint
+  endpoint: string;
+  setEndpoint: (endpoint: string) => void;
+  onConfirm: (() => void) | null; // Add onConfirm function
+  setOnConfirm: (onConfirm: (() => void) | null) => void; // Setter for onConfirm
 }
 
 interface ConfirmDeleteProviderProps {
@@ -22,11 +24,11 @@ export const ConfirmDeleteContext = createContext<
 export const ConfirmDeleteProvider: React.FC<ConfirmDeleteProviderProps> = ({
   children,
 }) => {
-  // States to store modal visibility, item ID, and the endpoint
   const [isShownConfirmDeleteModal, setIsShownConfirmDeleteModal] =
     useState(false);
   const [id, setId] = useState<number | null>(null);
-  const [endpoint, setEndpoint] = useState<string>(""); // New state for endpoint
+  const [endpoint, setEndpoint] = useState<string>("");
+  const [onConfirm, setOnConfirm] = useState<(() => void) | null>(null); // New state
 
   return (
     <ConfirmDeleteContext.Provider
@@ -35,8 +37,10 @@ export const ConfirmDeleteProvider: React.FC<ConfirmDeleteProviderProps> = ({
         setIsShownConfirmDeleteModal,
         id,
         setId,
-        endpoint, // Provide the endpoint
-        setEndpoint, // Provide the setEndpoint function
+        endpoint,
+        setEndpoint,
+        onConfirm, // Provide onConfirm
+        setOnConfirm, // Provide setter for onConfirm
       }}
     >
       {children}

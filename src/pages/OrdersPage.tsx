@@ -70,7 +70,7 @@ const OrdersPage = () => {
                 {[
                   "رقم الطلب",
                   "تاريخ الإنشاء",
-                  "التكلفة الكلية",
+                  "السعر الكلي",
                   "حالة الطلب",
                   "تاريخ التنفيذ",
                 ].map((item) => (
@@ -146,7 +146,7 @@ const OrdersPage = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="font-semibold text-gray-700">
-                      التكلفة الكلية:
+                      السعر الكلي:
                     </span>
                     <span className="text-gray-600">
                       {order.totalPrice} ر.س

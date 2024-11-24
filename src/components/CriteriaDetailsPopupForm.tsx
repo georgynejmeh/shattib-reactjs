@@ -94,7 +94,7 @@ const CriteriaDetailsPopupForm = ({
               placeholder="أدخل معلومات ووصف للمنتج"
             />
           </div>
-          <div className="w-1/3 max-h-28 px-16">
+          <div className="w-1/3 h-[250px] px-16">
             <UploadFile
               containImg
               title="صورة المتنج"

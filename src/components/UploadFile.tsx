@@ -1,20 +1,22 @@
-import { uploadIcon, useState, useRef } from "..";
+import React, { useState, useRef } from "react";
+import { ButtonGold, uploadIcon } from ".."; // Adjust the import path for uploadIcon
 
 interface Props {
   title: string;
   subTitle: string;
-  onImageChange?: (image: File) => void; // Accepts a File object when an image is selected
+  onImageChange?: (file: File) => void; // Accepts a File object when a file is selected
   containImg?: boolean;
 }
 
-const UploadFile = ({
+const UploadFile: React.FC<Props> = ({
   title,
   subTitle,
   onImageChange,
   containImg = false,
-}: Props) => {
+}) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [fileSrc, setFileSrc] = useState<string | null>(null);
+  const [isPdf, setIsPdf] = useState<boolean>(false);
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -23,12 +25,23 @@ const UploadFile = ({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && onImageChange) {
-      onImageChange(file); // Call the passed in function to update formData
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader.result as string); // Set the image preview source
-      };
-      reader.readAsDataURL(file); // Read the image as a data URL for preview
+      onImageChange(file); // Call the passed-in function to update formData
+
+      // Check if the file is a PDF
+      const isFilePdf = file.type === "application/pdf";
+      setIsPdf(isFilePdf);
+
+      if (isFilePdf) {
+        // Create an object URL for the PDF
+        setFileSrc(URL.createObjectURL(file));
+      } else {
+        // Create a preview for image files
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setFileSrc(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 
@@ -40,17 +53,25 @@ const UploadFile = ({
         onClick={handleClick} // Open file picker on click
       >
         <div className="w-full h-full flex flex-col justify-center items-center gap-4">
-          {imageSrc ? (
-            <img
-              className={`w-full h-full ${
-                containImg ? "object-contain" : "object-cover"
-              }`}
-              src={imageSrc}
-              alt="Uploaded"
-            /> // Show uploaded image preview
+          {fileSrc ? (
+            isPdf ? (
+              <iframe
+                src={fileSrc}
+                title="PDF Viewer"
+                className="w-full h-full"
+              />
+            ) : (
+              <img
+                className={`w-full h-full ${
+                  containImg ? "object-contain" : "object-cover"
+                }`}
+                src={fileSrc}
+                alt="Uploaded Preview"
+              />
+            )
           ) : (
             <>
-              <img className="w-16" src={uploadIcon} alt="" />
+              <img className="w-16" src={uploadIcon} alt="Upload Icon" />
               <span className="text-blue-950 font-bold">{subTitle}</span>
             </>
           )}
@@ -62,6 +83,15 @@ const UploadFile = ({
         className="hidden"
         onChange={handleFileChange}
       />
+      {fileSrc && isPdf && (
+        <ButtonGold
+          onClick={() => {
+            window.open(fileSrc, "_blank", "noopener,noreferrer");
+          }}
+        >
+          فتح الملف
+        </ButtonGold>
+      )}
     </div>
   );
 };

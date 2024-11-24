@@ -55,7 +55,7 @@ const OrderPage = () => {
               </div>
               <div className="flex items-center gap-4">
                 <img src={databaseIcon} alt="" />
-                <span className="text-gray-400 font-bold">التكلفة الكلية</span>
+                <span className="text-gray-400 font-bold">السعر الكلي</span>
                 <AccentText>{data.totalPrice} ريال</AccentText>
               </div>
               <button

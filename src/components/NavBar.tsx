@@ -71,9 +71,7 @@ const NavBar = () => {
               alt=""
               onClick={() => setIsDiscountShown(false)}
             />
-            <h4 className="text-xl">
-              خصم بقيمة 100% على تكلفة التوصيل في جميع الطلبات
-            </h4>
+            <h4 className="text-xl">توصيل مجاني لجميع الطلبات</h4>
             <div></div>
           </div>
         )}

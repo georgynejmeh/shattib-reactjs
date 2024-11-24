@@ -29,7 +29,7 @@ const HomeCategoriesComponent = ({
   };
   const { t } = useTranslation();
   return (
-    <section className="pt-16 relative">
+    <section id={`home-cat-${categoryId}`} className="pt-16 relative">
       <div className="mb-16">
         <h1 className="text-4xl font-bold text-gray-800 mb-6">
           {categoryName}

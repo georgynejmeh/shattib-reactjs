@@ -109,7 +109,7 @@ const CartPage = () => {
 
       {/* Total Price */}
       <div className="flex items-baseline gap-4 justify-end my-4 max-lg:flex-col max-lg:items-center">
-        <span className="text-xl">التكلفة الكلية</span>
+        <span className="text-xl">السعر الكلي</span>
         <span className="text-3xl">{totalPrice} ريال</span>
       </div>
 

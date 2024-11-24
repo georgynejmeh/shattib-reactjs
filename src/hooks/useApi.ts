@@ -168,12 +168,19 @@ export function useApi<T>(
     try {
       // const apiUrl = `${import.meta.env.VITE_API_URL}`;
       const apiUrl = "https://shatib.com/api/";
-      console.log(`${apiUrl}${endpoint}/${id}`);
+      let headers = {};
+      if (isToken) {
+        const token = localStorage.getItem("accessToken");
+        headers = {
+          Authorization: `Bearer ${token}`,
+          "Accept-Language": " ",
+        };
+      } else {
+        headers = { "Accept-Language": " " };
+      }
       const requestOptions = {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
+        headers: headers,
       };
       fetch(`${apiUrl}${endpoint}/${id}`, requestOptions)
         .then(async (res) => {

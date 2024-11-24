@@ -15,7 +15,14 @@ const AdminHomePage = () => {
   );
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
 
-  const { isLoading, error, data } = useApi<ProductHomePage[]>("Products");
+  const { isLoading, error, data } = useApi<ProductHomePage[]>(
+    `Products?categoryId=${selectedCategory}`,
+    "GET",
+    true,
+    false,
+    [selectedCategory]
+  );
+
   return (
     <main className="p-main">
       <h1 className="text-4xl font-bold text-primary mb-8">المنتجات</h1>

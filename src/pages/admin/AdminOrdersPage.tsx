@@ -1,7 +1,9 @@
+import { toast } from "react-toastify";
 import {
   DropDownMenuButton,
   MainPadding,
   OrdersTableRow,
+  shattibIcon,
   useApi,
   useState,
 } from "../..";
@@ -12,7 +14,7 @@ const AdminOrdersPage = () => {
   const [filter, setFilter] = useState<
     "Pending" | "Accepted" | "Rejected" | "Shipped" | "All" | string
   >("All");
-  const [refetchOrders] = useState<number>(0);
+  const [refetchOrders, setRefetchOrders] = useState<number>(0);
   const { isLoading, error, data } = useApi<Order[]>(
     filter === "All" ? "Orders/All" : `Orders/Status?status=${filter}`,
     "GET",
@@ -20,6 +22,15 @@ const AdminOrdersPage = () => {
     false,
     [refetchOrders]
   );
+
+  const onConfirmDelete = () => {
+    setRefetchOrders((prev) => (prev += 1));
+    toast.success("تم حذف الطلب بنجاح", {
+      theme: "colored",
+      style: { backgroundColor: "#c18a33" },
+      icon: () => <img src={shattibIcon} />,
+    });
+  };
   // Pending // Accepted // Rejected // Shipped
   // TODO DELETE
   // const temp: Array<"قيد المعالجة" | "مقبول" | "مرفوض" | "مكتمل"> = [
@@ -82,7 +93,7 @@ const AdminOrdersPage = () => {
               <th>تاريخ الإنشاء</th>
               {/* <th>المنتجات</th> */}
               {/* <th>الكمية</th> */}
-              <th>التكلفة الكلية</th>
+              <th>السعر الكلي</th>
               <th>حالة الطلب</th>
               <th>تاريخ التنفيذ</th>
               <th>العمليات</th>
@@ -110,6 +121,7 @@ const AdminOrdersPage = () => {
                   orderItems={order.orderItems}
                   dateOfArrival={order.dateOfArrival}
                   dateOfOrder={order.dateOfOrder}
+                  // onConfirmDelete={onConfirmDelete}
                   status={
                     order.status === "Pending"
                       ? "قيد المعالجة"

@@ -7,10 +7,12 @@ import {
   plusCircleGoldIcon,
   CriteriaDetailsPopupForm,
   Navigate,
+  shattibIcon,
 } from "..";
 import { PostCirteriaItem, PostCriteria } from "../models/Criteria";
 import { usePostCriteria } from "../hooks/usePostCriteria";
 import { useAddCategoryToCriteriaModal } from "../hooks/useAddCategoryToCriteriaModal";
+import { toast } from "react-toastify";
 
 const ConfirmNewConditionPage = () => {
   const { postData, isLoading, error, data } = usePostCriteria("Criteria");
@@ -157,10 +159,18 @@ const ConfirmNewConditionPage = () => {
       formData.forEach((i) => console.log(i));
       if (!error) {
         console.log("CONFIRM NEW PAGE CONDITION", "if state");
-
         localStorage.removeItem("criteriaTitle");
         localStorage.removeItem("selectedCategories");
         localStorage.removeItem("selectedCategoryNames");
+        toast.success("تم إرسال الكراسة بنجاح", {
+          theme: "colored",
+          style: {
+            backgroundColor: "#c18a33",
+            fontSize: "16px",
+            fontWeight: "bold",
+          },
+          icon: () => <img src={shattibIcon} />,
+        });
       }
       // const response = await fetch("/api/submitCriteria", {
       //   method: "POST",

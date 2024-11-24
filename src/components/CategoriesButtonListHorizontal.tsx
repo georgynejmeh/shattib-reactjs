@@ -65,8 +65,11 @@ const CategoriesButtonListHorizontal = ({
             <RoundButton
               key={cat.id}
               onClick={() => {
-                setSelectedCategory(cat.id);
+                // setSelectedCategory(cat.id);
                 setLocalCategory(cat.id);
+                document
+                  .getElementById(`home-cat-${cat.id}`)!
+                  .scrollIntoView({ behavior: "smooth", block: "start" });
               }}
               active={localCategory === cat.id}
             >

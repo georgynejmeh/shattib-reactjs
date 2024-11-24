@@ -1,7 +1,6 @@
 // import { Link, purpleParagraphIcon, redTrashIcon } from "..";
 // import { useConfirmDelete } from "../hooks/useConfirmDeleteModal";
-import { Link, purpleParagraphIcon, redTrashIcon } from "..";
-import { useConfirmDelete } from "../hooks/useConfirmDeleteModal";
+import { Link, purpleParagraphIcon } from "..";
 import { OrderItem } from "../models/Order";
 import AccentText from "./AccentText";
 
@@ -13,6 +12,7 @@ interface Props {
   dateOfArrival: string;
   dateOfOrder: string;
   user?: boolean;
+  // onConfirmDelete: () => void;
 }
 
 const OrdersTableRow = ({
@@ -22,11 +22,12 @@ const OrdersTableRow = ({
   // orderItems,
   dateOfArrival,
   dateOfOrder,
-}: // user = false,
+}: // onConfirmDelete,
+// user = false,
 Props) => {
-  const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
-    useConfirmDelete();
-  setEndpoint("Orders");
+  // const { setIsShownConfirmDeleteModal, setId, setEndpoint, setOnConfirm } =
+  //   useConfirmDelete();
+
   const userType = localStorage.getItem("userType");
   // let totalQty = 0;
   // orderItems.map((order) => {
@@ -76,14 +77,16 @@ Props) => {
             >
               <img src={purpleParagraphIcon} alt="" />
             </Link>
-            <button
+            {/* <button
               onClick={() => {
                 setId(id);
                 setIsShownConfirmDeleteModal(true);
+                setEndpoint("Orders");
+                setOnConfirm(() => onConfirmDelete);
               }}
             >
               <img src={redTrashIcon} alt="" />
-            </button>
+            </button> */}
           </div>
         </td>
       )}

@@ -1,24 +1,37 @@
+import { toast } from "react-toastify";
 import {
   bluePenIcon,
   Link,
   PaginationButtons,
   // productImg,
   redTrashIcon,
+  shattibIcon,
   useApi,
+  useState,
 } from "../..";
 import "../../App.css";
 import { useConfirmDelete } from "../../hooks/useConfirmDeleteModal";
 import { ProductHomePage } from "../../models/Product";
 
 const AdminProductsPage = () => {
+  const [refetchProducts, setRefetchProducts] = useState<number>(0);
   const { isLoading, error, data } = useApi<ProductHomePage[]>(
     "Products",
     "GET",
-    true
+    true,
+    false,
+    [refetchProducts]
   );
-  const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
+  const { setIsShownConfirmDeleteModal, setId, setEndpoint, setOnConfirm } =
     useConfirmDelete();
-  setEndpoint("Products");
+  const onConfirmDelete = () => {
+    setRefetchProducts((prev) => (prev += 1));
+    toast.success("تم حذف المنتج بنجاح", {
+      theme: "colored",
+      style: { backgroundColor: "#c18a33" },
+      icon: () => <img src={shattibIcon} />,
+    });
+  };
   // TODO DELETE TEMP
   // const temp = [1, 2, 3, 4, 5];
   return (
@@ -58,7 +71,7 @@ const AdminProductsPage = () => {
                         <span>{product.name}</span>
                       </div>
                     </td>
-                    <td>مواد الصحية</td>
+                    <td>{product.subCategoryName}</td>
                     {/* <td>150</td> */}
                     <td>{product.price} ريال</td>
                     <td>
@@ -71,6 +84,8 @@ const AdminProductsPage = () => {
                           onClick={() => {
                             setId(product.id);
                             setIsShownConfirmDeleteModal(true);
+                            setEndpoint("Products");
+                            setOnConfirm(() => onConfirmDelete);
                           }}
                         >
                           <img src={redTrashIcon} alt="" />

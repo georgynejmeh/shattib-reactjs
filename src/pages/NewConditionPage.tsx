@@ -19,6 +19,7 @@ import {
   parkehImg01,
   porsalenImg01,
   rkahmImg01,
+  shattibIcon,
   siramikImg01,
   stoneImg01,
   switchesImg01,
@@ -26,6 +27,8 @@ import {
   useApi,
 } from "..";
 import { Category } from "../models/Category";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const NewConditionPage = () => {
   const categoryImgs = [
@@ -57,7 +60,7 @@ const NewConditionPage = () => {
   const [selectedCategoryNames, setSelectedCategoryNames] = useState<string[]>(
     []
   );
-
+  const navigate = useNavigate();
   // Save to localStorage whenever the criteriaTitle, selectedCategories, or selectedCategoryNames change
   useEffect(() => {
     if (criteriaTitle) {
@@ -125,19 +128,22 @@ const NewConditionPage = () => {
   }, []);
 
   return (
-    <main>
+    <main id="criteriaTitle">
       <MainPadding>
-        <h1 className="text-2xl font-bold">طرح كراسة</h1>
-        <section className="py-8">
-          <h2 className="text-xl">عنوان الكراسة</h2>
-          <div className="w-1/2 max-lg:w-full">
-            <TextInput
-              value={criteriaTitle}
-              onChange={(e) => setCriteriaTitle(e.target.value)}
-              placeholder="أدخل عنوان الكراسة"
-            />
-          </div>
-        </section>
+        <div>
+          <h1 className="text-2xl font-bold">طرح كراسة</h1>
+          <section className="py-8">
+            <h2 className="text-xl">عنوان الكراسة</h2>
+            <div className="w-1/2 max-lg:w-full">
+              <TextInput
+                bordered
+                value={criteriaTitle}
+                onChange={(e) => setCriteriaTitle(e.target.value)}
+                placeholder="أدخل عنوان الكراسة"
+              />
+            </div>
+          </section>
+        </div>
         <h2 className="text-xl">التصنيفات</h2>
         <section className="py-4 overflow-hidden">
           <h3 className="text-gray-500 mb-8">حدد التصنيفات التي تبحث عنها</h3>
@@ -166,10 +172,30 @@ const NewConditionPage = () => {
           {/* <CategoryListHorizontal /> */}
         </section>
         <div className="flex flex-col w-full">
-          <div className="w-32 self-end max-lg:w-full max-lg:self-center">
-            <Link to="confirm">
-              <ButtonGold>التالي</ButtonGold>
-            </Link>
+          <div
+            className="w-32 self-end max-lg:w-full max-lg:self-center"
+            onClick={() => {
+              if (criteriaTitle === null || criteriaTitle.trim() === "") {
+                toast.error("يرجى إدخال عنوان للكراسة", {
+                  theme: "colored",
+                  // style: { backgroundColor: "#c18a33" },
+                  icon: () => <img src={shattibIcon} />,
+                });
+                document
+                  .getElementById("criteriaTitle")!
+                  .scrollIntoView({ behavior: "smooth" });
+              } else {
+                navigate("confirm");
+              }
+            }}
+          >
+            {/* <Link to="confirm"> */}
+            <ButtonGold
+            // disabled={criteriaTitle === null || criteriaTitle.trim() === ""}
+            >
+              التالي
+            </ButtonGold>
+            {/* </Link> */}
           </div>
         </div>
       </MainPadding>

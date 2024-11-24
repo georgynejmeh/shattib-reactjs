@@ -4,6 +4,7 @@ import {
   NewProductHeaderText,
   TextInput,
   useApi,
+  useState,
 } from "../..";
 import { Subcateogry } from "../../models/Subcategory";
 import { MyFormData } from "./AdminNewProductContainer";
@@ -38,8 +39,16 @@ const AdminNewProductPage: React.FC<Props> = ({
   };
 
   const { data } = useApi<Subcateogry[]>("SeededValues/SubCategories");
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredData = data
+    ? data.filter((subCategory) =>
+        subCategory.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
+  // Filter the subcategories based on the search term
+
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <NewProductHeaderText />
 
       <main className="flex flex-col gap-4 px-main pt-main pb-8">
@@ -68,7 +77,7 @@ const AdminNewProductPage: React.FC<Props> = ({
             <div className="w-full">
               <TextInput
                 blackTitle
-                title="تكلفة المنتج"
+                title="سعر المنتج"
                 placeholder="0.0 ريال"
                 name="Price"
                 number
@@ -80,20 +89,40 @@ const AdminNewProductPage: React.FC<Props> = ({
               <label className={"flex self-start my-2 text-sm"}>
                 الصنف الفرعي
               </label>
-              <select
-                name="SubCategoryId"
-                id="SubCategoryId"
-                className="px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                onChange={(e) => {
-                  handleSelectChange(parseInt(e.target.value));
-                }}
-              >
-                <option value="">اختر الصنف الفرعي</option>
-                {data &&
-                  data.map((subCategory) => (
-                    <option value={subCategory.id}>{subCategory.name}</option>
-                  ))}
-              </select>
+              <div className="relative">
+                {/* Search Input */}
+                <input
+                  type="text"
+                  placeholder="ابحث عن صنف..."
+                  className="mb-2 px-3 py-2 w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+
+                {/* Select Dropdown */}
+                <select
+                  name="SubCategoryId"
+                  id="SubCategoryId"
+                  className="px-3 py-2 w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  onChange={(e) => {
+                    handleSelectChange(parseInt(e.target.value));
+                  }}
+                  value={formData.SubCategoryId}
+                >
+                  <option value="">اختر الصنف الفرعي</option>
+                  {filteredData.length > 0 ? (
+                    filteredData.map((subCategory) => (
+                      <option key={subCategory.id} value={subCategory.id}>
+                        {subCategory.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="" disabled>
+                      لا توجد نتائج
+                    </option>
+                  )}
+                </select>
+              </div>
             </div>
           </div>
         </section>
