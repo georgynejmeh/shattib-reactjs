@@ -1,4 +1,11 @@
-import { AccentText, useApi, useEffect, useParams, useState } from "../..";
+import {
+  AccentText,
+  plusCircleIcon,
+  useApi,
+  useEffect,
+  useParams,
+  useState,
+} from "../..";
 import { Product } from "../../models/Product";
 import { Subcateogry } from "../../models/Subcategory";
 
@@ -50,7 +57,14 @@ const AdminEditProductPage = () => {
 
   // Store the image paths from API to display them
   // const [images, setImages] = useState([{ imagePath: "" }]);
-  const [imagePaths, setImagePaths] = useState<string[]>([]);
+  // Store the image paths and ids from the API to display them
+  const [getImages, setGetImages] = useState<
+    { id: number; imagePath: string }[]
+  >([]);
+  const handleDeleteImageRequest = async (imageId: number) => {
+    // Remove the image from the state (local deletion)
+    setGetImages((prev) => prev.filter((image) => image.id !== imageId));
+  };
 
   const [formData, setFormData] = useState({
     subCategoryId: data?.subCategoryId,
@@ -90,7 +104,7 @@ const AdminEditProductPage = () => {
         // images: data.images || [], // If there are images
       });
       // setImages(data.images || []);
-      setImagePaths(data.images?.map((image) => image.imagePath) || []);
+      setGetImages(data.images);
     }
   }, [data]);
 
@@ -378,19 +392,33 @@ const AdminEditProductPage = () => {
                 <label className="block text-sm font-medium text-gray-700">
                   صور المنتج
                 </label>
-                <div className="flex gap-4 mt-2">
-                  {imagePaths.map((imagePath, index) => (
+                <div className="flex flex-wrap gap-4 mt-2">
+                  {getImages.map((image, index) => (
                     <div
                       key={index}
-                      className="w-32 h-32 overflow-hidden rounded-lg border border-gray-200"
+                      className="relative w-32 h-32 overflow-hidden rounded-lg border border-gray-200"
                     >
                       <img
-                        src={imagePath}
+                        src={image.imagePath}
                         alt={`Product Image ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteImageRequest(image.id)}
+                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1"
+                      >
+                        ×
+                      </button>
                     </div>
                   ))}
+                  <button
+                    className="w-32 h-32 flex justify-center items-center rounded-lg border"
+                    type="button"
+                    onClick={() => {}}
+                  >
+                    <img src={plusCircleIcon} />
+                  </button>
                 </div>
                 {/* <button
                   type="button"
