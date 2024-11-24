@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import {
   AccentText,
+  plusCircleIcon,
   shattibIcon,
   useApi,
   useEffect,
@@ -10,6 +11,8 @@ import {
 import { Product } from "../../models/Product";
 import { Subcateogry } from "../../models/Subcategory";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../assets/const";
+import { refreshToken } from "../../hooks/useApi";
 
 const AdminEditProductPage = () => {
   const { data: dataSubCategories } = useApi<Subcateogry[]>(
@@ -28,13 +31,13 @@ const AdminEditProductPage = () => {
     }));
   };
 
-  const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      // Convert the FileList to an array of files
-      setSelectedImages((prev) => [...prev, ...Array.from(files)]);
-    }
-  };
+  // const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const files = e.target.files;
+  //   if (files) {
+  //     // Convert the FileList to an array of files
+  //     setSelectedImages((prev) => [...prev, ...Array.from(files)]);
+  //   }
+  // };
 
   const handleAddSpecification = () => {
     setFormData({
@@ -51,15 +54,92 @@ const AdminEditProductPage = () => {
   );
   const { patchForm } = useApi(`Products/${id}`, "PATCH", true, true);
 
+  function deleteImageRequest(imageId: number) {
+    try {
+      let headers = {};
+
+      const token = localStorage.getItem("accessToken");
+      headers = {
+        Authorization: `Bearer ${token}`,
+        "Accept-Language": " ",
+      };
+
+      const requestOptions = {
+        method: "DELETE",
+        headers: headers,
+      };
+      fetch(`${API_URL}Products/${id}/Images/${imageId}`, requestOptions)
+        .then(async (res) => {
+          if (res.status === 403) {
+            await refreshToken();
+          }
+        })
+        .catch((err) => {
+          console.log("deleteImageRequest Error: ", err);
+        });
+    } catch (error) {
+      console.log("deleteImageRequest Exception: ", error);
+    }
+  }
+
+  function uploadImageRequest(image: File) {
+    try {
+      const imageForm = new FormData();
+      let headers = {};
+
+      const token = localStorage.getItem("accessToken");
+      headers = {
+        Authorization: `Bearer ${token}`,
+        "Accept-Language": " ",
+      };
+
+      imageForm.append("ProductId", id!);
+      imageForm.append("NewImage", image);
+
+      const requestOptions = {
+        method: "PATCH",
+        headers: headers,
+        body: imageForm,
+      };
+      fetch(`${API_URL}Products/${id}/Images`, requestOptions)
+        .then(async (res) => {
+          if (res.status === 403) {
+            await refreshToken();
+          }
+        })
+        .catch((err) => {
+          console.log("uploadImageRequest Error: ", err);
+        });
+    } catch (error) {
+      console.log("uploadImageRequest Exception: ", error);
+    }
+  }
+
   // Store images selected in the file input
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  const handleDeleteImage = (index: number) => {
-    setSelectedImages((prev) => prev.filter((_, i) => i !== index));
-  };
+  // const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  // const handleDeleteImage = (index: number) => {
+  //   setSelectedImages((prev) => prev.filter((_, i) => i !== index));
+  // };
 
   // Store the image paths from API to display them
   // const [images, setImages] = useState([{ imagePath: "" }]);
-  const [imagePaths, setImagePaths] = useState<string[]>([]);
+  // Store the image paths and ids from the API to display them
+  const [getImages, setGetImages] = useState<
+    { id: number; imagePath: string }[]
+  >([]);
+  const handleDeleteImageRequest = async (imageId: number) => {
+    await deleteImageRequest(imageId);
+    // Remove the image from the state (local deletion)
+    setGetImages((prev) => prev.filter((image) => image.id !== imageId));
+  };
+
+  function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const image = e.target.files?.[0];
+
+    if (image) {
+      uploadImageRequest(image);
+    }
+  }
 
   const [formData, setFormData] = useState({
     subCategoryId: data?.subCategoryId,
@@ -99,7 +179,7 @@ const AdminEditProductPage = () => {
         // images: data.images || [], // If there are images
       });
       // setImages(data.images || []);
-      setImagePaths(data.images?.map((image) => image.imagePath) || []);
+      setGetImages(data.images);
     }
   }, [data]);
 
@@ -168,14 +248,14 @@ const AdminEditProductPage = () => {
     });
 
     // Handle images (only add if there are selected images)
-    if (selectedImages.length > 0) {
-      selectedImages.forEach((file, index) => {
-        form.append(`Images[${index}]`, file);
-      });
-    } else {
-      // If no images are selected, send an empty array for images
-      form.append("Images", "[]");
-    }
+    // if (selectedImages.length > 0) {
+    //   selectedImages.forEach((file, index) => {
+    //     form.append(`Images[${index}]`, file);
+    //   });
+    // } else {
+    //   // If no images are selected, send an empty array for images
+    //   form.append("Images", "[]");
+    // }
 
     // // Handle images
     // formData.images.forEach((image, index) => {
@@ -389,19 +469,37 @@ const AdminEditProductPage = () => {
                 <label className="block text-sm font-medium text-gray-700">
                   صور المنتج
                 </label>
-                <div className="flex gap-4 mt-2">
-                  {imagePaths.map((imagePath, index) => (
+                <div className="flex flex-wrap gap-4 mt-2">
+                  {getImages.map((image, index) => (
                     <div
                       key={index}
-                      className="w-32 h-32 overflow-hidden rounded-lg border border-gray-200"
+                      className="relative w-32 h-32 overflow-hidden rounded-lg border border-gray-200"
                     >
                       <img
-                        src={imagePath}
+                        src={image.imagePath}
                         alt={`Product Image ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteImageRequest(image.id)}
+                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1"
+                      >
+                        ×
+                      </button>
                     </div>
                   ))}
+                  <button
+                    className="w-32 h-32 flex justify-center items-center rounded-lg border"
+                    type="button"
+                  >
+                    <input
+                      type="file"
+                      className="absolute opacity-0 w-32 h-32"
+                      onChange={handleImageUpload}
+                    />
+                    <img src={plusCircleIcon} />
+                  </button>
                 </div>
                 {/* <button
                   type="button"
@@ -413,7 +511,7 @@ const AdminEditProductPage = () => {
               </div>
 
               {/* Images */}
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700">
                   تغيير الصور
                 </label>
@@ -449,7 +547,7 @@ const AdminEditProductPage = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div className="w-full">
                 <label className={"flex self-start my-2 text-sm"}>

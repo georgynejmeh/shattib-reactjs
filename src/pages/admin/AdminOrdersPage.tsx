@@ -1,9 +1,9 @@
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import {
   DropDownMenuButton,
   MainPadding,
   OrdersTableRow,
-  shattibIcon,
+  // shattibIcon,
   useApi,
   useState,
 } from "../..";
@@ -14,23 +14,24 @@ const AdminOrdersPage = () => {
   const [filter, setFilter] = useState<
     "Pending" | "Accepted" | "Rejected" | "Shipped" | "All" | string
   >("All");
-  const [refetchOrders, setRefetchOrders] = useState<number>(0);
+  // const [refetchOrders, setRefetchOrders] = useState<number>(0);
   const { isLoading, error, data } = useApi<Order[]>(
     filter === "All" ? "Orders/All" : `Orders/Status?status=${filter}`,
     "GET",
     true,
-    false,
-    [refetchOrders]
+    false
+    // [refetchOrders]
   );
 
-  const onConfirmDelete = () => {
-    setRefetchOrders((prev) => (prev += 1));
-    toast.success("تم حذف الطلب بنجاح", {
-      theme: "colored",
-      style: { backgroundColor: "#c18a33" },
-      icon: () => <img src={shattibIcon} />,
-    });
-  };
+  // const onConfirmDelete = () => {
+  //   setRefetchOrders((prev) => (prev += 1));
+  //   toast.success("تم حذف الطلب بنجاح", {
+  //     theme: "colored",
+  //     style: { backgroundColor: "#c18a33" },
+  //     icon: () => <img src={shattibIcon} />,
+  //   });
+  // };
+
   // Pending // Accepted // Rejected // Shipped
   // TODO DELETE
   // const temp: Array<"قيد المعالجة" | "مقبول" | "مرفوض" | "مكتمل"> = [
