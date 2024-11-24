@@ -11,6 +11,8 @@ import {
 import { Product } from "../../models/Product";
 import { Subcateogry } from "../../models/Subcategory";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../assets/const";
+import { refreshToken } from "../../hooks/useApi";
 
 const AdminEditProductPage = () => {
   const { data: dataSubCategories } = useApi<Subcateogry[]>(
@@ -29,13 +31,13 @@ const AdminEditProductPage = () => {
     }));
   };
 
-  const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      // Convert the FileList to an array of files
-      setSelectedImages((prev) => [...prev, ...Array.from(files)]);
-    }
-  };
+  // const handleAddImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const files = e.target.files;
+  //   if (files) {
+  //     // Convert the FileList to an array of files
+  //     setSelectedImages((prev) => [...prev, ...Array.from(files)]);
+  //   }
+  // };
 
   const handleAddSpecification = () => {
     setFormData({
@@ -52,11 +54,72 @@ const AdminEditProductPage = () => {
   );
   const { patchForm } = useApi(`Products/${id}`, "PATCH", true, true);
 
+  function deleteImageRequest(imageId: number) {
+    try {
+      let headers = {};
+
+      const token = localStorage.getItem("accessToken");
+      headers = {
+        Authorization: `Bearer ${token}`,
+        "Accept-Language": " ",
+      };
+
+      const requestOptions = {
+        method: "DELETE",
+        headers: headers,
+      };
+      fetch(`${API_URL}Products/${id}/Images/${imageId}`, requestOptions)
+        .then(async (res) => {
+          if (res.status === 403) {
+            await refreshToken();
+          }
+        })
+        .catch((err) => {
+          console.log("deleteImageRequest Error: ", err);
+        });
+    } catch (error) {
+      console.log("deleteImageRequest Exception: ", error);
+    }
+  }
+
+  function uploadImageRequest(image: File) {
+    try {
+      const imageForm = new FormData();
+      let headers = {};
+
+      const token = localStorage.getItem("accessToken");
+      headers = {
+        Authorization: `Bearer ${token}`,
+        "Accept-Language": " ",
+      };
+
+      imageForm.append("ProductId", id!);
+      imageForm.append("NewImage", image);
+
+      const requestOptions = {
+        method: "PATCH",
+        headers: headers,
+        body: imageForm,
+      };
+      fetch(`${API_URL}Products/${id}/Images`, requestOptions)
+        .then(async (res) => {
+          if (res.status === 403) {
+            await refreshToken();
+          }
+        })
+        .catch((err) => {
+          console.log("uploadImageRequest Error: ", err);
+        });
+    } catch (error) {
+      console.log("uploadImageRequest Exception: ", error);
+    }
+  }
+
   // Store images selected in the file input
-  const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  const handleDeleteImage = (index: number) => {
-    setSelectedImages((prev) => prev.filter((_, i) => i !== index));
-  };
+  // const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  // const handleDeleteImage = (index: number) => {
+  //   setSelectedImages((prev) => prev.filter((_, i) => i !== index));
+  // };
 
   // Store the image paths from API to display them
   // const [images, setImages] = useState([{ imagePath: "" }]);
@@ -65,9 +128,18 @@ const AdminEditProductPage = () => {
     { id: number; imagePath: string }[]
   >([]);
   const handleDeleteImageRequest = async (imageId: number) => {
+    await deleteImageRequest(imageId);
     // Remove the image from the state (local deletion)
     setGetImages((prev) => prev.filter((image) => image.id !== imageId));
   };
+
+  function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const image = e.target.files?.[0];
+
+    if (image) {
+      uploadImageRequest(image);
+    }
+  }
 
   const [formData, setFormData] = useState({
     subCategoryId: data?.subCategoryId,
@@ -176,14 +248,14 @@ const AdminEditProductPage = () => {
     });
 
     // Handle images (only add if there are selected images)
-    if (selectedImages.length > 0) {
-      selectedImages.forEach((file, index) => {
-        form.append(`Images[${index}]`, file);
-      });
-    } else {
-      // If no images are selected, send an empty array for images
-      form.append("Images", "[]");
-    }
+    // if (selectedImages.length > 0) {
+    //   selectedImages.forEach((file, index) => {
+    //     form.append(`Images[${index}]`, file);
+    //   });
+    // } else {
+    //   // If no images are selected, send an empty array for images
+    //   form.append("Images", "[]");
+    // }
 
     // // Handle images
     // formData.images.forEach((image, index) => {
@@ -420,8 +492,12 @@ const AdminEditProductPage = () => {
                   <button
                     className="w-32 h-32 flex justify-center items-center rounded-lg border"
                     type="button"
-                    onClick={() => {}}
                   >
+                    <input
+                      type="file"
+                      className="absolute opacity-0 w-32 h-32"
+                      onChange={handleImageUpload}
+                    />
                     <img src={plusCircleIcon} />
                   </button>
                 </div>
@@ -435,7 +511,7 @@ const AdminEditProductPage = () => {
               </div>
 
               {/* Images */}
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-700">
                   تغيير الصور
                 </label>
@@ -471,7 +547,7 @@ const AdminEditProductPage = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
 
               <div className="w-full">
                 <label className={"flex self-start my-2 text-sm"}>
