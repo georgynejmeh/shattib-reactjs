@@ -232,17 +232,28 @@ const ConfirmNewConditionPage = () => {
                           key={prodIndex}
                           className="p-4 border rounded bg-gray-100"
                         >
-                          <h3 className="font-semibold">
-                            {product.productName} {index}
+                          <h3 className="font">
+                            <strong className="text-lg font-bold">
+                              اسم المنتج:
+                            </strong>{" "}
+                            {product.productName}
                           </h3>
                           <p>
-                            <strong>وصف المنتج:</strong> {product.description}
+                            <strong className="text-lg font-bold">
+                              وصف المنتج:
+                            </strong>{" "}
+                            {product.description}
                           </p>
                           <p>
-                            <strong>الكمية:</strong> {product.amount}
+                            <strong className="text-lg font-bold">
+                              الكمية:
+                            </strong>{" "}
+                            {product.amount}
                           </p>
                           <p>
-                            <strong>وحدة القياس:</strong>{" "}
+                            <strong className="text-lg font-bold">
+                              وحدة القياس:
+                            </strong>{" "}
                             {product.measurementUnit}
                           </p>
                           {/* {images[index] && (

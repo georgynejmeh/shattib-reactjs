@@ -60,7 +60,7 @@ const AddCategoryToCriteriaModal = () => {
 
   return isShownCategoryCriteriaModal ? (
     <div className="fixed z-50 top-0 flex items-center justify-center w-full h-full bg-black bg-opacity-75">
-      <div className="hidden lg:flex bg-white rounded-xl  flex-col items-center justify-center gap-6 text-center w-full max-w-[90%] mx-4 p-6">
+      <div className="hidden lg:flex bg-white rounded-xl flex-col items-center justify-center gap-6 text-center w-full max-w-[70%] mx-4 p-6">
         <section className="py-4  h-content">
           <div className="flex flex-row justify-between">
             <div
@@ -72,7 +72,7 @@ const AddCategoryToCriteriaModal = () => {
             <h3 className="text-gray-500 mb-8">حدد التصنيفات التي تبحث عنها</h3>
             <div></div>
           </div>
-          <div className="flex flex-wrap gap-8 overflow-x-scroll no-scrollbar">
+          <div className="flex flex-wrap gap-8 overflow-x-scroll no-scrollbar max-h-[50vh]">
             {isLoading ? (
               <span>جاري التحميل...</span>
             ) : error ? (
