@@ -44,7 +44,10 @@ const NavBarCategoriesSidebarMenu = () => {
 
       {/* Sidebar */}
       {isSidebarOpen && (
-        <div className="fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-50">
+        <div
+          className="fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-50"
+          onClick={() => setSidebarOpen(false)}
+        >
           <div className="relative w-4/5 max-w-sm h-full bg-white shadow-lg">
             {/* Sidebar Header */}
             <div className="flex justify-between items-center p-4 border-b">
@@ -65,11 +68,13 @@ const NavBarCategoriesSidebarMenu = () => {
                   <div key={category.id}>
                     {/* Category Item */}
                     <div
-                      onClick={() =>
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
                         setActiveCategoryId((prev) =>
                           prev === category.id ? null : category.id
-                        )
-                      }
+                        );
+                      }}
                       className={`p-2 cursor-pointer flex justify-between items-center ${
                         activeCategoryId === category.id
                           ? "bg-gray-200 font-bold"

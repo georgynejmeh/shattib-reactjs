@@ -116,7 +116,7 @@ const AdminNewProductSecondPage = ({
 
   return (
     <main className="overflow-x-hidden">
-      {data && <Navigate to={"/admin/home"} />}
+      {data && <Navigate to={"/admin/"} />}
 
       <NewProductHeaderText second />
 

@@ -9,6 +9,7 @@ import {
   Navigate,
   useState,
   ButtonGold,
+  useLocation,
 } from "..";
 import { Login } from "../models/Login";
 
@@ -37,6 +38,8 @@ const LoginPage = () => {
 
   const isFormValid = formData.email !== "" && formData.password.length >= 8;
 
+  const location = useLocation();
+
   return (
     <>
       {data ? (
@@ -49,11 +52,14 @@ const LoginPage = () => {
       ) : null}
       {data ? (
         data.role === "Client" ? (
-          <Navigate to={"/home"} replace />
+          <Navigate to={location.state?.from?.pathname || "/home"} replace />
         ) : data.role === "Business" ? (
-          <Navigate to={"/conditions"} replace />
+          <Navigate
+            to={location.state?.from?.pathname || "/conditions"}
+            replace
+          />
         ) : data.role === "Administrator" ? (
-          <Navigate to={"/admin/home"} replace />
+          <Navigate to={"/admin/"} replace />
         ) : null
       ) : null}
       <form onSubmit={handleLogin}>

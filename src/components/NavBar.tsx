@@ -16,6 +16,7 @@ import {
 import { useLoginModal } from "../hooks/useLoginModal";
 // import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import NavBarCategoriesSidebarMenu from "./NavBarCategoriesDropdownMenu";
 
 const NavBar = () => {
   const [cartItemCount, setCartItemCount] = useState(0);
@@ -82,7 +83,7 @@ const NavBar = () => {
           <Link to={"/home"}>
             <span>{t("homePageTxt")}</span>
           </Link>
-          <NavBarCategoriesDropdownMenu />
+          <NavBarCategoriesSidebarMenu />
           {/* <Link to={"/home"}>
         <span>جميع المنتجات</span>
       </Link> */}

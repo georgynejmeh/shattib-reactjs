@@ -7,6 +7,7 @@ import {
   useParams,
   useState,
 } from "..";
+import { PdfHandler } from "../components/PdfHandler";
 import { CirteriaGet } from "../models/Criteria";
 
 const DocPage = () => {
@@ -132,16 +133,13 @@ const DocPage = () => {
           />
         </div>
 
-        <section className="flex">
-          <section className="flex flex-col gap-8 w-full">
-            <h1 className="text-2xl font-bold">كراسة {data && data.title}</h1>
-            <div className="flex gap-8">
-              {/* <div className="flex gap-2">
-                <span className="font-bold">عدد التصنيفات</span>
-                <AccentText bold size="sm">
-                  3
-                </AccentText>
-              </div> */}
+        <section className="flex flex-col lg:flex-row items-center gap-10">
+          {/* First Section */}
+          <section className="flex flex-col gap-8 w-full lg:w-1/2 items-center lg:items-start">
+            <h1 className="text-2xl font-bold text-center lg:text-left">
+              كراسة {data && data.title}
+            </h1>
+            <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
               <div className="flex gap-2">
                 <span className="font-bold">الحالة</span>
                 <span className="font-bold">
@@ -155,86 +153,51 @@ const DocPage = () => {
                 </span>
               </div>
             </div>
-            <h2 className="text-xl font-bold">المرفقات</h2>
-            <div className="flex flex-wrap gap-4 w-full ">
+            <h2 className="text-xl font-bold text-center lg:text-left">
+              المرفقات
+            </h2>
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               {data?.criteriaItems.map((item, index) => (
                 <div
                   key={index}
-                  className="rounded-xl w-1/3 overflow-hidden border border-primary p-5"
+                  className="rounded-xl w-full lg:w-auto border border-primary p-5"
                 >
-                  {item.image.toLowerCase().endsWith(".pdf") ? (
-                    <div>
-                      <iframe
-                        src={item.image}
-                        title="PDF Viewer"
-                        className="w-[100%] h-full"
-                      />
-                      <ButtonGold
-                        className="mt-3"
-                        onClick={() => {
-                          window.open(
-                            item.image,
-                            "_blank",
-                            "noopener,noreferrer"
-                          );
-                        }}
-                      >
-                        فتح الملف
-                      </ButtonGold>
-                    </div>
-                  ) : (
-                    <img
-                      className="w-full h-full object-cover"
-                      src={`${item.image}`}
-                      alt=""
-                    />
-                  )}
+                  <PdfHandler
+                    fileClassName="w-[260px] h-[180px]"
+                    file={item.image}
+                  />
+                  <div className="p-4 border rounded bg-gray-100">
+                    <h3>
+                      <strong className="text-lg font-bold">اسم المنتج:</strong>
+                      {item.productName}
+                    </h3>
+                    <p>
+                      <strong className="text-lg font-bold">الكمية:</strong>
+                      {item.amount}
+                    </p>
+                    <p>
+                      <strong className="text-lg font-bold">
+                        وحدة القياس:
+                      </strong>
+                      {item.measurementUnit}
+                    </p>
+                  </div>
                 </div>
               ))}
-              {/* <div className="rounded-xl w-1/3 overflow-hidden">
-                <img
-                  className="w-full h-full object-cover"
-                  src={subCategoryImg01}
-                  alt=""
-                />
-              </div> */}
             </div>
           </section>
-          <section className="flex flex-col items-center gap-8 w-1/2">
-            <h2 className="text-xl font-bold">الفاتورة</h2>
+
+          {/* Second Section */}
+          <section className="flex flex-col items-center gap-8 w-full lg:w-1/2">
+            <h2 className="text-xl font-bold text-center">الفاتورة</h2>
             {data && data!.invoices.length > 0 ? (
-              <div className="flex  gap-4">
-                <div className="w-full">
-                  {data?.invoices[0].image.toLowerCase().endsWith(".pdf") ? (
-                    <>
-                      <iframe
-                        src={data?.invoices[0].image}
-                        title="PDF Viewer"
-                        className="w-[100%] h-full"
-                      />
-                      <ButtonGold
-                        className="mt-3"
-                        onClick={() => {
-                          window.open(
-                            data?.invoices[0].image,
-                            "_blank",
-                            "noopener,noreferrer"
-                          );
-                        }}
-                      >
-                        فتح الملف
-                      </ButtonGold>
-                    </>
-                  ) : (
-                    <img
-                      className="w-full h-full object-cover"
-                      src={data?.invoices[0].image}
-                      alt=""
-                    />
-                  )}
-                </div>
+              <div className="flex flex-col gap-4 items-center">
+                <PdfHandler
+                  fileClassName="w-[300px] h-[220px]"
+                  file={data?.invoices[0].image}
+                />
                 {data.invoices[0].accepted === null && (
-                  <div className="flex gap-2 self-end">
+                  <div className="flex gap-2 self-center">
                     <button
                       onClick={() => {
                         const formdata = new FormData();
@@ -275,17 +238,17 @@ const DocPage = () => {
         </section>
 
         <hr className="my-12" />
-        <h1 className="text-center w-[32%] text-2xl font-bold mb-5">
+        <h1 className="text-center w-full text-2xl font-bold mb-5">
           وصل الدفع
         </h1>
-        <section className="flex">
+        <section className="flex flex-col items-center gap-8 w-full lg:w-full">
           {data &&
             data.invoices.length > 0 &&
             data.invoices[0].accepted &&
             !data.invoices[0].receipt && (
               <section className="flex flex-col items-center gap-8 w-96 h-96">
                 <UploadFile
-                  title="ارفع صورة الفاتورة"
+                  title=""
                   subTitle="أضف صورة الفاتورة"
                   onImageChange={handleReceiptImageChange}
                   containImg={true}
@@ -297,35 +260,11 @@ const DocPage = () => {
             )}
 
           {data && data.invoices.length > 0 && data.invoices[0].receipt && (
-            <div className="rounded-xl w-1/3">
-              {data.invoices[0].receipt.toLowerCase().endsWith(".pdf") ? (
-                <>
-                  {" "}
-                  <iframe
-                    src={data.invoices[0].receipt}
-                    title="PDF Viewer"
-                    className="w-full h-full"
-                  />
-                  <ButtonGold
-                    className="mt-3"
-                    onClick={() => {
-                      window.open(
-                        data.invoices[0].receipt,
-                        "_blank",
-                        "noopener,noreferrer"
-                      );
-                    }}
-                  >
-                    فتح الملف
-                  </ButtonGold>
-                </>
-              ) : (
-                <img
-                  className="w-[320px] h-[320px] object-contain"
-                  src={`${data.invoices[0].receipt}`}
-                  alt=""
-                />
-              )}
+            <div className="rounded-xl lg:w-1/3">
+              <PdfHandler
+                fileClassName="w-full h-[350px]"
+                file={data.invoices[0].receipt}
+              />
             </div>
           )}
         </section>

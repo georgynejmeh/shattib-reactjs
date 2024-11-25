@@ -1,5 +1,6 @@
 import { Link } from "..";
 import { Cirteria } from "../models/Criteria";
+import { PdfHandler } from "./PdfHandler";
 
 interface Props {
   id?: number;
@@ -12,9 +13,6 @@ const ConditionCard = ({ id = 0, status, criteria, image }: Props) => {
   if (criteria) {
     id = criteria.id;
   }
-
-  // Helper to check if the file is a PDF
-  const isPdf = image?.toLowerCase().endsWith(".pdf");
 
   return (
     <Link to={`doc/${id}`}>
@@ -49,19 +47,11 @@ const ConditionCard = ({ id = 0, status, criteria, image }: Props) => {
         </div>
         <div className="px-2 pt-2 h-40">
           {image ? (
-            isPdf ? (
-              <iframe
-                src={image}
-                title="PDF Viewer"
-                className="w-full h-full"
-              />
-            ) : (
-              <img
-                className="rounded-xl object-cover w-full h-full"
-                src={image}
-                alt="Uploaded file"
-              />
-            )
+            <PdfHandler
+              fileClassName="w-full h-full"
+              withOpenButton={false}
+              file={image}
+            />
           ) : null}
         </div>
       </div>

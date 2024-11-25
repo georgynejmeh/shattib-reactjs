@@ -15,7 +15,7 @@ const AdminSidePanel = () => {
   return (
     <nav className="fixed top-0 flex flex-col justify-between py-12 pt-28 px-6 bg-secondary text-white w-sidepanel h-full">
       <div className="flex flex-col gap-6">
-        <Link to={"/admin/home"}>
+        <Link to={"/admin/"}>
           <SidePanelItem icon={homeIcon}>الصفحة الرئيسية</SidePanelItem>
         </Link>
         <Link to={"/admin/products"}>
@@ -44,7 +44,7 @@ const AdminSidePanel = () => {
         </Link>
       </div>
       <div>
-        <Link to={""}>
+        <Link to={"/"}>
           <SidePanelItem icon={redLogoutIcon}>تسجيل الخروج</SidePanelItem>
         </Link>
       </div>

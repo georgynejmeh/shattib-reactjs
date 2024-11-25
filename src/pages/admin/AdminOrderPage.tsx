@@ -1,26 +1,22 @@
+import { useEffect, useState } from "react";
 import {
   AccentText,
   databaseIcon,
   downArrowIcon,
   drawerIcon,
+  emailIcon,
   MainPadding,
   OrderItem,
-  trashCanIcon,
+  phoneIcon,
   truckIcon,
   useApi,
   useParams,
 } from "../..";
-import { useConfirmDelete } from "../../hooks/useConfirmDeleteModal";
+
 import { Order } from "../../models/Order";
-import { useState, useEffect } from "react";
 
 const AdminOrderPage = () => {
   const { id } = useParams();
-
-  const { setIsShownConfirmDeleteModal, setId, setEndpoint } =
-    useConfirmDelete();
-  setEndpoint("Orders");
-  setId(parseInt(id || "0"));
 
   const { isLoading, error, data } = useApi<Order>(`Orders/${id}`, "GET", true);
   const { patchData } = useApi(`Orders/${id}`, "PATCH", true);
@@ -119,7 +115,7 @@ const AdminOrderPage = () => {
 
             <hr className="my-4" />
 
-            <section className="flex items-center gap-8 border-b-2 w-fit p-4">
+            <section className="flex flex-wrap items-center gap-8 border-b-2 w-fit p-4">
               <div className="flex items-center gap-4">
                 <img src={drawerIcon} alt="" />
                 <span className="text-gray-400 font-bold">تاريخ الإنشاء</span>
@@ -135,28 +131,34 @@ const AdminOrderPage = () => {
                 <span className="text-gray-400 font-bold">السعر الكلي</span>
                 <AccentText>{data.totalPrice} ريال</AccentText>
               </div>
-              <button
-                onClick={() => {
-                  setIsShownConfirmDeleteModal(true);
-                }}
-              >
-                <img className="ms-16 h-6" src={trashCanIcon} alt="Delete" />
-              </button>
+              <div className="flex items-center gap-4">
+                <img src={phoneIcon} alt="" />
+                <span className="text-gray-400 font-bold">رقم الهاتف</span>
+                <AccentText>{data.phoneNumber} </AccentText>
+              </div>
+              <div className="flex items-center gap-4">
+                <img src={emailIcon} alt="" />
+                <span className="text-gray-400 font-bold">
+                  البريد الالكتروني
+                </span>
+                <AccentText>{data.email} </AccentText>
+              </div>
             </section>
 
             <section>
               <h1 className="text-2xl font-bold my-8">المنتجات</h1>
               {data.orderItems === null
                 ? null
-                : data.orderItems.map((order, index) =>
-                    order ? (
+                : data.orderItems.map((item, index) =>
+                    item ? (
                       <OrderItem
                         key={index}
-                        image={order.productMainImage}
+                        image={item.productMainImage}
                         index={index}
-                        name={order.productName}
-                        quantity={order.quantitiy}
-                        price={order.totalPriceForThisProduct}
+                        name={item.productName}
+                        quantity={item.quantitiy}
+                        price={item.totalPriceForThisProduct}
+                        withInstallation={item.withInstallation!}
                       />
                     ) : null
                   )}

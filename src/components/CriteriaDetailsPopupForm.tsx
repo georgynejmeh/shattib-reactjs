@@ -47,7 +47,14 @@ const CriteriaDetailsPopupForm = ({
   } else {
     document.body.classList.remove("overflow-hidden");
   }
-
+  const isFormValid = () => {
+    return (
+      productName !== "" &&
+      description !== "" &&
+      amount !== 0 &&
+      measurementUnit !== ""
+    );
+  };
   return (
     <div className="absolute z-50 top-0 w-full h-full bg-black bg-opacity-25">
       <div className="rounded-xl flex flex-col justify-between w-5/6 h-5/6 bg-white mx-auto mt-4 p-8">
@@ -111,7 +118,9 @@ const CriteriaDetailsPopupForm = ({
         </div>
 
         <div className="w-36 self-end">
-          <ButtonGold onClick={handleSubmit}>تأكيد</ButtonGold>
+          <ButtonGold disabled={!isFormValid()} onClick={handleSubmit}>
+            تأكيد
+          </ButtonGold>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ interface Props {
   quantity?: number;
   price?: number;
   image: string;
+  withInstallation?: boolean;
 }
 
 const OrderItem = ({
@@ -14,6 +15,7 @@ const OrderItem = ({
   quantity = 6,
   price = 15,
   image,
+  withInstallation,
 }: Props) => {
   return (
     <div className="flex justify-around items-center gap-4 border-b-2">
@@ -26,6 +28,13 @@ const OrderItem = ({
       </TitleNumber>
       <TitleNumber inverse column subTitle={`x${quantity}`}>
         الكمية المطلوبة
+      </TitleNumber>
+      <TitleNumber
+        inverse
+        column
+        subTitle={`${withInstallation ? "نعم" : "لا"}`}
+      >
+        مع التركيب
       </TitleNumber>
       <TitleNumber inverse column subTitle={`${price} ريال`}>
         السعر الإجمالي

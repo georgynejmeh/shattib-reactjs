@@ -5,6 +5,8 @@ export interface Order {
   dateOfArrival: string;
   status: string;
   orderItems: OrderItem[];
+  phoneNumber?: string;
+  email?: string;
 }
 
 export interface OrderItem {
@@ -12,4 +14,5 @@ export interface OrderItem {
   productMainImage: string;
   quantitiy: number;
   totalPriceForThisProduct: number;
+  withInstallation?: boolean;
 }
