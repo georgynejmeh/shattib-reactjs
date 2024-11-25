@@ -89,6 +89,7 @@ const ProductDetailsCard = ({ data }: Props) => {
         setIncludeInstallation(productInCart.withInstallation || false);
       } else {
         // If the product is not in the cart, add it with only necessary data
+        console.log(includeInstallation);
         existingCart.push({
           productId: data.id,
           name: data.name,
@@ -191,10 +192,11 @@ const ProductDetailsCard = ({ data }: Props) => {
                       checked={includeInstallation}
                       onChange={(e) => {
                         console.log("checked", e.target.checked);
-                        setIncludeInstallation(e.target.checked);
                         if (e.target.checked) {
+                          setIncludeInstallation(true);
                           setPrice(data.price + data.installationTeam);
                         } else {
+                          setIncludeInstallation(false);
                           setPrice((prev) => prev - data.installationTeam);
                         }
                       }}
@@ -258,7 +260,7 @@ const ProductDetailsCard = ({ data }: Props) => {
                 alt=""
               />
             </div>
-            <div className="flex flex-wrap gap-3 mt-7 mr-[20%]">
+            <div className="flex flex-wrap gap-3 mt-7 mr-[20%] max-w-[60%]">
               {/* TODO DELETE LOOP */}
               {data.images.map((image, index) => (
                 <div

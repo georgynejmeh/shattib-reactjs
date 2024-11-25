@@ -18,6 +18,7 @@ const CartPage = () => {
   // Load cart from localStorage when the component mounts
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
     setCart(storedCart);
   }, []);
   const navigate = useNavigate();

@@ -27,9 +27,7 @@ const SearchPage = () => {
                         <img src={product.mainImagePath} alt="" />
                       </div>
                       <div className="flex flex-col justify-center gap-2">
-                        <span className="text-lg">
-                          اسم المنتج {product.name}
-                        </span>
+                        <span className="text-lg">{product.name}</span>
                         <span className="text-lg font-bold">
                           {product.price} ريال
                         </span>

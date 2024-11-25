@@ -20,7 +20,7 @@ const ProductPage = () => {
     setDescriptionOpen(!isDescriptionOpen);
   };
   const toggleVerification = () => {
-    setVerificationOpen(!isDescriptionOpen);
+    setVerificationOpen(!isVerificationOpen);
   };
 
   return (
