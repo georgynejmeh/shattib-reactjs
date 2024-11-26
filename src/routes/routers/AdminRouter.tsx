@@ -65,6 +65,10 @@ const AdminRouter: AdminRoute[] = [
     path: "product/new",
     element: <AdminNewProductContainer />,
   },
+  {
+    path: "product/new/2",
+    element: <AdminNewProductContainer />,
+  },
   { path: "product/edit/:id", element: <AdminEditProductPage /> },
   {
     path: "categories",
