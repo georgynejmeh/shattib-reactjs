@@ -4,7 +4,10 @@ import {
   addToBoxBlackIcon,
   addToCartIcon,
   ButtonGold,
+  leftArrowCircleIcon,
+  leftArrowIcon,
   QuantityControls,
+  rightArrowCircleIcon,
   shattibIcon,
   TitleNumber,
   useEffect,
@@ -130,6 +133,7 @@ const ProductDetailsCard = ({ data }: Props) => {
   const [activeImage, setActiveImage] = useState<string | undefined>(
     data!.images[0].imagePath
   );
+  const [activeImageIdx, setActiveImageIdx] = useState<number>(0);
   const [price, setPrice] = useState<number>(data!.price);
   // TODO DELETE
   // const temp = [1, 2, 3, 4, 5];
@@ -253,10 +257,10 @@ const ProductDetailsCard = ({ data }: Props) => {
 
           {/* Left section */}
           <section className="flex flex-col gap-4 rounded-xl w-full m-8">
-            <div className=" w-full h-2/4 rounded-xl overflow-hidden">
+            <div className=" w-full h-[500px] rounded-xl overflow-hidden">
               <img
                 className="w-full h-full object-contain shadow-2xl"
-                src={activeImage}
+                src={data.images[activeImageIdx].imagePath}
                 alt=""
               />
             </div>
@@ -265,7 +269,7 @@ const ProductDetailsCard = ({ data }: Props) => {
               {data.images.map((image, index) => (
                 <div
                   key={index}
-                  className={`w-24 h-24 rounded-xl overflow-hidden shadow-2xl bg-gray-300 ${
+                  className={`w-24 h-24 rounded-xl overflow-hidden shadow-2xl bg-gray-300${
                     activeImage === image.imagePath && "border border-primary"
                   }`}
                   onClick={() => {
@@ -289,34 +293,66 @@ const ProductDetailsCard = ({ data }: Props) => {
           <section className="flex flex-col justify-between items-center gap-4 rounded-xl w-full p-4">
             <div className="flex flex-col gap-4">
               <h1 className="text-xl font-bold">{data.name}</h1>
-              <h2 className="text-gray-500">{data.deaf}</h2>
+              <h2 className="text-gray-500">{data.brand}</h2>
             </div>
 
             <div className="flex items-center gap-4">
-              <AccentText>{data.price} ريال</AccentText>
+              <AccentText>{price} ريال</AccentText>
             </div>
 
             <hr className="w-full" />
 
-            <section className="flex flex-col gap-4 rounded-xl w-full h-full">
-              <div className="relative w-full h-64 rounded-xl overflow-hidden">
+            <section className="flex flex-col gap-4 mb-4 rounded-xl w-full h-full">
+              <div className="relative w-full h-64 rounded-xl overflow-hidden ">
                 <img
                   className="w-full h-full object-contain"
-                  src={data.images[0].imagePath}
+                  src={data.images[activeImageIdx].imagePath}
                   alt=""
                 />
-                {/* <button>
-                  <div className="absolute top-0 m-2 flex items-center justify-center h-12 w-12 rounded-full bg-white transition-all duration-700 hover:bg-red-200">
-                    <img src={heartIcon} alt="" />
-                  </div>
-                </button> */}
+                <button
+                  className="absolute left-0 w-10 h-10 top-[50%] bg-white rounded-full shadow-3xl"
+                  onClick={() => {
+                    if (activeImageIdx === data.images.length - 1) {
+                      setActiveImageIdx(0);
+                    } else {
+                      setActiveImageIdx((prev) => (prev += 1));
+                    }
+                  }}
+                >
+                  <img
+                    src={leftArrowIcon}
+                    className="justify-self-center"
+                    alt=""
+                  />
+                </button>
+                <button
+                  className="absolute right-0 top-[50%] w-10 h-10 bg-white rounded-full shadow-2xl"
+                  onClick={() => {
+                    if (activeImageIdx === 0) {
+                      setActiveImageIdx(data.images.length - 1);
+                    } else {
+                      setActiveImageIdx((prev) => (prev -= 1));
+                    }
+                  }}
+                >
+                  <img
+                    src={leftArrowIcon}
+                    className="rotate-180 justify-self-center"
+                  />
+                </button>
               </div>
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap justify-center gap-5">
                 {/* TODO DELETE LOOP */}
                 {data.images.map((image, index) => (
                   <div
                     key={index}
-                    className="w-18 h-10 rounded overflow-hidden"
+                    // className="w-18 h-10 rounded overflow-hidden"
+                    className={`w-24 h-24 rounded-xl overflow-hidden shadow-2xl bg-gray-300 ${
+                      activeImageIdx === index && "border border-primary"
+                    }`}
+                    onClick={() => {
+                      setActiveImageIdx(index);
+                    }}
                   >
                     <img
                       className="w-full h-full object-contain"
@@ -330,61 +366,21 @@ const ProductDetailsCard = ({ data }: Props) => {
 
             <hr className="w-full" />
 
-            <div className="w-full">
-              <TitleNumber size="md" subTitle={data.color}>
-                اللون
-              </TitleNumber>
-
-              {/* <div className="flex flex-wrap gap-1 py-4">
-                <button>
-                  <div className="h-12 w-10 rounded overflow-hidden">
-                    <img
-                      className="h-full w-full object-cover"
-                      src={data.images[0].imagePath}
-                      alt=""
-                    />
-                  </div>
-                </button>
-                <button>
-                  <div className="relative h-12 w-10 rounded overflow-hidden">
-                    <div className="absolute h-full w-full bg-red-900 bg-opacity-50" />
-                    <img
-                      className="h-full w-full object-cover"
-                      src={data.images[0].imagePath}
-                      alt=""
-                    />
-                  </div>
-                </button>
-                <button>
-                  <div className="relative h-12 w-10 rounded overflow-hidden">
-                    <div className="absolute h-full w-full bg-green-900 bg-opacity-50" />
-
-                    <img
-                      className="h-full w-full object-cover"
-                      src={data.images[0].imagePath}
-                      alt=""
-                    />
-                  </div>
-                </button>
-                <button>
-                  <div className="relative h-12 w-10 rounded overflow-hidden">
-                    <div className="absolute h-full w-full bg-yellow-900 bg-opacity-50" />
-
-                    <img
-                      className="h-full w-full object-cover"
-                      src={data.images[0].imagePath}
-                      alt=""
-                    />
-                  </div>
-                </button>
-              </div> */}
-
-              <div className="flex justify-around w-full flex-wrap gap-4">
+            <div className="flex flex-col flex-wrap justify-center gap-2 w-full">
+              <div className="flex flex-row justify-around">
+                <TitleNumber column subTitle={data.color}>
+                  اللون
+                </TitleNumber>
                 <TitleNumber
                   column
                   subTitle={`${data.measurements} ${data.measurementUnit}`}
                 >
                   القياس
+                </TitleNumber>
+              </div>
+              <div className="flex flex-row justify-around">
+                <TitleNumber column subTitle={data.measurementUnit}>
+                  وحدة القياس
                 </TitleNumber>
                 <TitleNumber column subTitle={data.manufacturingCountry}>
                   بلد التصنيع
@@ -399,7 +395,16 @@ const ProductDetailsCard = ({ data }: Props) => {
                   <input
                     type="checkbox"
                     checked={includeInstallation}
-                    onChange={(e) => setIncludeInstallation(e.target.checked)}
+                    onChange={(e) => {
+                      setPrice(data.price + data.installationTeam);
+                      if (e.target.checked) {
+                        setIncludeInstallation(true);
+                        setPrice(data.price + data.installationTeam);
+                      } else {
+                        setIncludeInstallation(false);
+                        setPrice((prev) => prev - data.installationTeam);
+                      }
+                    }}
                   />
                   طلب أعمال التركيب (+{data.installationTeam} ر.س)
                 </label>

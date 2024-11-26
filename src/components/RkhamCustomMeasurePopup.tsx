@@ -87,7 +87,7 @@ const RkhamCustomMeasurePopup = () => {
                     <TextInput
                       blackTitle
                       number
-                      title="الطول"
+                      title="الطول (cm) "
                       placeholder="أدخل الطول"
                       onChange={(e) => setHeight(e.target.value)}
                     />
@@ -96,7 +96,7 @@ const RkhamCustomMeasurePopup = () => {
                     <TextInput
                       blackTitle
                       number
-                      title="العرض"
+                      title="العرض (cm)"
                       placeholder="أدخل العرض"
                       onChange={(e) => setWidth(e.target.value)}
                     />

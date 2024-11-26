@@ -1,14 +1,16 @@
-import { useTranslation } from "react-i18next";
-import { CatDropdownItem, downArrowIcon, Link, useState } from "..";
-import { categories } from "../assets/json/categories";
-import { subCategories } from "../assets/json/subCategories";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { CatDropdownItem, downArrowIcon, Link, useApi, useState } from "..";
+import { HomeCategorie } from "../models/HomeCategories";
 
 const NavBarCategoriesSidebarMenu = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
   const { t } = useTranslation();
-
+  const { data: categories } = useApi<HomeCategorie[]>(
+    "Products/CatsSubCatsProducts",
+    "GET"
+  );
   // Handle body scroll lock
   useEffect(() => {
     if (isSidebarOpen) {
@@ -20,10 +22,6 @@ const NavBarCategoriesSidebarMenu = () => {
       document.body.classList.remove("no-scroll");
     };
   }, [isSidebarOpen]);
-
-  // Filter subcategories for the active category
-  const getSubcategoriesByCategoryId = (categoryId: number) =>
-    subCategories.filter((sub) => sub.categoryId === categoryId);
 
   if (isSidebarOpen) {
     document.body.classList.add("overflow-hidden");
@@ -61,64 +59,65 @@ const NavBarCategoriesSidebarMenu = () => {
             </div>
 
             {/* Categories and Subcategories */}
-            <div className="flex flex-col h-full overflow-y-auto">
+            <div className="flex flex-col h-full overflow-y-scroll">
               {/* Categories List */}
-              <div className="p-4">
-                {categories.map((category) => (
-                  <div key={category.id}>
-                    {/* Category Item */}
-                    <div
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        setActiveCategoryId((prev) =>
-                          prev === category.id ? null : category.id
-                        );
-                      }}
-                      className={`p-2 cursor-pointer flex justify-between items-center ${
-                        activeCategoryId === category.id
-                          ? "bg-gray-200 font-bold"
-                          : ""
-                      }`}
-                    >
-                      <CatDropdownItem showLeftIcon={false}>
-                        {category.name}
-                      </CatDropdownItem>
-                      <span className="text-gray-500">
-                        {activeCategoryId === category.id ? "−" : "+"}
-                      </span>
-                    </div>
+              <div className="p-4 mb-10">
+                {categories &&
+                  categories.map((category) => {
+                    console.log(category.name);
+                    return (
+                      <div key={category.id}>
+                        {/* Category Item */}
+                        <div
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            setActiveCategoryId((prev) =>
+                              prev === category.id ? null : category.id
+                            );
+                          }}
+                          className={`p-2 cursor-pointer flex justify-between items-center ${
+                            activeCategoryId === category.id
+                              ? "bg-gray-200 font-bold"
+                              : ""
+                          }`}
+                        >
+                          <CatDropdownItem showLeftIcon={false}>
+                            {category.name}
+                          </CatDropdownItem>
+                          <span className="text-gray-500">
+                            {activeCategoryId === category.id ? "−" : "+"}
+                          </span>
+                        </div>
 
-                    {/* Subcategories List */}
-                    {activeCategoryId === category.id && (
-                      <div className="pl-4 mt-2 border-l bg-gray-200">
-                        {getSubcategoriesByCategoryId(category.id).length >
-                        0 ? (
-                          getSubcategoriesByCategoryId(category.id).map(
-                            (subCategory) => (
-                              <Link
-                                key={subCategory.id}
-                                to={`/category/${category.id}/${subCategory.id}`}
-                                onClick={() => setSidebarOpen(false)} // Close sidebar after selecting
-                              >
-                                <CatDropdownItem
-                                  className="mr-5"
-                                  showLeftIcon={false}
+                        {/* Subcategories List */}
+                        {activeCategoryId === category.id && (
+                          <div className="pl-4 mt-2 border-l bg-gray-200 mb-10">
+                            {category.subCategories.length > 0 ? (
+                              category.subCategories.map((subCategory) => (
+                                <Link
+                                  key={subCategory.id}
+                                  to={`/category/${category.id}/${subCategory.id}`}
+                                  onClick={() => setSidebarOpen(false)} // Close sidebar after selecting
                                 >
-                                  {`- ${subCategory.name}`}
-                                </CatDropdownItem>
-                              </Link>
-                            )
-                          )
-                        ) : (
-                          <div className="text-gray-500">
-                            {t("noSubcategories")}
+                                  <CatDropdownItem
+                                    className="mr-5"
+                                    showLeftIcon={false}
+                                  >
+                                    {`- ${subCategory.name}`}
+                                  </CatDropdownItem>
+                                </Link>
+                              ))
+                            ) : (
+                              <div className="text-gray-500">
+                                لا يوجد تصنيفات فرعية
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>
-                    )}
-                  </div>
-                ))}
+                    );
+                  })}
               </div>
             </div>
           </div>

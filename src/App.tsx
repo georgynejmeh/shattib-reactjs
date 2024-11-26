@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import AdminRouter from "./routes/routers/AdminRouter.tsx";
 import MainPagesRouter from "./routes/routers/MainRouter.tsx";
 import AdminRouteMiddleware from "./routes/middlewares/AdminRoute.tsx";
-
+import "./App.css";
 // Lazy-load standalone components
 const IntroPage = lazy(() => import("./pages/IntroPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));

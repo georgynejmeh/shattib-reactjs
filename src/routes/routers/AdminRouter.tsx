@@ -46,6 +46,9 @@ const AdminSamplesPage: LazyComponent = React.lazy(
 const AdminCustomMeasuresPage: LazyComponent = React.lazy(
   () => import("../../pages/admin/AdminCustomMeasuresPage")
 );
+const AdminEditProductPage: LazyComponent = React.lazy(
+  () => import("../../pages/admin/AdminEditProductPage")
+);
 
 const AdminRouter: AdminRoute[] = [
   {
@@ -56,6 +59,7 @@ const AdminRouter: AdminRoute[] = [
     path: "products",
     element: <AdminProductsPage />,
   },
+  { path: "product/edit/:id", element: <AdminEditProductPage /> },
   {
     path: "categories",
     element: <AdminCategoriesPage />,
