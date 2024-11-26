@@ -339,13 +339,13 @@ const ProductDetailsCard = ({ data }: Props) => {
                   />
                 </button>
               </div>
-              <div className="flex flex-wrap justify-center gap-5">
+              <div className="flex flex-wrap  gap-5">
                 {/* TODO DELETE LOOP */}
                 {data.images.map((image, index) => (
                   <div
                     key={index}
                     // className="w-18 h-10 rounded overflow-hidden"
-                    className={`w-24 h-24 rounded-xl overflow-hidden shadow-2xl bg-gray-300 ${
+                    className={`w-16 h-16 rounded-xl overflow-hidden shadow-2xl bg-gray-300 ${
                       activeImageIdx === index && "border border-primary"
                     }`}
                     onClick={() => {

@@ -158,6 +158,7 @@ const ConfirmNewConditionPage = () => {
       await postData(formData);
       formData.forEach((i) => console.log(i));
       if (!error) {
+        console.log("error", error);
         console.log("CONFIRM NEW PAGE CONDITION", "if state");
         localStorage.removeItem("criteriaTitle");
         localStorage.removeItem("selectedCategories");
