@@ -53,6 +53,8 @@ const CartPage = () => {
         productId: item.productId,
         quantity: item.quantity,
         withInstallation: item.withInstallation,
+        colorId: item.colorId,
+        measurementId: item.measurementId,
       })),
       kind: "Order",
     };
@@ -93,7 +95,9 @@ const CartPage = () => {
               <CartItemCard
                 key={index}
                 productId={item.productId}
-                name={item.name}
+                name={`${item.name} ${
+                  item.withInstallation ? "(مع تركيب)" : "(دون تركيب)"
+                }`}
                 image={item.image}
                 price={item.price}
                 quantity={item.quantity}

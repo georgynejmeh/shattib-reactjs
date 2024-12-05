@@ -5,4 +5,6 @@ export interface CartItem {
   quantity: number;
   image: string;
   withInstallation: boolean;
+  colorId: number;
+  measurementId: number;
 }

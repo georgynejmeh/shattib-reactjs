@@ -14,7 +14,7 @@ import {
 import { useLoginModal } from "../hooks/useLoginModal";
 import { useRkhamCustomMeasure } from "../hooks/useRkhamCustomMeasure";
 import { CartItem } from "../models/CartItem";
-import { Product } from "../models/Product";
+import { Color, Measurement, Product } from "../models/Product";
 
 interface Props {
   data?: Product;
@@ -27,6 +27,18 @@ const ProductDetailsCard = ({ data }: Props) => {
   const [quantity, setQuantity] = useState(1); // Track quantity
   const [includeInstallation, setIncludeInstallation] = useState(false);
   const { setIsShownRkahmCustomMeasureModal } = useRkhamCustomMeasure();
+
+  const [isColorDropdownOpen, setIsColorDropdownOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<Color | null>(
+    data?.colors[0] || null
+  );
+  const [selectedMeasurement, setSelectedMeasurement] =
+    useState<Measurement | null>(data?.measurements[0] || null);
+  const colorOptions = [
+    { hexCode: "#008000" }, // Green
+    { hexCode: "#0000FF" }, // Blue
+    { hexCode: "#808080" }, // Gray
+  ];
 
   const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
   useEffect(() => {
@@ -98,6 +110,8 @@ const ProductDetailsCard = ({ data }: Props) => {
           image: data.images[0].imagePath,
           quantity: quantity,
           withInstallation: includeInstallation,
+          colorId: selectedColor?.id,
+          measurementId: selectedMeasurement?.id,
         });
       }
 
@@ -148,20 +162,57 @@ const ProductDetailsCard = ({ data }: Props) => {
               <h2 className="text-gray-500">{data.brand}</h2>
             </div>
             <div className="flex items-center gap-4">
-              <AccentText>{price} ريال</AccentText>
+              <AccentText>
+                {price +
+                  (selectedColor?.price || 0) +
+                  (selectedMeasurement?.price || 0)}{" "}
+                ريال
+              </AccentText>
             </div>
             <hr className="w-full" />
             <div>
               <div className="flex justify-between items-stretch gap-8">
-                <div className="w-full">
-                  <TitleNumber column subTitle={data.color}>
+                <div className="w-full flex flex-col items-center text-nowrap py-8">
+                  {/* <TitleNumber column subTitle={data.color}>
                     اللون
-                  </TitleNumber>
+                  </TitleNumber> */}
+                  <span className="text-xl font-bold mb-4">اللون</span>
+                  <div
+                    onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
+                    style={{ backgroundColor: data.colors[0]?.hexCode }}
+                    className="border-2 border-black w-10 h-6 rounded bg-red-400 bg-opacity-70"
+                  >
+                    ↓
+                  </div>
+                  {data?.colors[0]?.hexCode || "#000"}
+                  {isColorDropdownOpen && (
+                    <div className="mt-2 border-2 border-black w-10 h-24 bg-white">
+                      {colorOptions.map((color) => (
+                        <div
+                          key={color.hexCode}
+                          style={{ backgroundColor: color.hexCode }}
+                          className="w-full h-6 cursor-pointer"
+                          // onClick={() => handleColorSelect(color)} // Set the color on click
+                        >
+                          {color.hexCode}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="w-full">
-                  <TitleNumber column subTitle={`${data.measurements}`}>
+                  <div className="w-full flex flex-col items-center text-nowrap py-8">
+                    <span className="text-xl font-bold mb-4">القياس</span>
+                    <div className="w-10 h-6 rounded bg-gray-600 bg-opacity-70">
+                      {data?.measurements[0]?.name || "0"}
+                    </div>
+                  </div>
+                  {/* <TitleNumber
+                    column
+                    subTitle={`${data?.measurements[0]?.name}`}
+                  >
                     القياس
-                  </TitleNumber>
+                  </TitleNumber> */}
                 </div>
                 <div className="w-full">
                   <TitleNumber column subTitle={data.measurementUnit}>

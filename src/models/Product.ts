@@ -7,9 +7,9 @@ export interface Product {
   features: string;
   price: number;
   measurementUnit: string;
-  measurements: string;
+  measurements: Measurement[];
   manufacturingCountry: string;
-  color: string;
+  colors: Color[];
   installationTeam: number;
   deaf: string;
   retrivalAndReplacing: string;
@@ -44,4 +44,17 @@ interface SubCategory {
 interface ProductSpecifications {
   name: string;
   value: string;
+}
+
+export interface Color {
+  id: number;
+  hexCode: string;
+  price: number;
+  imagePath: string;
+}
+
+export interface Measurement {
+  id: number;
+  name: string;
+  price: number;
 }
