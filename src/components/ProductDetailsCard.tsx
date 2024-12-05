@@ -32,13 +32,22 @@ const ProductDetailsCard = ({ data }: Props) => {
   const [selectedColor, setSelectedColor] = useState<Color | null>(
     data?.colors[0] || null
   );
+  const [isMeasurementDropdownOpen, setIsMeasurementColorDropdownOpen] =
+    useState(false);
   const [selectedMeasurement, setSelectedMeasurement] =
     useState<Measurement | null>(data?.measurements[0] || null);
-  const colorOptions = [
-    { hexCode: "#008000" }, // Green
-    { hexCode: "#0000FF" }, // Blue
-    { hexCode: "#808080" }, // Gray
-  ];
+
+  // FOR TESTING
+  // const colorOptions: Color[] = [
+  //   { id: 0, price: 2, imagePath: "", hexCode: "#FF0000" },
+  //   { id: 0, price: 2, imagePath: "", hexCode: "#00FF00" },
+  //   { id: 0, price: 2, imagePath: "", hexCode: "#0000FF" },
+  // ];
+  // const measurementOptions: Measurement[] = [
+  //   { id: 0, name: "3x3", price: 20 },
+  //   { id: 0, name: "6x6", price: 20 },
+  //   { id: 0, name: "9x9", price: 20 },
+  // ];
 
   const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
   useEffect(() => {
@@ -106,7 +115,10 @@ const ProductDetailsCard = ({ data }: Props) => {
         existingCart.push({
           productId: data.id,
           name: data.name,
-          price: data.price,
+          price:
+            data.price +
+            (selectedColor?.price || 0) +
+            (selectedMeasurement?.price || 0),
           image: data.images[0].imagePath,
           quantity: quantity,
           withInstallation: includeInstallation,
@@ -179,32 +191,59 @@ const ProductDetailsCard = ({ data }: Props) => {
                   <span className="text-xl font-bold mb-4">اللون</span>
                   <div
                     onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
-                    style={{ backgroundColor: data.colors[0]?.hexCode }}
-                    className="border-2 border-black w-10 h-6 rounded bg-red-400 bg-opacity-70"
+                    style={{
+                      backgroundColor:
+                        selectedColor?.hexCode || data.colors[0]?.hexCode,
+                    }}
+                    className="border-2 border-black w-10 h-6 rounded bg-gray-300 bg-opacity-70 cursor-pointer"
                   >
-                    ↓
+                    {"اختر ↓"}
+                    {/* {data?.colors[0]?.hexCode || "#000"} */}
+                    {isColorDropdownOpen && (
+                      <div className="mt-2 w-10 bg-white">
+                        {data.colors.map((color) => (
+                          <div
+                            key={color.hexCode}
+                            style={{ backgroundColor: color.hexCode }}
+                            className="w-full h-6 cursor-pointer border border-black"
+                            onClick={() => setSelectedColor(color)}
+                            // onClick={() => handleColorSelect(color)} // Set the color on click
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  {data?.colors[0]?.hexCode || "#000"}
-                  {isColorDropdownOpen && (
-                    <div className="mt-2 border-2 border-black w-10 h-24 bg-white">
-                      {colorOptions.map((color) => (
-                        <div
-                          key={color.hexCode}
-                          style={{ backgroundColor: color.hexCode }}
-                          className="w-full h-6 cursor-pointer"
-                          // onClick={() => handleColorSelect(color)} // Set the color on click
-                        >
-                          {color.hexCode}
-                        </div>
-                      ))}
-                    </div>
-                  )}
                 </div>
                 <div className="w-full">
                   <div className="w-full flex flex-col items-center text-nowrap py-8">
                     <span className="text-xl font-bold mb-4">القياس</span>
-                    <div className="w-10 h-6 rounded bg-gray-600 bg-opacity-70">
-                      {data?.measurements[0]?.name || "0"}
+                    <div
+                      onClick={() =>
+                        setIsMeasurementColorDropdownOpen(
+                          !isMeasurementDropdownOpen
+                        )
+                      }
+                      className="border-2 border-black w-10 h-6 rounded bg-gray-300 bg-opacity-70 cursor-pointer"
+                    >
+                      {(selectedMeasurement?.name ||
+                        data?.measurements[0]?.name ||
+                        "اختر") + " ↓"}
+                      {isMeasurementDropdownOpen && (
+                        <div className="mt-2 border-2 w-10 bg-white">
+                          {data.measurements.map((measurement) => (
+                            <div
+                              key={measurement.name}
+                              className="w-full h-6 cursor-pointer bg-gray-50 border border-black"
+                              onClick={() =>
+                                setSelectedMeasurement(measurement)
+                              }
+                              // onClick={() => handleColorSelect(color)} // Set the color on click
+                            >
+                              {measurement.name}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                   {/* <TitleNumber
@@ -417,9 +456,39 @@ const ProductDetailsCard = ({ data }: Props) => {
 
             <div className="flex flex-col flex-wrap justify-center gap-2 w-full">
               <div className="flex flex-row justify-around">
-                <TitleNumber column subTitle={data.color}>
+                {/* <TitleNumber column subTitle={data.color}>
                   اللون
-                </TitleNumber>
+                </TitleNumber> */}
+                <div className="w-full flex flex-col items-center text-nowrap py-8">
+                  {/* <TitleNumber column subTitle={data.color}>
+                    اللون
+                  </TitleNumber> */}
+                  <span className="text-xl font-bold mb-4">اللون</span>
+                  <div
+                    onClick={() => setIsColorDropdownOpen(!isColorDropdownOpen)}
+                    style={{
+                      backgroundColor:
+                        selectedColor?.hexCode || data.colors[0]?.hexCode,
+                    }}
+                    className="border-2 border-black w-10 h-6 rounded bg-gray-300 bg-opacity-70 cursor-pointer"
+                  >
+                    {"اختر ↓"}
+                    {/* {data?.colors[0]?.hexCode || "#000"} */}
+                    {isColorDropdownOpen && (
+                      <div className="mt-2 w-10 bg-white">
+                        {data.colors.map((color) => (
+                          <div
+                            key={color.hexCode}
+                            style={{ backgroundColor: color.hexCode }}
+                            className="w-full h-6 cursor-pointer border border-black"
+                            onClick={() => setSelectedColor(color)}
+                            // onClick={() => handleColorSelect(color)} // Set the color on click
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
                 <TitleNumber
                   column
                   subTitle={`${data.measurements} ${data.measurementUnit}`}
@@ -428,9 +497,48 @@ const ProductDetailsCard = ({ data }: Props) => {
                 </TitleNumber>
               </div>
               <div className="flex flex-row justify-around">
-                <TitleNumber column subTitle={data.measurementUnit}>
+                {/* <TitleNumber column subTitle={data.measurementUnit}>
                   وحدة القياس
-                </TitleNumber>
+                </TitleNumber> */}
+                <div className="w-full">
+                  <div className="w-full flex flex-col items-center text-nowrap py-8">
+                    <span className="text-xl font-bold mb-4">القياس</span>
+                    <div
+                      onClick={() =>
+                        setIsMeasurementColorDropdownOpen(
+                          !isMeasurementDropdownOpen
+                        )
+                      }
+                      className="border-2 border-black w-10 h-6 rounded bg-gray-300 bg-opacity-70 cursor-pointer"
+                    >
+                      {(selectedMeasurement?.name ||
+                        data?.measurements[0]?.name ||
+                        "اختر") + " ↓"}
+                      {isMeasurementDropdownOpen && (
+                        <div className="mt-2 border-2 w-10 bg-white">
+                          {data.measurements.map((measurement) => (
+                            <div
+                              key={measurement.name}
+                              className="w-full h-6 cursor-pointer bg-gray-50 border border-black"
+                              onClick={() =>
+                                setSelectedMeasurement(measurement)
+                              }
+                              // onClick={() => handleColorSelect(color)} // Set the color on click
+                            >
+                              {measurement.name}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {/* <TitleNumber
+                    column
+                    subTitle={`${data?.measurements[0]?.name}`}
+                  >
+                    القياس
+                  </TitleNumber> */}
+                </div>
                 <TitleNumber column subTitle={data.manufacturingCountry}>
                   بلد التصنيع
                 </TitleNumber>
