@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import AdminNewProductPage from "./AdminNewProductPage";
 import AdminNewProductSecondPage from "./AdminNewProductSecondPage";
+import { ColorPost, MeasurementPost } from "../../models/Product";
 
 export interface MyFormData {
   SubCategoryId: number;
@@ -9,9 +10,9 @@ export interface MyFormData {
   Description: string;
   Price: number;
   MeasurementUnit: string;
-  Measurements: string;
+  Measurements: MeasurementPost[];
   ManufacturingCountry: string;
-  Color: string;
+  Colors: ColorPost[];
   Deaf: string;
   RetrivalAndReplacing: string;
   Notes: string;
@@ -34,9 +35,9 @@ const AdminNewProductContainer: React.FC = () => {
     Keywords: "",
     Price: 0.0,
     MeasurementUnit: "",
-    Measurements: "",
+    Measurements: [],
     ManufacturingCountry: "",
-    Color: "",
+    Colors: [],
     Deaf: "",
     RetrivalAndReplacing: "",
     Notes: "",
@@ -90,6 +91,7 @@ const AdminNewProductContainer: React.FC = () => {
           formData={formData}
           onInputChange={handleInputChange}
           handleSelectChange={handleSelectChange}
+          setFormData={setFormData}
         />
       )}
     </>

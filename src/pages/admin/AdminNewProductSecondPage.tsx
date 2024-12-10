@@ -27,35 +27,27 @@ const AdminNewProductSecondPage = ({
     "POST"
   );
 
-  // Local state for dynamic specifications
   const [specifications, setSpecifications] = useState<
     { name: string; value: string }[]
   >([]);
 
-  // Ensure formData.Images is initialized as an empty array if not present
   const images = formData.Images || [];
 
-  // Handle image selection (multiple files)
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      const newImages = Array.from(files); // Convert FileList to an array
+      const newImages = Array.from(files);
       setFormData((prevData) => ({
         ...prevData,
-        Images: [...(prevData.Images || []), ...newImages], // Ensure Images is always an array
+        Images: [...(prevData.Images || []), ...newImages],
       }));
     }
   };
 
-  // Handle adding a specification
   const handleAddSpecification = () => {
-    setSpecifications((prevSpecs) => [
-      ...prevSpecs,
-      { name: "", value: "" }, // Add an empty specification to allow user to fill in
-    ]);
+    setSpecifications((prevSpecs) => [...prevSpecs, { name: "", value: "" }]);
   };
 
-  // Handle specification input change
   const handleSpecificationChange = (
     index: number,
     field: "name" | "value",
@@ -66,40 +58,55 @@ const AdminNewProductSecondPage = ({
     setSpecifications(updatedSpecifications);
   };
 
-  // Handle specification deletion
   const handleRemoveSpecification = (index: number) => {
     setSpecifications((prevSpecs) => prevSpecs.filter((_, i) => i !== index));
   };
 
-  // Handle form submission
   const handleSubmit = async () => {
     const formDataToSend = new FormData();
 
-    // Append standard form fields
     for (const key in formData) {
       if (Object.prototype.hasOwnProperty.call(formData, key)) {
         const value = formData[key as keyof MyFormData];
+
         if (value instanceof File) {
           formDataToSend.append(key, value);
         } else if (Array.isArray(value)) {
-          value.forEach((file) => formDataToSend.append(key, file));
+          value.forEach((item) => {
+            if (item instanceof File) {
+              formDataToSend.append(key, item);
+            } else if (
+              "hexCode" in item &&
+              "price" in item &&
+              "imagePath" in item
+            ) {
+              formDataToSend.append(key, JSON.stringify(item));
+            } else if ("name" in item && "price" in item) {
+              formDataToSend.append(key, JSON.stringify(item));
+            }
+          });
         } else {
           formDataToSend.append(key, value as string);
         }
       }
     }
 
-    // Append the images as an array of files
     images.forEach((image) => {
-      formDataToSend.append("Images[]", image); // Append each image as a separate FormData entry
+      formDataToSend.append("Images[]", image);
     });
 
-    // Append the specifications array
     specifications.forEach((spec) => {
-      formDataToSend.append("Specifications[]", JSON.stringify(spec)); // Send each spec as a JSON string
+      formDataToSend.append("Specifications[]", JSON.stringify(spec));
     });
 
-    // Post data to the API
+    formData.Colors.forEach((color) => {
+      formDataToSend.append("Colors[]", JSON.stringify(color)); // Serialize ColorPost
+    });
+
+    formData.Measurements.forEach((measurement) => {
+      formDataToSend.append("Measurements[]", JSON.stringify(measurement)); // Serialize MeasurementPost
+    });
+
     postData(formDataToSend);
   };
 
@@ -109,7 +116,7 @@ const AdminNewProductSecondPage = ({
       Deaf.trim() !== "" &&
       RetrivalAndReplacing.trim() !== "" &&
       Notes.trim() !== "" &&
-      (Images?.length ?? 0) > 0 && // Use optional chaining and nullish coalescing to handle undefined Images
+      (Images?.length ?? 0) > 0 &&
       specifications.length >= 0
     );
   };
@@ -205,7 +212,7 @@ const AdminNewProductSecondPage = ({
                       ...prevData,
                       Images: (prevData.Images || []).filter(
                         (_, i) => i !== index
-                      ), // Default to empty array if Images is undefined
+                      ),
                     }));
                   }}
                 >

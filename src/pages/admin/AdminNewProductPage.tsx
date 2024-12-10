@@ -2,10 +2,12 @@ import {
   ButtonGold,
   Link,
   NewProductHeaderText,
+  plusCircleIcon,
   TextInput,
   useApi,
   useState,
 } from "../..";
+import { ColorPost, MeasurementPost } from "../../models/Product";
 import { Subcateogry } from "../../models/Subcategory";
 import { MyFormData } from "./AdminNewProductContainer";
 
@@ -15,14 +17,15 @@ interface Props {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   handleSelectChange: (value: number) => void;
+  setFormData: React.Dispatch<React.SetStateAction<MyFormData>>;
 }
 
 const AdminNewProductPage: React.FC<Props> = ({
   formData,
   onInputChange,
   handleSelectChange,
+  setFormData,
 }) => {
-  // Function to check if all required fields are filled
   const isFormValid = () => {
     return (
       formData.Name !== "" &&
@@ -32,9 +35,9 @@ const AdminNewProductPage: React.FC<Props> = ({
       formData.Description !== "" &&
       formData.Brand !== "" &&
       formData.MeasurementUnit !== "" &&
-      formData.Measurements !== "" &&
+      formData.Measurements.length !== 0 &&
       formData.ManufacturingCountry !== "" &&
-      formData.Color !== ""
+      formData.Colors.length !== 0
     );
   };
 
@@ -45,7 +48,57 @@ const AdminNewProductPage: React.FC<Props> = ({
         subCategory.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
     : [];
-  // Filter the subcategories based on the search term
+
+  const [measurements, setMeasurements] = useState<MeasurementPost[]>([
+    { name: "", price: 0 },
+  ]);
+  const [colors, setColors] = useState<ColorPost[]>([
+    { hexCode: "", price: 0, imagePath: "" },
+  ]);
+  const addMeasurementField = () => {
+    setMeasurements([...measurements, { name: "", price: 0 }]);
+  };
+  const addColorField = () => {
+    setColors([...colors, { hexCode: "", price: 0, imagePath: "" }]);
+  };
+  const handleMeasurementChange = (
+    index: number,
+    field: string,
+    value: string
+  ) => {
+    const updatedMeasurements = [...measurements];
+    updatedMeasurements[index] = {
+      ...updatedMeasurements[index],
+      [field]: value,
+    };
+    setMeasurements(updatedMeasurements);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      Measurements: updatedMeasurements,
+    }));
+  };
+  const handleColorChange = (
+    index: number,
+    field: string,
+    value: string | File | null
+  ) => {
+    const updatedColors = [...colors];
+
+    if (field === "imagePath" && value instanceof File) {
+      const imagePath = URL.createObjectURL(value);
+      updatedColors[index] = { ...updatedColors[index], [field]: imagePath };
+    } else {
+      updatedColors[index] = { ...updatedColors[index], [field]: value };
+    }
+
+    setColors(updatedColors);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      Colors: updatedColors,
+    }));
+  };
 
   return (
     <main className="overflow-x-hidden">
@@ -171,14 +224,38 @@ const AdminNewProductPage: React.FC<Props> = ({
               />
             </div>
             <div className="w-full">
-              <TextInput
-                blackTitle
-                title="القياس"
-                placeholder="أدخل قياس المنتج"
-                name="Measurements"
-                value={formData.Measurements}
-                onChange={onInputChange}
-              />
+              <h3 className="mb-4">القياسات</h3>
+              {measurements.map((measurement, index) => (
+                <div key={index}>
+                  <input
+                    className="border rounded mx-2 my-2"
+                    type="text"
+                    name={`measurementName-${index}`}
+                    placeholder="الاسم"
+                    value={measurement.name}
+                    onChange={(e) =>
+                      handleMeasurementChange(index, "name", e.target.value)
+                    }
+                  />
+                  <input
+                    className="border rounded max-w-16 my-2"
+                    type="number"
+                    name={`measurementPrice-${index}`}
+                    placeholder="السعر"
+                    value={measurement.price}
+                    onChange={(e) =>
+                      handleMeasurementChange(index, "price", e.target.value)
+                    }
+                  />
+                </div>
+              ))}
+              <div
+                onClick={addMeasurementField}
+                className="flex gap-2 items-end cursor-pointer"
+              >
+                <img className="mt-4" src={plusCircleIcon} />
+                إضافة قياس
+              </div>
             </div>
           </div>
         </section>
@@ -202,14 +279,47 @@ const AdminNewProductPage: React.FC<Props> = ({
               />
             </div>
             <div className="w-full">
-              <TextInput
-                blackTitle
-                title="اللون"
-                placeholder="لون المنتج"
-                name="Color"
-                value={formData.Color}
-                onChange={onInputChange}
-              />
+              <h3 className="my-2">الألوان</h3>
+              {colors.map((color, index) => (
+                <div key={index}>
+                  <input
+                    className="border rounded"
+                    type="file"
+                    onChange={(e) =>
+                      handleColorChange(
+                        index,
+                        "imagePath",
+                        e.target.files ? e.target.files[0] : null
+                      )
+                    }
+                  />
+                  <input
+                    className="mx-2"
+                    type="color"
+                    value={color.hexCode}
+                    onChange={(e) =>
+                      handleColorChange(index, "hexCode", e.target.value)
+                    }
+                  />
+                  <input
+                    className="border rounded max-w-16 my-2"
+                    type="number"
+                    name={`colorPrice-${index}`}
+                    placeholder="السعر"
+                    value={color.price}
+                    onChange={(e) =>
+                      handleColorChange(index, "price", e.target.value)
+                    }
+                  />
+                </div>
+              ))}
+              <div
+                onClick={addColorField}
+                className="flex gap-2 items-end cursor-pointer"
+              >
+                <img className="mt-4" src={plusCircleIcon} />
+                إضافة لون
+              </div>
             </div>
           </div>
         </section>

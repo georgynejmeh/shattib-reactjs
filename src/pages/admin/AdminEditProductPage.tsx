@@ -125,7 +125,7 @@ const AdminEditProductPage = () => {
   // const [images, setImages] = useState([{ imagePath: "" }]);
   // Store the image paths and ids from the API to display them
   const [getImages, setGetImages] = useState<
-    { id: number; imagePath: string }[]
+    { id: number; imagePath: File | null }[]
   >([]);
   const handleDeleteImageRequest = async (imageId: number) => {
     await deleteImageRequest(imageId);
@@ -156,7 +156,8 @@ const AdminEditProductPage = () => {
     notes: "",
     wareHouseCode: "",
     specifications: [{ name: "", value: "" }],
-    // images: [{ imagePath: "" }],
+    colors: [{ hexCode: "", price: 0, imagePath: "" }],
+    measurements: [{ name: "", price: 0 }],
   });
 
   useEffect(() => {
@@ -168,22 +169,100 @@ const AdminEditProductPage = () => {
         features: data.features,
         price: data.price,
         measurementUnit: data.measurementUnit,
-        meaurements: data.measurements[0].name,
+        meaurements:
+          data.measurements.length === 0 ? "" : data.measurements[0].name,
         manufacturingCountry: data.manufacturingCountry,
-        color: data.colors[0].hexCode,
+        color: data.colors.length === 0 ? "" : data.colors[0].hexCode,
         deaf: data.deaf,
         retrivalAndReplacing: data.retrivalAndReplacing,
         notes: data.notes,
         wareHouseCode: data.warehouseCode,
         specifications: data.productSpecifications,
-        // images: data.images || [], // If there are images
+        colors: data.colors || [],
+        measurements: data.measurements || [],
       });
-      // setImages(data.images || []);
-      setGetImages(data.images);
+      // setGetImages(data.images);
     }
   }, [data]);
 
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  const handleColorChange = (
+    index: number,
+    field: string,
+    value: string | File | null
+  ) => {
+    const updatedColors = [...formData.colors];
+    updatedColors[index] = { ...updatedColors[index], [field]: value };
+    setFormData({ ...formData, colors: updatedColors });
+  };
+
+  // const handleColorChange = (
+  //   index: number,
+  //   field: string,
+  //   value: string | File | null
+  // ) => {
+  //   const updatedColors = [...formData.colors];
+
+  //   if (field === "imagePath" && value instanceof File) {
+  //     const imagePath = URL.createObjectURL(value);
+  //     updatedColors[index] = { ...updatedColors[index], [field]: imagePath };
+  //   } else {
+  //     updatedColors[index] = { ...updatedColors[index], [field]: value };
+  //   }
+
+  //   // setColors(updatedColors);
+
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     Colors: updatedColors,
+  //   }));
+  // };
+
+  const handleMeasurementChange = (
+    index: number,
+    field: string,
+    value: string
+  ) => {
+    const updatedMeasurements = [...formData.measurements];
+    updatedMeasurements[index] = {
+      ...updatedMeasurements[index],
+      [field]: value,
+    };
+    setFormData({ ...formData, measurements: updatedMeasurements });
+  };
+
+  // Add color field
+  const handleAddColor = () => {
+    setFormData({
+      ...formData,
+      colors: [...formData.colors, { hexCode: "", price: 0, imagePath: "" }],
+    });
+  };
+
+  // Add measurement field
+  const handleAddMeasurement = () => {
+    setFormData({
+      ...formData,
+      measurements: [...formData.measurements, { name: "", price: 0 }],
+    });
+  };
+
+  // Handle deleting a color
+  const handleDeleteColor = (index: number) => {
+    setFormData({
+      ...formData,
+      colors: formData.colors.filter((_, i) => i !== index),
+    });
+  };
+
+  // Handle deleting a measurement
+  const handleDeleteMeasurement = (index: number) => {
+    setFormData({
+      ...formData,
+      measurements: formData.measurements.filter((_, i) => i !== index),
+    });
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -245,6 +324,17 @@ const AdminEditProductPage = () => {
     formData.specifications.forEach((spec, index) => {
       form.append(`Specifications[${index}][name]`, spec.name || "");
       form.append(`Specifications[${index}][value]`, spec.value || "");
+    });
+
+    formData.measurements.forEach((measure, index) => {
+      form.append(`Measurements[${index}][name]`, measure.name || "");
+      form.append(`Measurements[${index}][price]`, `${measure.price}` || "");
+    });
+
+    formData.colors.forEach((color, index) => {
+      form.append(`Colors[${index}][hexCode]`, color.hexCode || "");
+      form.append(`Colors[${index}][price]`, `${color.price}` || "");
+      form.append(`Colors[${index}][ImagePath]`, color.imagePath || "");
     });
 
     // Handle images (only add if there are selected images)
@@ -353,7 +443,7 @@ const AdminEditProductPage = () => {
                 />
               </div>
 
-              <div>
+              {/* <div>
                 <label
                   htmlFor="measurementUnit"
                   className="block text-sm font-medium text-gray-700"
@@ -369,7 +459,7 @@ const AdminEditProductPage = () => {
                   placeholder="القياسات"
                   className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
-              </div>
+              </div> */}
 
               <div>
                 <label
@@ -387,6 +477,124 @@ const AdminEditProductPage = () => {
                   placeholder="وحدة القياس"
                   className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
+              </div>
+
+              {/* Colors */}
+              <div>
+                <h3 className="my-2">الألوان</h3>
+                {formData.colors.map((color, index) => (
+                  <div key={index} className="flex gap-4 mb-2">
+                    {/* Display Color Image if it exists */}
+                    {color.imagePath ? (
+                      <div className="relative w-20 h-20">
+                        <img
+                          src={color.imagePath}
+                          alt={`Color ${index + 1}`}
+                          className="w-full h-full object-cover rounded-md"
+                        />
+                        <button
+                          type="button"
+                          className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="w-20 h-20 bg-gray-200 rounded-md"></div> // Placeholder if no image
+                    )}
+
+                    {/* Color Input */}
+                    <input
+                      type="color"
+                      value={color.hexCode}
+                      onChange={(e) =>
+                        handleColorChange(index, "hexCode", e.target.value)
+                      }
+                      className="w-16 h-10 border rounded"
+                    />
+
+                    {/* Price Input */}
+                    <input
+                      type="number"
+                      placeholder="السعر"
+                      value={color.price}
+                      onChange={(e) =>
+                        handleColorChange(index, "price", e.target.value)
+                      }
+                      className="w-1/3 p-3 border border-gray-300 rounded-md"
+                    />
+
+                    {/* Upload New Image */}
+                    <input
+                      type="file"
+                      className="p-2 border border-gray-300 rounded-md"
+                      onChange={(e) =>
+                        handleColorChange(
+                          index,
+                          "imagePath",
+                          e.target.files ? e.target.files[0] : null
+                        )
+                      }
+                    />
+
+                    {/* Delete Color Button */}
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteColor(index)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      حذف
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={handleAddColor}
+                  className="mt-4 text-blue-500 hover:text-blue-700"
+                >
+                  إضافة لون
+                </button>
+              </div>
+
+              {/* Measurements */}
+              <div>
+                <h3 className="my-2">القياسات</h3>
+                {formData.measurements.map((measurement, index) => (
+                  <div key={index} className="flex gap-4 mb-2">
+                    <input
+                      type="text"
+                      placeholder="الاسم"
+                      value={measurement.name}
+                      onChange={(e) =>
+                        handleMeasurementChange(index, "name", e.target.value)
+                      }
+                      className="w-1/2 p-3 border border-gray-300 rounded-md"
+                    />
+                    <input
+                      type="number"
+                      placeholder="السعر"
+                      value={measurement.price}
+                      onChange={(e) =>
+                        handleMeasurementChange(index, "price", e.target.value)
+                      }
+                      className="w-1/2 p-3 border border-gray-300 rounded-md"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteMeasurement(index)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      حذف
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={handleAddMeasurement}
+                  className="mt-4 text-blue-500 hover:text-blue-700"
+                >
+                  إضافة قياس
+                </button>
               </div>
 
               <div>
@@ -476,7 +684,7 @@ const AdminEditProductPage = () => {
                       className="relative w-32 h-32 overflow-hidden rounded-lg border border-gray-200"
                     >
                       <img
-                        src={image.imagePath}
+                        // src={image.imagePath}
                         alt={`Product Image ${index + 1}`}
                         className="w-full h-full object-cover"
                       />

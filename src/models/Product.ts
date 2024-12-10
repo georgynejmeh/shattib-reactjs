@@ -53,8 +53,19 @@ export interface Color {
   imagePath: string;
 }
 
+export interface ColorPost {
+  hexCode: string;
+  price: number;
+  imagePath: string;
+}
+
 export interface Measurement {
   id: number;
+  name: string;
+  price: number;
+}
+
+export interface MeasurementPost {
   name: string;
   price: number;
 }
