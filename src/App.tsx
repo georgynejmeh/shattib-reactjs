@@ -3,13 +3,13 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import CartPage from "./pages/CartPage";
 import ConditionDocsPage from "./pages/ConditionDocsPage";
-import ConfirmNewConditionPage from "./pages/ConfirmNewConditionPage";
+
 import DocPage from "./pages/DocPage";
 import HomePage from "./pages/HomePage";
 import IntroPage from "./pages/IntroPage";
 import LoginPage from "./pages/LoginPage";
 import MainCategoryPage from "./pages/MainCategoryPage";
-import NewConditionPage from "./pages/NewConditionPage";
+
 import PriceRequestPage from "./pages/PriceRequestPage";
 import PriceRequestSecondPage from "./pages/PriceRequestSecondPage";
 import ProductPage from "./pages/ProductPage";
@@ -39,11 +39,7 @@ const App = () => {
 
           <Route path="/conditions" element={<ConditionDocsPage />} />
           <Route path="/conditions/doc/:id" element={<DocPage />} />
-          <Route path="/conditions/new" element={<NewConditionPage />} />
-          <Route
-            path="/conditions/new/confirm"
-            element={<ConfirmNewConditionPage />}
-          />
+
           <Route path="/price-request" element={<PriceRequestPage />} />
           <Route path="/price-request-2" element={<PriceRequestSecondPage />} />
         </Route>
