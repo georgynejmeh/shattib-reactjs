@@ -1,30 +1,20 @@
-import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import CartPage from "./pages/CartPage";
+import ConditionDocsPage from "./pages/ConditionDocsPage";
+import ConfirmNewConditionPage from "./pages/ConfirmNewConditionPage";
+import DocPage from "./pages/DocPage";
 import HomePage from "./pages/HomePage";
 import IntroPage from "./pages/IntroPage";
 import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import MainLayout from "./layouts/MainLayout";
-import ProductPage from "./pages/ProductPage";
-import CartPage from "./pages/CartPage";
-import WishListPage from "./pages/WishListPage";
-import ConditionDocsPage from "./pages/ConditionDocsPage";
-import NewConditionPage from "./pages/NewConditionPage";
-import ConfirmNewConditionPage from "./pages/ConfirmNewConditionPage";
-import PriceRequestPage from "./pages/PriceRequestPage";
 import MainCategoryPage from "./pages/MainCategoryPage";
+import NewConditionPage from "./pages/NewConditionPage";
+import PriceRequestPage from "./pages/PriceRequestPage";
 import PriceRequestSecondPage from "./pages/PriceRequestSecondPage";
-import DocPage from "./pages/DocPage";
-import AdminLayout from "./layouts/AdminLayout";
-import AdminProductsPage from "./pages/admin/AdminProductsPage";
-import AdminHomePage from "./pages/admin/AdminHomePage";
-import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
-import AdminCategoryPage from "./pages/admin/AdminCategoryPage";
-import AdminNewProductContainer from "./pages/admin/AdminNewProductContainer";
-import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
-import AdminOrderPage from "./pages/admin/AdminOrderPage";
-import AdminCriteriaPage from "./pages/admin/AdminCriteriaPage";
-import AdminConsultationsPage from "./pages/admin/AdminConsultationsPage";
+import ProductPage from "./pages/ProductPage";
+import RegisterPage from "./pages/RegisterPage";
+import WishListPage from "./pages/WishListPage";
 
 const App = () => {
   // return to the top of the page on navigation
@@ -56,27 +46,6 @@ const App = () => {
           />
           <Route path="/price-request" element={<PriceRequestPage />} />
           <Route path="/price-request-2" element={<PriceRequestSecondPage />} />
-        </Route>
-        <Route element={<AdminLayout />}>
-          <Route path="/admin/home" element={<AdminHomePage />} />
-          <Route path="/admin/products" element={<AdminProductsPage />} />
-          <Route path="/admin/categories" element={<AdminCategoriesPage />} />
-          <Route path="/admin/category/1" element={<AdminCategoryPage />} />
-          <Route
-            path="/admin/product/new"
-            element={<AdminNewProductContainer />}
-          />
-          <Route
-            path="/admin/product/new/2"
-            element={<AdminNewProductContainer />}
-          />
-          <Route path="/admin/order/:id" element={<AdminOrderPage />} />
-          <Route path="/admin/orders" element={<AdminOrdersPage />} />
-          <Route path="/admin/criterias" element={<AdminCriteriaPage />} />
-          <Route
-            path="/admin/consultations"
-            element={<AdminConsultationsPage />}
-          />
         </Route>
         button
       </Routes>
